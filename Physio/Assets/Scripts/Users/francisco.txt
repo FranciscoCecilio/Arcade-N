@@ -1,0 +1,4 @@
+Username=francisco
+Name=Francisco Sousa
+Age=21
+Gender=Other

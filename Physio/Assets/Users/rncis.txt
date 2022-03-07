@@ -1,0 +1,4 @@
+Username=rncis
+Name=Francisco
+Age=22
+Gender=Female

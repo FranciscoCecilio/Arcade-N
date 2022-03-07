@@ -7,8 +7,8 @@ using UnityEngine.UI;
 public class MainMenuScript : MonoBehaviour {
 
     public Text helloPhrase;
-    public Text age;
-    public Text gender;
+    public Text age_and_gender;
+    public Text time;
 
     public GameObject maleAvatar;
     public GameObject femaleAvatar;
@@ -24,7 +24,7 @@ public class MainMenuScript : MonoBehaviour {
         SceneManager.LoadScene("ExerciseSelection");
     }
 
-    public void loadExerciseResultsScene()
+    public void loadExerciseResultsScene() 
     {
         SessionInfo.setView("Results");
         SceneManager.LoadScene("ReportScreen");
@@ -32,9 +32,16 @@ public class MainMenuScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        helloPhrase.text = "Hello, " + SessionInfo.getName() + "!";
-        age.text = SessionInfo.getAge() + " years old";
-        gender.text = SessionInfo.getGender();
+        
+        // verificar a hora do dia! para dizer Bom dia, Boa tarde
+        int sysHour = System.DateTime.Now.Hour; //gives you the current hour as an integer.
+        string greetingsText = "Bom dia, ";
+        if(sysHour > 12){
+            greetingsText = "Boa tarde, ";
+        }
+
+        helloPhrase.text = greetingsText + SessionInfo.getName() + "!";
+        age_and_gender.text = SessionInfo.getGender() + ", " + SessionInfo.getAge();
         if (SessionInfo.getGender() == "Female")
         {
             maleAvatar.SetActive(false);
@@ -45,5 +52,10 @@ public class MainMenuScript : MonoBehaviour {
     public void previousScreen()
     {
         SceneManager.LoadScene("LoginMenu2");
+    }
+
+    void Update()
+    {
+        time.text = System.DateTime.UtcNow.ToLocalTime().ToString("HH:mm");
     }
 }

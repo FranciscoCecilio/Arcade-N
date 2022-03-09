@@ -4,7 +4,7 @@ using UnityEngine;
 
 // by Francisco Cecílio
 
-public class BodyWrapper : MonoBehaviour
+public class BodyWrapper1 : MonoBehaviour
 {
     [SerializeField]
     private Transform _leftElbowPos;

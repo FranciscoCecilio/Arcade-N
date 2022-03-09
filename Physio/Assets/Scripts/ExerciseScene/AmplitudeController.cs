@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class AmplitudeController : MonoBehaviour {
 
-    //public GameObject patient;
     public BodyWrapper patient;
     public float maxSXY = 0;
     public float maxSXZ = 0;
@@ -32,7 +31,7 @@ public class AmplitudeController : MonoBehaviour {
     public Text cuElbow;
     public Text cuSup;
     public Text cuSdown;
-    
+
 
     // Use this for initialization
     void Start () {
@@ -47,7 +46,9 @@ public class AmplitudeController : MonoBehaviour {
             ShoulderXY();
             ShoulderXZ();
             Elbow();
-        }       
+        }
+
+       
 	}
 
 
@@ -180,6 +181,16 @@ public class AmplitudeController : MonoBehaviour {
                 break;
 
         }
+
+
+
+
+
+
   
     }
+
+
+
+
 }

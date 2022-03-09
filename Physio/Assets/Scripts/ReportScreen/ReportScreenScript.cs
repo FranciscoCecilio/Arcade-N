@@ -22,7 +22,7 @@ public class ReportScreenScript : MonoBehaviour
     string timestamp;
     private List<string> sessionTimestamps = new List<string>();
     private List<string> exercisesTimestamps = new List<string>();
-    private List<string> exercisesNames = new List<string>();
+    private List<string> exercisesName = new List<string>();
 
     public GameObject _firstView;
     public GameObject _secondView;
@@ -245,7 +245,7 @@ public class ReportScreenScript : MonoBehaviour
     void PopulateExercisesDropdown()
     {
         hasExercises = false;
-        exercisesNames.Clear();
+        exercisesName.Clear();
         exercisesTimestamps.Clear();
         exerDropdown.options.Clear();
 
@@ -289,11 +289,11 @@ public class ReportScreenScript : MonoBehaviour
                     System.DateTime date = System.DateTime.ParseExact(timestamp, "yyyyMMddTHHmmss", System.Globalization.CultureInfo.InvariantCulture);
                     timestamp = date.ToString("dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
                     string timestamp_hour = date.ToString("HH:mm", System.Globalization.CultureInfo.InvariantCulture);
-                    exercisesNames.Add(_name + " - " + timestamp_hour);
+                    exercisesName.Add(_name + " - " + timestamp_hour);
                     exercisesTimestamps.Add(timestamp);
                 }
             }
-            exerDropdown.AddOptions(exercisesNames);
+            exerDropdown.AddOptions(exercisesName);
         }
         results.SetActive(hasExercises);
         noResults.SetActive(!hasExercises);

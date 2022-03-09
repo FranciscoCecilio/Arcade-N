@@ -1,0 +1,3 @@
+nrReps=3
+tries=5
+correctReps=3

@@ -1,0 +1,16 @@
+timestamp=20190904T005708
+name=Grid
+arm=left
+nrReps=1
+duration=60
+restTime=60
+tries=1
+correctReps=1
+outOfPath=0
+avgTime=00:20 m
+totalTime=00:20 m
+regShouldComp=False
+regSpineComp=False
+leftShoulderComp=0
+rightShoulderComp=0
+spineComp=0

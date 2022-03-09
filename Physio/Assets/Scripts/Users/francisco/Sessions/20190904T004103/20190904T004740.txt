@@ -1,0 +1,16 @@
+timestamp=20190904T004740
+name=Up/Down
+arm=right
+nrReps=5
+duration=60
+restTime=60
+tries=8
+correctReps=5
+outOfPath=0
+avgTime=00:27 m
+totalTime=02:16 m
+regShouldComp=True
+regSpineComp=False
+leftShoulderComp=0
+rightShoulderComp=3
+spineComp=0

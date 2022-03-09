@@ -1,0 +1,5 @@
+timestamp=20190904T005336
+name=seq1
+exe=2=Left/Right=Exercise2Scene=left=2=60=60
+exe=3=Grid=Exercise3Scene=left=1=60=60
+exe=1=Up/Down=Exercise1Scene=right=3=60=60

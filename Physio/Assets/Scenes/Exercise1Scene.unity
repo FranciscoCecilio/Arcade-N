@@ -603,8 +603,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 307bf867f49a2eb40a1ef97f20985253, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bodypart: {fileID: 2074098266}
-  y: 0
 --- !u!23 &67010185
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -654,12 +652,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 67010182}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &68435634 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 115708, guid: 68330cc7135eb04409b64568117fc2bb,
-    type: 3}
-  m_PrefabInstance: {fileID: 1181978557}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &68435635 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 407180, guid: 68330cc7135eb04409b64568117fc2bb,
@@ -865,11 +857,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3987c8647e7ff547ba0dfac7d0b47fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  therapist: {fileID: 2111486869}
-  patient: {fileID: 688654282}
-  temp: {fileID: 2045815558}
-  therapistPos: {x: 0, y: 0, z: 0}
-  closeDist: 100
 --- !u!1 &77673816
 GameObject:
   m_ObjectHideFlags: 0
@@ -1660,7 +1647,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Restart
+  m_Text: "Recome\xE7ar"
 --- !u!222 &142438665
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2079,18 +2066,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1caa38274b2e6d42bd96234a103e7ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cursor: {fileID: 1177253421}
-  hasSecondaryCursor: 0
-  avgTime: {fileID: 1038219311}
-  lastrepTime: {fileID: 1324464307}
-  exerciseName: Front raise
-  leftExerciseBox: {fileID: 543918384}
-  rightExerciseBox: {fileID: 449119172}
-  leftTargets: {fileID: 1431502981}
-  rightTargets: {fileID: 322908693}
-  restartRepToggle: {fileID: 1295840516}
-  wellDoneMessage: {fileID: 1489179115}
-  pathSize: {fileID: 2112051999}
 --- !u!81 &161797246
 AudioListener:
   m_ObjectHideFlags: 0
@@ -3243,12 +3218,6 @@ Transform:
   m_Father: {fileID: 133681289}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &256626564 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 115708, guid: 68330cc7135eb04409b64568117fc2bb,
-    type: 3}
-  m_PrefabInstance: {fileID: 1194845000}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &256626565 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 407180, guid: 68330cc7135eb04409b64568117fc2bb,
@@ -4817,12 +4786,6 @@ Transform:
   m_Father: {fileID: 1361101792}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180.01999}
---- !u!1 &371240814 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 115708, guid: 68330cc7135eb04409b64568117fc2bb,
-    type: 3}
-  m_PrefabInstance: {fileID: 27498454}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &371240815 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 407180, guid: 68330cc7135eb04409b64568117fc2bb,
@@ -7117,7 +7080,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 24.98999, y: 63.979996}
+  m_AnchoredPosition: {x: 24.98999, y: 63.97998}
   m_SizeDelta: {x: 25.874, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &541437812
@@ -7616,7 +7579,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'Leaned:'
+  m_Text: 'Inclinado:'
 --- !u!222 &606138645
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8360,7 +8323,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Quit
+  m_Text: Sair
 --- !u!222 &662655923
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8597,27 +8560,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adc7cc1410de67c4d902ba1c647950b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scale: 1.5
-  offset: {x: 0, y: -10, z: 0}
-  headPos: {x: 0, y: 0, z: 0}
-  neckPos: {x: 0, y: 0, z: 0}
-  spineShoulderPos: {x: 0, y: 0, z: 0}
-  spineMidPos: {x: 0, y: 0, z: 0}
-  spineBasePos: {x: 0, y: 0, z: 0}
-  leftShoulderPos: {x: 0, y: 0, z: 0}
-  leftElbowPos: {x: 0, y: 0, z: 0}
-  leftWristPos: {x: 0, y: 0, z: 0}
-  leftHandPos: {x: 0, y: 0, z: 0}
-  leftThumbPos: {x: 0, y: 0, z: 0}
-  leftHandTipPos: {x: 0, y: 0, z: 0}
-  leftHipPos: {x: 0, y: 0, z: 0}
-  rightShoulderPos: {x: 0, y: 0, z: 0}
-  rightElbowPos: {x: 0, y: 0, z: 0}
-  rightWristPos: {x: 0, y: 0, z: 0}
-  rightHandPos: {x: 0, y: 0, z: 0}
-  rightThumbPos: {x: 0, y: 0, z: 0}
-  rightHandTipPos: {x: 0, y: 0, z: 0}
-  rightHipPos: {x: 0, y: 0, z: 0}
 --- !u!4 &688654283
 Transform:
   m_ObjectHideFlags: 0
@@ -10535,16 +10477,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a579d050a39cf4813ad1ec40d5455a6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointRadius: 13
-  presetCoordinatesFile: {fileID: 4900000, guid: deba6d0a9ba808f4ab740014b840a748,
-    type: 3}
-  patient: {fileID: 688654282}
-  usePresetCoordinates: 0
-  generatePresetCoordinates: 0
-  createPrimitive: 0
-  camera: {fileID: 1710280451}
-  heatmapImage: {fileID: 0}
-  var: 
 --- !u!4 &805197576
 Transform:
   m_ObjectHideFlags: 0
@@ -11209,7 +11141,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 11.700001, y: -2.6999998}
+  m_AnchoredPosition: {x: -32, y: -2.6999998}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &892011109
@@ -11245,7 +11177,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'Out of path:'
+  m_Text: 'Fora de trajeto:'
 --- !u!222 &892011110
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -11555,8 +11487,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 307bf867f49a2eb40a1ef97f20985253, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bodypart: {fileID: 1508546581}
-  y: 0
 --- !u!23 &940423943
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -12367,85 +12297,6 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 978538952}
-  m_CullTransparentMesh: 0
---- !u!1 &986849009
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 986849010}
-  - component: {fileID: 986849012}
-  - component: {fileID: 986849011}
-  m_Layer: 8
-  m_Name: Text
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &986849010
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 986849009}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1489179116}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 6, y: 6}
-  m_SizeDelta: {x: 443.7, y: 188.3}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &986849011
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 986849009}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 140
-    m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 10
-    m_MaxSize: 140
-    m_Alignment: 4
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: DONE!
---- !u!222 &986849012
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 986849009}
   m_CullTransparentMesh: 0
 --- !u!1 &987778148
 GameObject:
@@ -13374,7 +13225,7 @@ GameObject:
   - component: {fileID: 1027692703}
   - component: {fileID: 1027692702}
   m_Layer: 8
-  m_Name: timer
+  m_Name: counter%
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13919,7 +13770,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1088222798}
   m_Layer: 8
-  m_Name: Success
+  m_Name: Success Radial
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16115,12 +15966,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1224103920}
   m_CullTransparentMesh: 0
---- !u!1 &1232884724 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 115708, guid: 68330cc7135eb04409b64568117fc2bb,
-    type: 3}
-  m_PrefabInstance: {fileID: 1042680216}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1232884725 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 407180, guid: 68330cc7135eb04409b64568117fc2bb,
@@ -16436,7 +16281,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 78.3, y: -21.779999}
+  m_AnchoredPosition: {x: -0, y: -38}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1273735153
@@ -16472,7 +16317,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'Next rest in:'
+  m_Text: "Pr\xF3ximo Descanso em:"
 --- !u!222 &1273735154
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -16635,12 +16480,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1280911567}
   m_CullTransparentMesh: 0
---- !u!1 &1292187065 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 115708, guid: 68330cc7135eb04409b64568117fc2bb,
-    type: 3}
-  m_PrefabInstance: {fileID: 1514901866}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1294139810
 GameObject:
   m_ObjectHideFlags: 0
@@ -16839,7 +16678,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.90000004}
-  m_AnchoredPosition: {x: 392.80005, y: -145.62296}
+  m_AnchoredPosition: {x: 392.80005, y: -145.62292}
   m_SizeDelta: {x: -758.2101, y: -350.3025}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1296976449
@@ -17117,85 +16956,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &1307909143
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1307909144}
-  - component: {fileID: 1307909146}
-  - component: {fileID: 1307909145}
-  m_Layer: 8
-  m_Name: Text (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1307909144
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1307909143}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1489179116}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 5.999745, y: 95.100006}
-  m_SizeDelta: {x: 443.7, y: 188.3}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1307909145
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1307909143}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 65
-    m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 6
-    m_MaxSize: 140
-    m_Alignment: 4
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: WELL
---- !u!222 &1307909146
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1307909143}
-  m_CullTransparentMesh: 0
 --- !u!4 &1310315189 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 407180, guid: 68330cc7135eb04409b64568117fc2bb,
@@ -18315,7 +18075,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 237.76, y: -22.2}
+  m_AnchoredPosition: {x: 320.75964, y: -38.41996}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1397376065
@@ -18566,7 +18326,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Success
+  m_Text: Sucesso!
 --- !u!222 &1414195755
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -18575,12 +18335,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1414195752}
   m_CullTransparentMesh: 0
---- !u!1 &1414359228 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 115708, guid: 68330cc7135eb04409b64568117fc2bb,
-    type: 3}
-  m_PrefabInstance: {fileID: 445419227}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1415921369
 GameObject:
   m_ObjectHideFlags: 0
@@ -19733,6 +19487,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1489179116}
+  - component: {fileID: 1489179118}
+  - component: {fileID: 1489179117}
   m_Layer: 8
   m_Name: WellDoneMessage
   m_TagString: Untagged
@@ -19750,17 +19506,57 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1307909144}
-  - {fileID: 986849010}
+  m_Children: []
   m_Father: {fileID: 1872076103}
   m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 500, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1489179117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1489179115}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 66
+    m_FontStyle: 1
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 66
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: BOM TRABALHO!
+--- !u!222 &1489179118
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1489179115}
+  m_CullTransparentMesh: 1
 --- !u!1 &1490144073
 GameObject:
   m_ObjectHideFlags: 0
@@ -20014,8 +19810,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 307bf867f49a2eb40a1ef97f20985253, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bodypart: {fileID: 1292187065}
-  y: 0
 --- !u!81 &1508546585
 AudioListener:
   m_ObjectHideFlags: 0
@@ -20406,20 +20200,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7317337c1a4691b4aa4c50d6fa01f36e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sessionTimePatient: {fileID: 1865788958}
-  correctRepetitionsPatient: {fileID: 229444231}
-  setTimePatient: {fileID: 630916737}
-  restTimePatient: {fileID: 706646864}
-  startCounterPatient: {fileID: 155518493}
-  sessionTimeTherapist: {fileID: 1737636146}
-  correctRepetitionsTherapist: {fileID: 1774872442}
-  setTimeTherapist: {fileID: 1397376065}
-  restTimeTherapist: {fileID: 1848355065}
-  triesTherapist: {fileID: 1280157542}
-  totalReps: {fileID: 1707985808}
-  restPatient: {fileID: 1600134760}
-  restTherapist: {fileID: 2030269545}
-  completed: {fileID: 744342307}
 --- !u!1 &1531238653
 GameObject:
   m_ObjectHideFlags: 0
@@ -21430,28 +21210,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96a0a8df3f780e14a87b49d7844e03ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  patient: {fileID: 688654282}
-  compCam: {fileID: 1886268898}
-  ther: {fileID: 2074098273}
-  leftHip: {fileID: 1986624965}
-  rightHip: {fileID: 1414359228}
-  leftShoulder: {fileID: 256626564}
-  rightShoulder: {fileID: 371240814}
-  spineBase: {fileID: 68435634}
-  spineMid: {fileID: 1908717208}
-  spineShoulder: {fileID: 1232884724}
-  shoulderBar: {fileID: 1024443358}
-  spineBar: {fileID: 500962329}
-  shoulderToggle: {fileID: 541437810}
-  spineToggle: {fileID: 1147144743}
-  shoulderSlider: {fileID: 1940942470}
-  spineSlider: {fileID: 991200919}
-  shoulderArrow: {fileID: 1189836683}
-  spineLeftArrow: {fileID: 368850781}
-  spineRightArrow: {fileID: 1083042469}
-  shoulders: {fileID: 1493622997}
-  spine: {fileID: 1361101791}
-  incRepToggle: {fileID: 1295840516}
 --- !u!4 &1616229729 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 434594, guid: fc16d9e0f9aa9ed44ab5d71324969c2d,
@@ -23058,8 +22816,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 307bf867f49a2eb40a1ef97f20985253, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bodypart: {fileID: 1292187065}
-  y: 0
 --- !u!81 &1710280448
 AudioListener:
   m_ObjectHideFlags: 0
@@ -26015,17 +25771,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5078676123e204346b7dbb0a5032cedb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startButton: {fileID: 1430617730}
-  stopButton: {fileID: 2035208411}
-  quitButton: {fileID: 1091582947}
-  restartButton: {fileID: 1760175818}
-  nextButton: {fileID: 1941109079}
-  patientCanvas: {fileID: 1526526314}
-  leaned: {fileID: 2077802647}
-  shoulderLift: {fileID: 1804782886}
-  outOfPath: {fileID: 740396664}
-  exerciseName: {fileID: 643134063}
-  worldCamera: {fileID: 2074098273}
 --- !u!114 &1872076105
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26279,12 +26024,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1893659205}
   m_CullTransparentMesh: 0
---- !u!1 &1908717208 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 115708, guid: 68330cc7135eb04409b64568117fc2bb,
-    type: 3}
-  m_PrefabInstance: {fileID: 1305134073}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1908717214 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 407180, guid: 68330cc7135eb04409b64568117fc2bb,
@@ -27131,12 +26870,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc16d9e0f9aa9ed44ab5d71324969c2d, type: 3}
---- !u!1 &1986624965 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 115708, guid: 68330cc7135eb04409b64568117fc2bb,
-    type: 3}
-  m_PrefabInstance: {fileID: 1247143923}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1988470847 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 407180, guid: 68330cc7135eb04409b64568117fc2bb,
@@ -27590,9 +27323,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1872076104}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: 
-        m_MethodName: StopTherapy
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -27900,27 +27633,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adc7cc1410de67c4d902ba1c647950b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scale: 1.5
-  offset: {x: 0, y: -10, z: 0}
-  headPos: {x: 0, y: 0, z: 0}
-  neckPos: {x: 0, y: 0, z: 0}
-  spineShoulderPos: {x: 0, y: 0, z: 0}
-  spineMidPos: {x: 0, y: 0, z: 0}
-  spineBasePos: {x: 0, y: 0, z: 0}
-  leftShoulderPos: {x: 0, y: 0, z: 0}
-  leftElbowPos: {x: 0, y: 0, z: 0}
-  leftWristPos: {x: 0, y: 0, z: 0}
-  leftHandPos: {x: 0, y: 0, z: 0}
-  leftThumbPos: {x: 0, y: 0, z: 0}
-  leftHandTipPos: {x: 0, y: 0, z: 0}
-  leftHipPos: {x: 0, y: 0, z: 0}
-  rightShoulderPos: {x: 0, y: 0, z: 0}
-  rightElbowPos: {x: 0, y: 0, z: 0}
-  rightWristPos: {x: 0, y: 0, z: 0}
-  rightHandPos: {x: 0, y: 0, z: 0}
-  rightThumbPos: {x: 0, y: 0, z: 0}
-  rightHandTipPos: {x: 0, y: 0, z: 0}
-  rightHipPos: {x: 0, y: 0, z: 0}
 --- !u!1001 &2049814424
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28301,8 +28013,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 307bf867f49a2eb40a1ef97f20985253, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bodypart: {fileID: 1292187065}
-  y: 0
 --- !u!81 &2074098270
 AudioListener:
   m_ObjectHideFlags: 0
@@ -28374,7 +28084,7 @@ GameObject:
   - component: {fileID: 2077802648}
   - component: {fileID: 2077802647}
   m_Layer: 8
-  m_Name: timer
+  m_Name: counter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28901,27 +28611,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adc7cc1410de67c4d902ba1c647950b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scale: 1.5
-  offset: {x: 0, y: -10, z: 0}
-  headPos: {x: 0, y: 0, z: 0}
-  neckPos: {x: 0, y: 0, z: 0}
-  spineShoulderPos: {x: 0, y: 0, z: 0}
-  spineMidPos: {x: 0, y: 0, z: 0}
-  spineBasePos: {x: 0, y: 0, z: 0}
-  leftShoulderPos: {x: 0, y: 0, z: 0}
-  leftElbowPos: {x: 0, y: 0, z: 0}
-  leftWristPos: {x: 0, y: 0, z: 0}
-  leftHandPos: {x: 0, y: 0, z: 0}
-  leftThumbPos: {x: 0, y: 0, z: 0}
-  leftHandTipPos: {x: 0, y: 0, z: 0}
-  leftHipPos: {x: 0, y: 0, z: 0}
-  rightShoulderPos: {x: 0, y: 0, z: 0}
-  rightElbowPos: {x: 0, y: 0, z: 0}
-  rightWristPos: {x: 0, y: 0, z: 0}
-  rightHandPos: {x: 0, y: 0, z: 0}
-  rightThumbPos: {x: 0, y: 0, z: 0}
-  rightHandTipPos: {x: 0, y: 0, z: 0}
-  rightHipPos: {x: 0, y: 0, z: 0}
 --- !u!1 &2112051999
 GameObject:
   m_ObjectHideFlags: 0

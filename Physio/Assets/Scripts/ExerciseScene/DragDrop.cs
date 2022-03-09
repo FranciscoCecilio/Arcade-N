@@ -17,16 +17,6 @@ public class DragDrop : MonoBehaviour {
 
     private bool locked = false;
 
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
     void OnMouseDown()
     {
         if (!locked)
@@ -37,7 +27,6 @@ public class DragDrop : MonoBehaviour {
             offset = transform.position - Camera.main.ScreenToWorldPoint(new Vector3(screenPoint.x, Input.mousePosition.y, screenPoint.z));
             offsetAO = associatedObj.GetComponent<Transform>().position - Camera.main.ScreenToWorldPoint(new Vector3(screenPointAO.x, Input.mousePosition.y, screenPointAO.z));
         }
-        
     }
 
     void OnMouseDrag()

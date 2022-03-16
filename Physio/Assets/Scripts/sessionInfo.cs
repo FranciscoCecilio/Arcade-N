@@ -5,6 +5,7 @@ using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor;
 
 public static class SessionInfo
 {
@@ -91,8 +92,10 @@ public static class SessionInfo
     public static void DeleteUser(TMP_Text afterDeleteText) 
     {
         string filePath = Application.dataPath + "/Users/" + _username + ".txt";
+        string fileMetaFilePath = Application.dataPath + "/Users/" + _username + ".txt.meta";
         string folderpath = Application.dataPath + "/Users/" + _username;
-        
+        string folderMetaFilePath = Application.dataPath + "/Users/" + _username + ".meta";
+        afterDeleteText.text = "";
         /*int var = 0;
         foreach (string file in Directory.GetFiles( Application.dataPath + "/Users/"))
             {
@@ -113,13 +116,22 @@ public static class SessionInfo
         }
         else
         {
-            
-            //guiMessage = fileName + " file exists, deleting..."; 
-            afterDeleteText.text =  "Ficheiro de "+ "\"" + _username + "\" encontrado! Apagando..." ;
-            Debug.Log( "Ficheiro de "+ "\"" + _username + "\" encontrado! Apagando..." );
-            
-            File.Delete( filePath );
-            RefreshEditorProjectWindow();
+            try
+            {
+                File.Delete( filePath );
+                if(File.Exists(fileMetaFilePath)){
+                    File.Delete(fileMetaFilePath);
+                    Debug.Log("Apagou o file metafile");
+                }
+                afterDeleteText.text =  "Ficheiro de "+ "\"" + _username + "\" encontrado! Apagando..." ;
+                Debug.Log( "Ficheiro de "+ "\"" + _username + "\" encontrado! Apagando..." );
+            }
+            catch(IOException ioex){
+                afterDeleteText.text = "ERRO ao apagar o ficheiro com nome: \"" + _username + ".txt\"";
+                Debug.Log( ioex.Message);
+                return;
+            }
+            //RefreshEditorProjectWindow();
         }
 
         if ( !Directory.Exists( folderpath ) )
@@ -130,12 +142,23 @@ public static class SessionInfo
         }
         else
         {
-            //guiMessage = fileName + " file exists, deleting..."; 
-            afterDeleteText.text += "\nPasta de "+ "\"" + _username + "\" encontrado! Apagando..." ;
-            Debug.Log( "Pasta de "+ "\"" + _username + "\" encontrado! Apagando..." );
-            
-            Directory.Delete(folderpath, true);
-            RefreshEditorProjectWindow();
+            try
+            {
+                Directory.Delete(folderpath, true);
+                if(File.Exists(folderMetaFilePath)){
+                    File.Delete(folderMetaFilePath);
+                    Debug.Log("Apagou o folder metafile!!!");
+                }
+                //FileUtil.DeleteFileOrDirectory(folderpath);
+                afterDeleteText.text += "\nPasta "+ "\"" + _username + "\" encontrada! Apagando..." ;
+                Debug.Log( "Pasta "+ "\"" + _username + "\" encontrada! Apagando..." );
+            }
+            catch(IOException ioex){
+                afterDeleteText.text += "\nERRO ao apagar a pasta com nome: \"" + _username + "\"";
+                Debug.Log( "\nERRO ao apagar a pasta com nome: \"" + _username + "\"" );
+                Debug.Log( ioex.Message);
+            }
+            // RefreshEditorProjectWindow();
         }
     }
      

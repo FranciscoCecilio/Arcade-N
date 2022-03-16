@@ -354,7 +354,7 @@ public class Heatmap : ScriptableObject {
 
 	public static Bounds WorldBounds()
 	{
-		Object[] allGameObjects = GameObject.FindSceneObjectsOfType(typeof(GameObject));
+		Object[] allGameObjects = GameObject.FindObjectsOfType(typeof(GameObject));
 
 		GameObject p = new GameObject();
 		foreach(GameObject g in allGameObjects)

@@ -1,4 +1,0 @@
-Username=thanDur
-Name=Stéphane Duarte
-Age=23
-Gender=Male

@@ -3,29 +3,41 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class MainMenuScript : MonoBehaviour {
 
-    public Text helloPhrase;
-    public Text age_and_gender;
-    public Text time;
+    public TMP_Text helloText;
+    public TMP_Text age_and_gender;
+    public TMP_Text time;
 
     public GameObject maleAvatar;
     public GameObject femaleAvatar;
 
+    public GameObject deleteUI;
+    public TMP_Text deleteMessageNameText;
+    public GameObject afterDeleteUI;
+    public TMP_Text afterDeleteText;
+
     public void loadSequenceScene()
     {
+        // store this as the previous scene
+        LastScene._lastSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene("SequenceMenu");
     }
 
     public void loadExerciseSelectionScene()
     {
+        // store this as the previous scene
+        LastScene._lastSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SessionInfo.setView("Exercise");
         SceneManager.LoadScene("ExerciseSelection");
     }
 
     public void loadExerciseResultsScene() 
     {
+        // store this as the previous scene
+        LastScene._lastSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SessionInfo.setView("Results");
         SceneManager.LoadScene("ReportScreen");
     }
@@ -35,13 +47,13 @@ public class MainMenuScript : MonoBehaviour {
         
         // verificar a hora do dia! para dizer Bom dia, Boa tarde
         int sysHour = System.DateTime.Now.Hour; //gives you the current hour as an integer.
-        string greetingsText = "Bom dia, ";
+        string greetingsText = "BOM DIA, ";
         if(sysHour > 12){
-            greetingsText = "Boa tarde, ";
+            greetingsText = "BOA TARDE, ";
         }
 
-        helloPhrase.text = greetingsText + SessionInfo.getName() + "!";
-        age_and_gender.text = SessionInfo.getGender() + ", " + SessionInfo.getAge();
+        helloText.text = greetingsText + SessionInfo.getName().ToUpper() + "!";
+        //age_and_gender.text = SessionInfo.getGender() + ", " + SessionInfo.getAge();
         if (SessionInfo.getGender() == "Female")
         {
             maleAvatar.SetActive(false);
@@ -57,5 +69,27 @@ public class MainMenuScript : MonoBehaviour {
     void Update()
     {
         time.text = System.DateTime.UtcNow.ToLocalTime().ToString("HH:mm");
+    }
+
+    public void DeleteUser()
+    {
+        afterDeleteUI.SetActive(true);
+        SessionInfo.DeleteUser(afterDeleteText);
+        StartCoroutine(Delay());
+    }
+
+    public void CancelDelete(){
+        deleteUI.SetActive(false);
+    }
+    public void OpenDeleteMessage(){
+        deleteUI.SetActive(true);
+        deleteMessageNameText.text = "Deseja eliminar o perfil do user: " + SessionInfo.getName() + "?";
+    }
+
+    IEnumerator Delay()
+    {
+        //yield on a new YieldInstruction that waits for 2 seconds.
+        yield return new WaitForSeconds(5);
+        SceneManager.LoadScene("LoginMenu2");   
     }
 }

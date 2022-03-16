@@ -46,6 +46,8 @@ public class BodyScreenController : MonoBehaviour {
     }
 
     public void Quit() {
+        // store this as the previous scene
+        LastScene._lastSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene("ExerciseSelection");
     }
 

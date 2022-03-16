@@ -22,6 +22,8 @@ public class LoginMenu2 : MonoBehaviour
     {
         SessionInfo.setUsername(_usernames[_selectedNameIndex]);
         SessionInfo.createSessionPath();
+        // we want to know if the main menu was loaded from login to animate or not
+        LastScene._lastSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene("MainMenu");
     }
 

@@ -51,7 +51,9 @@ public class MainMenuScript : MonoBehaviour {
         if(sysHour > 12){
             greetingsText = "BOA TARDE, ";
         }
-
+        // this method loads the User in the SessionInfo
+        SessionInfo.loadUser();
+        
         helloText.text = greetingsText + SessionInfo.getName().ToUpper() + "!";
         //age_and_gender.text = SessionInfo.getGender() + ", " + SessionInfo.getAge();
         if (SessionInfo.getGender() == "Female")

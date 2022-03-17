@@ -47,9 +47,13 @@ public static class SessionInfo
     }
 
     public static string getName()
-    {   // UNCOMMENT THIS LINE TO WORK (COMMENT WHEN DEBUGGING)
-        loadInfo();
+    {   
         return _name;
+    }
+
+    public static void loadUser()
+    {   // This is called on MainMenu after the login.
+        loadInfo();
     }
 
     public static int getExerciseId()
@@ -87,6 +91,8 @@ public static class SessionInfo
                 line = reader.ReadLine();
             }
         }
+        Debug.Log("LoadedInfo");
+        reader.Close();
     }
 
     public static void DeleteUser(TMP_Text afterDeleteText) 

@@ -82,12 +82,15 @@ public class Register2 : MonoBehaviour
         {
             foreach (char c in str)
             {
-                if (boolGen.NextBoolean() && ((c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || c == '_'))
+                if (((c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || c == '_'))
                 {
                     sb.Append(c);
                 }
             }
         }
+        int uID = UnityEngine.Random.Range(1,100);
+        sb.Append(uID.ToString());
+        
         return sb.ToString();
     }
 

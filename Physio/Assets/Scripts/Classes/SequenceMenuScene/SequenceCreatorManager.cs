@@ -8,6 +8,7 @@ public static class SequenceManager
 {
     public static Sequence sequence;
 
+    // index gives the number of the exercise (if the sequence has 3 exercises and we are running the 1st exercise, index = 0)
     public static int index = 0;
 
     public static void newSequence(string name)
@@ -18,6 +19,7 @@ public static class SequenceManager
         sequence.toFile();
     }
 
+    // run is called in the start of a session
     public static void run()
     {
         SessionInfo.setView("RunSequence");
@@ -38,7 +40,6 @@ public static class SequenceManager
         {
             SceneManager.LoadScene("MainMenu");
         }
-        
     }
 
 }

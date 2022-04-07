@@ -42,6 +42,14 @@ public class MainMenuScript : MonoBehaviour {
         SceneManager.LoadScene("ReportScreen");
     }
 
+     public void loadNarrativeScene() 
+    {
+        // store this as the previous scene
+        LastScene._lastSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        SessionInfo.setView("Narrative");
+        SceneManager.LoadScene("NarrativeMenu");
+    }
+
 	// Use this for initialization
 	void Start () {
         

@@ -9,17 +9,14 @@ EditorBuildSettings:
     path: Assets/Scenes/LoginMenu2.unity
     guid: 694866dd67226604a89f562dc0985ae4
   - enabled: 1
+    path: Assets/Scenes/NarrativeMenu.unity
+    guid: 248e84b86e2beab4b9bab9c43266a9dd
+  - enabled: 1
     path: Assets/Scenes/RegisterProfile2.unity
     guid: 8c6f9a0283fe2064cafa75b3810eb918
-  - enabled: 0
-    path: Assets/Scenes/Old  Scenes/LoginMenu.unity
-    guid: fc86a53759d7b5740ae42060ebd5e2a4
   - enabled: 1
     path: Assets/Scenes/SequenceMenu.unity
     guid: ecc723e9171af6044a01f5ca47dd3aa3
-  - enabled: 0
-    path: Assets/Scenes/Old  Scenes/RegisterProfile.unity
-    guid: f6fc77018da47464f9d8fec1b3dac43c
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: edf6f8ec2df2fe34fbec5168daae180f

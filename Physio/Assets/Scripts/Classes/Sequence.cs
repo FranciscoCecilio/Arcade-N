@@ -33,12 +33,12 @@ public class Sequence
 
     public List<int> getExercisesIds()
     {
-        List<int> _exercisesList = new List<int>();
+        List<int> _exercisesIdList = new List<int>();
         for (int i = 0; i < _exerciseList.Count; i++)
         {
-            _exercisesList.Add(_exerciseList[i].getId());
+            _exercisesIdList.Add(_exerciseList[i].getId());
         }
-        return _exercisesList;
+        return _exercisesIdList;
     }
 
     public void setId(int id)
@@ -76,6 +76,8 @@ public class Sequence
         return _exerciseList[index];
     }
 
+    // creates a new sequence file in the directory USER/SEQUENCES/"<timestamp>.txt"
+    // this is called in the SequenceManager.newSequence(name)
     public void toFile()
     {
         if (!Directory.Exists(Application.dataPath + "/Users/" + SessionInfo.getUsername() + "/Sequences/"))

@@ -1,0 +1,4 @@
+Username=kiko12
+Name=kiko
+Age=22
+Gender=Male

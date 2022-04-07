@@ -1200,8 +1200,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11643914}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: loadExerciseSelectionScene
+        m_TargetAssemblyTypeName: MainMenuScript, Assembly-CSharp
+        m_MethodName: loadSequenceScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1569,8 +1569,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11643914}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: loadExerciseResultsScene
+        m_TargetAssemblyTypeName: MainMenuScript, Assembly-CSharp
+        m_MethodName: loadNarrativeScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

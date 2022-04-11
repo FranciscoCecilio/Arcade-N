@@ -4,6 +4,7 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class Register2 : MonoBehaviour
 {
@@ -24,7 +25,7 @@ public class Register2 : MonoBehaviour
 
     private void setName()
     {
-        string tempName = Name.GetComponent<InputField>().text;
+        string tempName = Name.GetComponent<TMP_InputField>().text;
         if (tempName != "")
         {
             _name = tempName;
@@ -39,7 +40,7 @@ public class Register2 : MonoBehaviour
 
     private void setAge()
     {
-        string tempAge = Age.GetComponent<InputField>().text;
+        string tempAge = Age.GetComponent<TMP_InputField>().text;
         if (tempAge != "")
         {
             _age = tempAge;

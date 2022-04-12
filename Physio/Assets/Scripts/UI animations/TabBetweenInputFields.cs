@@ -57,7 +57,7 @@ public class TabBetweenInputFields : MonoBehaviour
                 break;
             case 4: nr_utente.Select();
                 nr_utente.ActivateInputField();
-                nr_utente.selectionColor = selectedColor;
+                //nr_utente.selectionColor = selectedColor;
                 break;
             case 5: voltar.Select();
                 ColorBlock cb2 = voltar.colors;

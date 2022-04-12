@@ -12,11 +12,16 @@ public class Register2 : MonoBehaviour
 
     public GameObject Name;
     public GameObject EmptyNameMessage;
+    public GameObject EmptyNameBox;
     private string _name;
 
     public GameObject Age;
     public GameObject EmptyAgeMessage;
+    public GameObject EmptyAgeBox;
     private string _age;
+
+    public GameObject Nr_Saude;
+    private string _nrSaude;
 
     //Toggle gender gameObjects
     public Toggle IsMale;
@@ -30,10 +35,12 @@ public class Register2 : MonoBehaviour
         {
             _name = tempName;
             EmptyNameMessage.SetActive(false);
+            EmptyNameBox.SetActive(false);
         }
         else
         {
             EmptyNameMessage.SetActive(true);
+            EmptyNameBox.SetActive(true);
             _fieldsEmpty = true;
         }
     }
@@ -45,12 +52,19 @@ public class Register2 : MonoBehaviour
         {
             _age = tempAge;
             EmptyAgeMessage.SetActive(false);
+            EmptyAgeBox.SetActive(false);
         }
         else
         {
             EmptyAgeMessage.SetActive(true);
+            EmptyAgeBox.SetActive(true);
             _fieldsEmpty = true;
         }
+    }
+    
+    private void setNrSaude()
+    {
+        _nrSaude = Nr_Saude.GetComponent<TMP_InputField>().text;
     }
 
     private void setGender()
@@ -69,6 +83,7 @@ public class Register2 : MonoBehaviour
         writer.WriteLine("Name=" + _name);
         writer.WriteLine("Age=" + _age);
         writer.WriteLine("Gender=" + _gender);
+        if(_nrSaude != "") writer.WriteLine("Nr_Utente=" + _nrSaude);
 
         writer.Close();
 
@@ -101,6 +116,7 @@ public class Register2 : MonoBehaviour
         setName();
         setAge();
         setGender();
+        setNrSaude();
         if (!_fieldsEmpty)
         {
             saveInfo();

@@ -1,0 +1,5 @@
+Username=RafaAlex6
+Name=Rafa Alex
+Age=22
+Gender=Male
+Nr_Utente=123456789

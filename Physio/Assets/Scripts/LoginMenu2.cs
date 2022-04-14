@@ -9,8 +9,10 @@ using UnityEngine.SceneManagement;
 public class LoginMenu2 : MonoBehaviour
 { 
     public TMP_Dropdown _namesDropdown;
-    private List<string> _usernames = new List<string>();
-    private List<string> _names = new List<string>();
+    private List<string> _usernames = new List<string>(); // the list with usernames that correspond to .txt files, that will help login (ex. tiagorodrigues31)
+    private List<string> _names = new List<string>(); // names to be on the dropdown list (ex. Tiago Rodrigues - 123456789)
+    private List<TMP_Dropdown.OptionData> dropdownOptions;
+    
     private int _selectedNameIndex = 0;
 
     // Start is called before the first frame update
@@ -30,8 +32,8 @@ public class LoginMenu2 : MonoBehaviour
 
     private void populateUsersDropdown()
     {
-        _usernames.Add("");
-        _names.Add("Escolha o perfil do utente");
+        //_usernames.Add("");
+        //_names.Add("Escolha o perfil do utente");
 
         string folderpath = Application.dataPath + "/Users/";
         if (Directory.Exists(folderpath))
@@ -70,7 +72,6 @@ public class LoginMenu2 : MonoBehaviour
                         }
                         reader.Close();
                     }
-                    Debug.Log("Juntou o nome à lista" + _name);
                     _names.Add(_name);
                     _usernames.Add(username);
                 }
@@ -79,13 +80,18 @@ public class LoginMenu2 : MonoBehaviour
         {
             Directory.CreateDirectory(folderpath);
         }
-        Debug.Log(_names[0]);
         _namesDropdown.AddOptions(_names);
+        dropdownOptions = _namesDropdown.options;
     }
 
     public void Dropdown_IndexChanged(int index)
     {
-        _selectedNameIndex = index;
+        string namePicked = _namesDropdown.options[index].text;
+        for(int i = 0; i < dropdownOptions.Count; i ++){
+            if(namePicked.Equals(dropdownOptions[i].text)){
+                _selectedNameIndex = i;
+            }
+        }
     }
 
     public void createAccount()

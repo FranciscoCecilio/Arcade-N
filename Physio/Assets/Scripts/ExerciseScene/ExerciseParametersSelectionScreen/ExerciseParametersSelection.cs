@@ -10,10 +10,6 @@ public class ExerciseParametersSelection : MonoBehaviour {
     public InputField durationField;
     public InputField restTimeField;
 
-    void Start()
-    {
-    }
-
     public void next()
     {
         if (nRepsField != null)

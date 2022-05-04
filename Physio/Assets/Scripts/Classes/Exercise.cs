@@ -2,6 +2,16 @@
 using System;
 using System.IO;
 
+// TODO Cecilio: 
+//
+// Uma série (ou sequence) tem uma lista de exercícios, e cada exercício tem nr. de repetições.
+// Queremos que uma Série (ou sequence) seja, não um conjunto de exercícios variados, mas sim uma série do mesmo exercício.
+// Por exemplo: 
+// Série1: consiste em 3 séries de 1 repetição cada do exercício em grelha
+// Série2: consiste em 2 séries de 5 repetição cada do exercício Left-Right
+// Série3: consiste em 3 séries de 1 repetição cada do exercício em grelha
+
+// Portanto, uma Série recebe determiando exercício, nr. de séries, nr. de repetições (mesmo valor para cada série), tempo descanso entre séries
 public class Exercise
 {
     private int _id;

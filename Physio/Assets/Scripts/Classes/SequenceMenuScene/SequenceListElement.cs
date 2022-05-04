@@ -5,10 +5,44 @@ using UnityEngine.UI;
 using TMPro;
 public class SequenceListElement : MonoBehaviour
 {
+    // UI fields -----------------------
+    [SerializeField] int typeIndex;
+    public TMP_Text exerciseTypeText;
     public TMP_Text armText;
     public TMP_InputField nRepsField;
     public TMP_InputField nSeriesField;
     public TMP_InputField restTimerField;
+    // Sequence -----------------------
+    private Sequence _sequence;
+    //public Text buttonName; // nao será preciso
+
+    
+    public void SetSequence(Sequence sequence)
+    {
+        _sequence = sequence;
+        //buttonName.text = _sequence.getName();
+    }
+
+    
+   
+    // --------------------------------- UI Buttons ---------------------------------------------------
+     public void ChangeExerciseType(){
+        typeIndex++;
+        if(typeIndex > 2){
+            typeIndex = 0;
+        }
+        switch (typeIndex){
+            case 0: 
+                exerciseTypeText.text = "Grid";
+                break;
+            case 1: 
+                exerciseTypeText.text = "L/R";
+                break;
+            case 2: 
+                exerciseTypeText.text = "U/D";
+                break;        
+        }
+    }
 
     public void ChangeArm(){
         if(armText.text.Equals("Esquerdo")) armText.text = "Direito";
@@ -79,5 +113,9 @@ public class SequenceListElement : MonoBehaviour
             else restTimerField.text = "0";
         }
     }
+    // --------------------------------- END: UI Buttons ---------------------------------------------------
+
+    
+
 }
 

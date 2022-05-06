@@ -23,10 +23,9 @@ public class SequenceListElement : MonoBehaviour
         //buttonName.text = _sequence.getName();
     }
 
-    
-   
-    // --------------------------------- UI Buttons ---------------------------------------------------
-     public void ChangeExerciseType(){
+       
+    // --------------------------------- Parameters Buttons ---------------------------------------------------
+    public void ChangeExerciseType(){
         typeIndex++;
         if(typeIndex > 2){
             typeIndex = 0;
@@ -113,8 +112,11 @@ public class SequenceListElement : MonoBehaviour
             else restTimerField.text = "0";
         }
     }
-    // --------------------------------- END: UI Buttons ---------------------------------------------------
-
+    // --------------------------------- Delete Button ---------------------------------------------------
+    
+    public void DeleteSequence(){
+        Destroy(gameObject);
+    }
     
 
 }

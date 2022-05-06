@@ -76,15 +76,16 @@ public class Sequence
         return _exerciseList[index];
     }
 
-    // creates a new sequence file in the directory USER/SEQUENCES/"<timestamp>.txt"
+    // creates a new sequence file in the directory USER/username/SEQUENCES/"<timestamp>.txt"
     // chamado no SequenceManager.newSequence(name) e nesse caso a sequencia nao tem exercicios...
-    // 
+
+    // REPLACE kiko12 with SessionInfo.getUsername()
     public void toFile()
     {
-        if (!Directory.Exists(Application.dataPath + "/Users/" + SessionInfo.getUsername() + "/Sequences/"))
-            Directory.CreateDirectory(Application.dataPath + "/Users/" + SessionInfo.getUsername() + "/Sequences/");
+        if (!Directory.Exists(Application.dataPath + "/Users/" + "kiko12" + "/Sequences/"))
+            Directory.CreateDirectory(Application.dataPath + "/Users/" + "kiko12" + "/Sequences/");
         
-        string filepath = Application.dataPath + "/Users/" + SessionInfo.getUsername() + "/Sequences/" + _timestamp + ".txt";
+        string filepath = Application.dataPath + "/Users/" + "kiko12" + "/Sequences/" + _timestamp + ".txt";
 
         if (System.IO.File.Exists(filepath)) System.IO.File.Delete(filepath);
 

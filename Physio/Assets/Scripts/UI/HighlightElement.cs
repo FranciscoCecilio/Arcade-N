@@ -20,12 +20,12 @@ public class HighlightElement : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        image.color = highlightColor;
+        //image.color = highlightColor;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        image.color = startColor;
+        //image.color = startColor;
     }
 
     

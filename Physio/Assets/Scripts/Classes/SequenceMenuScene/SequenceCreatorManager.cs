@@ -11,11 +11,14 @@ public static class SequenceManager
     // index gives the number of the exercise (if the sequence has 3 exercises and we are running the 1st exercise, index = 0)
     public static int index = 0;
 
+    // chamado apenas em SequenceMenuScript.confirmNameSequence()
     public static void newSequence(string name)
     {
+        // criar uma sequencia  
         State.exercise = null;
         sequence = new global::Sequence(name);
         sequence.setTimestamp(DateTime.Now.ToString("yyyyMMddTHHmmss"));
+        // criar um ficheiro com o TS da sequencia
         sequence.toFile();
     }
 

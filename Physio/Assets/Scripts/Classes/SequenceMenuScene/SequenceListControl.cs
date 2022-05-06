@@ -41,8 +41,9 @@ public class SequenceListControl : MonoBehaviour
     #endif
     }
 
-    // Gera sequencias baseadas na ultima sessão
     // TODO: nos queremos criar apenas um botao com 1 sequencia da ultima sessão? ou queremos todas series da ultima sessao?
+    // Gera sequencias baseadas na ultima sessão
+    // Gera botões baseados nessas sequencias
     void Start()
     {
         if (!System.IO.Directory.Exists(Application.dataPath + "/Users/" + SessionInfo.getUsername() + "/Sequences/"))
@@ -113,19 +114,24 @@ public class SequenceListControl : MonoBehaviour
                         line = reader.ReadLine();
                     }
                 }
-                Debug.Log("chegou aqui");
-                //BOTAO SEQUENCIA 
-                GameObject button = Instantiate(listElementPrefab) as GameObject;
-                button.name = tempSequence.getName() + "Button";
-                button.SetActive(true);
-                //button.GetComponent<SequenceListButton>().SetSequence(tempSequence);
-                button.GetComponent<SequenceListElement>().SetSequence(tempSequence);
-                // TODO perceber como instanciar Butoes sem estar praqui a fazer scaledowns
-                button.transform.SetParent(listContent);
-                Debug.Log("e aqui");
+                // generate the button on the list
+                GenerateSequenceButton(tempSequence);
 
                 reader.Close();
             }
         }
+    }
+
+    public void GenerateSequenceButton(Sequence seq){
+        Debug.Log("chegou aqui");
+        //BOTAO SEQUENCIA 
+        GameObject button = Instantiate(listElementPrefab) as GameObject;
+        button.name = seq.getName() + "Button";
+        button.SetActive(true);
+        //button.GetComponent<SequenceListButton>().SetSequence(tempSequence);
+        button.GetComponent<SequenceListElement>().SetSequence(seq);
+        // TODO perceber como instanciar Butoes sem estar praqui a fazer scaledowns
+        button.transform.SetParent(listContent, false);
+        Debug.Log("e aqui");
     }
 }

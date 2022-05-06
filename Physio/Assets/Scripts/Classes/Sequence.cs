@@ -77,7 +77,8 @@ public class Sequence
     }
 
     // creates a new sequence file in the directory USER/SEQUENCES/"<timestamp>.txt"
-    // this is called in the SequenceManager.newSequence(name)
+    // chamado no SequenceManager.newSequence(name) e nesse caso a sequencia nao tem exercicios...
+    // 
     public void toFile()
     {
         if (!Directory.Exists(Application.dataPath + "/Users/" + SessionInfo.getUsername() + "/Sequences/"))

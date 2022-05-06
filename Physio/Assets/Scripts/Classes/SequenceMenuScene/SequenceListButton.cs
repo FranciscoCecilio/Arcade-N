@@ -15,12 +15,14 @@ public class SequenceListButton : MonoBehaviour
     public GameObject addExerciseButton;
 
     private Sequence _sequence;
+    /* passado para o ListElement
 
     public void SetSequence(Sequence sequence)
     {
         _sequence = sequence;
         buttonName.text = _sequence.getName();
     }
+    */
 
     private void renderExercisesList()
     {

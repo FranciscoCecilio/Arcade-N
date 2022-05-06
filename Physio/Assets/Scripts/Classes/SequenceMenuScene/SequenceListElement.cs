@@ -64,10 +64,10 @@ public class SequenceListElement : MonoBehaviour
         if (nSeriesField != null)
         {
             if (!nSeriesField.text.Equals("")) {
-                if((int.Parse(nSeriesField.text) <= 0)) nSeriesField.text = "0";
+                if((int.Parse(nSeriesField.text) <= 1)) nSeriesField.text = "1";
                 else nSeriesField.text = (int.Parse(nSeriesField.text) - 1).ToString();
             }
-            else nSeriesField.text = "0";
+            else nSeriesField.text = "1";
         }
     }
     
@@ -86,10 +86,10 @@ public class SequenceListElement : MonoBehaviour
         if (nRepsField != null)
         {
             if (!nRepsField.text.Equals("")){
-                if((int.Parse(nRepsField.text) <= 0)) nRepsField.text = "0";
+                if((int.Parse(nRepsField.text) <= 0)) nRepsField.text = "1";
                 else nRepsField.text = (int.Parse(nRepsField.text) - 1).ToString();
             }
-            else nRepsField.text = "0";
+            else nRepsField.text = "1";
         }
     }
 

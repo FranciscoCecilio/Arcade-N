@@ -2272,7 +2272,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 750867279009933877}
-  highlightColor: {r: 0.0129582975, g: 0.7532127, b: 0.9811321, a: 1}
+  highlightColor: {r: 1, g: 0.9443515, b: 0.50377357, a: 1}
 --- !u!1 &6801082224416128831
 GameObject:
   m_ObjectHideFlags: 0

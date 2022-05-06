@@ -9,6 +9,7 @@ public class SequenceMenuScript : MonoBehaviour
 
     public GameObject nameSequenceBox;
     public Text newSequenceName;
+    [SerializeField] SequenceListControl seqListCtrl;
 
     public void showNameSequenceBox()
     {
@@ -18,9 +19,12 @@ public class SequenceMenuScript : MonoBehaviour
     public void confirmNameSequence()
     {
         SequenceManager.newSequence(newSequenceName.text);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        seqListCtrl.GenerateSequenceButton(SequenceManager.sequence);
+        nameSequenceBox.SetActive(false);
     }
 
+    // personalizar as sequencias vai ser feito a partir do SequenceListElement
     public void addExercise()
     {
         SessionInfo.setView("SequenceCreat");

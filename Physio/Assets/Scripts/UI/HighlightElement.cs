@@ -21,13 +21,11 @@ public class HighlightElement : MonoBehaviour, IPointerEnterHandler, IPointerExi
     public void OnPointerEnter(PointerEventData eventData)
     {
         image.color = highlightColor;
-        Debug.Log("Mouse enter");
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         image.color = startColor;
-        Debug.Log("Mouse exit");
     }
 
     

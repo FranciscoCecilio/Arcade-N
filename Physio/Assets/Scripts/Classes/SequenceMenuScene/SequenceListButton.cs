@@ -4,6 +4,7 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
+// Esta classe Já nao é usada, passou a ser o SequenceListElement
 public class SequenceListButton : MonoBehaviour
 {
     public Text buttonName;

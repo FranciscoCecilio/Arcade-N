@@ -12,6 +12,7 @@ public class SequenceListElement : MonoBehaviour
     public TMP_InputField nRepsField;
     public TMP_InputField nSeriesField;
     public TMP_InputField restTimerField;
+    
     // Sequence -----------------------
     private Sequence _sequence;
     //public Text buttonName; // nao será preciso
@@ -114,10 +115,15 @@ public class SequenceListElement : MonoBehaviour
     }
     // --------------------------------- Delete Button ---------------------------------------------------
     
-    public void DeleteSequence(){
-        Destroy(gameObject);
+    // Olhar para o SequenceListButton e em vez de apagar exercicios, apagar o ficheiro TS?
+    public void DeleteSequenceButton(){
+        //Procura o script que controla os botoes da lista
+        GameObject sequencesList = GameObject.Find("Sequences");
+        if(sequencesList == null) Debug.Log("Error trying to find Sequences object in scene");
+        SequenceListControl script = (SequenceListControl) sequencesList.GetComponent(typeof(SequenceListControl));
+        // Seleciona esta sequencia como ativa e abre o delete dialogue
+        script.ActiveSequence(_sequence);
+        script.OpenDeleteDialogue();
     }
-    
-
 }
 

@@ -4,12 +4,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 
-// CHANGE FOREACH TO GETNAME instead of kiko12
+// CHANGE kiko12 to SessionInfo.getUsername()
 public class SequenceListControl : MonoBehaviour
 {
     public GameObject listElementPrefab;
 
     private Sequence selectedSequence;
+
+    public GameObject deleteDialogue;
 
     [SerializeField] Transform listContent;
 
@@ -18,20 +20,35 @@ public class SequenceListControl : MonoBehaviour
         selectedSequence = _sequence;
     }
 
+    public void OpenDeleteDialogue(){
+        deleteDialogue.SetActive(true);
+    }
+
+    public void CloseDeleteDialogue(){
+        deleteDialogue.SetActive(false);
+    }
+
+    // Destroi o botao e o txt da selectedSequence
     public void DestroySequence()
     {
         //Apaga o botão da sequência
         GameObject button = GameObject.Find(selectedSequence.getName() + "Button");
+        if(button == null) Debug.Log("Error trying to find the button to delete!");
+        
         button.SetActive(false);
+        Destroy(button);
 
-        //Limpa lista de exercicios
-        GameObject[] exercs = GameObject.FindGameObjectsWithTag("ExerciseName");
-        foreach (GameObject exerc in exercs) GameObject.Destroy(exerc);
+        //OLD: Limpa lista de exercicios (Nova versão não há lista de exercícios, apenas séries do mesmo exercicio)
+        /*GameObject[] exercs = GameObject.FindGameObjectsWithTag("ExerciseName");
+        foreach (GameObject exerc in exercs) GameObject.Destroy(exerc);*/
 
         //Apaga o ficheiro da sequência
-        string sequencePath = Application.dataPath + "/Users/" + SessionInfo.getUsername() + "/Sequences/" + selectedSequence.getTimestamp() + ".txt";
+        string sequencePath = Application.dataPath + "/Users/" + "kiko12" + "/Sequences/" + selectedSequence.getTimestamp() + ".txt";
+        if(!File.Exists(sequencePath)) Debug.Log("Error trying to find file to delete in: " + sequencePath);
         File.Delete(sequencePath);
         RefreshEditorProjectWindow();
+        
+        CloseDeleteDialogue();
     }
 
     void RefreshEditorProjectWindow()
@@ -123,7 +140,6 @@ public class SequenceListControl : MonoBehaviour
     }
 
     public void GenerateSequenceButton(Sequence seq){
-        Debug.Log("chegou aqui");
         //BOTAO SEQUENCIA 
         GameObject button = Instantiate(listElementPrefab) as GameObject;
         button.name = seq.getName() + "Button";
@@ -132,6 +148,5 @@ public class SequenceListControl : MonoBehaviour
         button.GetComponent<SequenceListElement>().SetSequence(seq);
         // TODO perceber como instanciar Butoes sem estar praqui a fazer scaledowns
         button.transform.SetParent(listContent, false);
-        Debug.Log("e aqui");
     }
 }

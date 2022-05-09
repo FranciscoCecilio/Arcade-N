@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// OLD script. In the new version, deleting a list element is handled in SequenceListControl
 public class DeleteSequence : MonoBehaviour {
 
     public GameObject confirmationBox;

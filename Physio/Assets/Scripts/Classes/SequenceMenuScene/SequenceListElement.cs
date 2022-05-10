@@ -17,13 +17,20 @@ public class SequenceListElement : MonoBehaviour
     private Sequence _sequence;
     //public Text buttonName; // nao será preciso
 
-    
     public void SetSequence(Sequence sequence)
     {
         _sequence = sequence;
         //buttonName.text = _sequence.getName();
     }
 
+    public Sequence GetSequence(){
+        if(_sequence == null){
+            Debug.Log("Error: Tried to Get a null sequence.");
+            return null;
+        }
+        else 
+            return _sequence;
+    }
        
     // --------------------------------- Parameters Buttons ---------------------------------------------------
     public void ChangeExerciseType(){
@@ -115,12 +122,15 @@ public class SequenceListElement : MonoBehaviour
     }
     // --------------------------------- Delete Button ---------------------------------------------------
     
-    // Olhar para o SequenceListButton e em vez de apagar exercicios, apagar o ficheiro TS?
+    // Envia pedido de delete ao SequenceListControl.cs
     public void DeleteSequenceButton(){
         //Procura o script que controla os botoes da lista
         GameObject sequencesList = GameObject.Find("Sequences");
+        
         if(sequencesList == null) Debug.Log("Error trying to find Sequences object in scene");
+
         SequenceListControl script = (SequenceListControl) sequencesList.GetComponent(typeof(SequenceListControl));
+        
         // Seleciona esta sequencia como ativa e abre o delete dialogue
         script.ActiveSequence(_sequence);
         script.OpenDeleteDialogue();

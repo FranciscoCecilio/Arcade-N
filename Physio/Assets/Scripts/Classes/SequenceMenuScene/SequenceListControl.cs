@@ -13,6 +13,8 @@ public class SequenceListControl : MonoBehaviour
 
     public GameObject deleteDialogue;
 
+    public GameObject clearDialogue;
+
     [SerializeField] Transform listContent;
 
     public void ActiveSequence(Sequence _sequence)
@@ -32,7 +34,8 @@ public class SequenceListControl : MonoBehaviour
     public void DestroySequence()
     {
         //Apaga o botão da sequência
-        GameObject button = GameObject.Find(selectedSequence.getName() + "Button");
+        //OLD que tb serve: GameObject button = GameObject.Find(selectedSequence.getName() + "Button");
+        GameObject button = listContent.Find(selectedSequence.getName() + "Button").gameObject;
         if(button == null) Debug.Log("Error trying to find the button to delete!");
         
         button.SetActive(false);
@@ -56,6 +59,27 @@ public class SequenceListControl : MonoBehaviour
     #if UNITY_EDITOR
            UnityEditor.AssetDatabase.Refresh();
     #endif
+    }
+
+    public void OpenClearDialogue(){
+        clearDialogue.SetActive(true);
+    }
+
+    public void CloseClearDialogue(){
+        clearDialogue.SetActive(false);
+    }
+
+    public void ClearList(){
+        // iteramos todos os botoes e apagamos um a um
+        foreach (Transform eachChild in listContent) {
+            if (eachChild.name.Substring(eachChild.name.Length - 6) == "Button") {
+                ActiveSequence(eachChild.gameObject.GetComponent<SequenceListElement>().GetSequence());
+                DestroySequence();
+                //eachChild.gameObject.GetComponent<SequenceListElement>().DeleteSequenceButton();
+                Debug.Log ("Button deleted. Name: " + eachChild.name);
+            }
+        }
+        CloseClearDialogue();
     }
 
     // TODO: nos queremos criar apenas um botao com 1 sequencia da ultima sessão? ou queremos todas series da ultima sessao?
@@ -140,13 +164,16 @@ public class SequenceListControl : MonoBehaviour
     }
 
     public void GenerateSequenceButton(Sequence seq){
+        if(seq == null){
+            Debug.Log("ERROR: Trying to create a button for a null sequence");
+            return;
+        }
         //BOTAO SEQUENCIA 
         GameObject button = Instantiate(listElementPrefab) as GameObject;
         button.name = seq.getName() + "Button";
         button.SetActive(true);
         //button.GetComponent<SequenceListButton>().SetSequence(tempSequence);
         button.GetComponent<SequenceListElement>().SetSequence(seq);
-        // TODO perceber como instanciar Butoes sem estar praqui a fazer scaledowns
         button.transform.SetParent(listContent, false);
     }
 }

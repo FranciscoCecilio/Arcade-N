@@ -14,11 +14,11 @@ public static class SequenceManager
     // chamado apenas em SequenceMenuScript.confirmNameSequence()
     public static void newSequence(string name)
     {
-        // criar uma sequencia  
+        // criar uma sequencia 
         State.exercise = null;
         sequence = new global::Sequence(name);
         sequence.setTimestamp(DateTime.Now.ToString("yyyyMMddTHHmmss"));
-        // criar um ficheiro com o TS da sequencia
+        // criar um ficheiro com o TimeStamp da sequencia
         sequence.toFile();
     }
 

@@ -78,6 +78,7 @@ public class Sequence
 
     // creates a new sequence file in the directory USER/username/SEQUENCES/"<timestamp>.txt"
     // chamado no SequenceManager.newSequence(name) e nesse caso a sequencia nao tem exercicios...
+    // chamado também durante no ExerciseParameterSelection
 
     // REPLACE kiko12 with SessionInfo.getUsername()
     public void toFile()

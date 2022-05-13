@@ -3,66 +3,84 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-public class SequenceListElement : MonoBehaviour
+
+public class ExerciseParametersPanel : MonoBehaviour
 {
-    // UI fields -----------------------
-    [SerializeField] int typeIndex;
-    public TMP_Text exerciseTypeText;
-    public TMP_Text armText;
+    public SequenceListElement _selectedListSequence;
+    // UI fields
+    public int exTypeIndex; // 0 Grid , 1 Left/RIght , 2 Up/Down
+    public int armIndex; // 0 Left , 1 Right
+
+    public GameObject emptyExercisesBox;
+    public GameObject emptyArmsBox;
+
     public TMP_InputField nRepsField;
     public TMP_InputField nSeriesField;
     public TMP_InputField restTimerField;
-    
-    // Sequence -----------------------
-    private Sequence _sequence;
-    //public Text buttonName; // nao será preciso
 
-    public void SetSequence(Sequence sequence)
-    {
-        _sequence = sequence;
-        //buttonName.text = _sequence.getName();
+    public void SetPanelActive(GameObject sequenceListElement){
+        _selectedListSequence = sequenceListElement.GetComponent<SequenceListElement>();
+        this.gameObject.SetActive(true);
+        // Load Info regarding that sequence (if its a new one there isn't)
+
     }
 
-    public Sequence GetSequence(){
-        if(_sequence == null){
-            Debug.Log("Error: Tried to Get a null sequence.");
-            return null;
-        }
-        else 
-            return _sequence;
-    }
-
-    public void SetSequenceParameters(int exTypeIndex, int armIndex, int nSeries, int nRepsField, int restTimerField){
-        // place the info in the placeholders
-
-        // save to a file
-    }
+    // checks if the fields are filled
+    public void ConfirmButton(){
+        bool exercise_was_selected = false;
+        bool arm_was_selected = false;
        
+        // Exercise type
+        if(exTypeIndex == 0 || exTypeIndex == 1 || exTypeIndex == 2){
+            exercise_was_selected = true;
+        }
+
+        // Arm
+        if(armIndex == 0 || armIndex == 1){
+            arm_was_selected = true;
+        }
+
+        // Confirm OR Highlight the buttons
+        if(exercise_was_selected && arm_was_selected){
+            // Confirm and Save on the Sequence List and txt file
+            _selectedListSequence.SetSequenceParameters(exTypeIndex, armIndex, int.Parse(nSeriesField.text), int.Parse(nRepsField.text), int.Parse(restTimerField.text));
+        }
+        else{
+            // Highlight exercises
+            if(!exercise_was_selected){
+                Highlight_Exercises();
+            }
+            // Highlight arm
+            if(!arm_was_selected){
+                Highlight_Arms();
+            }
+        }
+    }
+
+    // Highlights the UI to let users know they have to fill the fields
+    public void Highlight_Exercises(){
+        emptyExercisesBox.SetActive(true);
+    }
+
+    public void Highlight_Arms(){
+        emptyArmsBox.SetActive(true);
+    }
+
     // --------------------------------- Parameters Buttons ---------------------------------------------------
-    public void ChangeExerciseType(){
-        typeIndex++;
-        if(typeIndex > 2){
-            typeIndex = 0;
-        }
-        switch (typeIndex){
-            case 0: 
-                exerciseTypeText.text = "Grid";
-                break;
-            case 1: 
-                exerciseTypeText.text = "L/R";
-                break;
-            case 2: 
-                exerciseTypeText.text = "U/D";
-                break;        
-        }
+   
+    // exerciseCode: 0 Grid , 1 Left/Right , 2 Up/Down
+    public void SelectExerciseType(int exerciseCode){
+        exTypeIndex = exerciseCode;
+        emptyExercisesBox.SetActive(false);
     }
 
-    public void ChangeArm(){
-        if(armText.text.Equals("Esquerdo")) armText.text = "Direito";
-        else if(armText.text.Equals("Direito")) armText.text = "Esquerdo";
-        else armText.text = "Erro";
+    // armcode: 0 Left , 1 Right
+    public void SelectArm(int armCode){
+        exTypeIndex = armCode;
+        emptyArmsBox.SetActive(false);
     }
 
+    // Series
     public void nSeriesUp()
     {
         if (nSeriesField != null)
@@ -84,7 +102,7 @@ public class SequenceListElement : MonoBehaviour
         }
     }
     
-    
+    // Reps
     public void nRepsUp()
     {
         if (nRepsField != null)
@@ -106,6 +124,7 @@ public class SequenceListElement : MonoBehaviour
         }
     }
 
+    // Timer
     public void restTimerUp()
     {
         if (restTimerField != null)
@@ -126,20 +145,5 @@ public class SequenceListElement : MonoBehaviour
             else restTimerField.text = "0";
         }
     }
-    // --------------------------------- Delete Button ---------------------------------------------------
-    
-    // Envia pedido de delete ao SequenceListControl.cs
-    public void DeleteSequenceButton(){
-        //Procura o script que controla os botoes da lista
-        GameObject sequencesList = GameObject.Find("Sequences");
-        
-        if(sequencesList == null) Debug.Log("Error trying to find Sequences object in scene");
 
-        SequenceListControl script = (SequenceListControl) sequencesList.GetComponent(typeof(SequenceListControl));
-        
-        // Seleciona esta sequencia como ativa e abre o delete dialogue
-        script.ActiveSequence(_sequence);
-        script.OpenDeleteDialogue();
-    }
 }
-

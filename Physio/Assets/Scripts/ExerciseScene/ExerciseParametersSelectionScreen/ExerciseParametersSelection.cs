@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+// Old file not used anymore. We select the exercises in ExerciseParametersPanel.cs (in the Sequence Creation Scene)
 public class ExerciseParametersSelection : MonoBehaviour {
 
     public InputField nRepsField;

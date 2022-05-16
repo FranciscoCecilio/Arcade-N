@@ -6,26 +6,60 @@ using TMPro;
 
 public class ExerciseParametersPanel : MonoBehaviour
 {
-    public SequenceListElement _selectedListSequence;
     // UI fields
-    public int exTypeIndex; // 0 Grid , 1 Left/RIght , 2 Up/Down
-    public int armIndex; // 0 Left , 1 Right
+    [Header("Debugging")]
+    public SequenceListElement _selectedListSequence;
+    public int exTypeIndex; // -1 NotDef , 0 Grid , 1 Left/RIght , 2 Up/Down
+    public int armIndex; // -1 NotDef , 0 Left , 1 Right
 
-    public GameObject emptyExercisesBox;
-    public GameObject emptyArmsBox;
+    [Header("Overview Screen")]
+    public Image ExImgPlaceholder;
+    public TMP_Text ArmText;
+    public TMP_Text NSeriesText;
+    public TMP_Text NRepsText;
+    public TMP_Text RestTimerText;
 
-    public TMP_InputField nRepsField;
+    [Header("Parameters Selection")]
     public TMP_InputField nSeriesField;
+    public TMP_InputField nRepsField; 
     public TMP_InputField restTimerField;
 
-    public void SetPanelActive(GameObject sequenceListElement){
-        _selectedListSequence = sequenceListElement.GetComponent<SequenceListElement>();
-        this.gameObject.SetActive(true);
-        // Load Info regarding that sequence (if its a new one there isn't)
+    [Header("Flow")]
+    public GameObject overview_screen;
+    public GameObject arm_screen;
+    public GameObject parameters_screen;
 
+
+    // method called when the user clicks on a list element
+    // TODO prevents if we are editing
+    public void SetPanelActive(GameObject sequenceListElement){
+        this.gameObject.SetActive(true);
+        _selectedListSequence = sequenceListElement.GetComponent<SequenceListElement>();
+        // Load Info regarding that sequence (if its a new one there isn't)
+        LoadSequenceParameters(_selectedListSequence.GetSequence());
     }
 
-    // checks if the fields are filled
+    // Fetches the parameters from the selected sequence
+    private void LoadSequenceParameters(Sequence seq){
+        
+        if(seq.getLength() == 0){ // This means the sequence was recently created and doesn't have any exercises yet.
+            exTypeIndex = -1;
+            armIndex = - 1;
+            NSeriesText.text = "";
+            NRepsText.text = "";
+            RestTimerText.text = "";
+        }
+        else{
+            exTypeIndex = seq.getExercisesIds()[0];
+            // var beverage = (age >= 21) ? "Beer" : "Juice";
+            armIndex = seq.getExercise(0).isLeftArm() ? 0 : 1 ; // armIndex is 0 if isLeftArm is true
+            NSeriesText.text = seq.getSeries().ToString();
+            NRepsText.text =  seq.getExercise(0).getNReps().ToString();
+            RestTimerText.text = seq.getExercise(0).getRestTime().ToString();
+        }
+    }
+
+    // checks if the fields were filled
     public void ConfirmButton(){
         bool exercise_was_selected = false;
         bool arm_was_selected = false;
@@ -59,25 +93,25 @@ public class ExerciseParametersPanel : MonoBehaviour
 
     // Highlights the UI to let users know they have to fill the fields
     public void Highlight_Exercises(){
-        emptyExercisesBox.SetActive(true);
+        //emptyExercisesBox.SetActive(true);
     }
 
     public void Highlight_Arms(){
-        emptyArmsBox.SetActive(true);
+        //emptyArmsBox.SetActive(true);
     }
 
-    // --------------------------------- Parameters Buttons ---------------------------------------------------
-   
-    // exerciseCode: 0 Grid , 1 Left/Right , 2 Up/Down
-    public void SelectExerciseType(int exerciseCode){
+    // --------------------------------- Set Parameters Buttons ---------------------------------------------------
+    
+    // ExerciseCode: 0 Grid , 1 Left/Right , 2 Up/Down
+    public void SetExerciseType(int exerciseCode){
         exTypeIndex = exerciseCode;
-        emptyExercisesBox.SetActive(false);
+        //emptyExercisesBox.SetActive(false);
     }
-
-    // armcode: 0 Left , 1 Right
-    public void SelectArm(int armCode){
+    
+    // Armcode: 0 Left , 1 Right
+    public void SetArm(int armCode){
         exTypeIndex = armCode;
-        emptyArmsBox.SetActive(false);
+        //emptyArmsBox.SetActive(false);
     }
 
     // Series

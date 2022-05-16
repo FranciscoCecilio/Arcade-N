@@ -1,23 +1,23 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System;
 using System.IO;
 
 // TODO Cecilio: 
 //
-// Uma série (ou sequence) tem uma lista de exercícios, e cada exercício tem nr. de repetições.
-// Queremos que uma Série (ou sequence) seja, não um conjunto de exercícios variados, mas sim uma série do mesmo exercício.
+// Uma Sequence são um conjunto de (X = _series) Exercícios, em que cada exercício é igual (tem o mesmo _id e _nReps).
+// Ou seja: uma Sequence não é um conjunto de exercícios variados (de _ids diferentes), mas sim X séries do mesmo exercício.
 // Por exemplo: 
-// Série1: consiste em 3 séries de 1 repetição cada do exercício em grelha
-// Série2: consiste em 2 séries de 5 repetição cada do exercício Left-Right
-// Série3: consiste em 3 séries de 1 repetição cada do exercício em grelha
+// Sequence1: consiste em 3 séries de 1 repetição cada do exercício em Grelha
+// Sequence2: consiste em 2 séries de 5 repetiçoes cada do exercício Horizontal
+// Sequence3: consiste em 3 séries de 1 repetição cada do exercício Vertical
 
 // Portanto, uma Série recebe determiando exercício, nr. de séries, nr. de repetições (mesmo valor para cada série), tempo descanso entre séries
 public class Exercise
 {
-    private int _id;
-    private string _name;
+    private int _id; // 0 , 1 , 2
+    private string _name; // Grid, Horizontal, Vertical
 
-    private string _scenePath; //name of the scene
+    private string _scenePath; // name of the scene
     private bool _loggedToFile = false;
 
     //Parameters
@@ -68,16 +68,17 @@ public class Exercise
         _scenePath = scenePath;
     }
 
-    public Exercise(int id, string name, string scenePath, string arm, int nreps, int duration, int restTime)
+    public Exercise(int id, string name, string scenePath, int armCode, int nreps, int duration, int restTime)
     {
         _id = id;
         _name = name;
         _scenePath = scenePath;
-        if (arm == "left") _leftArm = true;
-        else _leftArm = false;
+        if (armCode == 0) _leftArm = true;
+        else if (armCode == 1) _leftArm = false;
+        else Debug.Log("ERROR : armcode is not 0 or 1:" + armCode);
         _nreps = nreps;
-        _duration = duration;
-        _restTime = restTime;
+        _duration = duration; // will it be used?
+        _restTime = restTime; // will it be used?
     }
 
     //SETTERS
@@ -335,6 +336,7 @@ public class Exercise
             writer.Close();
         }
     }
+    
     
     public string toSequenceFile()
     {

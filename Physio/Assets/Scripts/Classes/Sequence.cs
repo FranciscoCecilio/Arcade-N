@@ -5,9 +5,13 @@ using UnityEngine;
 
 public class Sequence
 {
-    private int _id;
+    private int _id; // never used?
     private string _name;
     private string _timestamp;
+    // New variable - Francisco Cecílio
+    private int _series; // _series is equal to the Lenght of _exerciseList
+    // New variable - Francisco Cecílio
+    private int _restDuration; // rest time between series (or exercises from the list)
 
     private List<Exercise> _exerciseList = new List<Exercise>();
 
@@ -66,6 +70,26 @@ public class Sequence
         _timestamp = timestamp;
     }
 
+    public void setSeries(int numSeries)
+    {
+        _series = numSeries;
+    }
+
+    public int getSeries()
+    {
+        return _series;
+    }
+
+    public void setRestDuration(int duration)
+    {
+        _restDuration = duration;
+    }
+
+    public int getRestDuration()
+    {
+        return _restDuration;
+    }
+
     public void addExercise(Exercise exercise)
     {
         _exerciseList.Add(exercise);
@@ -73,6 +97,10 @@ public class Sequence
 
     public Exercise getExercise(int index)
     {
+        if(index >= _exerciseList.Count){
+            Debug.Log("ERROR: Tried to GetExercise that does not exist.");
+            return null;
+        }
         return _exerciseList[index];
     }
 
@@ -94,7 +122,9 @@ public class Sequence
         using (var writer = new StreamWriter(stream))
         {
             writer.WriteLine("timestamp=" + _timestamp);
-            writer.WriteLine("name=" + _name);
+            writer.WriteLine("name=" + _name);  
+            writer.WriteLine("series=" + _series);  
+            writer.WriteLine("restDuration=" + _restDuration);  
 
             for (int i = 0; i < _exerciseList.Count; i++)
             {

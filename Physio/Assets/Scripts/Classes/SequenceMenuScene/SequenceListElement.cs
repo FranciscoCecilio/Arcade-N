@@ -9,9 +9,9 @@ public class SequenceListElement : MonoBehaviour
     [SerializeField] int typeIndex;
     public TMP_Text exerciseTypeText;
     public TMP_Text armText;
-    public TMP_InputField nRepsField;
-    public TMP_InputField nSeriesField;
-    public TMP_InputField restTimerField;
+    public TMP_Text nRepsField;
+    public TMP_Text nSeriesField;
+    public TMP_Text restTimerField;
     
     // Sequence -----------------------
     private Sequence _sequence;
@@ -32,13 +32,28 @@ public class SequenceListElement : MonoBehaviour
             return _sequence;
     }
 
-    public void SetSequenceParameters(int exTypeIndex, int armIndex, int nSeries, int nRepsField, int restTimerField){
+    public void SetSequenceParameters(int exTypeIndex, int armIndex, int nSeries, int nReps, int restTimer){
         // place the info in the placeholders
+        typeIndex = exTypeIndex;
+        ChangeExerciseType();
+        armText.text = (armIndex == 0) ? "Esquerdo" : "Direito";
+        nSeriesField.text = nSeries.ToString();
+        nRepsField.text = nReps.ToString();
+        restTimerField.text = restTimerField.ToString();
+
+        // save info on the sequence itself
+        _sequence.setSeries(nSeries);
+        // por cada serie juntar um exercicio com determinadas repetiçoes
+        for(int i = 0; i < nSeries; i++){
+            // exe=2=Left/Right=Exercise2Scene=right=10=60=60
+            // Exercise(int id, string name, string scenePath, string arm, int nreps, int duration, int restTime)
+            _sequence.addExercise(new Exercise(exTypeIndex,  exerciseTypeText.text, "Exercise"+exTypeIndex.ToString()+"Scene" , armIndex, nReps, 0, 0));
+        }
 
         // save to a file
+        _sequence.toFile();
     }
-       
-    // --------------------------------- Parameters Buttons ---------------------------------------------------
+
     public void ChangeExerciseType(){
         typeIndex++;
         if(typeIndex > 2){
@@ -46,88 +61,17 @@ public class SequenceListElement : MonoBehaviour
         }
         switch (typeIndex){
             case 0: 
-                exerciseTypeText.text = "Grid";
+                exerciseTypeText.text = "Grelha";
                 break;
             case 1: 
-                exerciseTypeText.text = "L/R";
+                exerciseTypeText.text = "Horizontal";
                 break;
             case 2: 
-                exerciseTypeText.text = "U/D";
+                exerciseTypeText.text = "Vertical";
                 break;        
         }
     }
 
-    public void ChangeArm(){
-        if(armText.text.Equals("Esquerdo")) armText.text = "Direito";
-        else if(armText.text.Equals("Direito")) armText.text = "Esquerdo";
-        else armText.text = "Erro";
-    }
-
-    public void nSeriesUp()
-    {
-        if (nSeriesField != null)
-        {
-            if (!nSeriesField.text.Equals("")) nSeriesField.text = (int.Parse(nSeriesField.text) + 1).ToString();
-            else nSeriesField.text = "2";
-        }
-    }
-
-    public void nSeriesDown()
-    {
-        if (nSeriesField != null)
-        {
-            if (!nSeriesField.text.Equals("")) {
-                if((int.Parse(nSeriesField.text) <= 1)) nSeriesField.text = "1";
-                else nSeriesField.text = (int.Parse(nSeriesField.text) - 1).ToString();
-            }
-            else nSeriesField.text = "1";
-        }
-    }
-    
-    
-    public void nRepsUp()
-    {
-        if (nRepsField != null)
-        {
-            if (!nRepsField.text.Equals("")) nRepsField.text = (int.Parse(nRepsField.text) + 1).ToString();
-            else nRepsField.text = "2";
-        }
-    }
-
-    public void nRepsDown()
-    {
-        if (nRepsField != null)
-        {
-            if (!nRepsField.text.Equals("")){
-                if((int.Parse(nRepsField.text) <= 0)) nRepsField.text = "1";
-                else nRepsField.text = (int.Parse(nRepsField.text) - 1).ToString();
-            }
-            else nRepsField.text = "1";
-        }
-    }
-
-    public void restTimerUp()
-    {
-        if (restTimerField != null)
-        {
-            if (!restTimerField.text.Equals("")) restTimerField.text = (int.Parse(restTimerField.text) + 10).ToString();
-            else restTimerField.text = "10";
-        }
-    }
-
-    public void restTimerDown()
-    {
-        if (restTimerField != null)
-        {
-            if (!restTimerField.text.Equals("")){
-                if((int.Parse(restTimerField.text) <= 0)) restTimerField.text = "0";
-                else restTimerField.text = (int.Parse(restTimerField.text) - 10).ToString();
-            }
-            else restTimerField.text = "0";
-        }
-    }
-    // --------------------------------- Delete Button ---------------------------------------------------
-    
     // Envia pedido de delete ao SequenceListControl.cs
     public void DeleteSequenceButton(){
         //Procura o script que controla os botoes da lista
@@ -141,5 +85,6 @@ public class SequenceListElement : MonoBehaviour
         script.ActiveSequence(_sequence);
         script.OpenDeleteDialogue();
     }
+
 }
 

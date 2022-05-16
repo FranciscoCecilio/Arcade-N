@@ -87,9 +87,9 @@ public class SequenceListControl : MonoBehaviour
     // Gera botões baseados nessas sequencias
     void Start()
     {
-        if (!System.IO.Directory.Exists(Application.dataPath + "/Users/" + SessionInfo.getUsername() + "/Sequences/"))
+        if (!System.IO.Directory.Exists(Application.dataPath + "/Users/" + "kiko12"+ "/Sequences/"))
         {
-            System.IO.Directory.CreateDirectory(Application.dataPath + "/Users/" + SessionInfo.getUsername() + "/Sequences/");
+            System.IO.Directory.CreateDirectory(Application.dataPath + "/Users/" + "kiko12" + "/Sequences/");
         }
 
         DateTime mostRecentTimestamp = DateTime.ParseExact("19000324T162543", "yyyyMMddTHHmmss", null); // inicializamos com um DateTime antigo (de 1900)
@@ -147,9 +147,23 @@ public class SequenceListControl : MonoBehaviour
 
                         else if (data[0] == "timestamp") tempSequence.setTimestamp(data[1]);
 
+                        else if (data[0] == "series") tempSequence.setSeries(Int32.Parse(data[1]));
+
+                        else if (data[0] == "restDuration") tempSequence.setRestDuration(Int32.Parse(data[1]));
+
                         else if (data[0] == "exe")
                         {
-                            tempSequence.addExercise(new Exercise(Int32.Parse(data[1]), data[2], data[3], data[4], Int32.Parse(data[5]), Int32.Parse(data[6]), Int32.Parse(data[7])));
+                            int armVar; // because some old files will still have "left" instead of "0"
+                            if(data[4] == "left") {
+                                armVar = 0;
+                            }
+                            else if(data[4] == "right"){
+                                armVar = 1;
+                            }
+                            else{
+                                armVar = Int32.Parse(data[4]);
+                            }
+                            tempSequence.addExercise(new Exercise(Int32.Parse(data[1]), data[2], data[3], armVar, Int32.Parse(data[5]), Int32.Parse(data[6]), Int32.Parse(data[7])));
                         }
 
                         line = reader.ReadLine();

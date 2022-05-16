@@ -12,7 +12,7 @@ TagManager:
   - spine
   - rshoulder
   - Arrow
-  - ExerciseSelectionButton
+  - ExerciseParametersPanel
   layers:
   - Default
   - TransparentFX

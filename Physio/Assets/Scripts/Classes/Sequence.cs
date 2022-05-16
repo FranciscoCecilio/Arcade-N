@@ -116,7 +116,8 @@ public class Sequence
         
         string filepath = Application.dataPath + "/Users/" + "kiko12" + "/Sequences/" + _timestamp + ".txt";
 
-        if (System.IO.File.Exists(filepath)) System.IO.File.Delete(filepath);
+        if (System.IO.File.Exists(filepath)) 
+            System.IO.File.Delete(filepath);
 
         using (var stream = new FileStream(filepath, FileMode.CreateNew, FileAccess.Write, FileShare.Write))
         using (var writer = new StreamWriter(stream))
@@ -130,9 +131,20 @@ public class Sequence
             {
                 writer.WriteLine("exe=" + _exerciseList[i].toSequenceFile());
             }
+
+            writer.Close();
+            stream.Close();
         }
+        RefreshEditorProjectWindow();
     }
 
+    private static void  RefreshEditorProjectWindow() 
+    {
+        #if UNITY_EDITOR
+        UnityEditor.AssetDatabase.Refresh();
+        #endif
+    }
+    
     //TODO
     //LOG TO FILE
 }

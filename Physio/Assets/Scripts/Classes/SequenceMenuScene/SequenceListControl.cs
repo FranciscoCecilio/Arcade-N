@@ -102,7 +102,7 @@ public class SequenceListControl : MonoBehaviour
             if (filename.Length == 2 && filename[1] == "txt") //Verifica que e um ficheiro txt e nao meta
             {
                 string actualFilename = filename[0].Substring(filename[0].Length - 15);
-                Debug.Log("FilenameFound: " + actualFilename);
+                //Debug.Log("FilenameFound: " + actualFilename);
                 // converter o timestamp para data time
                 DateTime tempDate = DateTime.ParseExact(actualFilename, "yyyyMMddTHHmmss", null);
                 // guardar o mais recente
@@ -116,7 +116,7 @@ public class SequenceListControl : MonoBehaviour
         }
         
         string mostRecentTimeStampString = mostRecentTimestamp.ToString("yyyyMMddTHHmmss");
-        Debug.Log("mostrecent TS: " + mostRecentTimeStampString);
+        //Debug.Log("mostrecent TS: " + mostRecentTimeStampString);
 
         // criamos um botao de sequencia igual ao da ultima sessão
         foreach (string file in System.IO.Directory.GetFiles(Application.dataPath + "/Users/kiko12/Sequences/")) //Ficheiros na pasta Sequences
@@ -169,10 +169,9 @@ public class SequenceListControl : MonoBehaviour
                         line = reader.ReadLine();
                     }
                 }
+                reader.Close();
                 // generate the button on the list
                 GenerateSequenceButton(tempSequence);
-
-                reader.Close();
             }
         }
     }

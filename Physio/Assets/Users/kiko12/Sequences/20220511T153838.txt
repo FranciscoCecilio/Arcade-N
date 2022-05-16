@@ -1,2 +1,4 @@
 timestamp=20220511T153838
 name=1
+series=0
+restDuration=0

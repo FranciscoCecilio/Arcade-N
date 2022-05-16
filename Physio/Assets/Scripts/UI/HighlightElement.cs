@@ -6,15 +6,24 @@ using System;
 using TMPro;
 using UnityEngine.EventSystems;
 
-public class HighlightElement : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class HighlightElement : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     public Image image;
     public Color highlightColor;
     Color startColor;
+    SequenceListElement seqListElement;
+    ExerciseParametersPanel exPanel;
     
     void Start()
     {
         startColor = image.color;
+
+        seqListElement = GetComponent<SequenceListElement>();
+        if(seqListElement == null) Debug.Log("ERROR: Could not find the SequenceListElement script locaclly.");
+
+        exPanel = GameObject.FindGameObjectWithTag ("ExerciseParametersPanel").GetComponent<ExerciseParametersPanel>();
+        if(exPanel == null) Debug.Log("ERROR: Could not find the exercise parameters panel tag.");
+
     }
 
 
@@ -28,5 +37,11 @@ public class HighlightElement : MonoBehaviour, IPointerEnterHandler, IPointerExi
         //image.color = startColor;
     }
 
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        Debug.Log("Clicked: " + eventData.pointerCurrentRaycast.gameObject.name);
+        image.color = highlightColor;
+        exPanel.SetPanelActive(seqListElement);
+    }
     
 }

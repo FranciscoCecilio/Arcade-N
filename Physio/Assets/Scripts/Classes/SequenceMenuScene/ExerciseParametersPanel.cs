@@ -13,7 +13,7 @@ public class ExerciseParametersPanel : MonoBehaviour
     public int armIndex; // -1 NotDef , 0 Left , 1 Right
 
     [Header("Overview Screen")]
-    public Image ExImgPlaceholder;
+    public ExerciseImage ExImg;
     public TMP_Text ArmText;
     public TMP_Text NSeriesText;
     public TMP_Text NRepsText;
@@ -26,28 +26,31 @@ public class ExerciseParametersPanel : MonoBehaviour
 
     [Header("Flow")]
     public GameObject overview_screen;
+    public GameObject exercise_screen;
     public GameObject arm_screen;
     public GameObject parameters_screen;
 
 
     // method called when the user clicks on a list element
     // TODO prevents if we are editing
-    public void SetPanelActive(GameObject sequenceListElement){
-        this.gameObject.SetActive(true);
-        _selectedListSequence = sequenceListElement.GetComponent<SequenceListElement>();
-        // Load Info regarding that sequence (if its a new one there isn't)
+    public void SetPanelActive(SequenceListElement seqlistElement){
+        _selectedListSequence = seqlistElement;
+
+        // Load Info regarding that sequence
         LoadSequenceParameters(_selectedListSequence.GetSequence());
+        
+        overview_screen.SetActive(true);
     }
 
-    // Fetches the parameters from the selected sequence
+    // Fetches the parameters from the sequence list element that was clicked --------------------------------------------------
     private void LoadSequenceParameters(Sequence seq){
-        
+        Debug.Log("here" + seq.getLength());
         if(seq.getLength() == 0){ // This means the sequence was recently created and doesn't have any exercises yet.
             exTypeIndex = -1;
             armIndex = - 1;
-            NSeriesText.text = "";
-            NRepsText.text = "";
-            RestTimerText.text = "";
+            NSeriesText.text = "-";
+            NRepsText.text = "-";
+            RestTimerText.text = "-";
         }
         else{
             exTypeIndex = seq.getExercisesIds()[0];
@@ -57,7 +60,14 @@ public class ExerciseParametersPanel : MonoBehaviour
             NRepsText.text =  seq.getExercise(0).getNReps().ToString();
             RestTimerText.text = seq.getExercise(0).getRestTime().ToString();
         }
+
+        ExImg.SetImage(exTypeIndex);
+
+        if(armIndex == 0) ArmText.text = "Esquerdo";
+        else if(armIndex == 1) ArmText.text = "Direito";
+        else ArmText.text = "-"; // armIndex == -1
     }
+    // ----------------------------------------------------------------------------------------------------------------------------
 
     // checks if the fields were filled
     public void ConfirmButton(){
@@ -100,7 +110,7 @@ public class ExerciseParametersPanel : MonoBehaviour
         //emptyArmsBox.SetActive(true);
     }
 
-    // --------------------------------- Set Parameters Buttons ---------------------------------------------------
+    // --------------------------------- Set Parameters ---------------------------------------------------
     
     // ExerciseCode: 0 Grid , 1 Left/Right , 2 Up/Down
     public void SetExerciseType(int exerciseCode){

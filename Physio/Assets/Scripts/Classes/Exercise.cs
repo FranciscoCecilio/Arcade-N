@@ -292,6 +292,8 @@ public class Exercise
             writer.WriteLine("spineComp=" + _spineComp);
 
             writer.Close();
+            // FC should i close stream too?
+            stream.Close();
         }
 
         //Copy to "Last" folder TODO
@@ -334,6 +336,8 @@ public class Exercise
             }
 
             writer.Close();
+            // FC should i close stream too?
+            stream.Close();
         }
     }
     

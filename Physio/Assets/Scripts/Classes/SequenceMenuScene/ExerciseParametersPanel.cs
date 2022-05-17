@@ -6,11 +6,11 @@ using TMPro;
 
 public class ExerciseParametersPanel : MonoBehaviour
 {
-    // UI fields
     [Header("Debugging")]
     public SequenceListElement _selectedListSequence;
     public int exTypeIndex; // -1 NotDef , 0 Grid , 1 Left/RIght , 2 Up/Down
     public int armIndex; // -1 NotDef , 0 Left , 1 Right
+    public ExerciseParametersFlow flowManager;
 
     [Header("Overview Screen")]
     public ExerciseImage ExImg;
@@ -23,105 +23,80 @@ public class ExerciseParametersPanel : MonoBehaviour
     public TMP_InputField nSeriesField;
     public TMP_InputField nRepsField; 
     public TMP_InputField restTimerField;
-
-    [Header("Flow")]
-    public GameObject overview_screen;
-    public GameObject exercise_screen;
-    public GameObject arm_screen;
-    public GameObject parameters_screen;
-
+    
 
     // method called when the user clicks on a list element
     // TODO prevents if we are editing
     public void SetPanelActive(SequenceListElement seqlistElement){
         _selectedListSequence = seqlistElement;
-
-        // Load Info regarding that sequence
         LoadSequenceParameters(_selectedListSequence.GetSequence());
-        
-        overview_screen.SetActive(true);
+        flowManager.StartEditing();
     }
 
     // Fetches the parameters from the sequence list element that was clicked --------------------------------------------------
     private void LoadSequenceParameters(Sequence seq){
-        Debug.Log("here" + seq.getLength());
+
         if(seq.getLength() == 0){ // This means the sequence was recently created and doesn't have any exercises yet.
             exTypeIndex = -1;
             armIndex = - 1;
+            // Fields on Paremeter Screen
             NSeriesText.text = "-";
             NRepsText.text = "-";
             RestTimerText.text = "-";
         }
+        
         else{
             exTypeIndex = seq.getExercisesIds()[0];
-            // var beverage = (age >= 21) ? "Beer" : "Juice";
             armIndex = seq.getExercise(0).isLeftArm() ? 0 : 1 ; // armIndex is 0 if isLeftArm is true
+            // Fields on Paremeter Screen
             NSeriesText.text = seq.getSeries().ToString();
             NRepsText.text =  seq.getExercise(0).getNReps().ToString();
             RestTimerText.text = seq.getExercise(0).getRestTime().ToString();
         }
 
+        // Fields on Overview Screen
         ExImg.SetImage(exTypeIndex);
-
-        if(armIndex == 0) ArmText.text = "Esquerdo";
-        else if(armIndex == 1) ArmText.text = "Direito";
-        else ArmText.text = "-"; // armIndex == -1
-    }
-    // ----------------------------------------------------------------------------------------------------------------------------
-
-    // checks if the fields were filled
-    public void ConfirmButton(){
-        bool exercise_was_selected = false;
-        bool arm_was_selected = false;
-       
-        // Exercise type
-        if(exTypeIndex == 0 || exTypeIndex == 1 || exTypeIndex == 2){
-            exercise_was_selected = true;
-        }
-
-        // Arm
-        if(armIndex == 0 || armIndex == 1){
-            arm_was_selected = true;
-        }
-
-        // Confirm OR Highlight the buttons
-        if(exercise_was_selected && arm_was_selected){
-            // Confirm and Save on the Sequence List and txt file
-            _selectedListSequence.SetSequenceParameters(exTypeIndex, armIndex, int.Parse(nSeriesField.text), int.Parse(nRepsField.text), int.Parse(restTimerField.text));
-        }
-        else{
-            // Highlight exercises
-            if(!exercise_was_selected){
-                Highlight_Exercises();
-            }
-            // Highlight arm
-            if(!arm_was_selected){
-                Highlight_Arms();
-            }
-        }
+        ArmText.text = GetArmString();
     }
 
-    // Highlights the UI to let users know they have to fill the fields
-    public void Highlight_Exercises(){
-        //emptyExercisesBox.SetActive(true);
+    private string GetArmString(){
+        string armString ="";
+        switch(armIndex){
+            case -1:
+                armString = "-";
+                break;
+            case 0:
+                armString = "Esquerdo";
+                break;
+            case 1:
+                armString = "Direito";
+                break;
+        }
+        return armString;
+    }
+    // Concludes Editing a Sequence by setting the new parameters (flow manager checks if the fields were filled and calls this)
+    public void EditConclusion(){
+        _selectedListSequence.SetSequenceParameters(exTypeIndex, armIndex, int.Parse(nSeriesField.text), int.Parse(nRepsField.text), int.Parse(restTimerField.text));
     }
 
-    public void Highlight_Arms(){
-        //emptyArmsBox.SetActive(true);
-    }
 
     // --------------------------------- Set Parameters ---------------------------------------------------
     
     // ExerciseCode: 0 Grid , 1 Left/Right , 2 Up/Down
     public void SetExerciseType(int exerciseCode){
+        // Define the index
         exTypeIndex = exerciseCode;
-        //emptyExercisesBox.SetActive(false);
+        // next panel
+        flowManager.NextPanel();
+        
     }
     
     // Armcode: 0 Left , 1 Right
     public void SetArm(int armCode){
-        exTypeIndex = armCode;
-        //emptyArmsBox.SetActive(false);
+        // Define the index
+        armIndex = armCode;
+        // next panel
+        flowManager.NextPanel();
     }
 
     // Series

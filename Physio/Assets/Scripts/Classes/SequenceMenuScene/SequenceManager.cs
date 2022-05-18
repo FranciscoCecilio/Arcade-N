@@ -4,25 +4,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+// This class should go through the list and play all sequences.
 public static class SequenceManager
 {
     public static Sequence sequence;
 
-    // index gives the number of the exercise (if the sequence has 3 exercises and we are running the 1st exercise, index = 0)
+    // index gives the number of the exercise of the given sequence (if the sequence has 3 exercises and we are running the 1st exercise, index = 0)
     public static int index = 0;
 
-    // chamado apenas em SequenceMenuScript.confirmNameSequence()
+    // called by SequenceMenuScript.confirmNameSequence()
     public static void newSequence(string name)
     {
-        // criar uma sequencia 
+        // creates a sequence 
         State.exercise = null;
         sequence = new global::Sequence(name);
         sequence.setTimestamp(DateTime.Now.ToString("yyyyMMddTHHmmss"));
-        // criar um ficheiro com o TimeStamp da sequencia
+        // creates a file 
         sequence.toFile();
     }
 
-    // run is called in the start of a session
+    // run is called in the start of a session by the button
     public static void run()
     {
         SessionInfo.setView("RunSequence");
@@ -44,5 +45,4 @@ public static class SequenceManager
             SceneManager.LoadScene("MainMenu");
         }
     }
-
 }

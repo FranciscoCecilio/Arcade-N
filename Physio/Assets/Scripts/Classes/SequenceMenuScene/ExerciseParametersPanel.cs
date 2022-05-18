@@ -33,7 +33,7 @@ public class ExerciseParametersPanel : MonoBehaviour
         flowManager.StartEditing();
     }
 
-    // Fetches the parameters from the sequence list element that was clicked --------------------------------------------------
+    // Fetches the parameters from the sequence list element that was clicked and UPDATES the overview_screen fields
     private void LoadSequenceParameters(Sequence seq){
 
         if(seq.getLength() == 0){ // This means the sequence was recently created and doesn't have any exercises yet.
@@ -59,6 +59,28 @@ public class ExerciseParametersPanel : MonoBehaviour
         ArmText.text = GetArmString();
     }
 
+    // This method could be directly on flow manager...
+    // Concludes Editing a Sequence by setting the new parameters (flow manager checks if the fields were filled and calls this)
+    public void FinishEditing(){
+        _selectedListSequence.SetSequenceParameters(exTypeIndex, armIndex, int.Parse(nSeriesField.text), int.Parse(nRepsField.text), int.Parse(restTimerField.text));
+
+    }
+
+    // This method receives and sets the new values and UPDATES the fields on the OverViewScreen 
+    // Called on the flow manager after EDITING or CANCELING
+    public void UpdateOverViewScreen(int newTypeIndex, int newArmIndex, int newSeries, int newReps, int newRestTime){
+        
+        exTypeIndex = newTypeIndex;
+        ExImg.SetImage(exTypeIndex);
+
+        armIndex = newArmIndex;
+        ArmText.text = GetArmString();
+
+        NSeriesText.text = newSeries.ToString();
+        NRepsText.text = newReps.ToString();
+        RestTimerText.text = newRestTime.ToString();
+    }
+
     private string GetArmString(){
         string armString ="";
         switch(armIndex){
@@ -74,12 +96,7 @@ public class ExerciseParametersPanel : MonoBehaviour
         }
         return armString;
     }
-    // Concludes Editing a Sequence by setting the new parameters (flow manager checks if the fields were filled and calls this)
-    public void EditConclusion(){
-        _selectedListSequence.SetSequenceParameters(exTypeIndex, armIndex, int.Parse(nSeriesField.text), int.Parse(nRepsField.text), int.Parse(restTimerField.text));
-    }
-
-
+    
     // --------------------------------- Set Parameters ---------------------------------------------------
     
     // ExerciseCode: 0 Grid , 1 Left/Right , 2 Up/Down
@@ -136,7 +153,7 @@ public class ExerciseParametersPanel : MonoBehaviour
         if (nRepsField != null)
         {
             if (!nRepsField.text.Equals("")){
-                if((int.Parse(nRepsField.text) <= 0)) nRepsField.text = "1";
+                if((int.Parse(nRepsField.text) <= 1)) nRepsField.text = "1";
                 else nRepsField.text = (int.Parse(nRepsField.text) - 1).ToString();
             }
             else nRepsField.text = "1";

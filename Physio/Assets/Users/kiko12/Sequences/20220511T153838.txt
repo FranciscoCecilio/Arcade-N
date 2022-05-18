@@ -1,4 +1,16 @@
 timestamp=20220511T153838
 name=1
-series=0
+series=1
 restDuration=0
+exe=2=Vertical=Exercise2Scene=right=1=0=0
+exe=2=Vertical=Exercise2Scene=right=1=0=0
+exe=2=Vertical=Exercise2Scene=right=1=0=0
+exe=2=Vertical=Exercise2Scene=right=1=0=0
+exe=1=Horizontal=Exercise1Scene=right=1=0=0
+exe=2=Vertical=Exercise2Scene=left=7=0=0
+exe=2=Vertical=Exercise2Scene=right=1=0=0
+exe=2=Vertical=Exercise2Scene=right=1=0=0
+exe=2=Vertical=Exercise2Scene=right=1=0=0
+exe=2=Vertical=Exercise2Scene=right=1=0=0
+exe=2=Vertical=Exercise2Scene=right=1=0=0
+exe=2=Vertical=Exercise2Scene=right=1=0=0

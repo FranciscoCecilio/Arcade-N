@@ -4,12 +4,19 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine;
 
+// A.K.A Flow Manager
 public class ExerciseParametersFlow : MonoBehaviour
 {
     [Header("Debugging")]
     public bool isEditing = false;
     public int panelCode; //0 to 4 that represent the screens
     public ExerciseParametersPanel exPanel;
+    // Backup variables - store previous values, in case the user CANCELS mid-edition
+    private int backup_exerciseTypeIndex; 
+    private int backup_armIndex;
+    private int backup_nSeries;
+    private int backup_nReps;
+    private int backup_restTime;
 
     [Header("Flow")]
     public GameObject overview_screen;
@@ -27,6 +34,8 @@ public class ExerciseParametersFlow : MonoBehaviour
     
     [Header("Arm Selection")]
     public Button[] ArmButtons;
+
+    
 
     // we want to EDIT in two cases: 
     // 1. After creating a new Sequence in SequenceMenuScript.confirmNameSequence()
@@ -46,9 +55,34 @@ public class ExerciseParametersFlow : MonoBehaviour
         EditButton.gameObject.SetActive(false);
         CancelButton.gameObject.SetActive(true);
         ConfirmButton.gameObject.SetActive(true);
+        // Store Backup variables
+        backup_exerciseTypeIndex = exPanel.exTypeIndex;
+        backup_armIndex = exPanel.armIndex;
+        backup_nSeries = int.Parse(exPanel.nSeriesField.text);
+        backup_nReps = int.Parse(exPanel.nRepsField.text);
+        backup_restTime = int.Parse(exPanel.restTimerField.text);
         // Set the control variables
         isEditing = true;
         panelCode = 1;
+    }
+
+    // Cancels the Edition (called by CANCEL button) and restores the previous values
+    public void CancelEditing(){
+        // Close all possible screens
+        exercise_screen.SetActive(false);
+        arm_screen.SetActive(false);
+        parameters_screen.SetActive(false);
+        // Open Overview_Screen
+        overview_screen.SetActive(true);
+        // Restores the old sequence values
+        exPanel.UpdateOverViewScreen(backup_exerciseTypeIndex, backup_armIndex, backup_nSeries, backup_nReps, backup_restTime);
+        // Set the control variables
+        isEditing = false;
+        panelCode = 0;
+        // Show or Hide buttons
+        EditButton.gameObject.SetActive(false);
+        CancelButton.gameObject.SetActive(false);
+        ConfirmButton.gameObject.SetActive(false);
     }
 
     // Finish Edition (called by the CONFIRM button)
@@ -59,15 +93,17 @@ public class ExerciseParametersFlow : MonoBehaviour
         parameters_screen.SetActive(false);
         // Open Overview_Screen
         overview_screen.SetActive(true);
+        // Sets the new sequence values 
+        exPanel.UpdateOverViewScreen(backup_exerciseTypeIndex, backup_armIndex, backup_nSeries, backup_nReps, backup_restTime);
         // Set the control variables
         isEditing = false;
         panelCode = 0;
-        // Enable and Disable buttons
+        // Show or Hide buttons
         EditButton.gameObject.SetActive(true);
         CancelButton.gameObject.SetActive(false);
         ConfirmButton.gameObject.SetActive(false);
         // Calls method on exPanel to set the changes
-        exPanel.EditConclusion();
+        exPanel.FinishEditing();
     }
 
     // Called by the "back" arrow in the panel

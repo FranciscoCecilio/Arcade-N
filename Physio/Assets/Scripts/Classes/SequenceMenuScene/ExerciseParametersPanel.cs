@@ -26,11 +26,16 @@ public class ExerciseParametersPanel : MonoBehaviour
     
 
     // method called when the user clicks on a list element
-    // TODO prevents if we are editing
     public void SetPanelActive(SequenceListElement seqlistElement){
         _selectedListSequence = seqlistElement;
         LoadSequenceParameters(_selectedListSequence.GetSequence());
-        flowManager.StartEditing();
+        // We want to jump to EDIT if the sequence was recently created
+        if(_selectedListSequence.GetSequence().getLength() == 0){
+            flowManager.StartEditing();
+        }
+        else{
+            flowManager.overview_screen.SetActive(true);
+        }
     }
 
     // Fetches the parameters from the sequence list element that was clicked and UPDATES the overview_screen fields
@@ -63,12 +68,11 @@ public class ExerciseParametersPanel : MonoBehaviour
     // Concludes Editing a Sequence by setting the new parameters (flow manager checks if the fields were filled and calls this)
     public void FinishEditing(){
         _selectedListSequence.SetSequenceParameters(exTypeIndex, armIndex, int.Parse(nSeriesField.text), int.Parse(nRepsField.text), int.Parse(restTimerField.text));
-
     }
 
     // This method receives and sets the new values and UPDATES the fields on the OverViewScreen 
-    // Called on the flow manager after EDITING or CANCELING
-    public void UpdateOverViewScreen(int newTypeIndex, int newArmIndex, int newSeries, int newReps, int newRestTime){
+    // Called on the flow manager after CANCELING
+    public void UpdateOverViewScreen_Cancel(int newTypeIndex, int newArmIndex, int newSeries, int newReps, int newRestTime){
         
         exTypeIndex = newTypeIndex;
         ExImg.SetImage(exTypeIndex);
@@ -79,6 +83,19 @@ public class ExerciseParametersPanel : MonoBehaviour
         NSeriesText.text = newSeries.ToString();
         NRepsText.text = newReps.ToString();
         RestTimerText.text = newRestTime.ToString();
+    }
+
+    // This method UPDATES the fields on the OverViewScreen 
+    // Called on the flow manager after EDITING
+    public void UpdateOverViewScreen_Edit(){
+
+        ExImg.SetImage(exTypeIndex);
+
+        ArmText.text = GetArmString();
+
+        NSeriesText.text = nSeriesField.text;
+        NRepsText.text = nRepsField.text;
+        RestTimerText.text = restTimerField.text;
     }
 
     private string GetArmString(){

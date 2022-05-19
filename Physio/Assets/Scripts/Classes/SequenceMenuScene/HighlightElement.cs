@@ -8,7 +8,7 @@ using UnityEngine.EventSystems;
 
 public class HighlightElement : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
-    public Image image;
+    public Image elmentImage;
     public Color highlightColor;
     Color startColor;
     SequenceListElement seqListElement;
@@ -16,7 +16,7 @@ public class HighlightElement : MonoBehaviour, IPointerEnterHandler, IPointerExi
     
     void Start()
     {
-        startColor = image.color;
+        startColor = elmentImage.color;
 
         seqListElement = GetComponent<SequenceListElement>();
         if(seqListElement == null) Debug.Log("ERROR: Could not find the SequenceListElement script locaclly.");
@@ -40,7 +40,7 @@ public class HighlightElement : MonoBehaviour, IPointerEnterHandler, IPointerExi
     public void OnPointerClick(PointerEventData eventData)
     {
         Debug.Log("Clicked: " + eventData.pointerCurrentRaycast.gameObject.name);
-        image.color = highlightColor;
+        elmentImage.color = highlightColor;
         exPanel.SetPanelActive(seqListElement);
     }
     

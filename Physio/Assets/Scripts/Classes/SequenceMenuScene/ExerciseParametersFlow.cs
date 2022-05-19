@@ -75,7 +75,7 @@ public class ExerciseParametersFlow : MonoBehaviour
         // Open Overview_Screen
         overview_screen.SetActive(true);
         // Restores the old sequence values
-        exPanel.UpdateOverViewScreen(backup_exerciseTypeIndex, backup_armIndex, backup_nSeries, backup_nReps, backup_restTime);
+        exPanel.UpdateOverViewScreen_Cancel(backup_exerciseTypeIndex, backup_armIndex, backup_nSeries, backup_nReps, backup_restTime);
         // Set the control variables
         isEditing = false;
         panelCode = 0;
@@ -94,7 +94,7 @@ public class ExerciseParametersFlow : MonoBehaviour
         // Open Overview_Screen
         overview_screen.SetActive(true);
         // Sets the new sequence values 
-        exPanel.UpdateOverViewScreen(backup_exerciseTypeIndex, backup_armIndex, backup_nSeries, backup_nReps, backup_restTime);
+        exPanel.UpdateOverViewScreen_Edit();
         // Set the control variables
         isEditing = false;
         panelCode = 0;

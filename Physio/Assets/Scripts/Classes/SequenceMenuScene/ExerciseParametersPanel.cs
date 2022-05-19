@@ -25,16 +25,23 @@ public class ExerciseParametersPanel : MonoBehaviour
     public TMP_InputField restTimerField;
     
 
-    // method called when the user clicks on a list element
+    // Called when the user clicks on a list element
     public void SetPanelActive(SequenceListElement seqlistElement){
+        // Set active sequence list element 
         _selectedListSequence = seqlistElement;
+        // Updates overview_screen
         LoadSequenceParameters(_selectedListSequence.GetSequence());
-        // We want to jump to EDIT if the sequence was recently created
+        // Close all opened panels
+        flowManager.CloseAllPanels();
+        // We want to jump to EDIT if the sequence was recently created ...
         if(_selectedListSequence.GetSequence().getLength() == 0){
             flowManager.StartEditing();
         }
         else{
+            // ... or simply Open overview_screen
             flowManager.overview_screen.SetActive(true);
+            flowManager.ConfirmButton.gameObject.SetActive(true);
+            flowManager.CancelButton.gameObject.SetActive(true);
         }
     }
 

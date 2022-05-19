@@ -103,12 +103,12 @@ public class Sequence
         }
         return _exerciseList[index];
     }
-
-    // creates a new sequence file in the directory USER/username/SEQUENCES/"<timestamp>.txt"
-    // chamado no SequenceManager.newSequence(name) e nesse caso a sequencia nao tem exercicios...
-    // chamado também durante no ExerciseParameterSelection
-
+    
     // REPLACE kiko12 with SessionInfo.getUsername()
+    // creates a new sequence file in the directory USER/username/SEQUENCES/"<timestamp>.txt"
+    // Called on SequenceManager.newSequence(name) e nesse caso a sequencia nao tem exercicios...
+    // Called after Editing/Creating a new Sequence. (but will no longer be)
+    // TODO we must call this only after we finish the exercises of a Sequence! not when we create one.
     public void toFile()
     {
         if (!Directory.Exists(Application.dataPath + "/Users/" + "kiko12" + "/Sequences/"))

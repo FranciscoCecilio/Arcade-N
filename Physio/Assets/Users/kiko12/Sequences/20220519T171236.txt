@@ -1,0 +1,4 @@
+timestamp=20220519T171236
+name=w
+series=0
+restDuration=0

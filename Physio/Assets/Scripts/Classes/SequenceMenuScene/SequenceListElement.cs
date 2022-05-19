@@ -57,7 +57,7 @@ public class SequenceListElement : MonoBehaviour
     }
     
     // Called from Exercise Panel on CONFIRM button
-    // Populates the List Element with the Sequence values; Stores in the sequence; Saves to a file
+    // Populates the List Element with the Sequence values; Stores in the sequence; [NOT:Saves to a file]
     public void SetSequenceParameters(int exTypeIndex, int armIndex, int nSeries, int nReps, int restTime){
 
         // place the info in the placeholders
@@ -81,7 +81,7 @@ public class SequenceListElement : MonoBehaviour
             _sequence.addExercise(new Exercise(exTypeIndex,  exImg.GetTypeText() , "Exercise"+exTypeIndex.ToString()+"Scene" , armIndex, nReps, 0, 0));
         }
         // save to a file
-        _sequence.toFile();
+        //_sequence.toFile();
     }
 
     // Requests to Delete to SequenceListControl.cs

@@ -46,9 +46,7 @@ public class ExerciseParametersFlow : MonoBehaviour
             return;
         }
         // Close all possible screens
-        overview_screen.SetActive(false);
-        arm_screen.SetActive(false);
-        parameters_screen.SetActive(false);
+        CloseAllPanels();
         // Open Exercise Type Selection
         exercise_screen.SetActive(true);
         // Enable and Disable buttons
@@ -69,9 +67,7 @@ public class ExerciseParametersFlow : MonoBehaviour
     // Cancels the Edition (called by CANCEL button) and restores the previous values
     public void CancelEditing(){
         // Close all possible screens
-        exercise_screen.SetActive(false);
-        arm_screen.SetActive(false);
-        parameters_screen.SetActive(false);
+        CloseAllPanels();
         // Open Overview_Screen
         overview_screen.SetActive(true);
         // Restores the old sequence values
@@ -80,7 +76,7 @@ public class ExerciseParametersFlow : MonoBehaviour
         isEditing = false;
         panelCode = 0;
         // Show or Hide buttons
-        EditButton.gameObject.SetActive(false);
+        EditButton.gameObject.SetActive(true);
         CancelButton.gameObject.SetActive(false);
         ConfirmButton.gameObject.SetActive(false);
     }
@@ -88,9 +84,7 @@ public class ExerciseParametersFlow : MonoBehaviour
     // Finish Edition (called by the CONFIRM button)
     public void ConfirmChanges(){
         // Close all possible screens
-        exercise_screen.SetActive(false);
-        arm_screen.SetActive(false);
-        parameters_screen.SetActive(false);
+        CloseAllPanels();
         // Open Overview_Screen
         overview_screen.SetActive(true);
         // Sets the new sequence values 
@@ -104,6 +98,18 @@ public class ExerciseParametersFlow : MonoBehaviour
         ConfirmButton.gameObject.SetActive(false);
         // Calls method on exPanel to set the changes
         exPanel.FinishEditing();
+    }
+
+    // Close all paremeter screens
+    public void CloseAllPanels(){
+        overview_screen.SetActive(false);
+        exercise_screen.SetActive(false);
+        arm_screen.SetActive(false);
+        parameters_screen.SetActive(false);
+        // and hide buttons
+        EditButton.gameObject.SetActive(false);
+        CancelButton.gameObject.SetActive(false);
+        ConfirmButton.gameObject.SetActive(false);
     }
 
     // Called by the "back" arrow in the panel
@@ -179,7 +185,7 @@ public class ExerciseParametersFlow : MonoBehaviour
         }
     }
     
-    // checks if the CONFIRM button should be enabled (if exercise type and arm were selected)
+    // Checks if the CONFIRM button should be enabled (if exercise type and arm were selected)
     void Update()
     {
         if(isEditing){

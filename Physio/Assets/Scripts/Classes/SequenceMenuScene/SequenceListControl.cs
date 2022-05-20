@@ -15,7 +15,7 @@ public class SequenceListControl : MonoBehaviour
 
     public GameObject clearDialogue;
 
-    [SerializeField] Transform listContent;
+    public Transform listContent;
 
     public void ActiveSequence(Sequence _sequence)
     {

@@ -37,7 +37,8 @@ public class SequenceMenuScript : MonoBehaviour
 
     public void run()
     {
-        SequenceManager.run();
+        // Send the List where the sequences elements are
+        SequenceManager.run(seqListCtrl.listContent);
     }
 
     public void previousScreen()

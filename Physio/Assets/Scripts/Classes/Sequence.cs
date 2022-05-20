@@ -103,6 +103,10 @@ public class Sequence
         }
         return _exerciseList[index];
     }
+
+    public List<Exercise> GetExerciseList(){
+        return _exerciseList;
+    }
     
     // REPLACE kiko12 with SessionInfo.getUsername()
     // creates a new sequence file in the directory USER/username/SEQUENCES/"<timestamp>.txt"

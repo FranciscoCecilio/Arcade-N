@@ -32,12 +32,6 @@ public class AmplitudeController : MonoBehaviour {
     public Text cuSup;
     public Text cuSdown;
 
-
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
 	// Update is called once per frame
 	void Update () {
 
@@ -47,24 +41,7 @@ public class AmplitudeController : MonoBehaviour {
             ShoulderXZ();
             Elbow();
         }
-
-       
 	}
-
-
-
-    void Elbow()
-    {
-        if (State.leftArmSelected)
-        {
-            AngleBetweenTwoVectors(patient.leftElbowPos - patient.leftShoulderPos, patient.leftElbowPos - patient.leftWristPos, "elbow");
-        }
-        else
-        {
-            AngleBetweenTwoVectors(patient.rightElbowPos - patient.rightShoulderPos, patient.rightElbowPos - patient.rightWristPos, "elbow");
-        }
-        
-    }
 
     void ShoulderXY()
     {
@@ -83,12 +60,6 @@ public class AmplitudeController : MonoBehaviour {
         {
             AngleBetweenTwoVectors(spineshoulder - spineBase, rightshoulder - rightelbow, "XY");
         }
-
-        
-
-
-
-
     }
 
     void ShoulderXZ()
@@ -106,12 +77,20 @@ public class AmplitudeController : MonoBehaviour {
         else
         {
             AngleBetweenTwoVectors(rightshoulder - spineshoulder, rightshoulder - rightelbow, "XZ");
-        }
-
-        
+        } 
     }
 
-
+    void Elbow()
+    {
+        if (State.leftArmSelected)
+        {
+            AngleBetweenTwoVectors(patient.leftElbowPos - patient.leftShoulderPos, patient.leftElbowPos - patient.leftWristPos, "elbow");
+        }
+        else
+        {
+            AngleBetweenTwoVectors(patient.rightElbowPos - patient.rightShoulderPos, patient.rightElbowPos - patient.rightWristPos, "elbow");
+        }
+    }
 
     public void AngleBetweenTwoVectors(Vector3 vectorA, Vector3 vectorB, string pos)
     {
@@ -181,16 +160,5 @@ public class AmplitudeController : MonoBehaviour {
                 break;
 
         }
-
-
-
-
-
-
-  
     }
-
-
-
-
 }

@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 
 public class VizController : MonoBehaviour
 {
-
+    [Header("Repetitions Counter")]
     public GameObject sessionTime;
     public GameObject leaned;
     public GameObject therapistProjection;
@@ -35,10 +35,12 @@ public class VizController : MonoBehaviour
     public Image RshoulderImage;
     public Image SImage;
 
-    public Text succ;
+    [Header("Repetitions Counter")]
+    public Text succ; // maybe delete   
     private int SuccPer;
     public Image SuccSlider;
-    public Image previousSuccSlider;
+    public Image previousSuccSlider; // maybe delete 
+    public Text totalReps;
 
     public Button settingsButton;
     public GameObject panel;
@@ -46,7 +48,7 @@ public class VizController : MonoBehaviour
     public Button heatButton;
     public Text heatMapText;
 
-    public Text totalReps;
+    
 
     public Camera worldCamera;
 

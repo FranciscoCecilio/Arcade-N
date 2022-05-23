@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+// Horizontal and Vertical exercise manager
 public class ExerciseManager : MonoBehaviour {
 
     public GameObject cursor;

@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Used to Translate the green Box (exercise trajectory)
 public class DragDropX : MonoBehaviour {
 
-    public GameObject associatedObj;
-
-    public float min;
-    public float max;
+    public GameObject associatedObj; // targets
 
     private Vector3 screenPoint;
     private Vector3 offset;
@@ -22,10 +20,10 @@ public class DragDropX : MonoBehaviour {
         if (!locked)
         {
             screenPoint = Camera.main.WorldToScreenPoint(transform.position);
-            screenPointAO = Camera.main.WorldToScreenPoint(associatedObj.GetComponent<Transform>().position);
+            //screenPointAO = Camera.main.WorldToScreenPoint(associatedObj.GetComponent<Transform>().position);
 
-            offset = transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, screenPoint.y, screenPoint.z));
-            offsetAO = associatedObj.GetComponent<Transform>().position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, screenPointAO.y, screenPointAO.z));
+            offset = transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
+            //offsetAO = associatedObj.GetComponent<Transform>().position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPointAO.z));
         }
     }
 
@@ -33,19 +31,17 @@ public class DragDropX : MonoBehaviour {
     {
         if (!locked)
         {
-            Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, screenPoint.y, screenPoint.z);
+            Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
             Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
 
-            /*if (curPosition.x > max) curPosition.x = max;
-            else if (curPosition.x < min) curPosition.x = min;*/
             transform.position = curPosition;
 
-            Vector3 curScreenPointAO = new Vector3(Input.mousePosition.x, screenPointAO.y, screenPointAO.z);
-            Vector3 curPositionAO = Camera.main.ScreenToWorldPoint(curScreenPointAO) + offsetAO;
-
-            /*if (curPositionAO.x > max) curPositionAO.x = max;
-            else if (curPositionAO.x < min) curPositionAO.x = min;*/
-            associatedObj.GetComponent<Transform>().position = curPositionAO;
+            //Vector3 curScreenPointAO = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPointAO.z);
+            //Vector3 curScreenPointAO = new Vector3(Input.mousePosition.x, screenPointAO.y, screenPointAO.z);
+            //Vector3 curPositionAO = Camera.main.ScreenToWorldPoint(curScreenPointAO) + offsetAO;
+            
+            // also translate the Target balls
+            associatedObj.GetComponent<Transform>().position = curPosition;
         }
     }
 

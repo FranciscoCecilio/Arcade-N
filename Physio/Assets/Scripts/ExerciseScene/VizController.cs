@@ -8,49 +8,56 @@ using UnityEngine.SceneManagement;
 
 public class VizController : MonoBehaviour
 {
-    [Header("Repetitions Counter")]
-    public GameObject sessionTime;
+    public Camera worldCamera;
+
+    [Header("Information for Therapists")]
     public GameObject leaned;
-    public GameObject therapistProjection;
     public GameObject outOfPath;
-    public GameObject restTime;
+    public GameObject therapistProjection;
     public GameObject shoulderLift;
-    public GameObject success;
-    public GameObject angles;
-    public GameObject repTime;
-    public GameObject compMov;
     public GameObject leftBG;
     public GameObject rightBG;
-    public GameObject AmpData;
+
+    [Header("Timers")]
+    public GameObject sessionTime;
+    public GameObject restTime;
+    public GameObject repTime;
     public GameObject last;
-    public GameObject CompText;
-    public GameObject AmpLeft;
-    public GameObject Ampright;
-    public string tempDist = "Social";
 
-    public Text leftS;
-    public Text rightS;
-    public Text Spine;
-    public Image LsholderImange;
-    public Image RshoulderImage;
-    public Image SImage;
-
-    [Header("Repetitions Counter")]
+    [Header("Repetitions Visualization")]
+    public GameObject success;
     public Text succ; // maybe delete   
     private int SuccPer;
     public Image SuccSlider;
     public Image previousSuccSlider; // maybe delete 
     public Text totalReps;
 
+    [Header("Bottom Right")]
     public Button settingsButton;
     public GameObject panel;
-
+    // Switch View and HeatMap - Maybe Delete
     public Button heatButton;
     public Text heatMapText;
 
-    
+    [Header("Angle Viualization - Delete")]
+    public GameObject angles;
+    public GameObject AmpData;
+    public GameObject AmpLeft;
+    public GameObject Ampright;
+    public string tempDist = "Social";
 
-    public Camera worldCamera;
+    [Header("Compensatory Stuff - Delete")]
+    public GameObject compMov;
+    public GameObject CompText;
+
+    public Image LsholderImange;
+    public Image RshoulderImage;
+    public Image SImage;
+
+    public Text leftS;
+    public Text rightS;
+    public Text Spine;
+
 
 
     // Use this for initialization

@@ -31,36 +31,6 @@ public class SequenceListControl : MonoBehaviour
         deleteDialogue.SetActive(false);
     }
 
-    // Destroi o botao 
-    // TODO: [NOT: destruir e o txt da selectedSequence - because the file will only be created after completing a sequence]
-    // TODO: depois de destruir um botao queremos dar udate nos XP esperados
-    public void DestroySequence()
-    {
-        //Apaga o botão da sequência
-        //OLD que tb serve: GameObject button = GameObject.Find(selectedSequence.getName() + "Button");
-        GameObject button = listContent.Find(selectedSequence.getName() + "Button").gameObject;
-        if(button == null) Debug.Log("Error trying to find the button to delete!");
-        
-        button.SetActive(false);
-        Destroy(button);
-
-        //Apaga o ficheiro da sequência - Já não é suposto porque o ficheiro não é criado quando o botão é criado, apenas quando se efetuam os exercícios.
-        
-        /*string sequencePath = Application.dataPath + "/Users/" + SessionInfo.getUsername() + "/Sequences/" + selectedSequence.getTimestamp() + ".txt";
-        if(!File.Exists(sequencePath)) Debug.Log("Error trying to find file to delete in: " + sequencePath);
-        File.Delete(sequencePath);
-        RefreshEditorProjectWindow();*/
-        
-        CloseDeleteDialogue();
-    }
-
-    void RefreshEditorProjectWindow()
-    {
-    #if UNITY_EDITOR
-           UnityEditor.AssetDatabase.Refresh();
-    #endif
-    }
-
     public void OpenClearDialogue(){
         clearDialogue.SetActive(true);
     }
@@ -68,11 +38,34 @@ public class SequenceListControl : MonoBehaviour
     public void CloseClearDialogue(){
         clearDialogue.SetActive(false);
     }
+    
+    // Destroi o botao 
+    // TODO: [NOT: destruir e o txt da selectedSequence - because the file will only be created after completing a sequence]
+    // TODO: depois de destruir um botao queremos dar update nos XP esperados
+    public void DestroySequence()
+    {
+        //Apaga o botão da sequência
+        GameObject button = listContent.Find(selectedSequence.getTimestamp() + "Button").gameObject;
+        if(button == null) Debug.Log("Error trying to find the button to delete!");
+        
+        button.SetActive(false);
+        Destroy(button);
+
+        CloseDeleteDialogue();
+
+        //Apaga o ficheiro da sequência - Já não é suposto porque o ficheiro não é criado quando o botão é criado, apenas quando se efetuam os exercícios.
+        /*string sequencePath = Application.dataPath + "/Users/" + SessionInfo.getUsername() + "/Sequences/" + selectedSequence.getTimestamp() + ".txt";
+        if(!File.Exists(sequencePath)) Debug.Log("Error trying to find file to delete in: " + sequencePath);
+        File.Delete(sequencePath);
+        RefreshEditorProjectWindow();*/
+    }
 
     public void ClearList(){
         // iteramos todos os botoes e apagamos um a um
         foreach (Transform eachChild in listContent) {
+            Debug.Log("iterou");
             if (eachChild.name.Substring(eachChild.name.Length - 6) == "Button") {
+                Debug.Log("entrou: "+eachChild.name);
                 ActiveSequence(eachChild.gameObject.GetComponent<SequenceListElement>().GetSequence());
                 DestroySequence();
                 //eachChild.gameObject.GetComponent<SequenceListElement>().DeleteSequenceButton();
@@ -80,6 +73,7 @@ public class SequenceListControl : MonoBehaviour
             }
         }
         CloseClearDialogue();
+        exPanel.flowManager.CloseAllPanels();
     }
 
     // TODO: nos queremos criar apenas um botao com 1 sequencia da ultima sessão? ou queremos todas series da ultima sessao?
@@ -184,12 +178,22 @@ public class SequenceListControl : MonoBehaviour
         }
         //Instantiate prefab
         GameObject button = Instantiate(listElementPrefab) as GameObject;
-        button.name = seq.getName() + "Button";
+        button.name = seq.getTimestamp() + "Button";
         button.SetActive(true);
         // Sets the sequence on SequenceListElement
         button.GetComponent<SequenceListElement>().SetSequence(seq);
         button.transform.SetParent(listContent, false);
+        // Highlights the button (and starts EDITING)
+        button.GetComponent<HighlightElement>().HighlightListElement();
         // Starts the Editing panel
         exPanel.SetPanelActive(button.GetComponent<SequenceListElement>());
+    }
+
+    
+    void RefreshEditorProjectWindow()
+    {
+    #if UNITY_EDITOR
+           UnityEditor.AssetDatabase.Refresh();
+    #endif
     }
 }

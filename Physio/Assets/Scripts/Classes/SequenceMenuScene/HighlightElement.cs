@@ -20,7 +20,7 @@ public class HighlightElement : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
     private bool isSelected = false;
     
-    void Start()
+    void Awake()
     {
         // Assign start color
         startColor = backgroundImage.color;
@@ -73,6 +73,7 @@ public class HighlightElement : MonoBehaviour, IPointerEnterHandler, IPointerExi
         isSelected = true;
         // Highlight the color
         backgroundImage.color = highlightColor;
+        
         //  Set active sequence in the ExerciseParameterPanel
         exPanel.SetPanelActive(seqListElement);
     }

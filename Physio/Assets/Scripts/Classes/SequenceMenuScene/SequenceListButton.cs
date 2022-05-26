@@ -7,7 +7,7 @@ using UnityEngine.UI;
 // Esta classe Já nao é usada, passou a ser o SequenceListElement
 public class SequenceListButton : MonoBehaviour
 {
-    public Text buttonName;
+    private Sequence _sequence;
 
     public GameObject exerciseListText;
     public GameObject exerciseButtonTemplate;
@@ -15,15 +15,6 @@ public class SequenceListButton : MonoBehaviour
     public GameObject deleteButton;
     public GameObject addExerciseButton;
 
-    private Sequence _sequence;
-    /* passado para o ListElement
-
-    public void SetSequence(Sequence sequence)
-    {
-        _sequence = sequence;
-        buttonName.text = _sequence.getName();
-    }
-    */
 
     private void renderExercisesList()
     {

@@ -33,6 +33,10 @@ public class ExerciseParametersPanel : MonoBehaviour
 
     // Called when the user clicks on a list element
     public void SetPanelActive(SequenceListElement seqlistElement){
+        if(flowManager.isEditing){
+            Debug.Log("Cannot edit right now.");
+            return;
+        }
         // Close all opened panels
         flowManager.CloseAllPanels();
         // Set active sequence list element 
@@ -106,7 +110,7 @@ public class ExerciseParametersPanel : MonoBehaviour
         NRepsText.text = backup_nReps;
         RestTimerText.text = backup_restTime;
     }
-    
+
     // This method UPDATES the fields on the OverViewScreen 
     // Called on the flow manager after EDITING
     public void UpdateOverViewScreen_Edit(){

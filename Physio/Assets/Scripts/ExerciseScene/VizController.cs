@@ -13,7 +13,7 @@ public class VizController : MonoBehaviour
     [Header("Information for Therapists")]
     public GameObject leaned;
     public GameObject outOfPath;
-    public GameObject therapistProjection;
+    public GameObject therapistProjection; // Delete
     public GameObject shoulderLift;
     public GameObject leftBG;
     public GameObject rightBG;
@@ -27,9 +27,10 @@ public class VizController : MonoBehaviour
     [Header("Repetitions Visualization")]
     public GameObject success;
     public Text succ; // maybe delete   
-    private int SuccPer;
+    private int SuccPer; // helpful for radial bar
     public Image SuccSlider;
     public Image previousSuccSlider; // maybe delete 
+    public Text correctReps; // incremented after a successful movement
     public Text totalReps;
 
     [Header("Bottom Right")]
@@ -63,6 +64,7 @@ public class VizController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        correctReps.text = "";
         totalReps.text = "" + State.exercise.getNReps();
         heatButton.interactable = false;
         settingsButton.interactable = true;
@@ -236,7 +238,8 @@ public class VizController : MonoBehaviour
         }
         
 
-        succ.text = "" + SuccPer + "%";
+        //succ.text = "" + SuccPer + "%";
+        correctReps.text = State.exercise.getCorrectReps().ToString();
         SuccSlider.fillAmount = SuccPer * 0.01f;
 
         if (SuccPer >= 70)
@@ -244,7 +247,7 @@ public class VizController : MonoBehaviour
             //SuccSlider.color = Color.Lerp(SImage.color, new Color32(0x4F, 0xFB, 0x7B, 0xFF), Mathf.PingPong(Time.time, 1));
             SuccSlider.color = new Color32(0x4F, 0xFB, 0x7B, 0xFF);
         }
-        else if (SuccPer < 70 && SuccPer > 29)
+        else if (SuccPer >= 30 && SuccPer < 70)
         {
 
             //SuccSlider.color = Color.Lerp(SImage.color, new Color32(0xF3, 0xFF, 0x24, 0xFF), Mathf.PingPong(Time.time, 1));

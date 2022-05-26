@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class BodyScreenController : MonoBehaviour {
 
     public GameObject startButton;
+    public GameObject startStuff;
     public GameObject stopButton;
     public GameObject quitButton;
     public GameObject restartButton;
@@ -29,6 +30,7 @@ public class BodyScreenController : MonoBehaviour {
             savePathPosition();
         }
         startButton.SetActive(false);
+        startStuff.SetActive(false);
         stopButton.SetActive(true);
         patientCanvas.SetActive(true);
     }

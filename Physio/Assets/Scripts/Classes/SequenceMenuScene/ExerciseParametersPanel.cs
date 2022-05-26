@@ -24,46 +24,52 @@ public class ExerciseParametersPanel : MonoBehaviour
     public TMP_InputField nRepsField; 
     public TMP_InputField restTimerField;
     
+    // Backup variables - store previous values, in case the user CANCELS mid-edition
+    private int backup_exerciseTypeIndex; 
+    private int backup_armIndex;
+    private string backup_nSeries;
+    private string backup_nReps;
+    private string backup_restTime;
 
     // Called when the user clicks on a list element
     public void SetPanelActive(SequenceListElement seqlistElement){
+        // Close all opened panels
+        flowManager.CloseAllPanels();
         // Set active sequence list element 
         _selectedListSequence = seqlistElement;
         // Updates overview_screen
         LoadSequenceParameters(_selectedListSequence.GetSequence());
-        // Close all opened panels
-        flowManager.CloseAllPanels();
         // We want to jump to EDIT if the sequence was recently created ...
         if(_selectedListSequence.GetSequence().getLength() == 0){
             flowManager.StartEditing();
         }
         else{
-            // ... or simply Open overview_screen
+            // ... or simply Open overview_screen and Edit_button
             flowManager.overview_screen.SetActive(true);
-            flowManager.ConfirmButton.gameObject.SetActive(true);
-            flowManager.CancelButton.gameObject.SetActive(true);
+            flowManager.EditButton.gameObject.SetActive(true);
+            flowManager.ConfirmButton.gameObject.SetActive(false);
+            flowManager.CancelButton.gameObject.SetActive(false);
         }
     }
 
-    // Fetches the parameters from the sequence list element that was clicked and UPDATES the overview_screen fields
+    // Fetches the parameters from the sequence list element that was clicked and updates the OVERVIEW_SCREEN fields
     private void LoadSequenceParameters(Sequence seq){
 
         if(seq.getLength() == 0){ // This means the sequence was recently created and doesn't have any exercises yet.
+            // it will never reach here because we edit before seeing the overview screen of a empty sequence
             exTypeIndex = -1;
             armIndex = - 1;
-            // Fields on Paremeter Screen
             NSeriesText.text = "-";
             NRepsText.text = "-";
             RestTimerText.text = "-";
         }
-        
         else{
             exTypeIndex = seq.getExercisesIds()[0];
             armIndex = seq.getExercise(0).isLeftArm() ? 0 : 1 ; // armIndex is 0 if isLeftArm is true
-            // Fields on Paremeter Screen
             NSeriesText.text = seq.getSeries().ToString();
             NRepsText.text =  seq.getExercise(0).getNReps().ToString();
             RestTimerText.text = seq.getExercise(0).getRestTime().ToString();
+
         }
 
         // Fields on Overview Screen
@@ -77,21 +83,30 @@ public class ExerciseParametersPanel : MonoBehaviour
         _selectedListSequence.SetSequenceParameters(exTypeIndex, armIndex, int.Parse(nSeriesField.text), int.Parse(nRepsField.text), int.Parse(restTimerField.text));
     }
 
-    // This method receives and sets the new values and UPDATES the fields on the OverViewScreen 
-    // Called on the flow manager after CANCELING
-    public void UpdateOverViewScreen_Cancel(int newTypeIndex, int newArmIndex, int newSeries, int newReps, int newRestTime){
-        
-        exTypeIndex = newTypeIndex;
-        ExImg.SetImage(exTypeIndex);
-
-        armIndex = newArmIndex;
-        ArmText.text = GetArmString();
-
-        NSeriesText.text = newSeries.ToString();
-        NRepsText.text = newReps.ToString();
-        RestTimerText.text = newRestTime.ToString();
+    // Called on the flow manager when we start EDITING
+    public void StoreBackupVariables(){
+        backup_exerciseTypeIndex = exTypeIndex;
+        backup_armIndex = armIndex;
+        backup_nSeries = _selectedListSequence.nSeriesField.text;
+        backup_nReps = _selectedListSequence.nRepsField.text;
+        backup_restTime = _selectedListSequence.restTimerField.text;
     }
 
+    // This method receives and sets the new values and UPDATES the fields on the OverViewScreen 
+    // Called on the flow manager after CANCELING
+    public void UpdateOverViewScreen_Cancel(){
+        
+        exTypeIndex = backup_exerciseTypeIndex;
+        ExImg.SetImage(exTypeIndex);
+
+        armIndex = backup_armIndex;
+        ArmText.text = GetArmString();
+
+        NSeriesText.text = backup_nSeries;
+        NRepsText.text = backup_nReps;
+        RestTimerText.text = backup_restTime;
+    }
+    
     // This method UPDATES the fields on the OverViewScreen 
     // Called on the flow manager after EDITING
     public void UpdateOverViewScreen_Edit(){
@@ -129,9 +144,8 @@ public class ExerciseParametersPanel : MonoBehaviour
         exTypeIndex = exerciseCode;
         // next panel
         flowManager.NextPanel();
-        
     }
-    
+
     // Armcode: 0 Left , 1 Right
     public void SetArm(int armCode){
         // Define the index

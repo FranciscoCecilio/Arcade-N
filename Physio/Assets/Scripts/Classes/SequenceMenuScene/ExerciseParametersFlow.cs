@@ -11,12 +11,6 @@ public class ExerciseParametersFlow : MonoBehaviour
     public bool isEditing = false;
     public int panelCode; //0 to 4 that represent the screens
     public ExerciseParametersPanel exPanel;
-    // Backup variables - store previous values, in case the user CANCELS mid-edition
-    private int backup_exerciseTypeIndex; 
-    private int backup_armIndex;
-    private int backup_nSeries;
-    private int backup_nReps;
-    private int backup_restTime;
 
     [Header("Flow")]
     public GameObject overview_screen;
@@ -35,8 +29,6 @@ public class ExerciseParametersFlow : MonoBehaviour
     [Header("Arm Selection")]
     public Button[] ArmButtons;
 
-    
-
     // we want to EDIT in two cases: 
     // 1. After creating a new Sequence in SequenceMenuScript.confirmNameSequence()
     // 2. Clicking button EDIT on the overview_screen
@@ -53,25 +45,35 @@ public class ExerciseParametersFlow : MonoBehaviour
         EditButton.gameObject.SetActive(false);
         CancelButton.gameObject.SetActive(true);
         ConfirmButton.gameObject.SetActive(true);
-        // Store Backup variables
-        backup_exerciseTypeIndex = exPanel.exTypeIndex;
-        backup_armIndex = exPanel.armIndex;
-        backup_nSeries = int.Parse(exPanel.nSeriesField.text);
-        backup_nReps = int.Parse(exPanel.nRepsField.text);
-        backup_restTime = int.Parse(exPanel.restTimerField.text);
-        // Set the control variables
+        // Set Backup variables
+        exPanel.StoreBackupVariables();
+        // Set the Control variables
         isEditing = true;
         panelCode = 1;
+        // Fields on Paremeter Screen
+        Sequence seq = exPanel._selectedListSequence.GetSequence();
+        if(seq.getLength() == 0){ // tambem queremos entrar qnd é a primeira seq
+        
+            exPanel.nSeriesField.text = "1";
+            exPanel.nRepsField.text = "1";
+            exPanel.restTimerField.text = "60";
+        }else if(seq.getLength() > 0){ // tambem queremos entrar qnd é a primeira seq
+        
+            exPanel.nSeriesField.text = seq.getSeries().ToString();
+            exPanel.nRepsField.text = seq.getExercise(0).getNReps().ToString();
+            exPanel.restTimerField.text = seq.getExercise(0).getRestTime().ToString();
+        }
+        PanelButtonsSelection();
     }
 
     // Cancels the Edition (called by CANCEL button) and restores the previous values
     public void CancelEditing(){
         // Close all possible screens
         CloseAllPanels();
+        // Restores the old sequence values
+        exPanel.UpdateOverViewScreen_Cancel();
         // Open Overview_Screen
         overview_screen.SetActive(true);
-        // Restores the old sequence values
-        exPanel.UpdateOverViewScreen_Cancel(backup_exerciseTypeIndex, backup_armIndex, backup_nSeries, backup_nReps, backup_restTime);
         // Set the control variables
         isEditing = false;
         panelCode = 0;
@@ -159,7 +161,7 @@ public class ExerciseParametersFlow : MonoBehaviour
         }
     }
 
-    // When a the Type and Arm panels are opened, this method is called to select (or hihglight) the buttons that were assigned
+    // When the Type and Arm panels are opened, this method is called to select (or hihglight) the buttons that were assigned
     public void PanelButtonsSelection(){
         // Buttons on Exercise Screen
         if(panelCode == 1){

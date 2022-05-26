@@ -43,7 +43,8 @@ public static class SessionInfo
 
     public static string getUsername()
     {
-        return _username;
+        return "kiko12";
+        //return _username;
     }
 
     public static string getName()

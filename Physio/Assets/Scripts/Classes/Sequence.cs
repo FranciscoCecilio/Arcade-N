@@ -95,6 +95,11 @@ public class Sequence
         _exerciseList.Add(exercise);
     }
 
+    public void clearExerciseList()
+    {
+        _exerciseList.Clear();
+    }
+
     public Exercise getExercise(int index)
     {
         if(index >= _exerciseList.Count){
@@ -107,18 +112,17 @@ public class Sequence
     public List<Exercise> GetExerciseList(){
         return _exerciseList;
     }
-    
-    // REPLACE kiko12 with SessionInfo.getUsername()
+   
     // creates a new sequence file in the directory USER/username/SEQUENCES/"<timestamp>.txt"
     // Called on SequenceManager.newSequence(name) e nesse caso a sequencia nao tem exercicios...
     // Called after Editing/Creating a new Sequence. (but will no longer be)
     // TODO we must call this only after we finish the exercises of a Sequence! not when we create one.
     public void toFile()
     {
-        if (!Directory.Exists(Application.dataPath + "/Users/" + "kiko12" + "/Sequences/"))
-            Directory.CreateDirectory(Application.dataPath + "/Users/" + "kiko12" + "/Sequences/");
+        if (!Directory.Exists(Application.dataPath + "/Users/" + SessionInfo.getUsername() + "/Sequences/"))
+            Directory.CreateDirectory(Application.dataPath + "/Users/" + SessionInfo.getUsername() + "/Sequences/");
         
-        string filepath = Application.dataPath + "/Users/" + "kiko12" + "/Sequences/" + _timestamp + ".txt";
+        string filepath = Application.dataPath + "/Users/" + SessionInfo.getUsername() + "/Sequences/" + _timestamp + ".txt";
 
         if (System.IO.File.Exists(filepath)) 
             System.IO.File.Delete(filepath);

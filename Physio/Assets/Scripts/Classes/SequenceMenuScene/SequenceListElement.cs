@@ -7,7 +7,7 @@ using TMPro;
 // A list Element is instantiated in two places: CRIAR SEQUENCIA button and SequenceListControl.Start()  
 public class SequenceListElement : MonoBehaviour
 {
-    [SerializeField] int typeIndex;
+    public int typeIndex;
     public ExerciseImage exImg;
     public TMP_Text armText;
     public TMP_Text nRepsField;
@@ -74,11 +74,12 @@ public class SequenceListElement : MonoBehaviour
 
         // save info on the sequence itself
         _sequence.setSeries(nSeries);
+        _sequence.clearExerciseList();
         for(int i = 0; i < nSeries; i++){
             // create X=n_series Exercises of the same type with Y=nReps reptitions
             // exe=2=Left/Right=Exercise2Scene=right=10=60=60
             // Exercise(int id, string name, string scenePath, string arm, int nreps, int duration, int restTime)
-            _sequence.addExercise(new Exercise(exTypeIndex,  exImg.GetTypeText() , "Exercise"+exTypeIndex.ToString()+"Scene" , armIndex, nReps, 0, 0));
+            _sequence.addExercise(new Exercise(exTypeIndex,  exImg.GetTypeText() , "Exercise"+exTypeIndex.ToString()+"Scene" , armIndex, nReps, 60, restTime));
         }
         // save to a file
         //_sequence.toFile();

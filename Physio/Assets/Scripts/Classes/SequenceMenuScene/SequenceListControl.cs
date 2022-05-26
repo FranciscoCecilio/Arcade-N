@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 
-// CHANGE kiko12 to SessionInfo.getUsername()
 public class SequenceListControl : MonoBehaviour
 {
     public GameObject listElementPrefab;
@@ -17,6 +16,8 @@ public class SequenceListControl : MonoBehaviour
 
     public Transform listContent;
 
+    [SerializeField] ExerciseParametersPanel exPanel;
+   
     public void ActiveSequence(Sequence _sequence)
     {
         selectedSequence = _sequence;
@@ -43,15 +44,12 @@ public class SequenceListControl : MonoBehaviour
         button.SetActive(false);
         Destroy(button);
 
-        //OLD: Limpa lista de exercicios (Nova versão não há lista de exercícios, apenas séries do mesmo exercicio)
-        /*GameObject[] exercs = GameObject.FindGameObjectsWithTag("ExerciseName");
-        foreach (GameObject exerc in exercs) GameObject.Destroy(exerc);*/
-
-        //Apaga o ficheiro da sequência
-        string sequencePath = Application.dataPath + "/Users/" + "kiko12" + "/Sequences/" + selectedSequence.getTimestamp() + ".txt";
+        //Apaga o ficheiro da sequência - Já não é suposto porque o ficheiro não é criado quando o botão é criado, apenas quando se efetuam os exercícios.
+        
+        /*string sequencePath = Application.dataPath + "/Users/" + SessionInfo.getUsername() + "/Sequences/" + selectedSequence.getTimestamp() + ".txt";
         if(!File.Exists(sequencePath)) Debug.Log("Error trying to find file to delete in: " + sequencePath);
         File.Delete(sequencePath);
-        RefreshEditorProjectWindow();
+        RefreshEditorProjectWindow();*/
         
         CloseDeleteDialogue();
     }
@@ -89,16 +87,16 @@ public class SequenceListControl : MonoBehaviour
     // Gera botões baseados nessas sequencias
     void Start()
     {
-        if (!System.IO.Directory.Exists(Application.dataPath + "/Users/" + "kiko12"+ "/Sequences/"))
+        if (!System.IO.Directory.Exists(Application.dataPath + "/Users/" + SessionInfo.getUsername()+ "/Sequences/"))
         {
-            System.IO.Directory.CreateDirectory(Application.dataPath + "/Users/" + "kiko12" + "/Sequences/");
+            System.IO.Directory.CreateDirectory(Application.dataPath + "/Users/" + SessionInfo.getUsername() + "/Sequences/");
         }
 
         DateTime mostRecentTimestamp = DateTime.ParseExact("19000324T162543", "yyyyMMddTHHmmss", null); // inicializamos com um DateTime antigo (de 1900)
         string mostRecentTSfilename = "";
         // encontramos o ficheiro com o timestamp mais recente 
         //foreach (string file in System.IO.Directory.GetFiles(Application.dataPath + "/Users/" + SessionInfo.getUsername() + "/Sequences/")) //Ficheiros na pasta Sequences
-        foreach (string file in System.IO.Directory.GetFiles(Application.dataPath + "/Users/kiko12/Sequences/")) //Ficheiros na pasta Sequences
+        foreach (string file in System.IO.Directory.GetFiles(Application.dataPath + "/Users/" + SessionInfo.getUsername() + "/Sequences/")) //Ficheiros na pasta Sequences
         {
             string[] filename = file.Split('.');
             if (filename.Length == 2 && filename[1] == "txt") //Verifica que e um ficheiro txt e nao meta
@@ -121,7 +119,7 @@ public class SequenceListControl : MonoBehaviour
         //Debug.Log("mostrecent TS: " + mostRecentTimeStampString);
 
         // criamos um botao de sequencia igual ao da ultima sessão
-        foreach (string file in System.IO.Directory.GetFiles(Application.dataPath + "/Users/kiko12/Sequences/")) //Ficheiros na pasta Sequences
+        foreach (string file in System.IO.Directory.GetFiles(Application.dataPath + "/Users/" + SessionInfo.getUsername() + "/Sequences/")) //Ficheiros na pasta Sequences
         {
             string[] filename = file.Split('.');
             if (filename.Length == 2 && filename[1] == "txt" && filename[0].Equals(mostRecentTSfilename,StringComparison.Ordinal)) //Verifica que e um ficheiro txt e nao meta e se é o ficheiro da sessão mais recente
@@ -178,17 +176,20 @@ public class SequenceListControl : MonoBehaviour
         }
     }
 
+    // Generates a button (that contains a list element) AND opens EDITING
     public void GenerateSequenceButton(Sequence seq){
         if(seq == null){
             Debug.Log("ERROR: Trying to create a button for a null sequence");
             return;
         }
-        //BOTAO SEQUENCIA 
+        //Instantiate prefab
         GameObject button = Instantiate(listElementPrefab) as GameObject;
         button.name = seq.getName() + "Button";
         button.SetActive(true);
-        //button.GetComponent<SequenceListButton>().SetSequence(tempSequence);
+        // Sets the sequence on SequenceListElement
         button.GetComponent<SequenceListElement>().SetSequence(seq);
         button.transform.SetParent(listContent, false);
+        // Starts the Editing panel
+        exPanel.SetPanelActive(button.GetComponent<SequenceListElement>());
     }
 }

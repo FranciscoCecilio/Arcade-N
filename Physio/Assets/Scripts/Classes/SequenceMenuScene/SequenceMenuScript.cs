@@ -4,13 +4,13 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-// 
 public class SequenceMenuScript : MonoBehaviour
 {
+    public GameObject nameSequenceBox; // dialogue
 
-    public GameObject nameSequenceBox;
-    public Text newSequenceName;
-    [SerializeField] SequenceListControl seqListCtrl;
+    public Text newSequenceName; // text field 
+
+    [SerializeField] SequenceListControl seqListCtrl; 
 
     public void showNameSequenceBox()
     {
@@ -20,12 +20,12 @@ public class SequenceMenuScript : MonoBehaviour
     // Called on the new sequence dialogue
     public void confirmNameSequence()
     {
+        // Creates new sequence
         SequenceManager.newSequence(newSequenceName.text);
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        // Generates the button (and starts editing)
         seqListCtrl.GenerateSequenceButton(SequenceManager.sequence);
+        // closes dialogue
         nameSequenceBox.SetActive(false);
-        // TODO we want to open edit panel - implica mostrar exercse_selection
-        
     }
 
     // personalizar as sequencias vai ser feito a partir do SequenceListElement

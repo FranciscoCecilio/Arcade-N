@@ -2,15 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
+// TODO Francisco - do we want to have patient stuff? ?
 public class PatientController : MonoBehaviour {
-    public Text sessionTimePatient;
     public Text correctRepetitionsPatient;
     public Text setTimePatient;
     public Text restTimePatient;
-    public Text startCounterPatient;
+    public TMP_Text startCounterPatient;
 
-    public Text sessionTimeTherapist;
+    public Text sessionTimePatient;
+    public TMP_Text sessionTimeTherapist;
+
     public Text correctRepetitionsTherapist;
     public Text setTimeTherapist;
     public Text restTimeTherapist;
@@ -67,8 +70,12 @@ public class PatientController : MonoBehaviour {
         sessionTimeInt++;
         int minutes = sessionTimeInt / 60;
         int seconds = sessionTimeInt % 60;
+        // TODO Francisco - do we want to have SessionTime ?
+        /*
         sessionTimePatient.text = minutes.ToString("00") + ":" + seconds.ToString("00");
+        */
         sessionTimeTherapist.text = minutes.ToString("00") + ":" + seconds.ToString("00");
+        
         State.sessionTimeInt = sessionTimeInt;
     }
 
@@ -97,7 +104,8 @@ public class PatientController : MonoBehaviour {
         setTimeInt--;
         int minutes = setTimeInt / 60;
         int seconds = setTimeInt % 60;
-        setTimePatient.text = minutes.ToString("00") + ":" + seconds.ToString("00");
+        // TODO Francisco - do we want to have patient stuff? ?
+        //setTimePatient.text = minutes.ToString("00") + ":" + seconds.ToString("00");
         setTimeTherapist.text = minutes.ToString("00") + ":" + seconds.ToString("00");
     }
 
@@ -115,19 +123,12 @@ public class PatientController : MonoBehaviour {
         restTimeTherapist.text = minutes.ToString("00") + ":" + seconds.ToString("00");
     }
 
-
     private void OnEnable() {
-        Debug.Log("ENabled PatientController");
         init();
     }
-
     private void OnDisable() {
         Debug.Log("Disabled PatientController");
         CancelInvoke();
-    }
-
-    // Use this for initialization
-    void Start() {
     }
 
     // Update is called once per frame

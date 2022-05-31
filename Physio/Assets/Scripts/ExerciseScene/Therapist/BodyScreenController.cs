@@ -3,21 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class BodyScreenController : MonoBehaviour {
 
     public GameObject startButton;
     public GameObject startStuff;
-    public GameObject stopButton;
+
+    public GameObject pauseButton;
+    public GameObject unPauseButton;
+    public GameObject pauseStuff;
     public GameObject quitButton;
     public GameObject restartButton;
+
     public GameObject nextButton;
     public GameObject patientCanvas;
 
-    public Text leaned;
-    public Text shoulderLift;
-    public Text outOfPath;
-    public Text exerciseName;
+    public TMP_Text leaned;
+    public TMP_Text shoulderLift;
+    public TMP_Text outOfPath;
+    public TMP_Text exerciseName;
 
     public Camera worldCamera;
 
@@ -35,12 +40,48 @@ public class BodyScreenController : MonoBehaviour {
         }
         startButton.SetActive(false);
         startStuff.SetActive(false);
-        stopButton.SetActive(true);
+        pauseButton.SetActive(true);
         patientCanvas.SetActive(true);
     }
 
+    public void PauseTherapy() {
+        unPauseButton.SetActive(true);
+        pauseButton.SetActive(false);
+        // SHOW quit, restart, next buttons
+        restartButton.SetActive(true);
+        quitButton.SetActive(true);
+        nextButton.SetActive(true);
+        // SHOW target edition
+        //startStuff.SetActive(true);
+        // SHOW information
+        //pauseStuff.SetActive(true); 
+
+        State.isTherapyOnGoing = false;
+        //State.exercise.setCompleted(true);
+        // TODO stop time?
+    }
+
+    public void UnPauseTherapy() {
+        pauseButton.SetActive(true);
+        unPauseButton.SetActive(false);
+        // HIDE quit, restart, next buttons
+        restartButton.SetActive(false);
+        quitButton.SetActive(false);
+        nextButton.SetActive(false);
+        // HIDE target edition
+        //startStuff.SetActive(false);
+        // HIDE information
+        //pauseStuff.SetActive(false); 
+
+        //patientCanvas.SetActive(false); ?????
+        
+        State.isTherapyOnGoing = true;
+        //State.exercise.setCompleted(true);
+        // TODO resume time?
+    }
+
     public void StopTherapy() {
-        stopButton.SetActive(false);
+        pauseButton.SetActive(false);
         State.exercise.setCompleted(true);
         State.isTherapyOnGoing = false;
         if (SessionInfo.toView() == "RunSequence") nextButton.SetActive(true);
@@ -59,8 +100,8 @@ public class BodyScreenController : MonoBehaviour {
 
     public void Restart()
     {
-        State.exercise.restart();
         State.resetState();
+        State.exercise.restart();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
@@ -90,7 +131,7 @@ public class BodyScreenController : MonoBehaviour {
         leaned.text = "" + State.exercise.getSpineComp();
         shoulderLift.text = "" + (State.exercise.getLeftShoulderComp() + State.exercise.getRightShoulderComp());
         outOfPath.text = "" + State.exercise.getOutOfPath();
-        exerciseName.text = State.exercise.getName();
+        exerciseName.text = "--"+ State.exercise.getName()+"--";
 
         if(State.exercise.isCompleted()) {
             StopTherapy();

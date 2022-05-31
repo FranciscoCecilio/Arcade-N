@@ -282,6 +282,7 @@ public class ExerciseManager : MonoBehaviour {
 
     public void changePathSize()
     {
+        Debug.Log("entrou no changepath");
         foreach (Transform child in exerciseBoxGroup.transform)
         {
             child.localScale = new Vector3(pathSize.GetComponent<Slider>().value, child.localScale.y, child.localScale.z);

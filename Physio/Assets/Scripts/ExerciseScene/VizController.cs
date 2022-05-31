@@ -11,10 +11,10 @@ public class VizController : MonoBehaviour
     public Camera worldCamera;
 
     [Header("Information for Therapists")]
-    public GameObject leaned;
-    public GameObject outOfPath;
-    //public GameObject therapistProjection; // Delete
     public GameObject shoulderLift;
+    public GameObject outOfPath;
+    public GameObject leaned;
+    //public GameObject therapistProjection; // Delete
     public GameObject leftBG;
     public GameObject rightBG;
 
@@ -297,9 +297,9 @@ public class VizController : MonoBehaviour
                 restTime.transform.localScale = Vector3.Slerp(restTime.transform.localScale, new Vector3(.5f, .5f, .5f), Time.deltaTime * 2);
                 break;
             case "Social":
-                sessionTime.transform.localScale = Vector3.Slerp(sessionTime.transform.localScale, new Vector3(.9f, .9f, .9f), Time.deltaTime * 2);
-                sessionTime.transform.localPosition = Vector3.Slerp(sessionTime.transform.localPosition, new Vector3(-420f, 210.0f, 0.0f), Time.deltaTime * 2);
-                restTime.transform.localScale = Vector3.Slerp(restTime.transform.localScale, new Vector3(0f, 0f, 0f), Time.deltaTime * 2);
+                //sessionTime.transform.localScale = Vector3.Slerp(sessionTime.transform.localScale, new Vector3(.9f, .9f, .9f), Time.deltaTime * 2);
+                //sessionTime.transform.localPosition = Vector3.Slerp(sessionTime.transform.localPosition, new Vector3(-420f, 210.0f, 0.0f), Time.deltaTime * 2);
+                //restTime.transform.localScale = Vector3.Slerp(restTime.transform.localScale, new Vector3(0f, 0f, 0f), Time.deltaTime * 2);
                 break;
             case "Intimate":
 
@@ -345,10 +345,10 @@ public class VizController : MonoBehaviour
         {
             case "Personal":
                 leaned.transform.localScale = Vector3.Slerp(leaned.transform.localScale, new Vector3(0.5f, 0.5f, 0.5f), Time.deltaTime * 2);
-                leaned.transform.localPosition = Vector3.Slerp(leaned.transform.localPosition, new Vector3(423f, 174.0f, 0.0f), Time.deltaTime * 2);
+                //leaned.transform.localPosition = Vector3.Slerp(leaned.transform.localPosition, new Vector3(423f, 174.0f, 0.0f), Time.deltaTime * 2);
                 break;
             case "Social":
-                leaned.transform.localScale = Vector3.Slerp(leaned.transform.localScale, new Vector3(0.0f, 0.0f, 0.0f), Time.deltaTime * 2);
+                //leaned.transform.localScale = Vector3.Slerp(leaned.transform.localScale, new Vector3(0.0f, 0.0f, 0.0f), Time.deltaTime * 2);
                 break;
             case "Intimate":
 
@@ -370,10 +370,10 @@ public class VizController : MonoBehaviour
         {
             case "Personal":
                 outOfPath.transform.localScale = Vector3.Slerp(outOfPath.transform.localScale, new Vector3(0.5f, 0.5f, 0.5f), Time.deltaTime * 2);
-                outOfPath.transform.localPosition = Vector3.Slerp(outOfPath.transform.localPosition, new Vector3(107f, 174.0f, 0.0f), Time.deltaTime * 2);
+                //outOfPath.transform.localPosition = Vector3.Slerp(outOfPath.transform.localPosition, new Vector3(107f, 174.0f, 0.0f), Time.deltaTime * 2);
                 break;
             case "Social":
-                outOfPath.transform.localScale = Vector3.Slerp(outOfPath.transform.localScale, new Vector3(0.0f, 0.0f, 0.0f), Time.deltaTime * 2);
+                //outOfPath.transform.localScale = Vector3.Slerp(outOfPath.transform.localScale, new Vector3(0.0f, 0.0f, 0.0f), Time.deltaTime * 2);
                 break;
             case "Intimate":
 
@@ -397,8 +397,8 @@ public class VizController : MonoBehaviour
                 rightBG.SetActive(true);
                 break;
             case "Social":
-                leftBG.SetActive(false);
-                rightBG.SetActive(false);
+                //leftBG.SetActive(false);
+                //rightBG.SetActive(false);
                 break;
             case "Intimate":
 
@@ -460,10 +460,10 @@ public class VizController : MonoBehaviour
         {
             case "Personal":
                 shoulderLift.transform.localScale = Vector3.Slerp(shoulderLift.transform.localScale, new Vector3(0.5f, 0.5f, 0.5f), Time.deltaTime * 2);
-                shoulderLift.transform.localPosition = Vector3.Slerp(shoulderLift.transform.localPosition, new Vector3(306f, 174.0f, 0.0f), Time.deltaTime * 2);
+                //shoulderLift.transform.localPosition = Vector3.Slerp(shoulderLift.transform.localPosition, new Vector3(306f, 174.0f, 0.0f), Time.deltaTime * 2);
                 break;
             case "Social":
-                shoulderLift.transform.localScale = Vector3.Slerp(shoulderLift.transform.localScale, new Vector3(0.0f, 0.0f, 0.0f), Time.deltaTime * 2);
+                //shoulderLift.transform.localScale = Vector3.Slerp(shoulderLift.transform.localScale, new Vector3(0.0f, 0.0f, 0.0f), Time.deltaTime * 2);
                 break;
             case "Intimate":
                 shoulderLift.transform.localScale = Vector3.Slerp(shoulderLift.transform.localScale, new Vector3(0.4f, 0.4f, 0.4f), Time.deltaTime * 2);

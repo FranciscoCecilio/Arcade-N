@@ -176,4 +176,19 @@ public static class SessionInfo
         UnityEditor.AssetDatabase.Refresh();
         #endif
     }
+    
+    // This resets the State because we changed Project Settings> Editor > Enter Play Mode > (disable) Domain Reload
+    // If Domain Reload was checked all static values would reset BUT sometimes we would have an infinite "Application.Reload" on entering play mode
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    static void Init()
+    {
+        _toView = "";
+        _timestampSession = "";
+        _username = "";
+        _name= "";
+        _age= "";
+        _gender= "";
+        _exerciseId = 1;
+        Debug.Log("sessionInfo reset.");
+    }
 }

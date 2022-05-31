@@ -13,7 +13,7 @@ public class VizController : MonoBehaviour
     [Header("Information for Therapists")]
     public GameObject leaned;
     public GameObject outOfPath;
-    public GameObject therapistProjection; // Delete
+    //public GameObject therapistProjection; // Delete
     public GameObject shoulderLift;
     public GameObject leftBG;
     public GameObject rightBG;
@@ -263,13 +263,14 @@ public class VizController : MonoBehaviour
         switch (tempDist  /*TherapistPatientTracker.GetInterDist()*/)
         {
             case "Personal":
-                success.transform.localScale = Vector3.Slerp(success.transform.localScale, new Vector3(0.5f, 0.5f, 0.5f), Time.deltaTime * 2);
-                success.transform.localPosition = Vector3.Slerp(success.transform.localPosition, new Vector3(261.0f, 218.0f, 0.0f), Time.deltaTime * 2);
+                success.transform.localScale = Vector3.Slerp(success.transform.localScale, new Vector3(0.6f, 0.6f, 0.6f), Time.deltaTime * 2);
+                //success.transform.localPosition = Vector3.Slerp(success.transform.localPosition, new Vector3(261.0f, 218.0f, 0.0f), Time.deltaTime * 2);
                 
-                break;
-            case "Social":
-                success.transform.localScale = Vector3.Slerp(success.transform.localScale, new Vector3(.9f, .9f, .9f), Time.deltaTime * 2);
-                success.transform.localPosition = Vector3.Slerp(success.transform.localPosition, new Vector3(265f, 190.0f, 0.0f), Time.deltaTime * 2);
+                break; 
+            case "Social": 
+                success.transform.localScale = Vector3.Slerp(success.transform.localScale, new Vector3(0.6f, 0.6f, 0.6f), Time.deltaTime * 2);
+                //success.transform.localScale = Vector3.Slerp(success.transform.localScale, new Vector3(.9f, .9f, .9f), Time.deltaTime * 2);
+                //success.transform.localPosition = Vector3.Slerp(success.transform.localPosition, new Vector3(265f, 190.0f, 0.0f), Time.deltaTime * 2);
                
                 break;
             case "Intimate":

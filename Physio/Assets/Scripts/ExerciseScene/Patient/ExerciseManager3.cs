@@ -54,10 +54,12 @@ public class ExerciseManager3 : MonoBehaviour {
     }
 
     private void OnEnable() {
+        Debug.Log("Enabled");
         init();
     }
 
     private void OnDisable() {
+        Debug.Log("Disabled");
         CancelInvoke();
     }
 

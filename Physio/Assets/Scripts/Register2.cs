@@ -10,7 +10,7 @@ public class Register2 : MonoBehaviour
 {
     private bool _fieldsEmpty;
 
-    public GameObject Name;
+    public GameObject Name; 
     public GameObject EmptyNameMessage;
     public GameObject EmptyNameBox;
     private string _name;
@@ -18,7 +18,7 @@ public class Register2 : MonoBehaviour
     public GameObject Age;
     public GameObject EmptyAgeMessage;
     public GameObject EmptyAgeBox;
-    private string _age;
+    private string _age; 
 
     public GameObject Nr_Saude;
     private string _nrSaude;

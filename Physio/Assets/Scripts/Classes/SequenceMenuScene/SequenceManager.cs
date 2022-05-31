@@ -93,4 +93,16 @@ public static class SequenceManager
             //SceneManager.LoadScene("MainMenu");
         }
     }
+    
+    // This resets the State because we changed Project Settings> Editor > Enter Play Mode > (disable) Domain Reload
+    // If Domain Reload was checked all static values would reset BUT sometimes we would have an infinite "Application.Reload" on entering play mode
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    static void Init()
+    {
+        sequence = null;
+        sequencesToRun = null;
+        sequenceIndex = 0;
+        index = 0;
+        Debug.Log("SequenceManager reset.");
+    }
 }

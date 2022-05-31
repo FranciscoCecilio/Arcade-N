@@ -117,10 +117,12 @@ public class PatientController : MonoBehaviour {
 
 
     private void OnEnable() {
+        Debug.Log("ENabled PatientController");
         init();
     }
 
     private void OnDisable() {
+        Debug.Log("Disabled PatientController");
         CancelInvoke();
     }
 

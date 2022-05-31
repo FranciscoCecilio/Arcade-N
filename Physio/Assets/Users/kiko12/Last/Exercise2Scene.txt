@@ -1,0 +1,8 @@
+timestamp=20220531T020122
+arm=right
+nrReps=5
+tries=0
+correctReps=0
+target0=(558.14, 277.88, 0.96)
+target1=(558.14, 166.98, 0.96)
+pathPosition=(548.14, 217.43, 0.94)

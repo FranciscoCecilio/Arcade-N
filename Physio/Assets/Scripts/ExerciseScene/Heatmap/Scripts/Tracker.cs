@@ -32,6 +32,7 @@ public class Tracker : MonoBehaviour {
 
 	public void OnDisable()
 	{
+        Debug.Log("Disabled Tracker");
 		StringUtility.Vector3ArrayToTextAsset(points.ToArray(), HeatmapTextAssetPath);
 	}
 

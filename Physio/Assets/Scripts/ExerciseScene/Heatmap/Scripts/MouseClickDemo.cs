@@ -278,6 +278,7 @@ public class MouseClickDemo : MonoBehaviour {
 
 	public void OnDisable()
 	{
+        Debug.Log("Disabled MouseClickDemo");
 		AssetDatabase.Refresh();
 	}
 

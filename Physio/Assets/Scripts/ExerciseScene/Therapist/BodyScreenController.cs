@@ -23,6 +23,10 @@ public class BodyScreenController : MonoBehaviour {
 
     private bool hasWroteReport;
 
+    void Start()
+    {
+        startStuff.SetActive(true);
+    }
     public void StartTherapy() {
         if (SceneManager.GetActiveScene().name == "Exercise1Scene" || SceneManager.GetActiveScene().name == "Exercise2Scene")
         {

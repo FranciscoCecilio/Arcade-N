@@ -12,6 +12,7 @@ public class PathBezier : MonoBehaviour {
 	private GameObject avatar1;
 
 	void OnEnable(){
+        Debug.Log("Enabled PathBezier");
 		// create the path
 		cr = new LTBezierPath( new Vector3[] {trans[0].position, trans[2].position, trans[1].position, trans[3].position, trans[3].position, trans[5].position, trans[4].position, trans[6].position} );
 	}

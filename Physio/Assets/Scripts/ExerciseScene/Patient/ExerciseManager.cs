@@ -46,10 +46,6 @@ public class ExerciseManager : MonoBehaviour {
 
     public GameObject pathSize;
 
-    // Use this for initialization
-    void Start () {
-    }
-
     void init() {
         State.hasSecondaryCursor = hasSecondaryCursor;
         State.currentTarget = 0;
@@ -68,16 +64,16 @@ public class ExerciseManager : MonoBehaviour {
         renderer.material.color = color;
     }
 
-    private void OnEnable() {
+    private void Start() {
         init();
     }
 
     private void OnDisable() {
         CancelInvoke();
     }
-
+ 
     //Choose the arm area
-    private void setArea() {
+    private void setArea() { 
         if (State.exercise.isLeftArm()) {
             activate(true);
             exerciseBoxGroup = leftExerciseBox;
@@ -98,6 +94,8 @@ public class ExerciseManager : MonoBehaviour {
         showArrows = false;
     }
 
+
+ 
     private void activate(bool left) {
         leftTargets.SetActive(left);
         leftExerciseBox.SetActive(left);

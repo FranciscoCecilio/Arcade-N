@@ -40,4 +40,21 @@ public static class State {
         //registerShoulderComp = false;
         //registerSpineComp = false;
     }
+
+    // This resets the State because we changed Project Settings > Editor > Enter Play Mode > (disable) Domain Reload
+    // If Domain Reload was checked all static values would reset BUT sometimes we would have an infinite "Application.Reload" on entering play mode
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    static void Init()
+    {
+        resetState();
+        exercise = null;
+        registerShoulderComp = false;
+        registerSpineComp = false;
+        currentTarget = 0;
+        sessionTimeInt = 0;
+        space = "Social";
+        heatM = "none";
+        touch = "none";
+        Debug.Log("State reset.");
+    }
 }

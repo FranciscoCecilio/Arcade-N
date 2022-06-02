@@ -24,10 +24,12 @@ public class ButtonsTween : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     }
 
     public void OnPointerEnter(PointerEventData eventData){
+        Debug.Log("enter");
         ScaleUp();
     }
 
     public void OnPointerExit(PointerEventData eventData){
+        Debug.Log("exit");
         ScaleBack();
     }
 }

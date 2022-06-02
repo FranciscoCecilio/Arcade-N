@@ -1,8 +1,0 @@
-timestamp=20220531T150440
-arm=left
-nrReps=5
-tries=0
-correctReps=0
-target0=(243.25, 205.85, 0.94)
-target1=(243.25, 111.80, 0.94)
-pathPosition=(243.25, 158.82, 0.94)

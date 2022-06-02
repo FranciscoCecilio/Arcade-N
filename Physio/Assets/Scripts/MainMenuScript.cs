@@ -81,7 +81,7 @@ public class MainMenuScript : MonoBehaviour {
         time.text = System.DateTime.UtcNow.ToLocalTime().ToString("HH:mm");
     }
 
-    public void DeleteUser()
+    private void DeleteUser()
     {
         afterDeleteUI.SetActive(true);
         SessionInfo.DeleteUser(afterDeleteText);

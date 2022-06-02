@@ -1,4 +1,0 @@
-timestamp=20220524T175029
-name=
-series=0
-restDuration=0

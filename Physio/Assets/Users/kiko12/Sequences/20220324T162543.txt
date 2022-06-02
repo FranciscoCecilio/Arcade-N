@@ -1,3 +1,0 @@
-timestamp=20220324T162543
-name=j
-exe=2=Left/Right=Exercise2Scene=right=10=60=60

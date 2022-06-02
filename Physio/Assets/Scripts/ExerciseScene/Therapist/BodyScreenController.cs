@@ -12,7 +12,7 @@ public class BodyScreenController : MonoBehaviour {
 
     public GameObject pauseButton;
     public GameObject unPauseButton;
-    public GameObject pauseStuff;
+    public GameObject pauseMessage;
     public GameObject quitButton;
     public GameObject restartButton;
 
@@ -26,6 +26,7 @@ public class BodyScreenController : MonoBehaviour {
 
     public Camera worldCamera;
 
+    public float fadeSpeedTest;
     private bool hasWroteReport;
 
     void Start()
@@ -39,10 +40,12 @@ public class BodyScreenController : MonoBehaviour {
             savePathPosition();
         }
         startButton.SetActive(false);
-        startStuff.SetActive(false);
+        // Fade out
+        StartCoroutine(FadeOutObject(startStuff, fadeSpeedTest));
         pauseButton.SetActive(true);
         patientCanvas.SetActive(true);
     }
+
 
     public void PauseTherapy() {
         unPauseButton.SetActive(true);
@@ -51,6 +54,7 @@ public class BodyScreenController : MonoBehaviour {
         restartButton.SetActive(true);
         quitButton.SetActive(true);
         nextButton.SetActive(true);
+        pauseMessage.SetActive(true);
         // SHOW target edition
         //startStuff.SetActive(true);
         // SHOW information
@@ -68,6 +72,7 @@ public class BodyScreenController : MonoBehaviour {
         restartButton.SetActive(false);
         quitButton.SetActive(false);
         nextButton.SetActive(false);
+        pauseMessage.SetActive(false);
         // HIDE target edition
         //startStuff.SetActive(false);
         // HIDE information
@@ -136,5 +141,28 @@ public class BodyScreenController : MonoBehaviour {
         if(State.exercise.isCompleted()) {
             StopTherapy();
         }
+    }
+
+    // fades object (start stuff)
+    private IEnumerator FadeOutObject(GameObject objectToFade, float fadeSpeed){
+        /*while(objectToFade.GetComponent<Renderer>().material.color.a > 0){
+            Color objectColor = objectToFade.GetComponent<Renderer>().material.color;
+            float fadeAmount = objectColor.a - (fadeSpeed * Time.deltaTime);
+
+            objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, fadeAmount);
+            objectToFade.GetComponent<Renderer>().material.color = objectColor;
+            yield return null;
+        }*/
+        while(objectToFade.transform.localScale.x < 3){
+            Vector3 scale = objectToFade.transform.localScale;
+            float newScale = scale.x + (fadeSpeed * Time.deltaTime);
+
+            scale = new Vector3(newScale, newScale, newScale);
+            objectToFade.transform.localScale = scale;
+            yield return null;
+        }
+        Debug.Log("Chegou aqui");
+        objectToFade.transform.localScale = new Vector3(1,1,1);
+        objectToFade.SetActive(false);
     }
 }

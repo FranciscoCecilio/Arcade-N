@@ -21,8 +21,9 @@ public class KinectDataManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetKey("escape"))
-            Application.Quit();
+        if (Input.GetKey("escape")){
+            //Application.Quit();
+        }
 
         List<Body> activeBodies = kinectData.getActiveBodies();
 
@@ -50,7 +51,55 @@ public class KinectDataManager : MonoBehaviour {
                     therapistPos = therapist.spineBasePos;
                 }
             }
-            /*
+        }
+
+        if ( activeBodies.Count > 2)
+        {
+            for(int j = 0; j < activeBodies.Count; j++)
+            {
+                Body body = activeBodies[j];
+                temp.setBody(body);
+                if (body.TrackingId == patient.getId())
+                {
+                    continue;
+                }
+
+                if (Vector3.Distance(temp.spineBasePos, therapist.spineBasePos) < 0.2)
+                {
+                    therapist.setBody(body);
+                    therapistPos = therapist.spineBasePos;
+                }
+                else if (closeDist < Vector3.Distance(new Vector3(0f,0f,0f), temp.spineBasePos))
+                {
+                    closeDist = Vector3.Distance(new Vector3(0f, 0f, 0f), temp.spineBasePos);
+                    therapist.setBody(body);
+                    therapistPos = therapist.spineBasePos;
+
+                }
+               
+            }
+        }
+
+        /*if (activeBodies.Count > 1)
+        {
+            var interDist = Vector3.Distance(patient.spineBasePos, therapist.spineBasePos);
+            //Debug.Log( "interdist " +  interDist);
+
+            if ( interDist > 0.9 && interDist < 1.7)
+            {
+                State.space = "Personal";
+            }
+            else if ( interDist <= 0.9)
+            {
+                State.space = "Intimate";
+            }
+            else
+            {
+                State.space = "Social";
+            }
+        }*/
+
+         /*
             // para o heatmap 
 
             var distMEsquerdaOEsquerda = Vector3.Distance(therapist.leftHandTipPos, patient.leftShoulderPos);
@@ -102,54 +151,6 @@ public class KinectDataManager : MonoBehaviour {
             { State.touch = "none"; }
 
             */
-
-        }
-
-        if ( activeBodies.Count > 2)
-        {
-            for(int j = 0; j < activeBodies.Count; j++)
-            {
-                Body body = activeBodies[j];
-                temp.setBody(body);
-                if (body.TrackingId == patient.getId())
-                {
-                    continue;
-                }
-
-                if (Vector3.Distance(temp.spineBasePos, therapist.spineBasePos) < 0.2)
-                {
-                    therapist.setBody(body);
-                    therapistPos = therapist.spineBasePos;
-                }
-                else if (closeDist < Vector3.Distance(new Vector3(0f,0f,0f), temp.spineBasePos))
-                {
-                    closeDist = Vector3.Distance(new Vector3(0f, 0f, 0f), temp.spineBasePos);
-                    therapist.setBody(body);
-                    therapistPos = therapist.spineBasePos;
-
-                }
-               
-            }
-        }
-
-        /*if (activeBodies.Count > 1)
-        {
-            var interDist = Vector3.Distance(patient.spineBasePos, therapist.spineBasePos);
-            //Debug.Log( "interdist " +  interDist);
-
-            if ( interDist > 0.9 && interDist < 1.7)
-            {
-                State.space = "Personal";
-            }
-            else if ( interDist <= 0.9)
-            {
-                State.space = "Intimate";
-            }
-            else
-            {
-                State.space = "Social";
-            }
-        }*/
 
         if (Time.frameCount % 30 == 0) {
             //System.GC.Collect();

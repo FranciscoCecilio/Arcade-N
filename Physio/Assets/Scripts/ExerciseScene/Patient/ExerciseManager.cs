@@ -72,7 +72,7 @@ public class ExerciseManager : MonoBehaviour {
         CancelInvoke();
     }
  
-    //Choose the arm area
+    //Choose the arm area (path)
     private void setArea() { 
         if (State.exercise.isLeftArm()) {
             activate(true);
@@ -112,7 +112,12 @@ public class ExerciseManager : MonoBehaviour {
         Ray landingRay = new Ray(cursor.transform.position, Vector3.back);
 
         if(State.isTherapyOnGoing) {
-
+            // Makes the correct target to blink
+            if(!isBlinking) {
+                    InvokeRepeating("blinkTarget", 0, 0.05f);
+                    isBlinking = true;
+                }
+                
             //Show arrows
             if (!showArrows)
             {
@@ -122,12 +127,7 @@ public class ExerciseManager : MonoBehaviour {
                 }
                 showArrows = true;
             }
-
-            if(!isBlinking) {
-                InvokeRepeating("blinkTarget", 0, 0.05f);
-                isBlinking = true;
-            }
-
+            
             if (Physics.Raycast(landingRay, out hit)) {
                 if (hit.collider.tag == "ExerciseCollider") { // is inside of the exercise area
                     if (State.hasStartedExercise) {
@@ -218,6 +218,8 @@ public class ExerciseManager : MonoBehaviour {
         }
     }
 
+    // This method maked the correct target to blink 
+    // AND updates the _arrows to point in the correct direction
     private void blinkTarget() {
         if (targets.transform.childCount == 0)
             return;
@@ -259,7 +261,7 @@ public class ExerciseManager : MonoBehaviour {
         color.b += delta;
 
         renderer.material.color = color;
-        
+        // Set _arrows with the correct direction
         for (int i = 0; i < _arrows.Length; i++)
         {
             if (target == 0 && _arrows[i].transform.parent.name == "UpArrows") _arrows[i].SetActive(false);

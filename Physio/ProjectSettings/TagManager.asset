@@ -13,11 +13,12 @@ TagManager:
   - rshoulder
   - Arrow
   - ExerciseParametersPanel
+  - ExerciseSelectionButton
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Pause
   - Water
   - UI
   - 
@@ -55,4 +56,7 @@ TagManager:
     locked: 0
   - name: Middle
     uniqueID: 533032981
+    locked: 0
+  - name: Pause
+    uniqueID: 3579053775
     locked: 0

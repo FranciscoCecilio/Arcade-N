@@ -1,0 +1,5 @@
+Username=kiko1244
+Name=kiko12
+Age=23
+Gender=Male
+Nr_Utente=123456789

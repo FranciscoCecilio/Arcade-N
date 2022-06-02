@@ -1,0 +1,4 @@
+timestamp=20220601T202806
+name=
+series=0
+restDuration=0

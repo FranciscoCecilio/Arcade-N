@@ -1,2 +1,0 @@
-timestamp=20220506T115123
-name=coco

@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEditor;
 
+// TODO kiko12 de _username
 public static class SessionInfo
 {
     private static string _toView = "";
@@ -185,6 +186,7 @@ public static class SessionInfo
         _toView = "";
         _timestampSession = "";
         _username = "";
+        _username = "kiko1244";
         _name= "";
         _age= "";
         _gender= "";

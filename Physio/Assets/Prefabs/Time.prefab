@@ -26,7 +26,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3262416164739192775}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -69,16 +69,16 @@ MonoBehaviour:
       m_Calls: []
   m_text: 12:35
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 94f0ff695a6d8e344933deddf156d219, type: 2}
-  m_sharedMaterial: {fileID: -7516517898558193943, guid: 94f0ff695a6d8e344933deddf156d219,
+  m_fontAsset: {fileID: 11400000, guid: 5aafc2de5ef9e1845a41ea978f634734, type: 2}
+  m_sharedMaterial: {fileID: 1813981763605811409, guid: 5aafc2de5ef9e1845a41ea978f634734,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

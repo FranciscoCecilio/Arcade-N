@@ -6,15 +6,8 @@ public class Targets_Tween : MonoBehaviour
 {
     void Start()
     {
-        Shake_Target();
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        //2
-        //LeanTween.cancel(gameObject);
-        //3
-        //LeanTween.moveX(gameObject, transform.position.x - 0.05f, 0.5f).setEaseShake(); 
+        //Shake_Target();
+        SquashAndStretch();
     }
 
     public void Shake_Target(){
@@ -22,5 +15,10 @@ public class Targets_Tween : MonoBehaviour
         LeanTween.cancel(gameObject);
         //3
         LeanTween.moveX(gameObject, transform.position.x - 0.5f, 0.5f).setEaseShake(); 
+    }
+
+    public void SquashAndStretch(){
+        gameObject.transform.localScale = new Vector3(10f,10f,10f);
+        LeanTween.scale(gameObject, new Vector3(35f,35f,35f), 2f).setEase(LeanTweenType.easeOutElastic);
     }
 }

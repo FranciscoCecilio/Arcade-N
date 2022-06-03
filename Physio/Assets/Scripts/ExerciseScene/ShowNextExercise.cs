@@ -5,6 +5,8 @@ using TMPro;
 
 public class ShowNextExercise : MonoBehaviour
 {
+    public GameObject info;
+
     public GameObject nextPanel;
     public GameObject nextButton;
 
@@ -20,6 +22,7 @@ public class ShowNextExercise : MonoBehaviour
     void Start()
     {
         PopulatePanel();
+        info.SetActive(false);
     }
 
     public void PopulatePanel(){

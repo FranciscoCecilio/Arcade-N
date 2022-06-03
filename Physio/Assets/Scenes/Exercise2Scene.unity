@@ -4216,6 +4216,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 022a345d1394725428d2ddc5755b456f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  info: {fileID: 1735612032}
   nextPanel: {fileID: 256965988}
   nextButton: {fileID: 1843444074}
   emptyPanel: {fileID: 418542261}
@@ -24071,7 +24072,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.90000004}
-  m_AnchoredPosition: {x: 392.80005, y: -145.62294}
+  m_AnchoredPosition: {x: 392.80005, y: -145.62292}
   m_SizeDelta: {x: -758.2101, y: -350.3025}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1296976449
@@ -37265,9 +37266,9 @@ RectTransform:
   - {fileID: 1759365849}
   - {fileID: 1551599635}
   - {fileID: 1489179116}
-  - {fileID: 224547764}
   - {fileID: 1221367125}
   - {fileID: 2030269546}
+  - {fileID: 224547764}
   - {fileID: 1215486590}
   - {fileID: 1741540010}
   - {fileID: 2059012864}

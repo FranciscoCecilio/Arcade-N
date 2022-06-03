@@ -1,0 +1,4 @@
+timestamp=20220603T194006
+name=testSequence
+series=0
+restDuration=0

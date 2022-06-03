@@ -26,10 +26,10 @@ public class VizController : MonoBehaviour
 
     [Header("Repetitions Visualization")]
     public GameObject success;
-    public Text succ; // maybe delete   
+    //public Text succ; // maybe delete   
     private int SuccPer; // helpful for radial bar
     public Image SuccSlider;
-    public Image previousSuccSlider; // maybe delete 
+    //public Image previousSuccSlider; // maybe delete 
     public Text correctReps; // incremented after a successful movement
     public Text totalReps;
 
@@ -484,6 +484,7 @@ public class VizController : MonoBehaviour
         panel.SetActive(!panel.activeSelf);
     }
 
+    // FC - Does nothing because I commented
     private void fillPreviousSuccBar()
     {
         string _arm = "";
@@ -514,8 +515,8 @@ public class VizController : MonoBehaviour
             if (SceneManager.GetActiveScene().name == "Exercise3Scene") succPer = (correctReps * 100) / nReps;
             else succPer = (correctReps * 100) / tries;
         }
-        previousSuccSlider.fillAmount = succPer * 0.01f;
-        previousSuccSlider.color = new Color32(0x80, 0x80, 0x80, 0xFF);
+        //previousSuccSlider.fillAmount = succPer * 0.01f;
+        //previousSuccSlider.color = new Color32(0x80, 0x80, 0x80, 0xFF);
     }
 
     private void positionElements()

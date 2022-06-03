@@ -14,7 +14,7 @@ using System.IO;
 // Portanto, uma Série recebe determiando exercício, nr. de séries, nr. de repetições (mesmo valor para cada série), tempo descanso entre séries
 public class Exercise
 {
-    private int _id; // 0 , 1 , 2
+    private int _id; // 0 , 1 , 2 = Exercise Type
     private string _name; // Grid, Horizontal, Vertical
 
     private string _scenePath; // name of the scene

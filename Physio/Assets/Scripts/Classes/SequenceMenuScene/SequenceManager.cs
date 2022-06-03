@@ -17,7 +17,7 @@ public static class SequenceManager
     private static int sequenceIndex = 0;
 
     // index gives the number of the exercise of the given sequence (if the sequence has 3 exercises and we are running the 1st exercise, index = 0)
-    public static int index = 0;
+    private static int index = 0;
 
     // called by SequenceMenuScript.confirmNameSequence()
     public static void newSequence(string name)
@@ -94,6 +94,25 @@ public static class SequenceManager
         }
     }
     
+    // this method returns the **1st Exercise from the next Sequence** and is usefull to show in the exercise scene
+    public static Exercise GetNextExercise(){
+        int nextSIndex = sequenceIndex + 1;
+
+        // if exists a next sequence
+        if (nextSIndex < sequencesToRun.Count)
+        {
+            // Assign the current sequence
+            Sequence tempSequence = sequencesToRun[nextSIndex];
+            // We assume that the next sequence has at least 1 exercise (is not empty)
+            return tempSequence.getExercise(0); 
+        }
+        return null;
+    }
+
+    public static void SetSeqIndex(int i){
+        sequenceIndex = i;
+    }
+
     // This resets the State because we changed Project Settings> Editor > Enter Play Mode > (disable) Domain Reload
     // If Domain Reload was checked all static values would reset BUT sometimes we would have an infinite "Application.Reload" on entering play mode
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]

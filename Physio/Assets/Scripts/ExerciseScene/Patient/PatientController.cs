@@ -16,7 +16,7 @@ public class PatientController : MonoBehaviour {
 
     public Text correctRepetitionsTherapist;
     public Text setTimeTherapist;
-    public Text restTimeTherapist;
+    public TMP_Text restTimeTherapist;
     public Text triesTherapist;
     public Text totalReps;
 

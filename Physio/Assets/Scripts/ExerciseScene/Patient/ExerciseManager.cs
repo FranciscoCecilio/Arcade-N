@@ -46,6 +46,13 @@ public class ExerciseManager : MonoBehaviour {
     private int repCounter;
     private int lastrep = 0;
 
+    private void Start() {
+        init();
+    }
+
+    private void OnDisable() {
+        CancelInvoke();
+    }
 
     void init() {
         State.hasSecondaryCursor = hasSecondaryCursor;
@@ -65,14 +72,6 @@ public class ExerciseManager : MonoBehaviour {
         renderer.material.color = color;
     }
 
-    private void Start() {
-        init();
-    }
-
-    private void OnDisable() {
-        CancelInvoke();
-    }
- 
     //Choose the arm area (path)
     private void setArea() { 
         if (State.exercise.isLeftArm()) {
@@ -95,8 +94,6 @@ public class ExerciseManager : MonoBehaviour {
         showArrows = false;
     }
 
-
- 
     private void activate(bool left) {
         leftTargets.SetActive(left);
         leftExerciseBox.SetActive(left);
@@ -104,7 +101,6 @@ public class ExerciseManager : MonoBehaviour {
         rightExerciseBox.SetActive(!left);
     }
 
-    // Update is called once per frame
     void Update () {
         /*GameObject[] target = GameObject.FindGameObjectsWithTag("TargetCollider");
         Debug.Log(target[0].transform.position.ToString());*/
@@ -115,10 +111,9 @@ public class ExerciseManager : MonoBehaviour {
         if(State.isTherapyOnGoing) {
             // Makes the correct target to blink
             if(!isBlinking) {
-                    InvokeRepeating("blinkTarget", 0, 0.05f);
-                    isBlinking = true;
-                }
-                
+                InvokeRepeating("blinkTarget", 0, 0.05f);
+                isBlinking = true;
+            }
             //Show arrows
             if (!showArrows)
             {
@@ -128,7 +123,7 @@ public class ExerciseManager : MonoBehaviour {
                 }
                 showArrows = true;
             }
-            
+            // Raycasts from hand position
             if (Physics.Raycast(landingRay, out hit)) {
                 if (hit.collider.tag == "ExerciseCollider") { // is inside of the exercise area
                     if (State.hasStartedExercise) {

@@ -28143,7 +28143,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1526526316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28241,7 +28241,7 @@ MonoBehaviour:
   completed: {fileID: 0}
   correctRepetitionsPatient: {fileID: 0}
   correctRepetitionsTherapist: {fileID: 1401276640}
-  triesTherapist: {fileID: 1007705735}
+  triesTherapist: {fileID: 1669601533}
   totalReps: {fileID: 1669601533}
   restTimeTherapist: {fileID: 1439656273}
   setTimeTherapist: {fileID: 1397376065}

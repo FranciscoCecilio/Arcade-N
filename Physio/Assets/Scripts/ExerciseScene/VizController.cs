@@ -83,7 +83,7 @@ public class VizController : MonoBehaviour
         BG();
         Comp();
         TimeViz();
-        Success();
+        RepetitionsVis();
         Leaned();
         Path();
         //RestTime();
@@ -229,34 +229,38 @@ public class VizController : MonoBehaviour
         }
     }
 
-    void Success()
+    void RepetitionsVis()
     {
         if (State.exercise.getTries() != 0)
         {
-            if (SceneManager.GetActiveScene().name == "Exercise3Scene") SuccPer = (State.exercise.getCorrectReps() * 100) / State.exercise.getNReps();
-            else SuccPer = (State.exercise.getCorrectReps() * 100) / State.exercise.getTries();
+            // FC - Doesnt make sense for grid
+            if (SceneManager.GetActiveScene().name == "Exercise3Scene") {
+                SuccPer = (State.exercise.getCorrectReps() * 100) / State.exercise.getNReps();
+            }
+            else{
+                SuccPer = (State.exercise.getCorrectReps() * 100) / State.exercise.getNReps();
+            }
         }
-        
 
-        //succ.text = "" + SuccPer + "%";
+        //Slider
         correctReps.text = State.exercise.getCorrectReps().ToString();
         SuccSlider.fillAmount = SuccPer * 0.01f;
 
         if (SuccPer >= 70)
         {
             //SuccSlider.color = Color.Lerp(SImage.color, new Color32(0x4F, 0xFB, 0x7B, 0xFF), Mathf.PingPong(Time.time, 1));
-            SuccSlider.color = new Color32(0x4F, 0xFB, 0x7B, 0xFF);
+            SuccSlider.color = new Color(4, 212, 134);
         }
         else if (SuccPer >= 30 && SuccPer < 70)
         {
 
             //SuccSlider.color = Color.Lerp(SImage.color, new Color32(0xF3, 0xFF, 0x24, 0xFF), Mathf.PingPong(Time.time, 1));
-            SuccSlider.color = new Color32(0xF3, 0xFF, 0x24, 0xFF);
+            SuccSlider.color = new Color(212,206,4);
         }
         else
         {
             //SuccSlider.color = Color.Lerp(SImage.color, new Color32(0xF9, 0x53, 0x53, 0xFF), Mathf.PingPong(Time.time, 1));
-            SuccSlider.color = new Color32(0xF9, 0x53, 0x53, 0xFF);
+            SuccSlider.color = new Color(212,120,4);
         }
 
 

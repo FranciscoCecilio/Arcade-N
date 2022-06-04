@@ -117,18 +117,18 @@ public class Sequence
     // Before: creates a new directory with a sequence file in the directory USER/username/<SessionTS>/Sequences/"<SequenceTS>.txt"
     // Now: creates a new directory with a sequence file in the directory Users/<username>/<SessionTS>/<SequenceTS>/"<SequenceTS>.txt"
 
-    // Called on SequenceManager.newSequence(name) e nesse caso a sequencia nao tem exercicios...
-    // Called after Editing/Creating a new Sequence. (but will no longer be)
+    // NOT ANYMORE: Called on SequenceManager.newSequence(name) e nesse caso a sequencia nao tem exercicios...
+    // NOT ANYMORE: Called after Editing/Creating a new Sequence. (but will no longer be)
 
-    // TODO we must call this only after we finish the exercises of a Sequence! not when we create one.
     public void toFile()
     {
+        Debug.Log("Sequence is going to be saved in "+Application.dataPath + "/Users/" + SessionInfo.getUsername() + "/" + SessionInfo.getSessionPath() + "/" + _timestamp);
         // Create directory <SequenceTS>
         if (!Directory.Exists(Application.dataPath + "/Users/" + SessionInfo.getUsername() + "/" + SessionInfo.getSessionPath() + "/"  + _timestamp))
             Directory.CreateDirectory(Application.dataPath + "/Users/" + SessionInfo.getUsername() + "/" + SessionInfo.getSessionPath() + "/" + _timestamp);
         
         // Create file <SequenceTS>.txt
-        string filepath = Application.dataPath + "/Users/" + SessionInfo.getUsername()+ "/"  + SessionInfo.getSessionPath() + "/" + _timestamp + ".txt";
+        string filepath = Application.dataPath + "/Users/" + SessionInfo.getUsername()+ "/"  + SessionInfo.getSessionPath() + "/" + _timestamp + "/" + _timestamp + ".txt";
         if (System.IO.File.Exists(filepath)) 
             System.IO.File.Delete(filepath);
 

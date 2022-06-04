@@ -267,15 +267,15 @@ public class Exercise
         if (_leftArm) _arm = "left";
         else _arm = "right";
 
-        //Users/<user>/<SessionTS>/<SequenceTS>/ExerciseTS.txt
-        String filename = "Exercise" + DateTime.Now.ToString("yyyyMMddTHHmmss");
+        // Create SessionTS folder
         if(!Directory.Exists(Application.dataPath + "/Users/" + SessionInfo.getUsername() + "/" + SessionInfo.getSessionPath() + "/" + SequenceManager.sequence.getTimestamp())){
-            Debug.Log("Tentou criar um ficheiro de Exercicio mas nao existe o folder Sessão>Sequencia");
-            return;
+            Directory.CreateDirectory(Application.dataPath + "/Users/" + SessionInfo.getUsername() + "/" + SessionInfo.getSessionPath() + "/" + SequenceManager.sequence.getTimestamp());
+            Debug.Log("Tentou criar um ficheiro de Exercicio mas nao existe o folder Sessão>Sequencia -> então criou.");
         }
-        String filepath = Application.dataPath + "/Users/" + SessionInfo.getUsername() + "/" +
-         SessionInfo.getSessionPath() + "/" + SequenceManager.sequence.getTimestamp() + "/" + filename + ".txt";
-        Debug.Log(filepath);
+        // Create the Exercise File
+        String filename = "Exercise" + DateTime.Now.ToString("yyyyMMddTHHmmss");
+        String filepath = Application.dataPath + "/Users/" + SessionInfo.getUsername() + "/" + SessionInfo.getSessionPath() + "/" + SequenceManager.sequence.getTimestamp() + "/" + filename + ".txt";
+
         using (var stream = new FileStream(filepath, FileMode.CreateNew, FileAccess.Write, FileShare.Write))
         using (var writer = new StreamWriter(stream))
         {

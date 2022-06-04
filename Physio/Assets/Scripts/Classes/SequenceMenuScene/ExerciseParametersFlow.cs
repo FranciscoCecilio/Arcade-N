@@ -30,7 +30,7 @@ public class ExerciseParametersFlow : MonoBehaviour
     public Button[] ArmButtons;
 
     // we want to EDIT in two cases: 
-    // 1. After creating a new Sequence in SequenceMenuScript.confirmNameSequence()
+    // 1. After creating a new Sequence in SequenceMenuScript.CreateNewSequence()
     // 2. Clicking button EDIT on the overview_screen
     public void StartEditing(){
         if(isEditing){

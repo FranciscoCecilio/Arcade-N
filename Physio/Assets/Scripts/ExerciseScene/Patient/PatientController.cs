@@ -29,8 +29,17 @@ public class PatientController : MonoBehaviour {
     private int restTimeInt;
     private int startCounterInt;
      
+    private void OnEnable() {
+        init();
+    }
+
+    private void OnDisable() {
+        Debug.Log("Disabled PatientController");
+        CancelInvoke();
+    }
+
     void init() {
-        totalReps.text = "" + State.exercise.getNReps();
+        //totalReps.text = "" + State.exercise.getNReps();
         //restPatient.SetActive(false);
         restTherapist.SetActive(false);
 
@@ -123,14 +132,7 @@ public class PatientController : MonoBehaviour {
         restTimeTherapist.text = minutes.ToString("00") + ":" + seconds.ToString("00");
     }
 
-    private void Start() {
-        init();
-    }
-
-    private void OnDisable() {
-        Debug.Log("Disabled PatientController");
-        CancelInvoke();
-    }
+    
 
     // Update is called once per frame
     void Update() {
@@ -144,8 +146,9 @@ public class PatientController : MonoBehaviour {
         //VERIFICAR ISTO TODO
         //completed.SetActive(State.exercise.isCompleted());
 
+        // Isto já é feito no Viz controller
         //correctRepetitionsPatient.text = "" + State.exercise.getCorrectReps();
-        correctRepetitionsTherapist.text = "" + State.exercise.getCorrectReps();
-        triesTherapist.text = "" + State.exercise.getTries();
+        //correctRepetitionsTherapist.text = "" + State.exercise.getCorrectReps();
+        //triesTherapist.text = "" + State.exercise.getTries();
     }
 }

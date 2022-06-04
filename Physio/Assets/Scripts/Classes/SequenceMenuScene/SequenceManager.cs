@@ -19,15 +19,15 @@ public static class SequenceManager
     // index gives the number of the exercise of the given sequence (if the sequence has 3 exercises and we are running the 1st exercise, index = 0)
     private static int index = 0;
 
-    // called by SequenceMenuScript.confirmNameSequence()
+    // called by SequenceMenuScript.CreateNewSequence()
     public static void newSequence(string name)
     {
         // creates a sequence 
         State.exercise = null;
         sequence = new global::Sequence(name);
         sequence.setTimestamp("Sequence" + DateTime.Now.ToString("yyyyMMddTHHmmss"));
-        // creates a file 
-        sequence.toFile();
+        // NOT ANYMORE: creates a file 
+        //sequence.toFile();
     }
 
     // run is called in the start of a session by the button
@@ -70,6 +70,7 @@ public static class SequenceManager
         else
         {
             // END of Session! - 
+            // TODO: Show congratulations, give the user the xp, show results in a panel, show narrative screen with the prize
             SceneManager.LoadScene("MainMenu");
         }
     }
@@ -86,10 +87,14 @@ public static class SequenceManager
         }
         else
         {
-            // this sequence is finished - go to next!
-            // TODO? here we should go back to the session screen for the rest duration!
+            // THIS SEQUENCE IS FINISHED
+            // Save Sequence
+            sequence.toFile();
+            // go to next!
             sequenceIndex ++;
             nextSequence();
+
+            // NOT ANYMORE: here we should go back to the session screen for the rest duration!
             //SceneManager.LoadScene("MainMenu");
         }
     }

@@ -8,24 +8,21 @@ public class SequenceMenuScript : MonoBehaviour
 {
     public GameObject nameSequenceBox; // dialogue
 
-    public Text newSequenceName; // text field 
-
     [SerializeField] SequenceListControl seqListCtrl; 
 
-    public void showNameSequenceBox()
-    {
-        nameSequenceBox.SetActive(true);
-    }
+    int just_a_number = 0; // we need a name for the sequence... lets assign the name to a number (it's arbitrary...)
 
     // Called on the new sequence dialogue
-    public void confirmNameSequence()
+    public void CreateNewSequence()
     {
         // Creates new sequence
-        SequenceManager.newSequence(newSequenceName.text);
+        SequenceManager.newSequence(just_a_number.ToString());
         // Generates the button (and starts editing)
         seqListCtrl.GenerateSequenceButton(SequenceManager.sequence);
         // closes dialogue
         nameSequenceBox.SetActive(false);
+        // theorically it should be equal to nr of sequences created (not if we delete one)
+        just_a_number ++;
     }
 
     // personalizar as sequencias vai ser feito a partir do SequenceListElement

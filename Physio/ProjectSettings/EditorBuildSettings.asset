@@ -24,13 +24,13 @@ EditorBuildSettings:
     path: Assets/Scenes/NarrativeMenu.unity
     guid: 248e84b86e2beab4b9bab9c43266a9dd
   - enabled: 1
-    path: Assets/Scenes/ExerciseSelection.unity
+    path: Assets/Scenes/Old  Scenes/ExerciseSelection.unity
     guid: 10a08efbba84e394ea7d250e2994fb00
   - enabled: 1
     path: Assets/Scenes/ArmSelection.unity
     guid: f552350b4f0bde04883704ccb4f9a879
   - enabled: 1
-    path: Assets/Scenes/ExerciseParametersSelection.unity
+    path: Assets/Scenes/Old  Scenes/ExerciseParametersSelection.unity
     guid: 819ccb01e0d610a4eae09a7cf4f3fe18
   - enabled: 1
     path: Assets/Scenes/ReportScreen.unity

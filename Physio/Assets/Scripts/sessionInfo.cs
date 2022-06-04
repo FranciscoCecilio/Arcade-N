@@ -13,7 +13,6 @@ public static class SessionInfo
     private static string _toView = "";
     private static string _timestampSession = "";
 
-    //TODO: APAGAR DEFAULTS
     private static string _username; // txt file name 
     private static string _name; // nome *bonito* dentro do .txt
     private static string _age;
@@ -21,6 +20,8 @@ public static class SessionInfo
 
     private static int _exerciseId = 1;
 
+    // DEFINITIONS
+    // Passar apra aqui o MusicIsOn, XP do User, 
     public static void setUsername(string username)
     {
         _username = username;

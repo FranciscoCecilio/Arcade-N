@@ -25,7 +25,7 @@ public static class SequenceManager
         // creates a sequence 
         State.exercise = null;
         sequence = new global::Sequence(name);
-        sequence.setTimestamp(DateTime.Now.ToString("yyyyMMddTHHmmss"));
+        sequence.setTimestamp("Sequence" + DateTime.Now.ToString("yyyyMMddTHHmmss"));
         // creates a file 
         sequence.toFile();
     }
@@ -69,7 +69,7 @@ public static class SequenceManager
         }
         else
         {
-            // END of Session!
+            // END of Session! - 
             SceneManager.LoadScene("MainMenu");
         }
     }
@@ -112,6 +112,14 @@ public static class SequenceManager
     public static void SetSeqIndex(int i){
         sequenceIndex = i;
     }
+    //-----------------------------------------------------------------------------------------------------------------------------------
+    // Settings during the session
+    public static bool isMusicOn = true;
+    public static bool isVoiceOn = true;
+    public static bool isNextPanelOn = false;
+    public static float chapterBarPercentage = 0;
+    public static int nextRest = 96;
+
 
     // This resets the State because we changed Project Settings> Editor > Enter Play Mode > (disable) Domain Reload
     // If Domain Reload was checked all static values would reset BUT sometimes we would have an infinite "Application.Reload" on entering play mode
@@ -122,6 +130,11 @@ public static class SequenceManager
         sequencesToRun = null;
         sequenceIndex = 0;
         index = 0;
+        isMusicOn = true;
+        isVoiceOn = true;
+        isNextPanelOn = false;
+        chapterBarPercentage = 0;
+        nextRest = 96;
         Debug.Log("SequenceManager reset.");
     }
 }

@@ -28,8 +28,8 @@ public static class SessionInfo
 
     public static void createSessionPath()
     {
-        _timestampSession = DateTime.Now.ToString("yyyyMMddTHHmmss");
-        System.IO.Directory.CreateDirectory(Application.dataPath + "/Users/" + _username + "/Sessions/" + _timestampSession);
+        _timestampSession = "Session" + DateTime.Now.ToString("yyyyMMddTHHmmss");
+        System.IO.Directory.CreateDirectory(Application.dataPath + "/Users/" + _username + "/" + _timestampSession);
     }
 
     public static string getSessionPath()

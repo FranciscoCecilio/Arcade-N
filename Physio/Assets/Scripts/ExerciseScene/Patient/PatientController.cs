@@ -6,23 +6,23 @@ using TMPro;
 
 // TODO Francisco - do we want to have patient stuff? ?
 public class PatientController : MonoBehaviour {
+    public GameObject completed;
+    [Header("Repetitions")]
     public Text correctRepetitionsPatient;
-    public Text setTimePatient;
-    public Text restTimePatient;
-    public TMP_Text startCounterPatient;
-
-    public Text sessionTimePatient;
-    public TMP_Text sessionTimeTherapist;
-
     public Text correctRepetitionsTherapist;
-    public Text setTimeTherapist;
-    public TMP_Text restTimeTherapist;
     public Text triesTherapist;
     public Text totalReps;
-
+    
+    [Header("Rest Time")]
+    public TMP_Text restTimeTherapist;
+    public Text setTimeTherapist;
+    public Text setTimePatient;
+    public Text restTimePatient;
     public GameObject restPatient;
     public GameObject restTherapist;
-    public GameObject completed;
+    public Text sessionTimePatient;
+    public TMP_Text sessionTimeTherapist;
+    public TMP_Text startCounterPatient;
 
     private int sessionTimeInt;
     private int setTimeInt;
@@ -31,7 +31,7 @@ public class PatientController : MonoBehaviour {
      
     void init() {
         totalReps.text = "" + State.exercise.getNReps();
-        restPatient.SetActive(false);
+        //restPatient.SetActive(false);
         restTherapist.SetActive(false);
 
         startCounterInt = 4;
@@ -80,7 +80,7 @@ public class PatientController : MonoBehaviour {
     }
 
     private void activateRest() {
-        restPatient.SetActive(true);
+        //restPatient.SetActive(true);
         restTherapist.SetActive(true);
         State.isTherapyOnGoing = false;
         State.restCount++;
@@ -119,13 +119,14 @@ public class PatientController : MonoBehaviour {
         restTimeInt--;
         int minutes = restTimeInt / 60;
         int seconds = restTimeInt % 60;
-        restTimePatient.text = minutes.ToString("00") + ":" + seconds.ToString("00");
+        //restTimePatient.text = minutes.ToString("00") + ":" + seconds.ToString("00");
         restTimeTherapist.text = minutes.ToString("00") + ":" + seconds.ToString("00");
     }
 
-    private void OnEnable() {
+    private void Start() {
         init();
     }
+
     private void OnDisable() {
         Debug.Log("Disabled PatientController");
         CancelInvoke();
@@ -141,9 +142,9 @@ public class PatientController : MonoBehaviour {
             CancelInvoke("sessionTimeInc");
         }
         //VERIFICAR ISTO TODO
-        completed.SetActive(State.exercise.isCompleted());
+        //completed.SetActive(State.exercise.isCompleted());
 
-        correctRepetitionsPatient.text = "" + State.exercise.getCorrectReps();
+        //correctRepetitionsPatient.text = "" + State.exercise.getCorrectReps();
         correctRepetitionsTherapist.text = "" + State.exercise.getCorrectReps();
         triesTherapist.text = "" + State.exercise.getTries();
     }

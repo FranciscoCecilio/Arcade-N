@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+// This script is not used anymore and probably won't work due to directory and file logic was changed
 public class ExerciseSelection : MonoBehaviour {
 
     private GameObject[] _buttons;

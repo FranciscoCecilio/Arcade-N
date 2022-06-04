@@ -7,44 +7,45 @@ using UnityEngine.UI;
 // Horizontal and Vertical exercise manager
 public class ExerciseManager : MonoBehaviour {
 
+    [Header("Cursors")]
     public GameObject cursor;
     public bool hasSecondaryCursor;
 
+    [Header("Time")]
     public Text avgTime;
     public Text lastrepTime;
 
-    private int lastrep = 0;
-
-    public string exerciseName;
-
+    [Header("Exercise")]
+    private GameObject exerciseBoxGroup;
     public GameObject leftExerciseBox;
     public GameObject rightExerciseBox;
-    private GameObject exerciseBoxGroup;
 
+    private GameObject targets;
     public GameObject leftTargets;
     public GameObject rightTargets;
-    private GameObject targets;
 
+    [Header("Other Objects")]
+    public GameObject exercisedFinishedMsg;
+    public GameObject pathSize;
+    public Toggle restartRepToggle;
+    public string exerciseName;
+
+    // AUDIO
     private AudioClip beep;
     private AudioSource audioSource;
 
+
+    // Booleans
     private bool reversePath;
-
     private bool isGroing;
-
     private bool hasRegisteredOutOfPath;
     private bool isBlinking;
-
     private bool showArrows = false;
+
     private GameObject[] _arrows;
-
     private int repCounter;
+    private int lastrep = 0;
 
-    public Toggle restartRepToggle;
-
-    public GameObject wellDoneMessage;
-
-    public GameObject pathSize;
 
     void init() {
         State.hasSecondaryCursor = hasSecondaryCursor;
@@ -172,12 +173,13 @@ public class ExerciseManager : MonoBehaviour {
 
                             lastrep = State.sessionTimeInt;
 
+                            // Finished the exercise > Play Animation > Play next exercise
                             if (State.exercise.getCorrectReps() >= State.exercise.getNReps()) { // done all the needed reps
                                 State.exercise.setTotalTime(State.sessionTimeInt);
                                 State.exercise.setCompleted(true);
                                 State.isTherapyOnGoing = false; //???
                                 State.resetState();
-                                StartCoroutine(showWellDoneMessage());
+                                StartCoroutine(showExerciseFinishedMessage());
                             }
                         }
 
@@ -271,15 +273,16 @@ public class ExerciseManager : MonoBehaviour {
         }
     }
 
-    private IEnumerator showWellDoneMessage()
+    private IEnumerator showExerciseFinishedMessage()
     {
         leftTargets.SetActive(false);
         leftExerciseBox.SetActive(false);
         rightTargets.SetActive(false);
         rightExerciseBox.SetActive(false);
-        wellDoneMessage.SetActive(true);
+        exercisedFinishedMsg.SetActive(true);
         yield return new WaitForSeconds(5);
-        wellDoneMessage.SetActive(false);
+        exercisedFinishedMsg.SetActive(false);
+        SequenceManager.nextExercise();
     }
 
     public void changePathSize()

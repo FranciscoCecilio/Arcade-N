@@ -5,12 +5,13 @@ using UnityEngine.EventSystems;
 
 public class ClickToOpen : MonoBehaviour, IPointerClickHandler
 {
-public GameObject[] objectsToOpen;
+    public GameObject[] objectsToOpen;
 
-   public void OnPointerClick(PointerEventData eventData)
+    public void OnPointerClick(PointerEventData eventData)
     {
         foreach(GameObject obj in objectsToOpen){
             obj.SetActive(!obj.activeSelf);
         }
     }
+    
 }

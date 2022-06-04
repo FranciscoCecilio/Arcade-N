@@ -65,6 +65,7 @@ public class Sequence
         return _timestamp;
     }
 
+    // It must receive a string in this format "SequenceyyyyMMddTHHmmss"
     public void setTimestamp(string timestamp)
     {
         _timestamp = timestamp;
@@ -113,24 +114,28 @@ public class Sequence
         return _exerciseList;
     }
    
-    // creates a new sequence file in the directory USER/username/SEQUENCES/"<timestamp>.txt"
+    // Before: creates a new directory with a sequence file in the directory USER/username/<SessionTS>/Sequences/"<SequenceTS>.txt"
+    // Now: creates a new directory with a sequence file in the directory Users/<username>/<SessionTS>/<SequenceTS>/"<SequenceTS>.txt"
+
     // Called on SequenceManager.newSequence(name) e nesse caso a sequencia nao tem exercicios...
     // Called after Editing/Creating a new Sequence. (but will no longer be)
+
     // TODO we must call this only after we finish the exercises of a Sequence! not when we create one.
     public void toFile()
     {
-        if (!Directory.Exists(Application.dataPath + "/Users/" + SessionInfo.getUsername() + "/Sequences/"))
-            Directory.CreateDirectory(Application.dataPath + "/Users/" + SessionInfo.getUsername() + "/Sequences/");
+        // Create directory <SequenceTS>
+        if (!Directory.Exists(Application.dataPath + "/Users/" + SessionInfo.getUsername() + "/" + SessionInfo.getSessionPath() + "/"  + _timestamp))
+            Directory.CreateDirectory(Application.dataPath + "/Users/" + SessionInfo.getUsername() + "/" + SessionInfo.getSessionPath() + "/" + _timestamp);
         
-        string filepath = Application.dataPath + "/Users/" + SessionInfo.getUsername() + "/Sequences/" + _timestamp + ".txt";
-
+        // Create file <SequenceTS>.txt
+        string filepath = Application.dataPath + "/Users/" + SessionInfo.getUsername()+ "/"  + SessionInfo.getSessionPath() + "/" + _timestamp + ".txt";
         if (System.IO.File.Exists(filepath)) 
             System.IO.File.Delete(filepath);
 
         using (var stream = new FileStream(filepath, FileMode.CreateNew, FileAccess.Write, FileShare.Write))
         using (var writer = new StreamWriter(stream))
         {
-            writer.WriteLine("timestamp=" + _timestamp);
+            writer.WriteLine("timestamp=" + _timestamp.Replace("Sequence", string.Empty) );
             writer.WriteLine("name=" + _name);  
             writer.WriteLine("series=" + _series);  
             writer.WriteLine("restDuration=" + _restDuration);  

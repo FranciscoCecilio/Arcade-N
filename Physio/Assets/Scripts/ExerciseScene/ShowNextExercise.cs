@@ -22,7 +22,7 @@ public class ShowNextExercise : MonoBehaviour
     void Start()
     {
         PopulatePanel();
-        info.SetActive(false);
+        info.SetActive(SequenceManager.isNextPanelOn);
     }
 
     public void PopulatePanel(){
@@ -68,5 +68,11 @@ public class ShowNextExercise : MonoBehaviour
                 break;
         }
         return armString;
+    }
+
+    void OnDisable()
+    {
+        Debug.Log("NextPanelOn: " + info.activeSelf );
+        SequenceManager.isNextPanelOn = info.activeSelf;
     }
 }

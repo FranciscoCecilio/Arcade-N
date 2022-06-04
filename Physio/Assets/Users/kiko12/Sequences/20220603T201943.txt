@@ -1,4 +1,0 @@
-timestamp=20220603T201943
-name=testSequence
-series=0
-restDuration=0

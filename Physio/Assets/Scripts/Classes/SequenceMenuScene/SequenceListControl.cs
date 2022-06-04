@@ -54,7 +54,7 @@ public class SequenceListControl : MonoBehaviour
         CloseDeleteDialogue();
 
         //Apaga o ficheiro da sequência - Já não é suposto porque o ficheiro não é criado quando o botão é criado, apenas quando se efetuam os exercícios.
-        /*string sequencePath = Application.dataPath + "/Users/" + SessionInfo.getUsername() + "/Sequences/" + selectedSequence.getTimestamp() + ".txt";
+        /*string sequencePath = Application.dataPath + "/Users/" + SessionInfo.getUsername() + SessionInfo.getSessionPath() + "/Sequences/" + selectedSequence.getTimestamp() + ".txt";
         if(!File.Exists(sequencePath)) Debug.Log("Error trying to find file to delete in: " + sequencePath);
         File.Delete(sequencePath);
         RefreshEditorProjectWindow();*/
@@ -76,21 +76,22 @@ public class SequenceListControl : MonoBehaviour
         exPanel.flowManager.CloseAllPanels();
     }
 
-    // TODO: nos queremos criar apenas um botao com 1 sequencia da ultima sessão? ou queremos todas series da ultima sessao?
-    // Gera sequencias baseadas na ultima sessão
-    // Gera botões baseados nessas sequencias
+    // TODO: Gerar botoes de sequencia iguais aos da sessão mais recente
+    // comparar Session folder names
+    // Buscar todos os folders de sequencias 
+    // Dentro de cada folder aproveitar o ficheiro de sequência se houver
     void Start()
     {
-        if (!System.IO.Directory.Exists(Application.dataPath + "/Users/" + SessionInfo.getUsername()+ "/Sequences/"))
+
+        /*if (!System.IO.Directory.Exists(Application.dataPath + "/Users/" + SessionInfo.getUsername() + SessionInfo.getSessionPath()+ "/Sequences/"))
         {
-            System.IO.Directory.CreateDirectory(Application.dataPath + "/Users/" + SessionInfo.getUsername() + "/Sequences/");
+            System.IO.Directory.CreateDirectory(Application.dataPath + "/Users/" + SessionInfo.getUsername() + SessionInfo.getSessionPath() + "/Sequences/");
         }
 
         DateTime mostRecentTimestamp = DateTime.ParseExact("19000324T162543", "yyyyMMddTHHmmss", null); // inicializamos com um DateTime antigo (de 1900)
         string mostRecentTSfilename = "";
         // encontramos o ficheiro com o timestamp mais recente 
-        //foreach (string file in System.IO.Directory.GetFiles(Application.dataPath + "/Users/" + SessionInfo.getUsername() + "/Sequences/")) //Ficheiros na pasta Sequences
-        foreach (string file in System.IO.Directory.GetFiles(Application.dataPath + "/Users/" + SessionInfo.getUsername() + "/Sequences/")) //Ficheiros na pasta Sequences
+        foreach (string file in System.IO.Directory.GetFiles(Application.dataPath + "/Users/" + SessionInfo.getUsername() + SessionInfo.getSessionPath() + "/Sequences/")) //Ficheiros na pasta Sequences
         {
             string[] filename = file.Split('.');
             if (filename.Length == 2 && filename[1] == "txt") //Verifica que e um ficheiro txt e nao meta
@@ -113,7 +114,7 @@ public class SequenceListControl : MonoBehaviour
         //Debug.Log("mostrecent TS: " + mostRecentTimeStampString);
 
         // criamos um botao de sequencia igual ao da ultima sessão
-        foreach (string file in System.IO.Directory.GetFiles(Application.dataPath + "/Users/" + SessionInfo.getUsername() + "/Sequences/")) //Ficheiros na pasta Sequences
+        foreach (string file in System.IO.Directory.GetFiles(Application.dataPath + "/Users/" + SessionInfo.getUsername() + SessionInfo.getSessionPath() + "/Sequences/")) //Ficheiros na pasta Sequences
         {
             string[] filename = file.Split('.');
             if (filename.Length == 2 && filename[1] == "txt" && filename[0].Equals(mostRecentTSfilename,StringComparison.Ordinal)) //Verifica que e um ficheiro txt e nao meta e se é o ficheiro da sessão mais recente
@@ -135,11 +136,12 @@ public class SequenceListControl : MonoBehaviour
                         exe=2=Left/Right=Exercise2Scene=right=10=60=60
 
                         */
+                        /*
                         string[] data = line.Split('=');
 
                         if (data[0] == "name") tempSequence.setName(data[1]);
 
-                        else if (data[0] == "timestamp") tempSequence.setTimestamp(data[1]);
+                        else if (data[0] == "timestamp") tempSequence.setTimestamp("Sequence" + data[1]);
 
                         else if (data[0] == "series") tempSequence.setSeries(Int32.Parse(data[1]));
 
@@ -167,7 +169,7 @@ public class SequenceListControl : MonoBehaviour
                 // generate the button on the list
                 GenerateSequenceButton(tempSequence);
             }
-        }
+        }*/
     }
 
     // Generates a button (that contains a list element) AND opens EDITING

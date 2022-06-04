@@ -1,4 +1,0 @@
-timestamp=20220601T202853
-name=
-series=0
-restDuration=0

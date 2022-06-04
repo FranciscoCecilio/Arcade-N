@@ -11,13 +11,14 @@ public class ScriptForTestingExerciseScreen : MonoBehaviour
         if(SessionInfo.toView().Equals("")){
             // Set View
             SessionInfo.setView("RunSequence");
+            SessionInfo.createSessionPath();
 
             // Add 1nd sequence
             // Creates new sequence
             SequenceManager.newSequence("testSequence1");
             Sequence testSequence1 = SequenceManager.sequence;
             // Add Exercise(int id, string name, string scenePath, int armCode, int nreps, int duration, int restTime)
-            testSequence1.addExercise(new Exercise(2, "nome", "Exercise2Scene", 1, 5, 40, 5));
+            testSequence1.addExercise(new Exercise(2, "nome", "Exercise2Scene", 1, 1, 40, 5));
             // Add sequence to seq to run
             SequenceManager.sequencesToRun = new List<Sequence>();
             SequenceManager.sequencesToRun.Add(testSequence1);

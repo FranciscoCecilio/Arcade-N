@@ -258,6 +258,7 @@ public class Exercise
         _outOfPath = 0;
     }
 
+    // we want to create a text file inside: Users/<user>/<SessionTS>/<SequenceTS>/
     public void logToFile()
     {
         _loggedToFile = true;
@@ -266,13 +267,19 @@ public class Exercise
         if (_leftArm) _arm = "left";
         else _arm = "right";
 
-        String filename = DateTime.Now.ToString("yyyyMMddTHHmmss");
-        String filepath = Application.dataPath + "/Users/" + SessionInfo.getUsername() + "/Sessions/" + SessionInfo.getSessionPath() + "/" + filename + ".txt";
-
+        //Users/<user>/<SessionTS>/<SequenceTS>/ExerciseTS.txt
+        String filename = "Exercise" + DateTime.Now.ToString("yyyyMMddTHHmmss");
+        if(!Directory.Exists(Application.dataPath + "/Users/" + SessionInfo.getUsername() + "/" + SessionInfo.getSessionPath() + "/" + SequenceManager.sequence.getTimestamp())){
+            Debug.Log("Tentou criar um ficheiro de Exercicio mas nao existe o folder Sessão>Sequencia");
+            return;
+        }
+        String filepath = Application.dataPath + "/Users/" + SessionInfo.getUsername() + "/" +
+         SessionInfo.getSessionPath() + "/" + SequenceManager.sequence.getTimestamp() + "/" + filename + ".txt";
+        Debug.Log(filepath);
         using (var stream = new FileStream(filepath, FileMode.CreateNew, FileAccess.Write, FileShare.Write))
         using (var writer = new StreamWriter(stream))
         {
-            writer.WriteLine("timestamp=" + filename);
+            writer.WriteLine("timestamp=" + filename.Replace("Exercise", string.Empty)); //"Level_01".Replace("Level_", string.Empty);
             writer.WriteLine("name=" + _name);
             writer.WriteLine("arm=" + _arm);
             writer.WriteLine("nrReps=" + _nreps);
@@ -297,9 +304,12 @@ public class Exercise
         }
 
         //Copy to "Last" folder TODO
-        if (!System.IO.Directory.Exists(Application.dataPath + "/Users/" + SessionInfo.getUsername() + "/Last/" /*+ _arm + "/"*/))
-            System.IO.Directory.CreateDirectory(Application.dataPath + "/Users/" + SessionInfo.getUsername() + "/Last/" /*+ _arm + "/"*/);
-        filepath = Application.dataPath + "/Users/" + SessionInfo.getUsername() + "/Last/" /*+ _arm + "/"*/ + _scenePath + ".txt";
+        // FC - não creio que valha a pena ter um LAST folder para exercicios
+
+        /*
+        if (!System.IO.Directory.Exists(Application.dataPath + "/Users/" + SessionInfo.getUsername() + "/Last/" ))
+            System.IO.Directory.CreateDirectory(Application.dataPath + "/Users/" + SessionInfo.getUsername() + "/Last/" );
+        filepath = Application.dataPath + "/Users/" + SessionInfo.getUsername() + "/Last/" + _scenePath + ".txt";
         if (System.IO.File.Exists(filepath)) System.IO.File.Delete(filepath);
         using (var stream = new FileStream(filepath, FileMode.CreateNew, FileAccess.Write, FileShare.Write))
         using (var writer = new StreamWriter(stream))
@@ -338,7 +348,7 @@ public class Exercise
             writer.Close();
             // FC should i close stream too?
             stream.Close();
-        }
+        }*/
     }
     
     

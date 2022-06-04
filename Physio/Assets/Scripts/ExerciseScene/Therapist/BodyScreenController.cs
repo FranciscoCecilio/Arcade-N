@@ -7,32 +7,48 @@ using TMPro;
 
 public class BodyScreenController : MonoBehaviour {
 
+    public Camera worldCamera;
+    public GameObject patientCanvas;
+    private bool hasWroteReport;
+    public float fadeSpeedTest;
+
+    [Header("Buttons")]
     public GameObject startButton;
     public GameObject startStuff;
 
     public GameObject pauseButton;
     public GameObject unPauseButton;
     public GameObject pauseMessage;
+
     public GameObject quitButton;
     public GameObject restartButton;
-
     public GameObject nextButton;
-    public GameObject patientCanvas;
 
+
+    [Header("Texts")]
     public TMP_Text leaned;
     public TMP_Text shoulderLift;
     public TMP_Text outOfPath;
     public TMP_Text exerciseName;
 
-    public Camera worldCamera;
-
-    public float fadeSpeedTest;
-    private bool hasWroteReport;
+  
 
     void Start()
     {
         startStuff.SetActive(true);
     }
+    
+    public void Update() {
+        leaned.text = "" + State.exercise.getSpineComp();
+        shoulderLift.text = "" + (State.exercise.getLeftShoulderComp() + State.exercise.getRightShoulderComp());
+        outOfPath.text = "" + State.exercise.getOutOfPath();
+        exerciseName.text = "--"+ State.exercise.getName()+"--";
+
+        if(State.exercise.isCompleted()) {
+            StopTherapy();
+        }
+    }
+    // Start button
     public void StartTherapy() {
         if (SceneManager.GetActiveScene().name == "Exercise1Scene" || SceneManager.GetActiveScene().name == "Exercise2Scene")
         {
@@ -46,7 +62,7 @@ public class BodyScreenController : MonoBehaviour {
         patientCanvas.SetActive(true);
     }
 
-
+    // Pause Button
     public void PauseTherapy() {
         unPauseButton.SetActive(true);
         pauseButton.SetActive(false);
@@ -65,6 +81,7 @@ public class BodyScreenController : MonoBehaviour {
         // TODO stop time?
     }
 
+    // UnPause Button
     public void UnPauseTherapy() {
         pauseButton.SetActive(true);
         unPauseButton.SetActive(false);
@@ -85,8 +102,8 @@ public class BodyScreenController : MonoBehaviour {
         // TODO resume time?
     }
 
+    // Finish Button
     public void StopTherapy() {
-        pauseButton.SetActive(false);
         State.exercise.setCompleted(true);
         State.isTherapyOnGoing = false;
         if (SessionInfo.toView() == "RunSequence") nextButton.SetActive(true);
@@ -132,17 +149,6 @@ public class BodyScreenController : MonoBehaviour {
         State.exercise.savePathPosition(worldCamera.WorldToScreenPoint(path.transform.position));
     }
 
-    public void Update() {
-        leaned.text = "" + State.exercise.getSpineComp();
-        shoulderLift.text = "" + (State.exercise.getLeftShoulderComp() + State.exercise.getRightShoulderComp());
-        outOfPath.text = "" + State.exercise.getOutOfPath();
-        exerciseName.text = "--"+ State.exercise.getName()+"--";
-
-        if(State.exercise.isCompleted()) {
-            StopTherapy();
-        }
-    }
-
     // fades object (start stuff)
     private IEnumerator FadeOutObject(GameObject objectToFade, float fadeSpeed){
         /*while(objectToFade.GetComponent<Renderer>().material.color.a > 0){
@@ -161,7 +167,6 @@ public class BodyScreenController : MonoBehaviour {
             objectToFade.transform.localScale = scale;
             yield return null;
         }
-        Debug.Log("Chegou aqui");
         objectToFade.transform.localScale = new Vector3(1,1,1);
         objectToFade.SetActive(false);
     }

@@ -19,6 +19,23 @@ public static class SequenceManager
     // index gives the number of the exercise of the given sequence (if the sequence has 3 exercises and we are running the 1st exercise, index = 0)
     private static int index = 0;
 
+    // Setters and Getters
+    public static void SetSeqIndex(int i){
+        sequenceIndex = i;
+    }
+
+    public static int GetSeqIndex(){
+        return sequenceIndex;
+    }
+
+    public static void SetExerciseIndex(int i){
+        index = i;
+    }
+
+    public static int GetExerciseIndex(){
+        return index;;
+    }
+
     // called by SequenceMenuScript.CreateNewSequence()
     public static void newSequence(string name)
     {
@@ -99,7 +116,7 @@ public static class SequenceManager
         }
     }
     
-    // this method returns the **1st Exercise from the next Sequence** and is usefull to show in the exercise scene
+    // this method returns the **1st Exercise from the next Sequence** and is usefull to show in the panel of exercise scene
     public static Exercise GetNextExercise(){
         int nextSIndex = sequenceIndex + 1;
 
@@ -114,9 +131,7 @@ public static class SequenceManager
         return null;
     }
 
-    public static void SetSeqIndex(int i){
-        sequenceIndex = i;
-    }
+    
     //-----------------------------------------------------------------------------------------------------------------------------------
     // Settings during the session
     public static bool isMusicOn = true;

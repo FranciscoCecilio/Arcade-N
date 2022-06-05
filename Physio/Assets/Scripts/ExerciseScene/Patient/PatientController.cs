@@ -97,7 +97,7 @@ public class PatientController : MonoBehaviour {
     }
 
     private void activateSet() {
-        restPatient.SetActive(false);
+        //restPatient.SetActive(false);
         restTherapist.SetActive(false);
         State.isTherapyOnGoing = true;
         initSetTimer();

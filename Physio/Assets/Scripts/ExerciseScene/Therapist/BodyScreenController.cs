@@ -35,7 +35,10 @@ public class BodyScreenController : MonoBehaviour {
 
     void Start()
     {
-        startStuff.SetActive(true);
+        // If we are setting up the 1st exercise of the sequence, then we want to Setup/Edit the trajectories
+        if(SequenceManager.GetExerciseIndex() == 0){
+            startStuff.SetActive(true);
+        }   
     }
     
     public void Update() {
@@ -62,44 +65,35 @@ public class BodyScreenController : MonoBehaviour {
         patientCanvas.SetActive(true);
     }
 
-    // Pause Button
+    // Pause Button - show Finish and Restart Buttons / Start Stuff / UnPause Button
+    // Also - stop therapy and timers
     public void PauseTherapy() {
-        unPauseButton.SetActive(true);
         pauseButton.SetActive(false);
-        // SHOW quit, restart, next buttons
+        unPauseButton.SetActive(true);
+        // SHOW finish and restart
         restartButton.SetActive(true);
         quitButton.SetActive(true);
-        nextButton.SetActive(true);
-        pauseMessage.SetActive(true);
-        // SHOW target edition
-        //startStuff.SetActive(true);
-        // SHOW information
-        //pauseStuff.SetActive(true); 
-
+        // Stop therapy
         State.isTherapyOnGoing = false;
-        //State.exercise.setCompleted(true);
-        // TODO stop time?
+        // SHOW Start Stuff (to edit path)
+        startStuff.SetActive(true);
+
+        //pauseMessage.SetActive(true);
     }
 
     // UnPause Button
     public void UnPauseTherapy() {
         pauseButton.SetActive(true);
         unPauseButton.SetActive(false);
-        // HIDE quit, restart, next buttons
+        // HIDE finish and restart
         restartButton.SetActive(false);
         quitButton.SetActive(false);
-        nextButton.SetActive(false);
-        pauseMessage.SetActive(false);
-        // HIDE target edition
-        //startStuff.SetActive(false);
-        // HIDE information
-        //pauseStuff.SetActive(false); 
-
-        //patientCanvas.SetActive(false); ?????
-        
+        // Start therapy
         State.isTherapyOnGoing = true;
-        //State.exercise.setCompleted(true);
-        // TODO resume time?
+        // HIDE Start Stuff (to edit path)
+        startStuff.SetActive(false);
+
+        //pauseMessage.SetActive(false);
     }
 
     // Finish Button
@@ -117,7 +111,7 @@ public class BodyScreenController : MonoBehaviour {
     public void Quit() {
         // store this as the previous scene
         LastScene._lastSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene("ExerciseSelection");
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void Restart()

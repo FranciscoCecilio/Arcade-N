@@ -249,18 +249,18 @@ public class VizController : MonoBehaviour
         if (SuccPer >= 70)
         {
             //SuccSlider.color = Color.Lerp(SImage.color, new Color32(0x4F, 0xFB, 0x7B, 0xFF), Mathf.PingPong(Time.time, 1));
-            SuccSlider.color = new Color(4, 212, 134);
+            SuccSlider.color = new Color32(0x04, 0xD4, 0x86, 0xFF);
         }
         else if (SuccPer >= 30 && SuccPer < 70)
         {
 
             //SuccSlider.color = Color.Lerp(SImage.color, new Color32(0xF3, 0xFF, 0x24, 0xFF), Mathf.PingPong(Time.time, 1));
-            SuccSlider.color = new Color(212,206,4);
+            SuccSlider.color = new Color32(0xD4,0xCE,0x04, 0xFF);
         }
         else
         {
             //SuccSlider.color = Color.Lerp(SImage.color, new Color32(0xF9, 0x53, 0x53, 0xFF), Mathf.PingPong(Time.time, 1));
-            SuccSlider.color = new Color(212,120,4);
+            SuccSlider.color = new Color32(0xD4,0x78,0x04, 0xFF);
         }
 
 

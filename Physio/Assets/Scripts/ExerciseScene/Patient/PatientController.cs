@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-// TODO Francisco - do we want to have patient stuff? ?
+// TODO Francisco - do we want to have patient stuff? ? - I passed to TimeVis script
 public class PatientController : MonoBehaviour {
     public GameObject completed;
     [Header("Repetitions")]

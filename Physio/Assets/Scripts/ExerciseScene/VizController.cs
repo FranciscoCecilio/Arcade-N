@@ -77,16 +77,16 @@ public class VizController : MonoBehaviour
         {
             tempDist = State.space;
         }
-        BG();
-        Comp();
-        TimeViz();
+        //BG();
+        //Comp();
+        //TimeViz();
         RepetitionsVis();
-        Leaned();
-        Path();
+        //Leaned();
+        //Path();
         //RestTime();
-        Shoulder();
-        Angles();
-        RepTime();
+        //Shoulder();
+        //Angles();
+        //RepTime();
 
         if (State.exercise.isCompleted())
         {
@@ -97,6 +97,67 @@ public class VizController : MonoBehaviour
         
         //sessionTime.transform.localScale = therapistProjection.transform.localScale;
     }
+
+    void RepetitionsVis()
+    {
+        if (State.exercise.getTries() != 0)
+        {
+            // FC - Doesnt make sense for grid
+            if (SceneManager.GetActiveScene().name == "Exercise3Scene") {
+                SuccPer = (State.exercise.getCorrectReps() * 100) / State.exercise.getNReps();
+            }
+            else{
+                SuccPer = (State.exercise.getCorrectReps() * 100) / State.exercise.getNReps();
+            }
+        }
+
+        //Slider
+        correctReps.text = State.exercise.getCorrectReps().ToString();
+        SuccSlider.fillAmount = SuccPer * 0.01f;
+
+        if (SuccPer >= 70)
+        {
+            //SuccSlider.color = Color.Lerp(SImage.color, new Color32(0x4F, 0xFB, 0x7B, 0xFF), Mathf.PingPong(Time.time, 1));
+            SuccSlider.color = new Color32(0x04, 0xD4, 0x86, 0xFF);
+        }
+        else if (SuccPer >= 30 && SuccPer < 70)
+        {
+
+            //SuccSlider.color = Color.Lerp(SImage.color, new Color32(0xF3, 0xFF, 0x24, 0xFF), Mathf.PingPong(Time.time, 1));
+            SuccSlider.color = new Color32(0xD4,0xCE,0x04, 0xFF);
+        }
+        else
+        {
+            //SuccSlider.color = Color.Lerp(SImage.color, new Color32(0xF9, 0x53, 0x53, 0xFF), Mathf.PingPong(Time.time, 1));
+            SuccSlider.color = new Color32(0xD4,0x78,0x04, 0xFF);
+        }
+
+
+        switch (tempDist  /*TherapistPatientTracker.GetInterDist()*/)
+        {
+            case "Personal":
+                success.transform.localScale = Vector3.Slerp(success.transform.localScale, new Vector3(0.6f, 0.6f, 0.6f), Time.deltaTime * 2);
+                //success.transform.localPosition = Vector3.Slerp(success.transform.localPosition, new Vector3(261.0f, 218.0f, 0.0f), Time.deltaTime * 2);
+                
+                break; 
+            case "Social": 
+                success.transform.localScale = Vector3.Slerp(success.transform.localScale, new Vector3(0.6f, 0.6f, 0.6f), Time.deltaTime * 2);
+                //success.transform.localScale = Vector3.Slerp(success.transform.localScale, new Vector3(.9f, .9f, .9f), Time.deltaTime * 2);
+                //success.transform.localPosition = Vector3.Slerp(success.transform.localPosition, new Vector3(265f, 190.0f, 0.0f), Time.deltaTime * 2);
+               
+                break;
+            case "Intimate":
+
+                break;
+            case "Public":
+
+                break;
+            case "ERROR":
+
+                break;
+        }
+    }
+
 
     public void switchView()
     {
@@ -170,8 +231,6 @@ public class VizController : MonoBehaviour
             case "Social":
                 repTime.transform.localScale = Vector3.Slerp(repTime.transform.localScale, new Vector3(0f, 0f, 0f), Time.deltaTime * 2);
                 last.transform.localScale = Vector3.Slerp(last.transform.localScale, new Vector3(0f, 0f, 0f), Time.deltaTime * 2);
-
-
                 break;
             case "Intimate":
                 last.transform.localScale = Vector3.Slerp(last.transform.localScale, new Vector3(1f, 1f, 1f), Time.deltaTime * 2);
@@ -215,66 +274,6 @@ public class VizController : MonoBehaviour
                 break;
             case "Intimate":
                 AmpData.transform.localScale = Vector3.Slerp(AmpData.transform.localScale, new Vector3(1.0f, 1.0f, 1.0f), Time.deltaTime * 2);
-
-                break;
-            case "Public":
-
-                break;
-            case "ERROR":
-
-                break;
-        }
-    }
-
-    void RepetitionsVis()
-    {
-        if (State.exercise.getTries() != 0)
-        {
-            // FC - Doesnt make sense for grid
-            if (SceneManager.GetActiveScene().name == "Exercise3Scene") {
-                SuccPer = (State.exercise.getCorrectReps() * 100) / State.exercise.getNReps();
-            }
-            else{
-                SuccPer = (State.exercise.getCorrectReps() * 100) / State.exercise.getNReps();
-            }
-        }
-
-        //Slider
-        correctReps.text = State.exercise.getCorrectReps().ToString();
-        SuccSlider.fillAmount = SuccPer * 0.01f;
-
-        if (SuccPer >= 70)
-        {
-            //SuccSlider.color = Color.Lerp(SImage.color, new Color32(0x4F, 0xFB, 0x7B, 0xFF), Mathf.PingPong(Time.time, 1));
-            SuccSlider.color = new Color32(0x04, 0xD4, 0x86, 0xFF);
-        }
-        else if (SuccPer >= 30 && SuccPer < 70)
-        {
-
-            //SuccSlider.color = Color.Lerp(SImage.color, new Color32(0xF3, 0xFF, 0x24, 0xFF), Mathf.PingPong(Time.time, 1));
-            SuccSlider.color = new Color32(0xD4,0xCE,0x04, 0xFF);
-        }
-        else
-        {
-            //SuccSlider.color = Color.Lerp(SImage.color, new Color32(0xF9, 0x53, 0x53, 0xFF), Mathf.PingPong(Time.time, 1));
-            SuccSlider.color = new Color32(0xD4,0x78,0x04, 0xFF);
-        }
-
-
-        switch (tempDist  /*TherapistPatientTracker.GetInterDist()*/)
-        {
-            case "Personal":
-                success.transform.localScale = Vector3.Slerp(success.transform.localScale, new Vector3(0.6f, 0.6f, 0.6f), Time.deltaTime * 2);
-                //success.transform.localPosition = Vector3.Slerp(success.transform.localPosition, new Vector3(261.0f, 218.0f, 0.0f), Time.deltaTime * 2);
-                
-                break; 
-            case "Social": 
-                success.transform.localScale = Vector3.Slerp(success.transform.localScale, new Vector3(0.6f, 0.6f, 0.6f), Time.deltaTime * 2);
-                //success.transform.localScale = Vector3.Slerp(success.transform.localScale, new Vector3(.9f, .9f, .9f), Time.deltaTime * 2);
-                //success.transform.localPosition = Vector3.Slerp(success.transform.localPosition, new Vector3(265f, 190.0f, 0.0f), Time.deltaTime * 2);
-               
-                break;
-            case "Intimate":
 
                 break;
             case "Public":

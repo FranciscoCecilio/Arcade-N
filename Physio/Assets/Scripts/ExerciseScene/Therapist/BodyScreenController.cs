@@ -8,7 +8,7 @@ using TMPro;
 public class BodyScreenController : MonoBehaviour {
 
     public Camera worldCamera;
-    public GameObject patientCanvas;
+    public TimeVis timeVis;
     private bool hasWroteReport;
     public float fadeSpeedTest;
 
@@ -76,8 +76,8 @@ public class BodyScreenController : MonoBehaviour {
         }
         */
         isEditingOnStart = false;
-        // Turn on Patient Canvas - Will disappear in the future
-        patientCanvas.SetActive(true);
+        // Initialize timeVis
+        timeVis.init();
         // Deactivate button
         startButton.SetActive(false);
         // Fade out the exercise Edition

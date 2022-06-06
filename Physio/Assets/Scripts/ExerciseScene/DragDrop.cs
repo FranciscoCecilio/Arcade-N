@@ -16,15 +16,19 @@ public class DragDrop : MonoBehaviour {
     private bool locked = false;
 
     [Header("Debugging")]
+    [HideInInspector]
     public float y_value;
     public float otherTarget_y;
     public float barInitialHeight;
+    public float barInitialZScale;
+    public bool dragDetected = false;
 
     // Use this for initialization
     void Start () {
 		y_value = transform.position.y;
         otherTarget_y = otherTarget.position.y;
         barInitialHeight = Mathf.Abs(otherTarget_y - y_value);
+        barInitialZScale = exerciseBox.transform.localScale.z;
 	}
 	
 	// Update is called once per frame
@@ -59,18 +63,21 @@ public class DragDrop : MonoBehaviour {
             otherTarget.position = new Vector3(otherTarget.position.x, otherTarget_y - (curPosition.y - y_value), otherTarget.position.z); 
 
             // rescale the green bar
-            float zScale = Mathf.Abs(otherTarget.position.y - transform.position.y) / barInitialHeight ;
+            float zScale =  Mathf.Abs(otherTarget.position.y - transform.position.y) * barInitialZScale / barInitialHeight ;
             exerciseBox.transform.localScale = new Vector3(exerciseBox.transform.localScale.x, exerciseBox.transform.localScale.y, zScale);
 
-            /*Vector3 curScreenPointAO = new Vector3(screenPointAO.x, Input.mousePosition.y, screenPointAO.z);
-            Vector3 curPositionAO = Camera.main.ScreenToWorldPoint(curScreenPointAO) + offsetAO;*/
-            //associatedObj.GetComponent<Transform>().position = curPositionAO;
-            
+            // We want to check if any changes were made
+            dragDetected = true;
         }
     }
 
     public void lockDragDrop(bool intention)
     {
         locked = intention;
+        // We want to check if any changes were made
+        if(locked == true && dragDetected == true){
+            dragDetected = false;
+            ExercisePreferencesSetup.preferencesChanged = true;
+        }
     }
 }

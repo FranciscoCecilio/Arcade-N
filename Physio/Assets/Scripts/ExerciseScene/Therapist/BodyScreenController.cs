@@ -14,7 +14,7 @@ public class BodyScreenController : MonoBehaviour {
 
     [Header("Buttons")]
     public GameObject startButton;
-    public GameObject startStuff;
+    public GameObject exerciseEdition;
 
     public GameObject pauseButton;
     public GameObject unPauseButton;
@@ -31,14 +31,19 @@ public class BodyScreenController : MonoBehaviour {
     public TMP_Text outOfPath;
     public TMP_Text exerciseName;
 
-  
+    bool isEditingOnStart;
 
     void Start()
     {
-        // If we are setting up the 1st exercise of the sequence, then we want to Setup/Edit the trajectories
-        if(SequenceManager.GetExerciseIndex() == 0){
-            startStuff.SetActive(true);
+        isEditingOnStart = true;
+        // If we are running the 1st exercise of a sequence, then we want to Setup/Edit
+        if(SequenceManager.GetExerciseIndex() == 1){
+            exerciseEdition.SetActive(true);
         }   
+        else{
+            // simulate the normal Start (except we didn't EDIT or pressed Start button)
+            StartTherapy();
+        }
     }
     
     public void Update() {
@@ -50,19 +55,33 @@ public class BodyScreenController : MonoBehaviour {
         if(State.exercise.isCompleted()) {
             StopTherapy();
         }
+
+        if(Input.GetKeyDown(KeyCode.Escape)){
+            PauseTherapy();
+        }
     }
-    // Start button
+
+    // Called by Start button
     public void StartTherapy() {
+        
+        // Currently, in our programme we don't need to save the path or targets positions on start
+        // We only need these values to Update the perferences folder (at the end of th exercise) 
+        /*
         if (SceneManager.GetActiveScene().name == "Exercise1Scene" || SceneManager.GetActiveScene().name == "Exercise2Scene")
         {
+            
             saveTargetPositions();
             savePathPosition();
+            
         }
-        startButton.SetActive(false);
-        // Fade out
-        StartCoroutine(FadeOutObject(startStuff, fadeSpeedTest));
-        pauseButton.SetActive(true);
+        */
+        isEditingOnStart = false;
+        // Turn on Patient Canvas - Will disappear in the future
         patientCanvas.SetActive(true);
+        // Deactivate button
+        startButton.SetActive(false);
+        // Fade out the exercise Edition
+        StartCoroutine(FadeOutObject(exerciseEdition, fadeSpeedTest));
     }
 
     // Pause Button - show Finish and Restart Buttons / Start Stuff / UnPause Button
@@ -76,7 +95,7 @@ public class BodyScreenController : MonoBehaviour {
         // Stop therapy
         State.isTherapyOnGoing = false;
         // SHOW Start Stuff (to edit path)
-        startStuff.SetActive(true);
+        exerciseEdition.SetActive(true);
 
         //pauseMessage.SetActive(true);
     }
@@ -88,10 +107,14 @@ public class BodyScreenController : MonoBehaviour {
         // HIDE finish and restart
         restartButton.SetActive(false);
         quitButton.SetActive(false);
-        // Start therapy
-        State.isTherapyOnGoing = true;
-        // HIDE Start Stuff (to edit path)
-        startStuff.SetActive(false);
+        // here we prevent jumping to the exercise during the edition at the start
+        if(!isEditingOnStart){
+            // Resume therapy
+            State.isTherapyOnGoing = true;
+            // HIDE Start Stuff (to edit path)
+            exerciseEdition.SetActive(false);
+        }
+        
 
         //pauseMessage.SetActive(false);
     }
@@ -124,23 +147,6 @@ public class BodyScreenController : MonoBehaviour {
     public void Next()
     {
         SequenceManager.nextExercise();
-    }
-
-    public void saveTargetPositions()
-    {
-        GameObject[] targets = GameObject.FindGameObjectsWithTag("TargetCollider");
-        Vector3[] targetPositions = new Vector3[targets.Length];
-        for (int i = 0; i < targets.Length; i++)
-        {
-            targetPositions[i] = worldCamera.WorldToScreenPoint(targets[i].transform.position);
-        }
-        State.exercise.saveTargetPositions(targetPositions);
-    }
-
-    public void savePathPosition()
-    {
-        GameObject path = GameObject.FindGameObjectWithTag("ExerciseCollider");
-        State.exercise.savePathPosition(worldCamera.WorldToScreenPoint(path.transform.position));
     }
 
     // fades object (start stuff)

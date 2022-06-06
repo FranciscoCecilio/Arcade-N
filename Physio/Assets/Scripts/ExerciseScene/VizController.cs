@@ -59,8 +59,6 @@ public class VizController : MonoBehaviour
     public Text rightS;
     public Text Spine;
 
-
-
     // Use this for initialization
     void Start()
     {
@@ -70,7 +68,6 @@ public class VizController : MonoBehaviour
         settingsButton.interactable = true;
         heatMapText.text = "";
         //fillPreviousSuccBar();
-        positionElements();
     }
 
     // Update is called once per frame
@@ -416,10 +413,10 @@ public class VizController : MonoBehaviour
         }
     }
 
-
+    // This method would paint the circles of the human image, with the shoulder and spine circles
+    // TODO: Now, we only to show this image in result screens
     void Shoulder()
     {
-
         leftS.text = "" + (State.exercise.getLeftShoulderComp());
         rightS.text = "" + (State.exercise.getRightShoulderComp());
         
@@ -456,10 +453,6 @@ public class VizController : MonoBehaviour
             LsholderImange.color = Color.Lerp(LsholderImange.color, new Color32(0x80, 0x80, 0x80, 0x80), Mathf.PingPong(Time.time, 1));
         }
         
-
-
-
-
         switch (tempDist  /*TherapistPatientTracker.GetInterDist()*/)
         {
             case "Personal":
@@ -479,13 +472,6 @@ public class VizController : MonoBehaviour
                 shoulderLift.transform.localScale = Vector3.Slerp(shoulderLift.transform.localScale, new Vector3(1.0f, 1.0f, 1.0f), Time.deltaTime * 2);
                 break;
         }
-
-
-    }
-
-    public void togglePanel()
-    {
-        panel.SetActive(!panel.activeSelf);
     }
 
     // FC - Does nothing because I commented
@@ -523,74 +509,9 @@ public class VizController : MonoBehaviour
         //previousSuccSlider.color = new Color32(0x80, 0x80, 0x80, 0xFF);
     }
 
-    private void positionElements()
+    public void togglePanel()
     {
-        string scene = SceneManager.GetActiveScene().name;
-        if ( scene == "Exercise1Scene" || scene == "Exercise2Scene")
-        {
-            string _arm = "";
-            if (State.exercise.isLeftArm()) _arm = "left";
-            else _arm = "right";
-
-            string filepath = Application.dataPath + "/Users/" + SessionInfo.getUsername() + "/Last/" + scene + ".txt";
-
-            if (System.IO.File.Exists(filepath))
-            {
-                string line = "";
-                StreamReader reader = new StreamReader(filepath);
-                {
-                    line = reader.ReadLine();
-                    while (line != null)
-                    {
-                        string[] data = line.Split('=');
-                        if (data[0] == "arm")
-                        {
-                            if (!data[1].Equals(_arm)) break;
-                        }
-                        if (data[0] == "pathPosition")
-                        {
-                            Vector3 pathPosition = StringToVector3(data[1]);
-                            GameObject path = GameObject.FindGameObjectWithTag("ExerciseCollider");
-                            path.transform.position = worldCamera.ScreenToWorldPoint(pathPosition);
-                        }
-                        else if (data[0] == "target0")
-                        {
-                            Vector3 target1Position = StringToVector3(data[1]);
-                            GameObject[] targets = GameObject.FindGameObjectsWithTag("TargetCollider");
-                            targets[0].transform.position = worldCamera.ScreenToWorldPoint(target1Position);
-                        }
-                        else if (data[0] == "target1")
-                        {
-                            Vector3 target2Position = StringToVector3(data[1]);
-                            GameObject[] targets = GameObject.FindGameObjectsWithTag("TargetCollider");
-                            targets[1].transform.position = worldCamera.ScreenToWorldPoint(target2Position);
-                        }
-                        line = reader.ReadLine();
-                    }
-                }
-            }
-        }
-    }
-
-    public static Vector3 StringToVector3(string sVector)
-    {
-        // Remove the parentheses
-        if (sVector.StartsWith("(") && sVector.EndsWith(")"))
-        {
-            sVector = sVector.Substring(1, sVector.Length - 2);
-        }
-        sVector = sVector.Replace(" ", string.Empty);
-
-        // split the items
-        string[] sArray = sVector.Split(',');
-
-        // store as a Vector3
-        Vector3 result = new Vector3(
-            float.Parse(sArray[0].Replace(".", ",")),
-            float.Parse(sArray[1].Replace(".", ",")),
-            float.Parse(sArray[2].Replace(".", ",")));
-
-        return result;
+        panel.SetActive(!panel.activeSelf);
     }
 
 }

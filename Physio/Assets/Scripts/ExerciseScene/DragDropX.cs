@@ -14,11 +14,24 @@ public class DragDropX : MonoBehaviour {
     private Vector3 offsetAO;
 
     private bool locked = false;
+    [Header("Debugging")]
+    public bool dragDetected = false;
+
+    void Start()
+    {
+        foreach(Transform target in associatedObj.transform){
+            if(target.gameObject.tag.Equals("TargetCollider")){
+                target.localPosition = new Vector3(0,target.localPosition.y,0);
+            }
+        }
+        associatedObj.transform.position = transform.position;
+    }
 
     void OnMouseDown()
     {
         if (!locked)
         {
+            
             screenPoint = Camera.main.WorldToScreenPoint(transform.position);
             //screenPointAO = Camera.main.WorldToScreenPoint(associatedObj.GetComponent<Transform>().position);
 
@@ -41,12 +54,21 @@ public class DragDropX : MonoBehaviour {
             //Vector3 curPositionAO = Camera.main.ScreenToWorldPoint(curScreenPointAO) + offsetAO;
             
             // also translate the Target balls
-            associatedObj.GetComponent<Transform>().position = curPosition;
+            associatedObj.transform.position = curPosition;
+            
+            // We want to check if any changes were made
+            dragDetected = true;
         }
     }
 
     public void lockDragDrop(bool intention)
     {
         locked = intention;
+
+        // We want to check if any changes were made
+        if(locked == true && dragDetected == true){
+            dragDetected = false;
+            ExercisePreferencesSetup.preferencesChanged = true;
+        }
     }
 }

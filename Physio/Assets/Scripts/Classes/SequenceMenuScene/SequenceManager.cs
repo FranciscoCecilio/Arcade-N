@@ -33,7 +33,7 @@ public static class SequenceManager
     }
 
     public static int GetExerciseIndex(){
-        return index;;
+        return index;
     }
 
     // called by SequenceMenuScript.CreateNewSequence()

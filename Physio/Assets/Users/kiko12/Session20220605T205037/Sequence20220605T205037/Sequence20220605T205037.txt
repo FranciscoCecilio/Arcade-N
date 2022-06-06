@@ -1,0 +1,5 @@
+timestamp=20220605T205037
+name=testSequence1
+series=0
+restDuration=0
+exe=2=nome1=Exercise2Scene=right=3=40=5

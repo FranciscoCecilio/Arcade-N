@@ -41,11 +41,12 @@ public class Exercise
     int _spineComp = 0;
     int _outOfPath = 0;
 
+    // Horizontal and Vertical Exercises - important values to fetch from previous session (inside User/ExerciseParemeters)
     private Vector3[] _targetPositions;
-    Vector3 _pathPosition;
+    Vector3 _pathPosition; //transform.localposition
+    Vector3 _pathSize; //transform.localscale
 
     //Constructor
-
     public Exercise()
     {
         /*int id = 1;
@@ -203,6 +204,18 @@ public class Exercise
         return _outOfPath;
     }
 
+    public Vector3[] GetTargetPositions(){
+        return _targetPositions;
+    }
+
+    public Vector3 GetPathPosition(){
+        return _pathPosition;
+    }
+
+    public Vector3 GetPathSize(){
+        return _pathSize;
+    }
+
     //function
     public void incTries()
     {
@@ -244,6 +257,11 @@ public class Exercise
         _pathPosition = position;
     }
 
+    public void savePathSize(Vector3 size)
+    {
+        _pathSize = size;
+    }
+
     public void restart()
     {
         _loggedToFile = false;
@@ -270,7 +288,7 @@ public class Exercise
         // Create SessionTS folder
         if(!Directory.Exists(Application.dataPath + "/Users/" + SessionInfo.getUsername() + "/" + SessionInfo.getSessionPath() + "/" + SequenceManager.sequence.getTimestamp())){
             Directory.CreateDirectory(Application.dataPath + "/Users/" + SessionInfo.getUsername() + "/" + SessionInfo.getSessionPath() + "/" + SequenceManager.sequence.getTimestamp());
-            Debug.Log("Tentou criar um ficheiro de Exercicio mas nao existe o folder Sessão>Sequencia -> então criou.");
+            //Debug.Log("Tentou criar um ficheiro de Exercicio mas nao existe o folder Sessão>Sequencia -> então criou.");
         }
         // Create the Exercise File
         String filename = "Exercise" + DateTime.Now.ToString("yyyyMMddTHHmmss");

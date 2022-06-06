@@ -16,11 +16,12 @@ public class ExerciseManager : MonoBehaviour {
     public Text lastrepTime;
 
     [Header("Exercise")]
-    private GameObject exerciseBoxGroup;
+    public ExercisePreferencesSetup preferencesScript;
+    GameObject exerciseBoxGroup;
     public GameObject leftExerciseBox;
     public GameObject rightExerciseBox;
 
-    private GameObject targets;
+    GameObject targets;
     public GameObject leftTargets;
     public GameObject rightTargets;
 
@@ -55,10 +56,13 @@ public class ExerciseManager : MonoBehaviour {
     }
 
     void init() {
+        // setup the variables
         State.hasSecondaryCursor = hasSecondaryCursor;
         State.currentTarget = 0;
         State.hasStartedExercise = false;
         reversePath = false;
+
+        //set the correct targets
         setArea();
 
         beep = (AudioClip)Resources.Load("Sounds/beep");
@@ -72,7 +76,7 @@ public class ExerciseManager : MonoBehaviour {
         renderer.material.color = color;
     }
 
-    //Choose the arm area (path)
+    // Disable the incorrect targets
     private void setArea() { 
         if (State.exercise.isLeftArm()) {
             activate(true);
@@ -93,7 +97,7 @@ public class ExerciseManager : MonoBehaviour {
         }
         showArrows = false;
     }
-
+    
     private void activate(bool left) {
         leftTargets.SetActive(left);
         leftExerciseBox.SetActive(left);
@@ -170,11 +174,17 @@ public class ExerciseManager : MonoBehaviour {
 
                             // Finished the exercise > Play Animation > Play next exercise
                             if (State.exercise.getCorrectReps() >= State.exercise.getNReps()) { // done all the needed reps
+                                // Save the Exercise Preferences
+                                preferencesScript.SaveEverything();
+                                // Reset State stuff
                                 State.exercise.setTotalTime(State.sessionTimeInt);
                                 State.exercise.setCompleted(true);
+                                Debug.Log("Reseted state after completed ex.");
                                 State.isTherapyOnGoing = false; //???
                                 State.resetState();
+                                // Show congratulations
                                 StartCoroutine(showExerciseFinishedMessage());
+                                
                             }
                         }
 
@@ -270,22 +280,28 @@ public class ExerciseManager : MonoBehaviour {
 
     private IEnumerator showExerciseFinishedMessage()
     {
+        // Hide Exercise
         leftTargets.SetActive(false);
         leftExerciseBox.SetActive(false);
         rightTargets.SetActive(false);
         rightExerciseBox.SetActive(false);
+        // Show the message for 5 secs
         exercisedFinishedMsg.SetActive(true);
         yield return new WaitForSeconds(5);
         exercisedFinishedMsg.SetActive(false);
+
+        // Save the Exercise Preferences
+        preferencesScript.SavePreferencesToFile();
+        // Play next Exercise
         SequenceManager.nextExercise();
     }
 
-    public void changePathSize()
+    public void changePathSize(Slider slider)
     {
         Debug.Log("entrou no changepath");
         foreach (Transform child in exerciseBoxGroup.transform)
         {
-            child.localScale = new Vector3(pathSize.GetComponent<Slider>().value, child.localScale.y, child.localScale.z);
+            child.localScale = new Vector3(slider.GetComponent<Slider>().value, child.localScale.y, child.localScale.z);
         }
     }
 }

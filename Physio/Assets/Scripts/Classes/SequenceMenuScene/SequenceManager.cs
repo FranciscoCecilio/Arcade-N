@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-// This class should go through the list and play all sequences.
+// This class is responsible for playing the correct exercises
+// If we have to play 3 sequences, we will play all the Exercises of Sequence 1, then 2, and then 3.
 public static class SequenceManager
 {
     // current sequence
@@ -176,10 +177,11 @@ public static class SequenceManager
 
     
     //-----------------------------------------------------------------------------------------------------------------------------------
-    // Settings during the session
+    // Settings during the session (maybe passar para sessionInfo e dar upload no text do user)
     public static bool isMusicOn = true;
     public static bool isVoiceOn = true;
     public static bool isNextPanelOn = false;
+    public static bool isTherapistInfoOn = false;
     public static float chapterBarPercentage = 0;
     public static int nextRest = 96;
 
@@ -196,6 +198,7 @@ public static class SequenceManager
         isMusicOn = true;
         isVoiceOn = true;
         isNextPanelOn = false;
+        isTherapistInfoOn = false;
         chapterBarPercentage = 0;
         nextRest = 96;
         Debug.Log("SequenceManager reset.");

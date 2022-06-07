@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 
+// This class should be renamed to ButtonController since all it does is handle buttons
 public class BodyScreenController : MonoBehaviour {
 
     public Camera worldCamera;
@@ -20,22 +21,29 @@ public class BodyScreenController : MonoBehaviour {
     public GameObject unPauseButton;
     public GameObject pauseMessage;
 
+    SoundManager soundManager; // if the user clicks on the music buttons, we tell SoundManager
+    public GameObject musicOnButton;
+    public GameObject musicOffButton;
+
     public GameObject quitButton;
     public GameObject restartButton;
     public GameObject nextButton;
-
-
-    [Header("Texts")]
-    public TMP_Text leaned;
-    public TMP_Text shoulderLift;
-    public TMP_Text outOfPath;
-    public TMP_Text exerciseName;
 
     bool isEditingOnStart;
 
     void Start()
     {
         isEditingOnStart = true;
+        // Enable the correct music button according the settings (TODO: Do the same for the voice assistant)
+        if(SequenceManager.isMusicOn){
+            musicOnButton.SetActive(true);
+            musicOffButton.SetActive(false);
+        }
+        else{
+            musicOnButton.SetActive(false);
+            musicOffButton.SetActive(true); 
+        }
+
         // If we are running the 1st exercise of a sequence, then we want to Setup/Edit
         if(SequenceManager.GetExerciseIndex() == 1){
             exerciseEdition.SetActive(true);
@@ -47,11 +55,6 @@ public class BodyScreenController : MonoBehaviour {
     }
     
     public void Update() {
-        leaned.text = "" + State.exercise.getSpineComp();
-        shoulderLift.text = "" + (State.exercise.getLeftShoulderComp() + State.exercise.getRightShoulderComp());
-        outOfPath.text = "" + State.exercise.getOutOfPath();
-        exerciseName.text = "--"+ State.exercise.getName()+"--";
-
         if(State.exercise.isCompleted()) {
             StopTherapy();
         }
@@ -63,20 +66,8 @@ public class BodyScreenController : MonoBehaviour {
 
     // Called by Start button
     public void StartTherapy() {
-        
-        // Currently, in our programme we don't need to save the path or targets positions on start
-        // We only need these values to Update the perferences folder (at the end of th exercise) 
-        /*
-        if (SceneManager.GetActiveScene().name == "Exercise1Scene" || SceneManager.GetActiveScene().name == "Exercise2Scene")
-        {
-            
-            saveTargetPositions();
-            savePathPosition();
-            
-        }
-        */
         isEditingOnStart = false;
-        // Initialize timeVis
+        // init timeVis
         timeVis.init();
         // Deactivate button
         startButton.SetActive(false);
@@ -114,8 +105,6 @@ public class BodyScreenController : MonoBehaviour {
             // HIDE Start Stuff (to edit path)
             exerciseEdition.SetActive(false);
         }
-        
-
         //pauseMessage.SetActive(false);
     }
 
@@ -131,6 +120,26 @@ public class BodyScreenController : MonoBehaviour {
         }
     }
 
+    public void TurnMusicOn(){
+        if(soundManager == null){
+            soundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>();
+        }
+        soundManager.PlayMusicAgain();
+        SequenceManager.isMusicOn = true;
+        musicOnButton.SetActive(true);
+        musicOffButton.SetActive(false);
+    }
+
+    public void TurnMusicOff(){
+        if(soundManager == null){
+            soundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>();
+        }
+        soundManager.MuteMusic();
+        SequenceManager.isMusicOn = false;
+        musicOnButton.SetActive(false);
+        musicOffButton.SetActive(true);
+    }
+
     public void Quit() {
         // store this as the previous scene
         LastScene._lastSceneIndex = SceneManager.GetActiveScene().buildIndex;
@@ -144,12 +153,14 @@ public class BodyScreenController : MonoBehaviour {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+    // TODO: Add a dialogue before actually jumping. 
+    // TODO: Also, we should save the Exercise beforestarting another one.
     public void Next()
     {
         SequenceManager.nextExercise();
     }
 
-    // fades object (start stuff)
+    // fades object (exercise edition stuff)
     private IEnumerator FadeOutObject(GameObject objectToFade, float fadeSpeed){
         /*while(objectToFade.GetComponent<Renderer>().material.color.a > 0){
             Color objectColor = objectToFade.GetComponent<Renderer>().material.color;

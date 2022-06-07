@@ -3,16 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-// This is only used to turn on Next Exercise Panel
+// Used to turn on/off NextExercisePanel AND TherapistInfo
 public class ClickToOpen : MonoBehaviour, IPointerClickHandler
 {
-    public GameObject[] objectsToOpen;
+    public GameObject objectToOpen;
+    public bool isNextPanel;
+    public bool isTherapistInfo;
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        foreach(GameObject obj in objectsToOpen){
-            obj.SetActive(!obj.activeSelf);
-            SequenceManager.isNextPanelOn = obj.activeSelf;
+        objectToOpen.SetActive(!objectToOpen.activeSelf);
+
+        if(isNextPanel){
+            SequenceManager.isNextPanelOn = objectToOpen.activeSelf;
+        }
+        else if(isTherapistInfo){
+            SequenceManager.isNextPanelOn = objectToOpen.activeSelf;
         }
     }
     

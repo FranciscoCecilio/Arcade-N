@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-     public Sound[] sounds;
+    public Sound[] sounds;
+    AudioSource[] allSources;
 
-     public Sound GetSound(string name){
+    public Sound GetSound(string name){
         Sound s =  Array.Find(sounds, sound => sound.name == name);
         return s;
     }
@@ -24,6 +25,7 @@ public class SoundManager : MonoBehaviour
         // Initializae all sounds
         foreach(Sound s in sounds){
             s.source = gameObject.AddComponent<AudioSource>();
+            //allSources.Add
             s.source.clip = s.clip;
             s.source.pitch = s.pitch;
             s.source.volume = s.volume;
@@ -33,7 +35,10 @@ public class SoundManager : MonoBehaviour
     }
 
     public void Start(){
-        Play("Sunny Sunday");
+        // We only want to play music if the user wants it
+        if(SequenceManager.isMusicOn){
+            //Play("Sunny Sunday");
+        }
     }
     
     public void Play(string name){
@@ -53,4 +58,22 @@ public class SoundManager : MonoBehaviour
         }
         s.source.PlayOneShot(s.clip);
     }
+
+    // called by the Music button
+    public void MuteMusic(){
+        AudioSource[] audios = FindObjectsOfType<AudioSource>();
+        foreach(AudioSource a in audios){
+            //if(a.isPlaying)
+                //audioData.Pause();
+        }
+    }
+
+    // called by the Music button
+    public void PlayMusicAgain(){
+        AudioSource[] audios = FindObjectsOfType<AudioSource>();
+        foreach(AudioSource a in audios){
+                //audioData.UnPause();
+        }
+    }
+
 }

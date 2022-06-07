@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+// This script needs to stop using Update to manage the animations. It should instead use Invoke and coroutines. because animations only play on start
 public class VizController : MonoBehaviour
 {
     public Camera worldCamera;
@@ -25,7 +26,7 @@ public class VizController : MonoBehaviour
     public GameObject last;
 
     [Header("Repetitions Visualization")]
-    public GameObject success;
+    public GameObject repetitionsVis;
     //public Text succ; // maybe delete   
     private int SuccPer; // helpful for radial bar
     public Image SuccSlider;
@@ -62,8 +63,13 @@ public class VizController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        // reset repetitions texts
         correctReps.text = "";
         totalReps.text = "" + State.exercise.getNReps();
+        // scale down repVis, so we enlarge it after to create an animation
+        repetitionsVis.transform.localScale = new Vector3 (0.1f,0.1f,0.1f);
+
+        //FC - i dont use any of these
         heatButton.interactable = false;
         settingsButton.interactable = true;
         heatMapText.text = "";
@@ -136,14 +142,14 @@ public class VizController : MonoBehaviour
         switch (tempDist  /*TherapistPatientTracker.GetInterDist()*/)
         {
             case "Personal":
-                success.transform.localScale = Vector3.Slerp(success.transform.localScale, new Vector3(0.6f, 0.6f, 0.6f), Time.deltaTime * 2);
-                //success.transform.localPosition = Vector3.Slerp(success.transform.localPosition, new Vector3(261.0f, 218.0f, 0.0f), Time.deltaTime * 2);
+                repetitionsVis.transform.localScale = Vector3.Slerp(repetitionsVis.transform.localScale, new Vector3(0.5f, 0.5f, 0.5f), Time.deltaTime * 2);
+                //repetitionsVis.transform.localPosition = Vector3.Slerp(repetitionsVis.transform.localPosition, new Vector3(261.0f, 218.0f, 0.0f), Time.deltaTime * 2);
                 
                 break; 
             case "Social": 
-                success.transform.localScale = Vector3.Slerp(success.transform.localScale, new Vector3(0.6f, 0.6f, 0.6f), Time.deltaTime * 2);
-                //success.transform.localScale = Vector3.Slerp(success.transform.localScale, new Vector3(.9f, .9f, .9f), Time.deltaTime * 2);
-                //success.transform.localPosition = Vector3.Slerp(success.transform.localPosition, new Vector3(265f, 190.0f, 0.0f), Time.deltaTime * 2);
+                repetitionsVis.transform.localScale = Vector3.Slerp(repetitionsVis.transform.localScale, new Vector3(0.5f, 0.5f, 0.5f), Time.deltaTime * 2);
+                //repetitionsVis.transform.localScale = Vector3.Slerp(repetitionsVis.transform.localScale, new Vector3(.9f, .9f, .9f), Time.deltaTime * 2);
+                //repetitionsVis.transform.localPosition = Vector3.Slerp(repetitionsVis.transform.localPosition, new Vector3(265f, 190.0f, 0.0f), Time.deltaTime * 2);
                
                 break;
             case "Intimate":

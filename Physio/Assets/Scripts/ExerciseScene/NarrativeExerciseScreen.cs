@@ -33,7 +33,7 @@ public class NarrativeExerciseScreen : MonoBehaviour
         // update the slider (value: 0 to 1)
         progressBar.value = SequenceManager.GetSessionProgressionPerc();
         // update the number
-        handleText.text = ((int) SequenceManager.GetSessionProgressionPerc() * 100).ToString() + "%";
+        handleText.text = ((int)(SequenceManager.GetSessionProgressionPerc() * 100) ).ToString() + "%";
     }
 
     // this is called in the ExerciseManager whenever a repetition is completed 
@@ -43,7 +43,7 @@ public class NarrativeExerciseScreen : MonoBehaviour
         // updates bar
         progressBar.value = SequenceManager.GetSessionProgressionPerc();
         // updates number
-        handleText.text = ((int) SequenceManager.GetSessionProgressionPerc() * 100).ToString() + "%";
+        handleText.text = ((int)(SequenceManager.GetSessionProgressionPerc() * 100) ).ToString() + "%";
         // progressively clears the blurry of the next chapter image
         CalculateBlurSize();
     }

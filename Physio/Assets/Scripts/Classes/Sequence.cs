@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
+// Just a reminder: a Sequence has a list of Exercises (each exercise is exactly the same). 
+// When a Sequence is played, we are playing the same Exercise <_nSeries> times.
 public class Sequence
 {
     private int _id; // never used?
@@ -96,6 +98,7 @@ public class Sequence
     {
         totalRepetitions += exercise.getNReps(); // everytime we add an exercise we change the value of totalRepetitions
         _exerciseList.Add(exercise);
+        _series = _exerciseList.Count;
     }
 
     public int getTotalRepetitions(){

@@ -1,0 +1,16 @@
+timestamp=20220607T181509
+name=nome2
+arm=right
+nrReps=1
+duration=40
+restTime=2
+tries=2
+correctReps=1
+outOfPath=1
+avgTime=00:06 m
+totalTime=00:06 m
+regShouldComp=False
+regSpineComp=False
+leftShoulderComp=0
+rightShoulderComp=0
+spineComp=0

@@ -17,6 +17,7 @@ public static class SessionInfo
     private static string _name; // nome *bonito* dentro do .txt
     private static string _age;
     private static string _gender;
+    private static int _XP = 0; // TODO or level
 
     private static int _exerciseId = 1;
 
@@ -74,6 +75,11 @@ public static class SessionInfo
         return _gender;
     }
 
+    public static int getXP()
+    {
+        return _XP;
+    }
+
     public static string toView()
     {
         return _toView;
@@ -91,6 +97,7 @@ public static class SessionInfo
                 if (data[0] == "Name") _name = data[1];
                 else if (data[0] == "Age") _age = data[1];
                 else if (data[0] == "Gender") _gender = data[1];
+                else if (data[0] == "XP") _XP = int.Parse(data[1]);
                 line = reader.ReadLine();
             }
         }
@@ -192,6 +199,7 @@ public static class SessionInfo
         _age= "";
         _gender= "";
         _exerciseId = 1;
+        _XP = 0;
         Debug.Log("sessionInfo reset.");
     }
 }

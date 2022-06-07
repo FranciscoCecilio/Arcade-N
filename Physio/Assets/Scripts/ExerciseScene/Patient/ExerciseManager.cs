@@ -26,6 +26,7 @@ public class ExerciseManager : MonoBehaviour {
     public GameObject rightTargets;
 
     [Header("Other Objects")]
+    public NarrativeExerciseScreen narrativeScript;
     public GameObject exercisedFinishedMsg;
     public GameObject pathSize;
     public Toggle restartRepToggle;
@@ -157,6 +158,9 @@ public class ExerciseManager : MonoBehaviour {
                             State.currentTarget = 0;
                             State.exercise.incTries();
                             State.exercise.incCorrectReps();
+                            // updates the session progression 
+                            narrativeScript.IncNarrativePerc();
+                            
                             reversePath = false;
 
                             int minutes = (State.sessionTimeInt / State.exercise.getCorrectReps()) / 60;

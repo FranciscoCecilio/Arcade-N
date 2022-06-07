@@ -12,6 +12,7 @@ public class Sequence
     private int _series; // _series is equal to the Lenght of _exerciseList
     // New variable - Francisco Cecílio
     private int _restDuration; // rest time between series (or exercises from the list)
+    private int totalRepetitions = 0; // this variable is usefull to calculate the Percentage_per_Repetition during the Exercise Screen
 
     private List<Exercise> _exerciseList = new List<Exercise>();
 
@@ -93,7 +94,12 @@ public class Sequence
 
     public void addExercise(Exercise exercise)
     {
+        totalRepetitions += exercise.getNReps(); // everytime we add an exercise we change the value of totalRepetitions
         _exerciseList.Add(exercise);
+    }
+
+    public int getTotalRepetitions(){
+        return totalRepetitions;
     }
 
     public void clearExerciseList()

@@ -19,6 +19,11 @@ public static class SequenceManager
     // index gives the number of the exercise of the given sequence (if the sequence has 3 exercises and we are running the 1st exercise, index = 0)
     private static int index = 0;
 
+    // these are not actually percentages bc they go from 0 to 1.
+    private static float sessionProgressionPerc = 0; // current progress (0 to 1)
+    private static float percPerRepetition = 0; // each repetition has a percentage associated to it (0 to 1)
+
+
     // Setters and Getters
     public static void SetSeqIndex(int i){
         sequenceIndex = i;
@@ -34,6 +39,26 @@ public static class SequenceManager
 
     public static int GetExerciseIndex(){
         return index;
+    }
+
+    public static void SetSessionProgressionPerc(float i){
+        sessionProgressionPerc = i;
+    }
+
+    public static float GetSessionProgressionPerc(){
+        return sessionProgressionPerc;
+    }
+
+    public static void SetPercPerRepetition(float i){
+        percPerRepetition = i;
+    }
+
+    public static float GetPercPerRepetition(){
+        return percPerRepetition;
+    }
+    
+    public static void IncrementSessionProgression(){
+        sessionProgressionPerc += percPerRepetition;
     }
 
     // called by SequenceMenuScript.CreateNewSequence()
@@ -57,8 +82,9 @@ public static class SequenceManager
         sequencesToRun = new List<Sequence>();
 
         foreach (Transform eachChild in listContent) {
-            Debug.Log(eachChild);
+            
             Sequence seqToAdd = eachChild.GetComponent<SequenceListElement>().GetSequence();
+            
             if(seqToAdd == null){
                 Debug.Log("ERROR: tried to Add a Sequence from List Content but it is null.");
             }
@@ -66,13 +92,30 @@ public static class SequenceManager
                 sequencesToRun.Add(seqToAdd);
             }
         }
-        // TODO : Calculate the XP per Sequence
+        // Reset the sessionProgressionPercentage
+        sessionProgressionPerc = 0;
+
+        //Calculate the PercPerRepetition
+        CalculatePercPerRepetition();
 
         // Start running the 1st Sequence
         if(sequencesToRun.Count > 0){
             sequenceIndex = 0;
             nextSequence();
         }
+    }
+
+    // calculates the impact one repetition has on the percentageBar during the exercise
+    public static void CalculatePercPerRepetition(){
+        int totalRepetitions = 0;
+        // we iterate over every sequence and check the total number of repetitions
+        for(int i = 0; i < sequencesToRun.Count; i++){
+            totalRepetitions += sequencesToRun[i].getTotalRepetitions();
+        }
+        // set the variable percePerRepetition
+        percPerRepetition = (100 / totalRepetitions) * 0.01f;
+        Debug.Log("totalReps: " + totalRepetitions);
+        Debug.Log("percPerRep: " + percPerRepetition);
     }
 
     public static void nextSequence()

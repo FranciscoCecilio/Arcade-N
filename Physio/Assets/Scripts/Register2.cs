@@ -84,6 +84,7 @@ public class Register2 : MonoBehaviour
         writer.WriteLine("Age=" + _age);
         writer.WriteLine("Gender=" + _gender);
         if(_nrSaude != "") writer.WriteLine("Nr_Utente=" + _nrSaude);
+        writer.WriteLine("XP=" + 0);
 
         writer.Close();
 

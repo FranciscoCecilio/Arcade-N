@@ -34,6 +34,8 @@ public class ScriptForTestingExerciseScreen : MonoBehaviour
             SequenceManager.sequencesToRun.Add(testSequence2);
 
             // Run sequences
+            SequenceManager.SetSessionProgressionPerc(0);
+            SequenceManager.CalculatePercPerRepetition();
             SequenceManager.SetSeqIndex(0);
             SequenceManager.nextSequence();
 

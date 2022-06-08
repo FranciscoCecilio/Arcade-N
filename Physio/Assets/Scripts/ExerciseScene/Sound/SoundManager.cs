@@ -1,7 +1,9 @@
 ﻿using UnityEngine.Audio;
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
+// Used in Main Menu, Narrative Menu, all Exercises,
 public class SoundManager : MonoBehaviour
 {
     public Sound[] sounds;
@@ -19,7 +21,10 @@ public class SoundManager : MonoBehaviour
             Destroy(this.gameObject);
         }
         else{
-            DontDestroyOnLoad(gameObject);
+            string scene = SceneManager.GetActiveScene().name;
+            if ( scene == "Exercise1Scene" || scene == "Exercise2Scene" || scene == "Exercise0Scene"){
+                DontDestroyOnLoad(gameObject);
+            }
         }
 
         // Initializae all sounds

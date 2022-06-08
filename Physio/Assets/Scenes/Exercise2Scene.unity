@@ -33953,6 +33953,13 @@ MonoBehaviour:
     loop: 1
     source: {fileID: 0}
     web_url_source: https://www.youtube.com/watch?v=qZK0HC8KRTY
+  - name: beep
+    clip: {fileID: 8300000, guid: 2576467c0e116ef4982914ef71aa60f7, type: 3}
+    volume: 0.05
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+    web_url_source: https://www.youtube.com/watch?v=qZK0HC8KRTY
 --- !u!4 &1715409729
 Transform:
   m_ObjectHideFlags: 0
@@ -38302,13 +38309,11 @@ MonoBehaviour:
   pauseButton: {fileID: 2035208411}
   unPauseButton: {fileID: 312349998}
   pauseMessage: {fileID: 0}
+  musicOnButton: {fileID: 0}
+  musicOffButton: {fileID: 0}
   quitButton: {fileID: 1437423264}
   restartButton: {fileID: 1871212422}
   nextButton: {fileID: 1843444074}
-  leaned: {fileID: 2055652638}
-  shoulderLift: {fileID: 729848312}
-  outOfPath: {fileID: 1710659875}
-  exerciseName: {fileID: 1394528176}
 --- !u!114 &1872076105
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38331,7 +38336,7 @@ MonoBehaviour:
   restTime: {fileID: 1353597662}
   repTime: {fileID: 1345433938}
   last: {fileID: 1872915784}
-  success: {fileID: 1797490455}
+  repetitionsVis: {fileID: 1797490455}
   SuccSlider: {fileID: 1158178164}
   correctReps: {fileID: 1401276640}
   totalReps: {fileID: 1669601533}

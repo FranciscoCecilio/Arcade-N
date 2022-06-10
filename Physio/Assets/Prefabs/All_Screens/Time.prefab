@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3262416164739192774}
   - component: {fileID: 3262416164739192779}
   - component: {fileID: 3262416164739192772}
-  - component: {fileID: 3262416164739192773}
+  - component: {fileID: 4831264958017450191}
   m_Layer: 5
   m_Name: Time
   m_TagString: Untagged
@@ -32,7 +32,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -137,7 +137,7 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &3262416164739192773
+--- !u!114 &4831264958017450191
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -146,8 +146,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3262416164739192775}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b4eca503c7abe046b4e32dbb3f7a912, type: 3}
+  m_Script: {fileID: 11500000, guid: 6af59d9c5e2bcdd47a7e18815af4ec53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  username: {fileID: 0}
-  alreadyTakenError: {fileID: 0}
+  time: {fileID: 3262416164739192772}

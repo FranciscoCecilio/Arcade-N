@@ -5,8 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-// Old script 
-public class ReportScreenScript : MonoBehaviour
+public class ResultsScreen : MonoBehaviour
 {
     public Text username;
     public Text age;
@@ -78,6 +77,7 @@ public class ReportScreenScript : MonoBehaviour
         PopulateInfo(index);
     }
 
+    // we want to populate the 
     void Start()
     {
         PopulateUserInfo();

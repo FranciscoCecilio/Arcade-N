@@ -9,7 +9,6 @@ public class MainMenuScript : MonoBehaviour {
 
     public TMP_Text helloText;
     public TMP_Text age_and_gender;
-    public TMP_Text time;
 
     public GameObject maleAvatar;
     public GameObject femaleAvatar;
@@ -78,7 +77,6 @@ public class MainMenuScript : MonoBehaviour {
 
     void Update()
     {
-        time.text = System.DateTime.UtcNow.ToLocalTime().ToString("HH:mm");
     }
 
     private void DeleteUser()

@@ -13,7 +13,7 @@ public class AutoPlayModeSceneSetup
             return;
  
         // Set Play Mode scene to first scene defined in build settings.
-        EditorSceneManager.playModeStartScene = AssetDatabase.LoadAssetAtPath<SceneAsset>("Assets/Scenes/NarrativeMenu.unity");
+        EditorSceneManager.playModeStartScene = AssetDatabase.LoadAssetAtPath<SceneAsset>("Assets/Scenes/Exercise2Scene .unity");
         //EditorSceneManager.playModeStartScene = AssetDatabase.LoadAssetAtPath<SceneAsset>("Assets/Scenes/Exercise2Scene.unity" EditorBuildSettings.scenes[0].path);
     }
 }

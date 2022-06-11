@@ -132,6 +132,7 @@ public static class SequenceManager
         {
             // END of Session! - 
             // TODO: Show congratulations, give the user the xp, show results in a panel, show narrative screen with the prize
+            // TODO : save session 
             SceneManager.LoadScene("MainMenu");
         }
     }

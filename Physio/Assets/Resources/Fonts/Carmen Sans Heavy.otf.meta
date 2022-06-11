@@ -1,0 +1,28 @@
+fileFormatVersion: 2
+guid: 6cd14929b67a34746a66028268c4e6c9
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Carmen Sans
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: e339c8212f5b6a84e82b2e58bebd72f2, type: 3}
+  - {fileID: 12800000, guid: 0b8df6e0dca6eea47a23ae6e1beaa14e, type: 3}
+  - {fileID: 12800000, guid: 8a00ae1a58cec634db90d715eccbf3af, type: 3}
+  - {fileID: 12800000, guid: b012e240adfed094ebb6eb0ec172ac11, type: 3}
+  - {fileID: 12800000, guid: e0a380913e539f84e861883d8de10037, type: 3}
+  - {fileID: 12800000, guid: fbd66912794392241afb6e246538690a, type: 3}
+  - {fileID: 12800000, guid: 48b49c0d4ceaa9c4ea111513e6b34230, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

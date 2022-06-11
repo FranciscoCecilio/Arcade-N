@@ -301,11 +301,11 @@ public class Exercise
             writer.WriteLine("name=" + _name);
             writer.WriteLine("arm=" + _arm);
             writer.WriteLine("nrReps=" + _nreps);
+            writer.WriteLine("correctReps=" + _correctReps);
+            writer.WriteLine("tries=" + _tries);
+            writer.WriteLine("outOfPath=" + _outOfPath);
             writer.WriteLine("duration=" + _duration);
             writer.WriteLine("restTime=" + _restTime);
-            writer.WriteLine("tries=" + _tries);
-            writer.WriteLine("correctReps=" + _correctReps);
-            writer.WriteLine("outOfPath=" + _outOfPath);
             writer.WriteLine("avgTime=" + _avgTime);
             writer.WriteLine("totalTime=" + _totalTime);
             //TODO

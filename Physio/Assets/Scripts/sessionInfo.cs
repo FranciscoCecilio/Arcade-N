@@ -105,6 +105,11 @@ public static class SessionInfo
         reader.Close();
     }
 
+    // TODO: save session file in the end of the session (last exercise from last sequence OR Quitting during the exercises)
+    public static void saveSession(){
+        
+    }
+
     public static void DeleteUser(TMP_Text afterDeleteText) 
     {
         string filePath = Application.dataPath + "/Users/" + _username + ".txt";

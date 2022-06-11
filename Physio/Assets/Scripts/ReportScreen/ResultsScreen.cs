@@ -4,6 +4,7 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class ResultsScreen : MonoBehaviour
 {
@@ -65,6 +66,15 @@ public class ResultsScreen : MonoBehaviour
     bool regShoulderComp = false;
     bool regSpineComp = false;
 
+    [Header("Main Info")]
+    public TMP_Text nr_sessions;
+    public TMP_Text performance;
+    public TMP_Text totalTherapyTime;
+
+    [Header("List Content")]
+    public Transform listContent;
+    
+
     public void SessionDropdown_IndexChanged(int index)
     {
         selectionSessionTimestamp = sessionTimestamps[index];
@@ -80,10 +90,25 @@ public class ResultsScreen : MonoBehaviour
     // we want to populate the 
     void Start()
     {
+        PopulateMainInfo();
+        PopulateSessionsList();
+
         PopulateUserInfo();
         PopulateSessionsDropdown();
         if (hasSessions) PopulateExercisesDropdown();
         if (hasExercises) PopulateInfo(0);
+    }
+
+    // Nr.Sessions ; Performance; total Time of therapy
+    void PopulateMainInfo(){
+        nr_sessions.text = "1";
+        performance.text  = "100%";
+        totalTherapyTime.text = "00:00:10";
+    }
+
+    // Fetch all sessions files and instantiate SessionResultsElement buttons on the listContent
+    void PopulateSessionsList(){
+
     }
 
     void PopulateUserInfo()

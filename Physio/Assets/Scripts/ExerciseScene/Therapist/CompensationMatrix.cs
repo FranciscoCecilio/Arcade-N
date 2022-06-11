@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+// This is responsible for incrementing compensatory moves during the exercise
 public class CompensationMatrix : MonoBehaviour {
 
     public BodyWrapper patient;

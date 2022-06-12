@@ -1,5 +1,0 @@
-timestamp=20220605T132107
-name=0
-series=1
-restDuration=0
-exe=2=Vertical=Exercise2Scene=right=1=60=60

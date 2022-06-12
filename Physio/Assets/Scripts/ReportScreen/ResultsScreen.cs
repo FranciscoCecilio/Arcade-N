@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 
+// used to instantiate all session buttons
 public class ResultsScreen : MonoBehaviour
 {
     public Text username;
@@ -71,21 +72,10 @@ public class ResultsScreen : MonoBehaviour
     public TMP_Text performance;
     public TMP_Text totalTherapyTime;
 
-    [Header("List Content")]
-    public Transform listContent;
-    
-
-    public void SessionDropdown_IndexChanged(int index)
-    {
-        selectionSessionTimestamp = sessionTimestamps[index];
-        PopulateExercisesDropdown();
-        if (hasExercises) PopulateInfo(0);
-    }
-
-    public void Dropdown_IndexChanged(int index)
-    {
-        PopulateInfo(index);
-    }
+    [Header("List Contents")]
+    public Transform allSessionListContent;
+    public GameObject sessionResultPrefab;
+    public Transform specificSessionListContent;
 
     // we want to populate the 
     void Start()
@@ -93,10 +83,10 @@ public class ResultsScreen : MonoBehaviour
         PopulateMainInfo();
         PopulateSessionsList();
 
-        PopulateUserInfo();
+        /*PopulateUserInfo();
         PopulateSessionsDropdown();
         if (hasSessions) PopulateExercisesDropdown();
-        if (hasExercises) PopulateInfo(0);
+        if (hasExercises) PopulateInfo(0);*/
     }
 
     // Nr.Sessions ; Performance; total Time of therapy
@@ -108,7 +98,42 @@ public class ResultsScreen : MonoBehaviour
 
     // Fetch all sessions files and instantiate SessionResultsElement buttons on the listContent
     void PopulateSessionsList(){
+        string folderpath = Application.dataPath + "/Users/" + SessionInfo.getUsername();
+        if (Directory.Exists(folderpath))
+        {
+            string[] folders = Directory.GetDirectories(folderpath);
+            // For each Session folder we instantiate a SessionResult Button
+            for (int i = folders.Length - 1; i > -1; i--) 
+            {
+                string folderName = folders[i].Substring(folderpath.Length+1);
+                if(folderName.Equals("ExercisePreferences")) continue;
+                GenerateSessionResultButton(/* session result info here*/folderName,folders[i]);
 
+                /*string[] files = Directory.GetFiles(folders[i]);
+                if (files.Length > 0)
+                {
+                    hasSessions = true;
+                    string[] filename = folders[i].Split('/');
+                    string timestamp = filename[filename.Length - 1];
+                    System.DateTime date = System.DateTime.ParseExact(timestamp, "yyyyMMddTHHmmss", System.Globalization.CultureInfo.InvariantCulture);
+                    timestamp = date.ToString("dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
+                    sessionTimestamps.Add(timestamp);
+                }*/
+            }
+            /*if (sessionTimestamps.Count != 0) selectionSessionTimestamp = sessionTimestamps[0];
+            sessionDropdown.AddOptions(sessionTimestamps);*/
+        }
+    }
+
+    // Generates a button
+    public void GenerateSessionResultButton(/*will receive session result info*/ string sessionTS, string folderPath){
+        //Instantiate prefab
+        GameObject button = Instantiate(sessionResultPrefab) as GameObject;
+        button.name = sessionTS;
+        button.SetActive(true);
+        // Sets the parameters 
+        button.GetComponent<SessionResult>().PopulateSessionListElement(folderPath, specificSessionListContent);
+        button.transform.SetParent(allSessionListContent, false);
     }
 
     void PopulateUserInfo()
@@ -241,6 +266,18 @@ public class ResultsScreen : MonoBehaviour
             person.GetComponent<Image>().color = tempColor;
         }
 
+    }
+
+    public void SessionDropdown_IndexChanged(int index)
+    {
+        selectionSessionTimestamp = sessionTimestamps[index];
+        PopulateExercisesDropdown();
+        if (hasExercises) PopulateInfo(0);
+    }
+
+    public void Dropdown_IndexChanged(int index)
+    {
+        PopulateInfo(index);
     }
 
     void PopulateSessionsDropdown()

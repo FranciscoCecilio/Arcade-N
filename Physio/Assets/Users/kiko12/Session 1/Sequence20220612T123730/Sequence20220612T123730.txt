@@ -1,0 +1,5 @@
+timestamp=20220612T123730
+name=0
+series=1
+restDuration=0
+exe=2=Vertical=Exercise2Scene=right=1=60=60

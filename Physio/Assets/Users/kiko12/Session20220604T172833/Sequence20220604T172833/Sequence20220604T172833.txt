@@ -1,5 +1,0 @@
-timestamp=20220604T172833
-name=testSequence2
-series=0
-restDuration=0
-exe=2=nome2=Exercise2Scene=left=2=40=2

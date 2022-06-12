@@ -6,21 +6,18 @@ using UnityEngine.UI;
 
 public class SequenceMenuScript : MonoBehaviour
 {
-    public GameObject nameSequenceBox; // dialogue
 
     [SerializeField] SequenceListControl seqListCtrl; 
 
     int just_a_number = 0; // we need a name for the sequence... lets assign the name to a number (it's arbitrary...)
 
-    // Called on the new sequence dialogue
+    // Called on button Create Sequence
     public void CreateNewSequence()
     {
         // Creates new sequence
         SequenceManager.newSequence(just_a_number.ToString());
         // Generates the button (and starts editing)
         seqListCtrl.GenerateSequenceButton(SequenceManager.sequence);
-        // closes dialogue
-        nameSequenceBox.SetActive(false);
         // theorically it should be equal to nr of sequences created (not if we delete one)
         just_a_number ++;
     }

@@ -25,7 +25,7 @@ public class Results_TweenManager : MonoBehaviour
         specificSession_init = SpecificSession.transform.localPosition;
         specificSession_Title_init = SpecificSession_Title.transform.localPosition;
 
-        OpenSpecificSession();
+        //OpenSpecificSession();
     }
 
     public void OpenSpecificSession(){

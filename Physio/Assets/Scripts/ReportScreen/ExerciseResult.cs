@@ -39,25 +39,31 @@ public class ExerciseResult : MonoBehaviour
     List<string> _totalTime = new List<string>();
     List<string> _averageTime = new List<string>();
 
-    [Header("Mistakes")]
-    public TMP_Text _regShouldCompText;
-    public TMP_Text _regSpineCompText;
+    [Header("Compensatory")]
     public TMP_Text _leftShoulderCompText;
     public TMP_Text _rightShoulderCompText;
     public TMP_Text _spineCompText;
 
-    List<string> _regShouldComps = new List<string>();
-    List<string> _regSpineComps = new List<string>();
+    public Image LsholderImage;
+    public Image RsholderImage;
+    public Image SpineImage;
+
     List<string> _leftShoulderComps = new List<string>();
     List<string> _rightShoulderComps = new List<string>();
     List<string> _spineComps = new List<string>();
+
+    [Header("Series button")]
+    public GameObject prevSerieButton; 
+    public GameObject nextSerieButton; 
+    public TMP_Text numberText;
 
     // Indexes
     int _selectedSerieIndex = 0;
     int _listIndex;
     
-    //size of exercises saved in this button - useless atm
-    int exercisesCount = 0;
+    // Variables
+    int exercisesCount = 0; 
+    bool initialPopulate = false;
 
     // sequence folder path
     public string folderPath;
@@ -65,7 +71,18 @@ public class ExerciseResult : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //PopulateExerciseListElement();
+    }
+
+    // called by the button
+    public void NextSeries(){
+        _selectedSerieIndex ++;
+        PopulateExerciseListElement();
+    }
+
+    // called by the button
+    public void PreviousSeries(){
+        _selectedSerieIndex --;
+        PopulateExerciseListElement();
     }
 
     // populate the button with the correct values
@@ -73,30 +90,47 @@ public class ExerciseResult : MonoBehaviour
     // TODO personalizar as strings
     public void  PopulateExerciseListElement(){
         // Main parameters
-        Debug.Log(_Arm);
-        Debug.Log(_correctReps[0]);
-        _NSeriesText.text = _NSeries;
-        _NRepsText.text = _NReps;
-        _ArmText.text = _Arm;
-        _DurationText.text = _Duration;
-        _RestimeText.text = _Restime;
+        if(!initialPopulate){
+            PickExImg();
+            _NSeries = exercisesCount.ToString();
+            _NSeriesText.text = "Séries: " + _NSeries;
+            _NRepsText.text = "Repetições: " + _NReps;
+            _ArmText.text = "Braço: " + _Arm;
+            _DurationText.text = "Duração: " + _Duration;
+            _RestimeText.text = "T. Descanso: " + _Restime;
+            initialPopulate = true;
+        }
         // Results
-        _correctRepsText.text = _correctReps[_selectedSerieIndex];
-        _outOfPathsText.text =  _outOfPaths[_selectedSerieIndex];
-        _totalTimeText.text = _totalTime[_selectedSerieIndex];
-        _averageTimeText.text = _averageTime[_selectedSerieIndex];
-        // mistakes
-        /*_regShouldCompText.text = _regShouldComps[_selectedSerieIndex];
-        _regSpineCompText.text = _leftShoulderComps[_selectedSerieIndex];
-        _leftShoulderCompText.text = _leftShoulderComps[_selectedSerieIndex];
-        _rightShoulderCompText.text = _rightShoulderComps[_selectedSerieIndex];
-        _spineCompText.text = _spineComps[_selectedSerieIndex];*/
+        _correctRepsText.text = "Reps. corretas: " + _correctReps[_selectedSerieIndex] + "/" + _NReps;
+        _outOfPathsText.text =  "Foras de trajeto: " + _outOfPaths[_selectedSerieIndex];
+        _totalTimeText.text = "Tempo total: " + _totalTime[_selectedSerieIndex];
+        _averageTimeText.text ="Tempo médio: " + _averageTime[_selectedSerieIndex];
+        // Compensatory
+        ShowShoulderComp();
+        ShowSpineComps();
+        Debug.Log(_selectedSerieIndex);
+        // Text
+        numberText.text = (_selectedSerieIndex + 1).ToString();
+        // Hide the previous/next_series buttons
+        if(_selectedSerieIndex <= 0){
+            prevSerieButton.SetActive(false);
+        }
+        else{
+            prevSerieButton.SetActive(true);
+        }
+        if(_selectedSerieIndex >= exercisesCount - 1){
+            nextSerieButton.SetActive(false);
+        }
+        else{
+            nextSerieButton.SetActive(true);
+        }
     }
 
     // this receives the parameters and results of one of the exercises from the sequence 
     public void AddExerciseInfo(Dictionary<string, string> newExercise){
         // planning variables (always the same)
         _Arm = newExercise["arm"];
+        _ExType = newExercise["name"];
         _NReps = newExercise["nrReps"];
         _Duration = newExercise["duration"];
         _Restime = newExercise["restTime"];
@@ -106,14 +140,97 @@ public class ExerciseResult : MonoBehaviour
         _correctReps.Add(newExercise["correctReps"]);
         _averageTime.Add(newExercise["avgTime"]);
         _totalTime.Add(newExercise["totalTime"]);
-        // mistakes variables
-        _regShouldComps.Add(newExercise["regShouldComp"]);
-        _leftShoulderComps.Add(newExercise["leftShoulderComp"]);
+        // Compensatory variables
         _leftShoulderComps.Add(newExercise["leftShoulderComp"]);
         _rightShoulderComps.Add(newExercise["rightShoulderComp"]);
         _spineComps.Add(newExercise["spineComp"]);
-        
         // lastly increase the control variable
         exercisesCount ++;
+    }
+
+    // Aux functions
+
+    void PickExImg(){
+        switch(_ExType){
+            case "Grelha":
+                _ExImg.SetImage(0);
+                break;
+            case "Horizontal":
+                _ExImg.SetImage(1);
+                break;
+            case "Vertical":
+                _ExImg.SetImage(2);
+                break;
+            default:
+                _ExImg.SetImage(-1);
+                break;
+        }
+    }
+
+    void ShowShoulderComp(){
+        _leftShoulderCompText.text = _leftShoulderComps[_selectedSerieIndex];
+        _rightShoulderCompText.text = _rightShoulderComps[_selectedSerieIndex];
+
+        int LShoulderComps = Int32.Parse(_leftShoulderComps[_selectedSerieIndex]);
+        int RShoulderComps = Int32.Parse(_rightShoulderComps[_selectedSerieIndex]);
+        
+        if (LShoulderComps > 0 || RShoulderComps > 0)
+        {
+            if (LShoulderComps > 10)
+            {
+                LsholderImage.color =  new Color32(0xF9, 0x53, 0x53, 0xFF);
+            }
+            else if (LShoulderComps <= 10 && LShoulderComps > 5)
+            {
+                LsholderImage.color = new Color32(0xF3, 0xFF, 0x24, 0xFF);
+            }
+            else
+            {
+                LsholderImage.color = new Color32(0x4F, 0xFB, 0x7B, 0xFF);
+            }
+
+            if (RShoulderComps > 10)
+            {
+                RsholderImage.color = new Color32(0xF9, 0x53, 0x53, 0xFF);
+            }
+            else if (RShoulderComps <= 10 && RShoulderComps > 5)
+            {
+                RsholderImage.color = new Color32(0xF3, 0xFF, 0x24, 0xFF);
+            }
+            else
+            {
+                RsholderImage.color = new Color32(0x4F, 0xFB, 0x7B, 0xFF);
+            }
+        } 
+        else
+        {
+            RsholderImage.color = new Color32(0x80, 0x80, 0x80, 0x80);
+            LsholderImage.color = new Color32(0x80, 0x80, 0x80, 0x80);
+        }
+    }
+
+    void ShowSpineComps()
+    {
+        _spineCompText.text = _spineComps[_selectedSerieIndex];
+        int spineComps = Int32.Parse(_spineComps[_selectedSerieIndex]);
+
+        if (spineComps > 0)
+        {
+            if (spineComps > 10)
+            {
+                SpineImage.color = new Color32(0xF9, 0x53, 0x53, 0xFF);
+            }
+            else if (spineComps <= 10 && spineComps > 5)
+            {
+                SpineImage.color = new Color32(0xF3, 0xFF, 0x24, 0xFF);
+            }
+            else
+            {
+                SpineImage.color = new Color32(0x4F, 0xFB, 0x7B, 0xFF);
+            }
+        } else
+        {
+            SpineImage.color = new Color32(0x80, 0x80, 0x80, 0x80);
+        }
     }
 }

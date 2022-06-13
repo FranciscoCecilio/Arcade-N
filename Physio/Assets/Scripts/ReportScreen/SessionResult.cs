@@ -134,6 +134,7 @@ public class SessionResult : MonoBehaviour
                             rightShoulderComp=0
                             spineComp=0*/
                             if (data[0] == "arm") newExerciseResultdictionary.Add(data[0], data[1]);
+                            if (data[0] == "name") newExerciseResultdictionary.Add(data[0], data[1]);
                             else if (data[0] == "nrReps") newExerciseResultdictionary.Add(data[0], data[1]);
                             else if (data[0] == "duration") newExerciseResultdictionary.Add(data[0], data[1]);
                             else if (data[0] == "correctReps") newExerciseResultdictionary.Add(data[0], data[1]);
@@ -141,8 +142,8 @@ public class SessionResult : MonoBehaviour
                             else if (data[0] == "restTime") newExerciseResultdictionary.Add(data[0], data[1]);
                             else if (data[0] == "avgTime") newExerciseResultdictionary.Add(data[0], data[1]);
                             else if (data[0] == "totalTime") newExerciseResultdictionary.Add(data[0], data[1]);
-                            else if (data[0] == "regShouldComp") newExerciseResultdictionary.Add(data[0], data[1]);
-                            else if (data[0] == "regSpineComp") newExerciseResultdictionary.Add(data[0], data[1]);
+                            //else if (data[0] == "regShouldComp") newExerciseResultdictionary.Add(data[0], data[1]);\
+                            //else if (data[0] == "regSpineComp") newExerciseResultdictionary.Add(data[0], data[1]);
                             else if (data[0] == "leftShoulderComp") newExerciseResultdictionary.Add(data[0], data[1]);
                             else if (data[0] == "rightShoulderComp") newExerciseResultdictionary.Add(data[0], data[1]);
                             else if (data[0] == "spineComp") newExerciseResultdictionary.Add(data[0], data[1]);

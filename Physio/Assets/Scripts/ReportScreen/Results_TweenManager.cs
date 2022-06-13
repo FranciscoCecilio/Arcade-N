@@ -30,16 +30,16 @@ public class Results_TweenManager : MonoBehaviour
 
     public void OpenSpecificSession(){
         // Set initial positions
+        AllSessions.SetActive(true);
         LeanTween.moveLocal(SpecificSession_Title , new Vector3(1000,specificSession_Title_init.y,0), 0);
         LeanTween.moveLocal(SpecificSession , new Vector3(specificSession_init.x,-600,0), 0);
-        AllSessions.SetActive(true);
-        SpecificSession.SetActive(true);
         // Move title and Main Info right
         LeanTween.moveLocal(AllSessions_Title, new Vector3(1000,allSessions_Title_init.y,0), .7f).setEase(LeanTweenType.easeInOutCubic);
         LeanTween.moveLocal(MainInfo         , new Vector3(1000,mainInfo_init.y,0), .7f).setEase(LeanTweenType.easeInOutCubic);
         // Move all sessions UP
         LeanTween.moveLocal(AllSessions      , new Vector3(0,600,0), .7f).setDelay(.7f).setEase(LeanTweenType.easeInOutCubic);
         // Move specific sessions UP
+        SpecificSession.SetActive(true);
         LeanTween.moveLocal(SpecificSession , specificSession_init, .7f).setDelay(.7f).setEase(LeanTweenType.easeInOutCubic);
         LeanTween.moveLocal(SpecificSession_Title, specificSession_Title_init, .7f).setDelay(.7f).setEase(LeanTweenType.easeInOutCubic);
     }

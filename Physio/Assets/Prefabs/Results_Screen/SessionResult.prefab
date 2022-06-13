@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5882167057357939479}
   - component: {fileID: 5882167057357939477}
   - component: {fileID: 5882167057357939478}
+  - component: {fileID: 3618897266797241350}
   m_Layer: 5
   m_Name: Date
   m_TagString: Untagged
@@ -136,6 +137,18 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!225 &3618897266797241350
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5882167057357939472}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &5882167057588372860
 GameObject:
   m_ObjectHideFlags: 0
@@ -356,6 +369,7 @@ GameObject:
   - component: {fileID: 5882167058445382247}
   - component: {fileID: 5882167058445382245}
   - component: {fileID: 5882167058445382246}
+  - component: {fileID: 8548455265540306454}
   m_Layer: 5
   m_Name: Session nr
   m_TagString: Untagged
@@ -481,6 +495,18 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!225 &8548455265540306454
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5882167058445382240}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &5882167058596146147
 GameObject:
   m_ObjectHideFlags: 0
@@ -492,6 +518,7 @@ GameObject:
   - component: {fileID: 5882167058596146146}
   - component: {fileID: 5882167058596146144}
   - component: {fileID: 5882167058596146145}
+  - component: {fileID: 2234393658954865155}
   m_Layer: 5
   m_Name: Duration (1)
   m_TagString: Untagged
@@ -617,6 +644,18 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!225 &2234393658954865155
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5882167058596146147}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &5882167058744532339
 GameObject:
   m_ObjectHideFlags: 0
@@ -628,6 +667,7 @@ GameObject:
   - component: {fileID: 5882167058744532338}
   - component: {fileID: 5882167058744532336}
   - component: {fileID: 5882167058744532337}
+  - component: {fileID: 6929536622544675818}
   m_Layer: 5
   m_Name: Performance
   m_TagString: Untagged
@@ -753,6 +793,18 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!225 &6929536622544675818
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5882167058744532339}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &5882167058882453132
 GameObject:
   m_ObjectHideFlags: 0
@@ -764,6 +816,7 @@ GameObject:
   - component: {fileID: 5882167058882453139}
   - component: {fileID: 5882167058882453137}
   - component: {fileID: 5882167058882453138}
+  - component: {fileID: 1578494761901284467}
   m_Layer: 5
   m_Name: Duration
   m_TagString: Untagged
@@ -890,6 +943,18 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!225 &1578494761901284467
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5882167058882453132}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &5882167059255823583
 GameObject:
   m_ObjectHideFlags: 0

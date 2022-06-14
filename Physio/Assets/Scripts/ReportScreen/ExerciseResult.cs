@@ -9,9 +9,11 @@ using System;
 public class ExerciseResult : MonoBehaviour
 {
     [Header("Main parameters")]
+    public TMP_Text _ListIndexText;
     public TMP_Text _TotalDurationText;
     public ExerciseImage _ExImg;
 
+    string _ListIndex;
     string _TotalDuration;
     string _ExType;
 
@@ -59,7 +61,6 @@ public class ExerciseResult : MonoBehaviour
 
     // Indexes
     int _selectedSerieIndex = 0;
-    int _listIndex;
     
     // Variables
     int exercisesCount = 0; 
@@ -92,23 +93,24 @@ public class ExerciseResult : MonoBehaviour
         // Main parameters
         if(!initialPopulate){
             PickExImg();
+            CalculateTotalTime();
+            _ListIndexText.text = _ListIndex;
             _NSeries = exercisesCount.ToString();
-            _NSeriesText.text = "Séries: " + _NSeries;
-            _NRepsText.text = "Repetições: " + _NReps;
-            _ArmText.text = "Braço: " + _Arm;
-            _DurationText.text = "Duração: " + _Duration;
-            _RestimeText.text = "T. Descanso: " + _Restime;
+            _NSeriesText.text = "<b>Séries: </b>" + _NSeries;
+            _NRepsText.text = "<b>Repetições: </b>" + _NReps;
+            _ArmText.text = "<b>Braço: </b>" + _Arm;
+            _DurationText.text = "<b>Duração: </b>" + _Duration;
+            _RestimeText.text = "<b>T. Descanso: </b>" + _Restime;
             initialPopulate = true;
         }
         // Results
-        _correctRepsText.text = "Reps. corretas: " + _correctReps[_selectedSerieIndex] + "/" + _NReps;
-        _outOfPathsText.text =  "Foras de trajeto: " + _outOfPaths[_selectedSerieIndex];
-        _totalTimeText.text = "Tempo total: " + _totalTime[_selectedSerieIndex];
-        _averageTimeText.text ="Tempo médio: " + _averageTime[_selectedSerieIndex];
+        _correctRepsText.text = "<b>Reps. corretas: </b>" + _correctReps[_selectedSerieIndex] + "/" + _NReps;
+        _outOfPathsText.text =  "<b>Foras de trajeto: </b>" + _outOfPaths[_selectedSerieIndex];
+        _totalTimeText.text = "<b>Tempo total: </b>" + _totalTime[_selectedSerieIndex];
+        _averageTimeText.text ="<b>Tempo médio: </b>" + _averageTime[_selectedSerieIndex];
         // Compensatory
         ShowShoulderComp();
         ShowSpineComps();
-        Debug.Log(_selectedSerieIndex);
         // Text
         numberText.text = (_selectedSerieIndex + 1).ToString();
         // Hide the previous/next_series buttons
@@ -145,6 +147,7 @@ public class ExerciseResult : MonoBehaviour
         _rightShoulderComps.Add(newExercise["rightShoulderComp"]);
         _spineComps.Add(newExercise["spineComp"]);
         // lastly increase the control variable
+        _ListIndex = newExercise["lastIndex"];
         exercisesCount ++;
     }
 
@@ -165,6 +168,21 @@ public class ExerciseResult : MonoBehaviour
                 _ExImg.SetImage(-1);
                 break;
         }
+    }
+
+    void CalculateTotalTime(){
+        int minutes = 0;
+        int seconds = 0;
+        string expression;
+        string[] numbers;
+        // Format: 00:02 min
+        for(int i = 0; i < _totalTime.Count; i++){
+            expression = _totalTime[i].Split(' ')[0]; // 00:02
+            numbers = expression.Split(':'); // 00:02
+            minutes += Int32.Parse(numbers[0]); // 00
+            seconds += Int32.Parse(numbers[1]); // 02
+        }
+        _TotalDurationText.text = minutes.ToString("00") + " : " + seconds.ToString("00");
     }
 
     void ShowShoulderComp(){

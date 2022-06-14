@@ -1,5 +1,6 @@
 timestamp=20220612T123912
 name=1
+totalDuration=03:00:46
 series=3
 restDuration=0
 exe=2=Vertical=Exercise2Scene=right=2=60=0

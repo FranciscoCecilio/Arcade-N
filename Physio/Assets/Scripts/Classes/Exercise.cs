@@ -129,7 +129,7 @@ public class Exercise
     {
         int minutes = timeSeconds / 60;
         int seconds = timeSeconds % 60;
-        _totalTime = minutes.ToString("00") + ":" + seconds.ToString("00") + " m";
+        _totalTime = minutes.ToString("00") + ":" + seconds.ToString("00") + " min";
     }
 
     //GETTERS

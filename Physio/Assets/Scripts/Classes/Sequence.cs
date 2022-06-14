@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using System.IO;
 using UnityEngine;
 
@@ -140,10 +141,18 @@ public class Sequence
         if (System.IO.File.Exists(filepath)) 
             System.IO.File.Delete(filepath);
 
+        // Calculate the total duration of the sequence
+        System.DateTime timestamp = DateTime.ParseExact(_timestamp, "yyyyMMddTHHmmss",System.Globalization.CultureInfo.InvariantCulture); 
+        System.DateTime  now = System.DateTime.Now;
+        TimeSpan difference = now - timestamp;
+        string totalDuration = string.Format("{0:D2}:{1:D2}:{2:D2} horas", difference.Hours, difference.Minutes, difference.Seconds);
+        Debug.Log("Timespan::: " + totalDuration); //HH:MM:SS horas
+
         using (var stream = new FileStream(filepath, FileMode.CreateNew, FileAccess.Write, FileShare.Write))
         using (var writer = new StreamWriter(stream))
         {
             writer.WriteLine("timestamp=" + _timestamp.Replace("Sequence", string.Empty) );
+            writer.WriteLine("totalDuration=" + totalDuration );
             writer.WriteLine("name=" + _name);  
             writer.WriteLine("series=" + _series);  
             writer.WriteLine("restDuration=" + _restDuration);  

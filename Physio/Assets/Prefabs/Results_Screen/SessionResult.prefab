@@ -36,8 +36,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -38, y: 0}
-  m_SizeDelta: {x: 360, y: 16}
+  m_AnchoredPosition: {x: -193, y: 0}
+  m_SizeDelta: {x: 235.6, y: 16}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5882167057357939477
 CanvasRenderer:
@@ -67,7 +67,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 18 Maio / 13h45
+  m_text: 18 maio 2022 / 13h45
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7f4f67051143a124cbc5b1bc40733a8d, type: 2}
   m_sharedMaterial: {fileID: -3982096778254385821, guid: 7f4f67051143a124cbc5b1bc40733a8d,
@@ -102,7 +102,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -1010,10 +1010,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ccea2f7a04bed43bc6e8ab7f1d5c0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  listIndexText: {fileID: 5882167058445382246}
+  sessionNumber: {fileID: 5882167058445382246}
   dateText: {fileID: 5882167057357939478}
-  durationText: {fileID: 5882167058882453138}
+  totalDurationText: {fileID: 5882167058882453138}
   performanceText: {fileID: 5882167058744532337}
+  totalTimeSpan: 
   sessionFolderPath: 
   exerciseResultPrefab: {fileID: 6072608474397183173, guid: 08e5cd7f7f6ee1b49b0faf3531b9f65f,
     type: 3}

@@ -1,22 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 using TMPro;
 using UnityEngine.UI;
 using System.IO;
 
 public class SessionResult : MonoBehaviour
 {
-    public TMP_Text listIndexText;
+    public TMP_Text sessionNumber;
     public TMP_Text dateText;
-    public TMP_Text durationText;
+    public TMP_Text totalDurationText;
     public TMP_Text performanceText;
+    List<string> timespans = new List<string>();
+    public string totalTimeSpan; // HH:mm:ss 
 
     // session folder path
     public string sessionFolderPath;   // Application.dataPath + "/Users/" + SessionInfo.getUsername() + <SessionTS>
     public GameObject exerciseResultPrefab;
-    // this is where we instantiate ExerciseResult prefabs
+
+    // parent of ExerciseResult prefabs
     Transform specificSessionListContent;
+    List<GameObject> exerciseResults = new List<GameObject>();
     
     // Indexes
     int _listIndex;
@@ -36,42 +41,55 @@ public class SessionResult : MonoBehaviour
         //PopulateExerciseListElement();
     }
 
-    // TODO receive parameters
-    public void PopulateSessionListElement(string fPath, Transform listContent){
+    public void PopulateSessionListElement(int sessionNum, string sessionDate, string fPath, Transform listContent){
+        sessionNumber.text = sessionNum.ToString();
         sessionFolderPath = fPath;
         specificSessionListContent = listContent;
-        listIndexText.text = "5";
-        dateText.text = "20 Maio / 12h45";
-        durationText.text = "01:25:13";
+        dateText.text = sessionDate;
+        // TODO performance
         performanceText.text = "85%";
+        FetchSequenceDurations();
+        CalculateSessionDuration();
+
+    }
+
+    // we are interested in this to calculate the total therapy time in Results Screen
+    public string GetTotalTimeSpan(){
+        return totalTimeSpan;
     }
 
     public void OpenSessionPanel(){
-        // play animation
-        if(tweenManager == null){
-            tweenManager = GameObject.FindGameObjectWithTag("TweenManager").GetComponent<Results_TweenManager>();
-        }
-        if(isInList){
-            tweenManager.OpenSpecificSession();
-        }
-        else{
-            tweenManager.ReturnToAllSessions();
-        }
-
-        // set the correct session number title
         // we only fetch the exercise results one time
         if(!hasLoaded){
             FetchExerciseResults();
             hasLoaded = true;
         }
+
+        // play animation
+        if(tweenManager == null){
+            tweenManager = GameObject.FindGameObjectWithTag("TweenManager").GetComponent<Results_TweenManager>();
+        }
+        if(isInList){
+            tweenManager.SetSpecificSessionParameters(this.GetComponent<SessionResult>());
+            tweenManager.OpenSpecificSession(gameObject);
+            // make all the corresponding exercise_results buttons appear
+            for(int i = 0; i < exerciseResults.Count; i++){
+                exerciseResults[i].SetActive(true);
+            }
+        }
+        else{
+            // next method ALREADY hides exercise_results buttons in list 
+            tweenManager.ReturnToAllSessions(gameObject);
+        }
+
+        // set the correct session number title
         // set the correct session paremeters on the top of the panel
         // set all the sequences on Specific Session Panel ContentList
 
     }
-
-    // goes inside the Session folder
+    
+    // Generates a exercise result button for each sequence inside this session
     void FetchExerciseResults(){
-        // sessionFolderPath: Application.dataPath + "/Users/" + SessionInfo.getUsername() "/" <SessionTS>
         if (Directory.Exists(sessionFolderPath))
         {
             // sequenceFolders[i]: Application.dataPath + "/Users/" + SessionInfo.getUsername() "/" <SessionTS> "/" <Sequencefolder i>
@@ -84,6 +102,9 @@ public class SessionResult : MonoBehaviour
                 // Instantiate Exercise Result Button
                 string exerciseFolderName = sequenceFolders[i].Substring(sessionFolderPath.Length+1);
                 ExerciseResult newButton = GenerateExerciseResultButton(exerciseFolderName);
+
+                // save the buttons for when we comeback to this screen
+                exerciseResults.Add(newButton.gameObject);
 
                 // Exercise Files: Application.dataPath + "/Users/" + SessionInfo.getUsername() "/" <SessionTS> "/" <Sequencefolder i> "/" exercises here
                 string specificSequence = sequenceFolders[i];
@@ -110,6 +131,7 @@ public class SessionResult : MonoBehaviour
                     //Debug.Log("is inside exercise:" + file);
                     // dictionary <key, value>
                     Dictionary<string, string> newExerciseResultdictionary = new Dictionary<string, string>();
+                    int listIndex = 0;
                     string line = "";
                     StreamReader reader = new StreamReader(file);
                     {
@@ -134,7 +156,7 @@ public class SessionResult : MonoBehaviour
                             rightShoulderComp=0
                             spineComp=0*/
                             if (data[0] == "arm") newExerciseResultdictionary.Add(data[0], data[1]);
-                            if (data[0] == "name") newExerciseResultdictionary.Add(data[0], data[1]);
+                            else if (data[0] == "name") newExerciseResultdictionary.Add(data[0], data[1]);
                             else if (data[0] == "nrReps") newExerciseResultdictionary.Add(data[0], data[1]);
                             else if (data[0] == "duration") newExerciseResultdictionary.Add(data[0], data[1]);
                             else if (data[0] == "correctReps") newExerciseResultdictionary.Add(data[0], data[1]);
@@ -152,7 +174,10 @@ public class SessionResult : MonoBehaviour
                         }
                     }
                     reader.Close();
-                    Debug.Log(newExerciseResultdictionary.Count);
+                    // increement the variable that has the order in the exercise_result list
+                    newExerciseResultdictionary.Add("lastIndex", listIndex.ToString());
+                    listIndex ++;
+                    // Add the exercise serie
                     newButton.AddExerciseInfo(newExerciseResultdictionary);
 
                 }
@@ -177,12 +202,105 @@ public class SessionResult : MonoBehaviour
     }
 
 
+    // goes inside the sequence files and fetches Total duration
+    void FetchSequenceDurations(){
+        // sessionFolderPath: Application.dataPath + "/Users/" + SessionInfo.getUsername() "/" <SessionTS>
+        if (Directory.Exists(sessionFolderPath))
+        {
+            // sequenceFolders[i]: Application.dataPath + "/Users/" + SessionInfo.getUsername() "/" <SessionTS> "/" <Sequencefolder i>
+            string[] sequenceFolders = Directory.GetDirectories(sessionFolderPath);
+
+            // For each Sequence folder we fetch its Exercises and instantiate one ExerciseResult Button
+            for (int i = sequenceFolders.Length - 1; i > -1; i--) 
+            {
+                // Exercise Files: Application.dataPath + "/Users/" + SessionInfo.getUsername() "/" <SessionTS> "/" <Sequencefolder i> "/" exercises here
+                string specificSequence = sequenceFolders[i];
+                string[] exfiles = Directory.GetFiles(specificSequence);
+               
+                // For each Exercise file we fetch and store its parameters
+                foreach (string file in exfiles)
+                {
+                    //Verifica que e um ficheiro txt e nao meta
+                    string[] filename = file.Split('.');
+                    if (filename.Length != 2 || filename[1] != "txt" ) 
+                    {
+                        continue;
+                    }
+                    // Verifies if its the Sequence file
+                    string[] filename1 = file.Split('\\');
+                    if(!filename1[filename1.Length-1].Substring(0, "Sequence".Length).Equals("Sequence"))
+                    {
+                        //"It's an exercise, continue"
+                        continue;
+                    }
+                    string line = "";
+                    StreamReader reader = new StreamReader(file);
+                    {
+                        line = reader.ReadLine();
+                        while (line != null)
+                        {
+                            string[] data = line.Split('=');
+                            if (data[0] == "totalDuration"){
+                                timespans.Add(data[1]); // Get what we came for and store: 00:15:12
+                                break;
+                            }
+                            line = reader.ReadLine();
+                        }
+                    }
+                    reader.Close();
+                }
+            }
+        }
+        else{
+            Debug.Log("ERROR: SessionResult is trying to fetch sequence files from: " + sessionFolderPath);
+        }
+    }
+    
+    void CalculateSessionDuration(){
+        string expression;
+        TimeSpan totalTime = TimeSpan.Zero;
+        // Format: HH:MM:SS horas
+        for(int i = 0; i < timespans.Count; i++){
+            expression = timespans[i].Split(' ')[0]; //HH:MM:SS 
+            TimeSpan ts = TimeSpan.ParseExact(expression, "hh\\:mm\\:ss", System.Globalization.CultureInfo.InvariantCulture);
+            totalTime += ts;
+        }
+        
+        totalTimeSpan = string.Format("{0:D2}:{1:D2}:{2:D2}", totalTime.Hours, totalTime.Minutes, totalTime.Seconds);
+        totalDurationText.text = totalTimeSpan;
+    }
+
 
 
     // called when a button is instantiated after clicking a session in list
     public void SetIsInList(bool intention){
         isInList = intention;
     }
+
+    // after we pick one session we must pass them to the specific_session
+    public void SetSelectesSessionValues(SessionResult selectedResult){
+        if(isInList) Debug.Log("ERROR: this is supposed to be called on the selected session on the specific_panel");
+        sessionNumber.text = selectedResult.GetSessionNumber();
+        dateText.text = selectedResult.GetDate();
+        totalDurationText.text = selectedResult.GetDuration();
+        performanceText.text = selectedResult.GetPerformance();
+    }
+
+    public string GetSessionNumber(){
+        return sessionNumber.text;
+    }
+    public string GetDate(){
+        return dateText.text;
+    }
+    public string GetDuration(){
+        return totalDurationText.text;
+    }
+    public string GetPerformance(){
+        return performanceText.text;
+    }
+
+    
+
 
 
     

@@ -1069,7 +1069,6 @@ GameObject:
   - component: {fileID: 201274668}
   - component: {fileID: 201274670}
   - component: {fileID: 201274669}
-  - component: {fileID: 201274671}
   m_Layer: 5
   m_Name: Nr
   m_TagString: Untagged
@@ -1195,18 +1194,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 201274667}
   m_CullTransparentMesh: 1
---- !u!225 &201274671
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 201274667}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 0
-  m_BlocksRaycasts: 0
-  m_IgnoreParentGroups: 0
 --- !u!1 &215906101
 GameObject:
   m_ObjectHideFlags: 0
@@ -1462,8 +1449,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: "N\xBA SESSOES"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4384ad5582c870d45b8fa09971a2bc4a, type: 2}
+  m_sharedMaterial: {fileID: -8347260715242610734, guid: 4384ad5582c870d45b8fa09971a2bc4a,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1597,8 +1585,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: TEMPO DE TERAPIA
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4384ad5582c870d45b8fa09971a2bc4a, type: 2}
+  m_sharedMaterial: {fileID: -8347260715242610734, guid: 4384ad5582c870d45b8fa09971a2bc4a,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2759,8 +2748,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: 00:25:13
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b91fcf4fc2796854382a1f63640aceb5, type: 2}
+  m_sharedMaterial: {fileID: 6483315535352741706, guid: b91fcf4fc2796854382a1f63640aceb5,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3656,8 +3646,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: 100%
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b91fcf4fc2796854382a1f63640aceb5, type: 2}
+  m_sharedMaterial: {fileID: 6483315535352741706, guid: b91fcf4fc2796854382a1f63640aceb5,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3989,6 +3980,9 @@ MonoBehaviour:
   MainInfo: {fileID: 183180937}
   SpecificSession: {fileID: 1603583349}
   SpecificSession_Title: {fileID: 1676719696}
+  specificLlistContent: {fileID: 1806596042}
+  selectedSessionResult: {fileID: 1438097760}
+  sessionNumberText: {fileID: 1676719698}
 --- !u!4 &604461891
 Transform:
   m_ObjectHideFlags: 0
@@ -8719,7 +8713,7 @@ PrefabInstance:
     - target: {fileID: 5882167059255823583, guid: 68cbc3a1721474847b69ef8a5408a954,
         type: 3}
       propertyPath: m_Name
-      value: Sequence Result
+      value: Selected Session Result
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
@@ -8730,6 +8724,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1438097758}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1438097760 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5502418473575036204, guid: 68cbc3a1721474847b69ef8a5408a954,
+    type: 3}
+  m_PrefabInstance: {fileID: 1438097758}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87ccea2f7a04bed43bc6e8ab7f1d5c0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &1457596154 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6072608474397183172, guid: 08e5cd7f7f6ee1b49b0faf3531b9f65f,
@@ -8872,8 +8878,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: PERFORMANCE
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4384ad5582c870d45b8fa09971a2bc4a, type: 2}
+  m_sharedMaterial: {fileID: -8347260715242610734, guid: 4384ad5582c870d45b8fa09971a2bc4a,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -9559,7 +9566,6 @@ GameObject:
   - component: {fileID: 1642894781}
   - component: {fileID: 1642894783}
   - component: {fileID: 1642894782}
-  - component: {fileID: 1642894784}
   m_Layer: 5
   m_Name: Perormance
   m_TagString: Untagged
@@ -9685,18 +9691,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1642894780}
   m_CullTransparentMesh: 1
---- !u!225 &1642894784
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1642894780}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 0
-  m_BlocksRaycasts: 0
-  m_IgnoreParentGroups: 0
 --- !u!1 &1676719696
 GameObject:
   m_ObjectHideFlags: 0
@@ -9757,8 +9751,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Sess\xE3o 2"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 76a0540dc1278a74084e276638780385, type: 2}
+  m_sharedMaterial: {fileID: 6873868900314753922, guid: 76a0540dc1278a74084e276638780385,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -9933,8 +9928,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: 5
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b91fcf4fc2796854382a1f63640aceb5, type: 2}
+  m_sharedMaterial: {fileID: 6483315535352741706, guid: b91fcf4fc2796854382a1f63640aceb5,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -10529,8 +10525,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: Horas  Mins   Segs
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b91fcf4fc2796854382a1f63640aceb5, type: 2}
+  m_sharedMaterial: {fileID: 6483315535352741706, guid: b91fcf4fc2796854382a1f63640aceb5,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -10751,7 +10748,6 @@ GameObject:
   - component: {fileID: 1792506253}
   - component: {fileID: 1792506255}
   - component: {fileID: 1792506254}
-  - component: {fileID: 1792506256}
   m_Layer: 5
   m_Name: Data
   m_TagString: Untagged
@@ -10877,18 +10873,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1792506252}
   m_CullTransparentMesh: 1
---- !u!225 &1792506256
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1792506252}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 0
-  m_BlocksRaycasts: 0
-  m_IgnoreParentGroups: 0
 --- !u!1001 &1795213710
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11909,10 +11893,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Todas as sessoes
+  m_text: "Todas as sess\xF5es"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 76a0540dc1278a74084e276638780385, type: 2}
+  m_sharedMaterial: {fileID: 6873868900314753922, guid: 76a0540dc1278a74084e276638780385,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -13322,7 +13307,6 @@ GameObject:
   - component: {fileID: 2053197617}
   - component: {fileID: 2053197619}
   - component: {fileID: 2053197618}
-  - component: {fileID: 2053197620}
   m_Layer: 5
   m_Name: Duration
   m_TagString: Untagged
@@ -13448,18 +13432,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2053197616}
   m_CullTransparentMesh: 1
---- !u!225 &2053197620
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2053197616}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 0
-  m_BlocksRaycasts: 0
-  m_IgnoreParentGroups: 0
 --- !u!1 &2057165963
 GameObject:
   m_ObjectHideFlags: 0
@@ -14014,8 +13986,8 @@ RectTransform:
   - {fileID: 1737727643}
   - {fileID: 502689739}
   - {fileID: 411404975}
-  - {fileID: 1028539029}
   - {fileID: 1603583350}
+  - {fileID: 1028539029}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

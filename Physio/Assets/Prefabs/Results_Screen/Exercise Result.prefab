@@ -189,7 +189,7 @@ GameObject:
   - component: {fileID: 2823483714698804563}
   - component: {fileID: 4937223084942968027}
   m_Layer: 5
-  m_Name: Sequence Number
+  m_Name: List Index
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3055,6 +3055,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fc4793d1b671e647adaa9474114f8c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _ListIndexText: {fileID: 4937223084942968027}
   _TotalDurationText: {fileID: 6072608474155104994}
   _ExImg: {fileID: 211953483691181899}
   _NSeriesText: {fileID: 1940092696721858426}

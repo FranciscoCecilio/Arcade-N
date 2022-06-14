@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 // used to instantiate all session buttons
 public class ResultsScreen : MonoBehaviour
@@ -71,6 +72,9 @@ public class ResultsScreen : MonoBehaviour
     public TMP_Text nr_sessions;
     public TMP_Text performance;
     public TMP_Text totalTherapyTime;
+    List<string> sessionTimespans = new List<string>();
+
+    
 
     [Header("List Contents")]
     public Transform allSessionListContent;
@@ -82,6 +86,7 @@ public class ResultsScreen : MonoBehaviour
     {
         PopulateMainInfo();
         PopulateSessionsList();
+        // Calculate the Total Therapy TIme
 
         /*PopulateUserInfo();
         PopulateSessionsDropdown();
@@ -93,12 +98,13 @@ public class ResultsScreen : MonoBehaviour
     void PopulateMainInfo(){
         nr_sessions.text = "1";
         performance.text  = "100%";
-        totalTherapyTime.text = "00:00:10";
+        // Total therapy is calculated after populateSessionsList
     }
 
     // Fetch all sessions files and instantiate SessionResultsElement buttons on the listContent
     void PopulateSessionsList(){
         string folderpath = Application.dataPath + "/Users/" + SessionInfo.getUsername();
+        int sessionNumber = 0;
         if (Directory.Exists(folderpath))
         {
             string[] folders = Directory.GetDirectories(folderpath);
@@ -106,34 +112,66 @@ public class ResultsScreen : MonoBehaviour
             for (int i = folders.Length - 1; i > -1; i--) 
             {
                 string folderName = folders[i].Substring(folderpath.Length+1);
-                if(folderName.Equals("ExercisePreferences")) continue;
-                GenerateSessionResultButton(/* session result info here*/folderName,folders[i]);
 
-                /*string[] files = Directory.GetFiles(folders[i]);
-                if (files.Length > 0)
-                {
-                    hasSessions = true;
-                    string[] filename = folders[i].Split('/');
-                    string timestamp = filename[filename.Length - 1];
-                    System.DateTime date = System.DateTime.ParseExact(timestamp, "yyyyMMddTHHmmss", System.Globalization.CultureInfo.InvariantCulture);
-                    timestamp = date.ToString("dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
-                    sessionTimestamps.Add(timestamp);
-                }*/
+                // We found a exercise folder -> continue
+                if(folderName.Equals("ExercisePreferences")) continue;
+
+                // inc the session_number
+                sessionNumber ++;
+
+                // get the timestamp to build the date
+                string ts = folderName.Replace("Session", string.Empty);
+                string sessionDate = CalculateSessionDate(ts);
+
+                // generate button
+                SessionResult result = GenerateSessionResultButton(sessionNumber,sessionDate,folderName,folders[i]);
+                sessionTimespans.Add(result.GetTotalTimeSpan());
             }
-            /*if (sessionTimestamps.Count != 0) selectionSessionTimestamp = sessionTimestamps[0];
-            sessionDropdown.AddOptions(sessionTimestamps);*/
+            // at the end, after creating one button for each session, we calculate total therapy time
+            CalculateTherapyTime();
         }
     }
 
-    // Generates a button
-    public void GenerateSessionResultButton(/*will receive session result info*/ string sessionTS, string folderPath){
+    // returns a string with the date of the session
+    string CalculateSessionDate(string ts){
+        DateTime timestamp;
+        DateTime.TryParseExact(ts, "yyyyMMddTHHmmss", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out timestamp);
+        //18 Maio 2022 / 13h45
+        string sessionDate = timestamp.Day + " " +
+            System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(timestamp.Month) + " " +
+            timestamp.Year + " / " + 
+            timestamp.Hour + "h" + timestamp.Minute;
+        
+        return sessionDate;
+    }
+
+    // calculates the main info parameter: total therapy time
+    void CalculateTherapyTime(){
+        string expression;
+        TimeSpan totalTime = TimeSpan.Zero;
+        // Format: HH:MM:SS horas
+        for(int i = 0; i < sessionTimespans.Count; i++){
+            Debug.Log("iterando timespans: " + sessionTimespans[i]);
+            expression = sessionTimespans[i].Split(' ')[0]; //HH:MM:SS 
+            TimeSpan ts = TimeSpan.ParseExact(expression, "hh\\:mm\\:ss", System.Globalization.CultureInfo.InvariantCulture);
+            Debug.Log("ts: " + ts);
+            totalTime += ts;
+        }
+        // assign the variable (finally)        
+        totalTherapyTime.text = string.Format("{0:D2}:{1:D2}:{2:D2}", totalTime.Hours, totalTime.Minutes, totalTime.Seconds);
+    }
+
+    // Generates a session button
+    public SessionResult GenerateSessionResultButton(/*will receive session result info*/ int sessionNumber, string sessionDate, string sessionTS, string folderPath){
         //Instantiate prefab
         GameObject button = Instantiate(sessionResultPrefab) as GameObject;
         button.name = sessionTS;
         button.SetActive(true);
-        // Sets the parameters 
-        button.GetComponent<SessionResult>().PopulateSessionListElement(folderPath, specificSessionListContent);
+        // Sets the parameters  
+        button.GetComponent<SessionResult>().PopulateSessionListElement(sessionNumber, sessionDate, folderPath, specificSessionListContent);
         button.transform.SetParent(allSessionListContent, false);
+
+        return button.GetComponent<SessionResult>();
     }
 
     void PopulateUserInfo()

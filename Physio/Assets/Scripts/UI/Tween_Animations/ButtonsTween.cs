@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class ButtonsTween : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    float tweenTime = 0.3f;
+    float tweenTime = 0.1f;
     // Start is called before the first frame update
     void Start()
     {

@@ -151,10 +151,8 @@ public class ResultsScreen : MonoBehaviour
         TimeSpan totalTime = TimeSpan.Zero;
         // Format: HH:MM:SS horas
         for(int i = 0; i < sessionTimespans.Count; i++){
-            Debug.Log("iterando timespans: " + sessionTimespans[i]);
             expression = sessionTimespans[i].Split(' ')[0]; //HH:MM:SS 
             TimeSpan ts = TimeSpan.ParseExact(expression, "hh\\:mm\\:ss", System.Globalization.CultureInfo.InvariantCulture);
-            Debug.Log("ts: " + ts);
             totalTime += ts;
         }
         // assign the variable (finally)        

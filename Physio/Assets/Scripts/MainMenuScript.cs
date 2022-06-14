@@ -69,14 +69,22 @@ public class MainMenuScript : MonoBehaviour {
             femaleAvatar.SetActive(true);
         }
 	}
+    // called by the button
+    public void Quit(){
+        SessionInfo.logout();
+        Application.Quit();
+    }
+    // in case someone ALT+F4
+    public void OnApplicationQuit()
+    {
+        Debug.Log("Application ending after " + Time.time + " seconds");
+        SessionInfo.logout();
+    }
 
     public void previousScreen()
     {
+        SessionInfo.logout();
         SceneManager.LoadScene("LoginMenu2");
-    }
-
-    void Update()
-    {
     }
 
     private void DeleteUser()

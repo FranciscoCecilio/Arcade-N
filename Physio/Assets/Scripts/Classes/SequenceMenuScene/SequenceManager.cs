@@ -179,8 +179,7 @@ public static class SequenceManager
     
     //-----------------------------------------------------------------------------------------------------------------------------------
     // Settings during the session (maybe passar para sessionInfo e dar upload no text do user)
-    public static bool isMusicOn = true;
-    public static bool isVoiceOn = true;
+    
     public static bool isNextPanelOn = false;
     public static bool isTherapistInfoOn = false;
     public static float chapterBarPercentage = 0;
@@ -196,8 +195,6 @@ public static class SequenceManager
         sequencesToRun = null;
         sequenceIndex = 0;
         index = 0;
-        isMusicOn = true;
-        isVoiceOn = true;
         isNextPanelOn = false;
         isTherapistInfoOn = false;
         chapterBarPercentage = 0;

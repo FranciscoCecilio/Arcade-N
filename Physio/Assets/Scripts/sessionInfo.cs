@@ -17,12 +17,14 @@ public static class SessionInfo
     private static string _name; // nome *bonito* dentro do .txt
     private static string _age;
     private static string _gender;
-    private static int _XP = 0; // TODO or level
 
     private static int _exerciseId = 1;
 
     // DEFINITIONS
-    // Passar apra aqui o MusicIsOn, XP do User, 
+    private static int _XP = 0; // TODO or level
+    private static bool _isMusicOn = true;
+    private static bool _isVoiceOn = true;
+
     public static void setUsername(string username)
     {
         _username = username;
@@ -55,9 +57,23 @@ public static class SessionInfo
         return _name;
     }
 
+     // This is called on MainMenu after the login
     public static void loadUser()
-    {   // This is called on MainMenu after the login.
+    { 
         loadInfo();
+    }
+
+    public static void OnApplicationQuit()
+    {
+        Debug.Log("Application ending after " + Time.time + " seconds");
+        //logout();
+    }
+
+    // This is called when we logout from the MainMenu to Login
+    public static void logout()
+    {
+        // write to the user file the settings and XP
+
     }
 
     public static int getExerciseId()
@@ -85,6 +101,24 @@ public static class SessionInfo
         return _toView;
     }
 
+    public static void setMusic(bool intention){
+        _isMusicOn = intention;
+    }
+
+    public static bool isMusicOn()
+    {
+        return _isMusicOn;
+    }
+
+    public static bool isVoiceOn()
+    {
+        return _isVoiceOn;
+    }
+
+    public static void setVoice(bool intention){
+        _isVoiceOn = intention;
+    }
+
     private static void loadInfo()
     {
         string line = "";
@@ -98,6 +132,8 @@ public static class SessionInfo
                 else if (data[0] == "Age") _age = data[1];
                 else if (data[0] == "Gender") _gender = data[1];
                 else if (data[0] == "XP") _XP = int.Parse(data[1]);
+                else if (data[0] == "MusicOn") _isMusicOn = (data[1] == "true");
+                else if (data[0] == "VoicOn") _isVoiceOn = (data[1] == "true");
                 line = reader.ReadLine();
             }
         }
@@ -205,6 +241,8 @@ public static class SessionInfo
         _gender= "";
         _exerciseId = 1;
         _XP = 0;
+        _isMusicOn = true;
+        _isVoiceOn = true;
         Debug.Log("sessionInfo reset.");
     }
 }

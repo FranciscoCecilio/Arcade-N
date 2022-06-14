@@ -35,7 +35,7 @@ public class BodyScreenController : MonoBehaviour {
     {
         isEditingOnStart = true;
         // Enable the correct music button according the settings (TODO: Do the same for the voice assistant)
-        if(SequenceManager.isMusicOn){
+        if(SessionInfo.isMusicOn()){
             musicOnButton.SetActive(true);
             musicOffButton.SetActive(false);
         }
@@ -125,7 +125,7 @@ public class BodyScreenController : MonoBehaviour {
             soundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>();
         }
         soundManager.PlayMusicAgain();
-        SequenceManager.isMusicOn = true;
+        SessionInfo.setMusic(true);
         musicOnButton.SetActive(true);
         musicOffButton.SetActive(false);
     }
@@ -135,7 +135,7 @@ public class BodyScreenController : MonoBehaviour {
             soundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>();
         }
         soundManager.MuteMusic();
-        SequenceManager.isMusicOn = false;
+        SessionInfo.setMusic(false);
         musicOnButton.SetActive(false);
         musicOffButton.SetActive(true);
     }

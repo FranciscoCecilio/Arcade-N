@@ -17,6 +17,7 @@ public static class SessionInfo
     private static string _name; // nome *bonito* dentro do .txt
     private static string _age;
     private static string _gender;
+    private static string _nrSaude; // we don't use it outside login
 
     private static int _exerciseId = 1;
 
@@ -63,17 +64,31 @@ public static class SessionInfo
         loadInfo();
     }
 
-    public static void OnApplicationQuit()
-    {
-        Debug.Log("Application ending after " + Time.time + " seconds");
-        //logout();
-    }
 
     // This is called when we logout from the MainMenu to Login
     public static void logout()
     {
-        // write to the user file the settings and XP
+        string userfile = Application.dataPath + "/Users/" + _username + ".txt";
 
+        if(File.Exists(userfile)) File.Delete(userfile);
+
+        // write to the user file the settings and XP
+        StreamWriter writer = new StreamWriter(userfile);
+
+        writer.WriteLine("Username=" + _username);
+        writer.WriteLine("Name=" + _name);
+        writer.WriteLine("Age=" + _age);
+        writer.WriteLine("Gender=" + _gender);
+        if(_nrSaude != "") writer.WriteLine("Nr_Utente=" + _nrSaude);
+        // new stuff
+        writer.WriteLine("XP=" + _XP);
+        writer.WriteLine("MusicOn=" + _isMusicOn);
+        writer.WriteLine("VoiceOn=" + _isVoiceOn);
+
+        writer.Close();
+
+        SessionInfo.setUsername(_username);
+        
     }
 
     public static int getExerciseId()
@@ -131,6 +146,7 @@ public static class SessionInfo
                 if (data[0] == "Name") _name = data[1];
                 else if (data[0] == "Age") _age = data[1];
                 else if (data[0] == "Gender") _gender = data[1];
+                else if (data[0] == "Nr_Utente") _nrSaude = data[1];
                 else if (data[0] == "XP") _XP = int.Parse(data[1]);
                 else if (data[0] == "MusicOn") _isMusicOn = (data[1] == "true");
                 else if (data[0] == "VoicOn") _isVoiceOn = (data[1] == "true");
@@ -153,17 +169,6 @@ public static class SessionInfo
         string folderpath = Application.dataPath + "/Users/" + _username;
         string folderMetaFilePath = Application.dataPath + "/Users/" + _username + ".meta";
         afterDeleteText.text = "";
-        /*int var = 0;
-        foreach (string file in Directory.GetFiles( Application.dataPath + "/Users/"))
-            {
-                if(var == 4){
-                    Debug.Log(file);
-                    File.Delete(file);
-                    
-                }
-                var ++;
-            }*/
-
         // check if file exists
         if ( !File.Exists( filePath ) )
         {

@@ -2,15 +2,16 @@
 using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 
 // Used in Main Menu, Narrative Menu, all Exercises,
 public class SoundManager : MonoBehaviour
 {
     public Sound[] sounds;
-    AudioSource[] allSources;
+    List<AudioSource> allSources;
 
-    private bool sm_musicIsOn;
-    private bool sm_voiceIsOn;
+    [SerializeField] bool sm_musicIsOn;
+    [SerializeField] bool sm_voiceIsOn;
 
     public Sound GetSound(string name){
         Sound s =  Array.Find(sounds, sound => sound.name == name);
@@ -42,19 +43,22 @@ public class SoundManager : MonoBehaviour
         }
 
         // Initializae all sounds
+        allSources = new List<AudioSource>();
         foreach(Sound s in sounds){
             s.source = gameObject.AddComponent<AudioSource>();
-            //allSources.Add
             s.source.clip = s.clip;
             s.source.pitch = s.pitch;
             s.source.volume = s.volume;
             s.source.loop = s.loop;
+            // Add audiosource to list
+            allSources.Add(s.source);
 
         }
     }
     public string musicToPlayOnStart; 
     public void Start(){
         sm_musicIsOn = SessionInfo.isMusicOn();
+        Debug.Log("seinfo: " + SessionInfo.isMusicOn());
         sm_voiceIsOn = SessionInfo.isVoiceOn();
         // We only want to play music if the user wants it
         if(sm_musicIsOn && !musicToPlayOnStart.Equals(string.Empty)){
@@ -74,7 +78,17 @@ public class SoundManager : MonoBehaviour
     }
 
     public void PlayOneShot(string name){
-        if(!sm_musicIsOn) return;
+        //if(!sm_musicIsOn) return;
+        Sound s = GetSound(name);
+        if( s == null){
+            Debug.LogWarning("Sound: " + name + " not found!");
+            return;
+        }
+        s.source.PlayOneShot(s.clip);
+    }
+
+    public void PlayVoiceLine(string name){
+        //if(!sm_musicIsOn) return;
         Sound s = GetSound(name);
         if( s == null){
             Debug.LogWarning("Sound: " + name + " not found!");
@@ -85,8 +99,7 @@ public class SoundManager : MonoBehaviour
 
     // called by the Music button
     public void MuteMusic(){
-        AudioSource[] audios = FindObjectsOfType<AudioSource>();
-        foreach(AudioSource a in audios){
+        foreach(AudioSource a in allSources){
             //if(a.isPlaying)
                 //audioData.Pause();
         }
@@ -94,58 +107,94 @@ public class SoundManager : MonoBehaviour
 
     // called by the Music button
     public void PlayMusicAgain(){
-        AudioSource[] audios = FindObjectsOfType<AudioSource>();
-        foreach(AudioSource a in audios){
+        foreach(AudioSource a in allSources){
                 //audioData.UnPause();
         }
     }
 
     // When a Music button is pressed we run this method
-    public void SettingsChanged(){
-        if(SessionInfo.isMusicOn()){
-            //if we are playing, 
-            if(sm_musicIsOn){
-                // keep playing: Do nothing
-            }
-            else{
-                // start some music
-                sm_musicIsOn = true;
-                Play(musicToPlayOnStart);
+    public void MusicSettingsChanged(){
+        // Music -----------------------------------
+        AudioSource music = null;
+        foreach(AudioSource a in allSources){
+            Debug.Log(a.clip.name + " vs " + musicToPlayOnStart);
+            if(a.clip.name.Equals(musicToPlayOnStart)){
+                music = a; // get original music
+                break;
             }
         }
-        else{
-            //if we are playing
-            if(sm_musicIsOn){
-                // stop playing
-                sm_musicIsOn = false;
-                MuteMusic();
-            }
-            else{
-                // keep not playing: Do nothing
-            }
+        if(music == null){
+            Debug.Log("ERROR: Starting Music was not found");
+            return;
         }
-        if(SessionInfo.isVoiceOn()){
+        // Music is playing
+        if(music != null && music.isPlaying){
             if(SessionInfo.isMusicOn()){
-                //if we are playing, 
-                if(sm_voiceIsOn){
-                    // keep playing: Do nothing
+                // Do Nothing: keep playing the music
+                sm_musicIsOn = true;
+            }
+            else{
+                // Pause the music
+                music.Pause();
+                sm_musicIsOn = false;
+            }
+        }
+        // Music is not playing
+        else{
+            if(SessionInfo.isMusicOn()){
+                // Then we need to Unpause the music or Play it from start
+                sm_musicIsOn = true;
+                Debug.Log("music.time: " + music.time);
+                if(music.time > 0){
+                    music.UnPause();
                 }
                 else{
-                    // start some music
-                    sm_voiceIsOn = true;
-                    Play(musicToPlayOnStart);
+                    Play(music.name);
                 }
             }
+            else{
+                // Do Nothing: don't play anithghing
+                sm_musicIsOn = false;
+            }
         }
-        else{
-            //if we are playing
-            if(sm_voiceIsOn){
-                // stop playing
-                sm_voiceIsOn = false;
-                MuteMusic();
+    }
+
+    // When a Voice button is pressed we run this method
+    public void VoiceSettingsChanged(){
+        // Music -----------------------------------
+        AudioSource music = null;
+        foreach(AudioSource a in allSources){
+            if(a.name.Equals(musicToPlayOnStart)){
+                music = a; // get original music
+            }
+        }
+        // Music is playing
+        if(music != null && music.isPlaying){
+            if(SessionInfo.isMusicOn()){
+                // Do Nothing: keep playing the music
+                sm_musicIsOn = true;
             }
             else{
-                // keep not playing: Do nothing
+                // Pause the music
+                music.Pause();
+                sm_musicIsOn = false;
+            }
+        }
+        // Music is not playing
+        else{
+            if(SessionInfo.isMusicOn()){
+                // Then we need to Unpause the music or Play it from start
+                if(music.time > 0){
+                    music.UnPause();
+                }
+                else{
+                    Play(music.name);
+                }
+                sm_musicIsOn = true;
+            }
+            else{
+                // Do Nothing: don't play anithghing
+                sm_musicIsOn = false;
             }
         }
     }

@@ -18,6 +18,8 @@ public class MainMenuScript : MonoBehaviour {
     public GameObject afterDeleteUI;
     public TMP_Text afterDeleteText;
 
+    SoundManager soundManager;
+
     public void loadSequenceScene()
     {
         // store this as the previous scene
@@ -107,5 +109,17 @@ public class MainMenuScript : MonoBehaviour {
         //yield on a new YieldInstruction that waits for 2 seconds.
         yield return new WaitForSeconds(5);
         SceneManager.LoadScene("LoginMenu2");   
+    }
+
+    
+    public void PlaySoundManager(string sound){
+        // Update SoundManager
+        if(soundManager == null){
+            soundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>();
+            if(soundManager == null){
+                Debug.Log("ERROR: could not find a SoundManager in this scene!");
+            }
+        }
+        soundManager.PlayOneShot(sound);
     }
 }

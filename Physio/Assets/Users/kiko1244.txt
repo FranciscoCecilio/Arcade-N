@@ -3,3 +3,6 @@ Name=kiko12
 Age=23
 Gender=Male
 Nr_Utente=123456789
+XP=0
+MusicOn=False
+VoiceOn=True

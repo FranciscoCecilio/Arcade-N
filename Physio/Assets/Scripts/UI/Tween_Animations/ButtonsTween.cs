@@ -6,21 +6,23 @@ using UnityEngine.EventSystems;
 public class ButtonsTween : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     float tweenTime = 0.1f;
+    public Vector3 initialscale;
     // Start is called before the first frame update
     void Start()
     {
         //Tween();
+        
     }
 
     public void ScaleUp(){
         LeanTween.cancel(gameObject);
-        transform.localScale = Vector3.one;
-        LeanTween.scale(gameObject, Vector3.one * 1.1f, tweenTime).setEase(LeanTweenType.easeInBack);
+        transform.localScale = initialscale;
+        LeanTween.scale(gameObject, initialscale * 1.1f, tweenTime).setEase(LeanTweenType.easeInBack);
     }
 
     public void ScaleBack(){
         LeanTween.cancel(gameObject);
-        LeanTween.scale(gameObject, Vector3.one, tweenTime);
+        LeanTween.scale(gameObject, initialscale, tweenTime);
     }
 
     public void OnPointerEnter(PointerEventData eventData){

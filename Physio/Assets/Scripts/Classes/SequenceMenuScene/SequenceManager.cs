@@ -69,8 +69,6 @@ public static class SequenceManager
         State.exercise = null;
         sequence = new global::Sequence(name);
         sequence.setTimestamp("Sequence" + DateTime.Now.ToString("yyyyMMddTHHmmss"));
-        // NOT ANYMORE: creates a file 
-        //sequence.toFile();
     }
 
     // run is called in the start of a session by the button

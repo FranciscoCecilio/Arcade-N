@@ -22,7 +22,7 @@ public static class SessionInfo
     private static int _exerciseId = 1;
 
     // DEFINITIONS
-    private static int _XP = 0; // TODO or level
+    private static int _XP = 0; // TODO or level (0 to 500 in multiples of 100)
     private static bool _isMusicOn = true;
     private static bool _isVoiceOn = true;
 

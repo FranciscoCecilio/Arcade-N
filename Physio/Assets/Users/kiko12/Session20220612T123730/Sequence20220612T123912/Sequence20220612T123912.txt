@@ -6,3 +6,5 @@ restDuration=0
 exe=2=Vertical=Exercise2Scene=right=2=60=0
 exe=2=Vertical=Exercise2Scene=right=2=60=0
 exe=2=Vertical=Exercise2Scene=right=2=60=0
+performance=0.34
+

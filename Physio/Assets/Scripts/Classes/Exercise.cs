@@ -30,7 +30,7 @@ public class Exercise
     //variables
     bool _isCompleted = false;
 
-    int _tries = 0;
+    int _tries = 0; // = correctReps + out_of_paths
     int _correctReps = 0;
 
     String _avgTime;

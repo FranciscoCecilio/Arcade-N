@@ -4,3 +4,4 @@ totalDuration=01:45:23
 series=1
 restDuration=0
 exe=2=Vertical=Exercise2Scene=right=1=60=60
+performance=0.15

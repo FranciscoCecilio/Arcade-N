@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using TMPro;
+using System.Linq;
 using UnityEngine.UI;
 using System.IO;
 
@@ -10,8 +11,11 @@ public class SessionResult : MonoBehaviour
 {
     public TMP_Text sessionNumber;
     public TMP_Text dateText;
-    public TMP_Text totalDurationText;
+    // performance
     public TMP_Text performanceText;
+    List<double> performances = new List<double>();
+    // duration
+    public TMP_Text totalDurationText;
     List<string> timespans = new List<string>();
     public string totalTimeSpan; // HH:mm:ss 
 
@@ -48,8 +52,9 @@ public class SessionResult : MonoBehaviour
         dateText.text = sessionDate;
         // TODO performance
         performanceText.text = "85%";
-        FetchSequenceDurations();
+        FetchSequenceInfo();
         CalculateSessionDuration();
+        CalculateSessionPerformance();
 
     }
 
@@ -202,8 +207,8 @@ public class SessionResult : MonoBehaviour
     }
 
 
-    // goes inside the sequence files and fetches Total duration
-    void FetchSequenceDurations(){
+    // goes inside the sequence files and fetches Total duration and performance
+    void FetchSequenceInfo(){
         // sessionFolderPath: Application.dataPath + "/Users/" + SessionInfo.getUsername() "/" <SessionTS>
         if (Directory.Exists(sessionFolderPath))
         {
@@ -241,8 +246,10 @@ public class SessionResult : MonoBehaviour
                         {
                             string[] data = line.Split('=');
                             if (data[0] == "totalDuration"){
-                                timespans.Add(data[1]); // Get what we came for and store: 00:15:12
-                                break;
+                                timespans.Add(data[1]); // Get what we came for and store: Duration 00:15:12
+                            }
+                            else if(data[0] == "performance"){
+                                performances.Add(double.Parse(data[1], System.Globalization.CultureInfo.InvariantCulture)); // Get what we came for and store: 00:15:12
                             }
                             line = reader.ReadLine();
                         }
@@ -268,6 +275,12 @@ public class SessionResult : MonoBehaviour
         
         totalTimeSpan = string.Format("{0:D2}:{1:D2}:{2:D2}", totalTime.Hours, totalTime.Minutes, totalTime.Seconds);
         totalDurationText.text = totalTimeSpan;
+    }
+
+    void CalculateSessionPerformance(){
+        // calculate average performance
+        double average = performances.Count > 0 ? performances.Average() : 0.0;        
+        performanceText.text = (average * 100).ToString() + " %";
     }
 
 

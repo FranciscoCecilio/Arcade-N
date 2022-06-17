@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using System;
 using System.IO;
@@ -10,7 +11,7 @@ public class Sequence
 {
     private int _id; // never used?
     private string _name;
-    private string _timestamp;
+    private string _timestamp; // format: SequenceyyyyMMddTHHmmss
     // New variable - Francisco Cecílio
     private int _series; // _series is equal to the Lenght of _exerciseList
     // New variable - Francisco Cecílio
@@ -142,11 +143,13 @@ public class Sequence
             System.IO.File.Delete(filepath);
 
         // Calculate the total duration of the sequence
-        System.DateTime timestamp = DateTime.ParseExact(_timestamp, "yyyyMMddTHHmmss",System.Globalization.CultureInfo.InvariantCulture); 
+        System.DateTime timestamp = DateTime.ParseExact(_timestamp.Replace("Sequence",string.Empty), "yyyyMMddTHHmmss",System.Globalization.CultureInfo.InvariantCulture); 
         System.DateTime  now = System.DateTime.Now;
         TimeSpan difference = now - timestamp;
         string totalDuration = string.Format("{0:D2}:{1:D2}:{2:D2} horas", difference.Hours, difference.Minutes, difference.Seconds);
-        Debug.Log("Timespan::: " + totalDuration); //HH:MM:SS horas
+
+        // We need the overall Performance of Sequence (correctReps / tries)
+        List<int> exPerformances = new List<int>();
 
         using (var stream = new FileStream(filepath, FileMode.CreateNew, FileAccess.Write, FileShare.Write))
         using (var writer = new StreamWriter(stream))
@@ -160,7 +163,15 @@ public class Sequence
             for (int i = 0; i < _exerciseList.Count; i++)
             {
                 writer.WriteLine("exe=" + _exerciseList[i].toSequenceFile());
+                // calculate each exercise performance
+                int exPerformance = _exerciseList[i].getCorrectReps() / _exerciseList[i].getTries();
+                exPerformances.Add(exPerformance);
+                Debug.Log("Calculated performance for exercise"+i+" : " + exPerformance);
             }
+            // calculate average performance
+            double average = exPerformances.Count > 0 ? exPerformances.Average() : 0.0;
+            Debug.Log("Calculated avg performance for sequence: " + average);
+            writer.WriteLine("performance=" + average);  
 
             writer.Close();
             stream.Close();

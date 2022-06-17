@@ -48,6 +48,9 @@ public class ExerciseManager : MonoBehaviour {
     private int repCounter;
     private int lastrep = 0;
 
+    // Sound Manager
+    SoundManager soundManager;
+
     private void Start() {
         init();
     }
@@ -66,8 +69,12 @@ public class ExerciseManager : MonoBehaviour {
         //set the correct targets
         setArea();
 
-        beep = (AudioClip)Resources.Load("Sounds/beep");
-        audioSource = GetComponent<AudioSource>();
+        if(soundManager == null){
+            soundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>();
+            if(soundManager == null){
+                Debug.Log("ERROR: could not find a SoundManager in this scene!");
+            }
+        }
 
         Renderer renderer = targets.transform.GetChild(0).gameObject.GetComponent<Renderer>();
         Color color = renderer.material.color;
@@ -200,7 +207,7 @@ public class ExerciseManager : MonoBehaviour {
                             State.currentTarget--;
                         }
 
-                        audioSource.PlayOneShot(beep);
+                        soundManager.PlayOneShot("beep");
                     }
                 }
             }

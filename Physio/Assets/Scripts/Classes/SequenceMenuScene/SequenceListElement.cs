@@ -81,8 +81,6 @@ public class SequenceListElement : MonoBehaviour
             // Exercise(int id, string name, string scenePath, string arm, int nreps, int duration, int restTime)
             _sequence.addExercise(new Exercise(exTypeIndex,  exImg.GetTypeText() , "Exercise"+exTypeIndex.ToString()+"Scene" , armIndex, nReps, 60, restTime));
         }
-        // save to a file
-        //_sequence.toFile();
     }
 
     // Requests to Delete to SequenceListControl.cs

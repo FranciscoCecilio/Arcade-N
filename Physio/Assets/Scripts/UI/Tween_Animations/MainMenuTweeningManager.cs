@@ -10,7 +10,7 @@ public class MainMenuTweeningManager : MonoBehaviour
 
     void Start()
     {
-        if(LastScene._lastSceneIndex != 0) return;
+        //if(LastScene._lastSceneIndex != 0) return;
         // get their initial positions
         mainImgInit = mainImage.transform.localPosition;
         buttonsPanelInit = buttonsPanel.transform.localPosition;

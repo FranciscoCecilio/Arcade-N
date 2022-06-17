@@ -60,7 +60,12 @@ public class BodyScreenController : MonoBehaviour {
         }
 
         if(Input.GetKeyDown(KeyCode.Escape)){
-            PauseTherapy();
+            if(pauseButton.activeSelf && !unPauseButton.activeSelf){
+                PauseTherapy();
+            }
+            else if(!pauseButton.activeSelf && unPauseButton.activeSelf){
+                UnPauseTherapy();
+            }
         }
     }
 

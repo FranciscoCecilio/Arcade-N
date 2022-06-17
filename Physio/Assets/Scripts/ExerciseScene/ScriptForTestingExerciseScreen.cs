@@ -13,6 +13,17 @@ public class ScriptForTestingExerciseScreen : MonoBehaviour
             SessionInfo.setView("RunSequence");
             SessionInfo.createSessionPath();
 
+            // assign the current level
+            SequenceManager.SetCurrentChapter(SessionInfo.getXP() / 100 + 1);
+            if( SequenceManager.GetCurrentChapter() %2 == 0){
+            // chatpter is even and has 4 Images to unlock
+                 SequenceManager.unlockedChaptersEncoding = new List<int>() {0,0,0,0};
+            }
+            else{
+                // chatpter is odd and has 5 Images to unlock
+                 SequenceManager.unlockedChaptersEncoding = new List<int>() {0,0,0,0,0};
+            }
+
             // Add 1nd sequence
             // Creates new sequence
             SequenceManager.newSequence("testSequence1");

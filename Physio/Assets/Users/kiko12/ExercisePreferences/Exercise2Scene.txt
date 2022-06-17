@@ -1,5 +1,5 @@
 arm=right
-pathPosition=(554.84, 190.49, 1.51)
+pathPosition=(396.55, 156.17, 1.00)
 pathSize=(1.41, 1.00, 0.98)
 target0=(0.00, 116.10, 0.00)
 target1=(0.00, -116.10, 0.00)

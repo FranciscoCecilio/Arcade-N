@@ -10,7 +10,7 @@ public class ChapterEntry : MonoBehaviour
     public TMP_Text caption;
     public Image photograph;
 
-     public void SetPhotograph(int chapterNum, int chapterImg){
+    public void SetPhotograph(int chapterNum, int chapterImg){
 
         Sprite sprite = Resources.Load<Sprite>("Narrative Materials/Chapter"+chapterNum.ToString() +"/"+ chapterImg.ToString());
 

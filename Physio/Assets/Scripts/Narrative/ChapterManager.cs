@@ -28,8 +28,10 @@ public class ChapterManager : MonoBehaviour
     [Header("3) Two images")]
     public ChapterEntry left_chapter_3;
     public ChapterEntry right_chapter_3;
-    [Header("4) Left image and empty page")]
+    [Header("4) Left image and empty")]
     public ChapterEntry left_chapter_4;
+    [Header("5) Preview Image and Text")]
+    public ChapterEntry preview_image;
     public TMP_Text preview_text;
     
     [Header("SoundManager")]
@@ -38,44 +40,122 @@ public class ChapterManager : MonoBehaviour
     public int currentPageIndex;
     public int currentPageType;
     public GameObject currentPage;
+    public bool isChapterOdd;
 
-    // we can enter this 
-    public void ShowNarrative(){
-        currentChapter = 1;
-        currentImage = 1;
-        //currentChapter = SessionInfo.getXP() % 100 + 1;
-        //currentImage = GetCurrentImage();
-        
-        // 1) If we are starting the session (we come from Session Creation Scene), we want to:
-        // 1. look at the preview of the _lastchapter; 2. turn the page; 3. Read the title and 1st image; 4. go to exercise screen
-        currentPageType = 2;
-        SetPage(currentPageType);
-
+    void Start()
+    {
+        ShowNarrative();
     }
 
-    public void SetPage(int pagetype){
-        // show current page and set variables
-        ShowPage(pagetype);
-        // place the correct vis or titles
-        switch(pagetype){
-            case 1: // index
-                // TODO
-                break;
-            case 2: // 2) Chapter name and 1st Image
-                SetChapterTitle(chapterName_text);
-                SetChapterUI(right_chapter_2);
-                break;
-            case 3: // 3) Two images
-                SetChapterUI(left_chapter_3);
-                SetChapterUI(right_chapter_3);
-                break;
-            case 4: // 4) Left image and empty page
-                SetChapterUI(left_chapter_4);
-                SetChapterTitle(preview_text);
-                break;
+    public void ShowNarrative(){
+
+        currentChapter = SequenceManager.GetCurrentChapter();
+
+        if(currentChapter % 2 == 0){
+            isChapterOdd = false;
+        }
+        else{
+            isChapterOdd = true;
+        }
+
+        // we can enter from the exercise: 
+        // 1) to see the preview 
+        if(SequenceManager.hasPreviewToUnlock){
+            // ANIMATE preview 
+            // 1. look at the preview of the _lastchapter; 2. turn the page; 3. Read the title and 1st image; 4. go to exercise screen
+            SequenceManager.hasPreviewToUnlock = false;
+            StartCoroutine(ShowPreview());
+        }
+        // 2) to see the unlocked images
+        else if(SequenceManager.hasImagesToUnlock){
+            // ANIMATE images 
+            // we want to 1. unlock the image or images according to the XP and session_progress; 2. nextExercise()
+            SequenceManager.hasImagesToUnlock = false;
+            StartCoroutine(ShowAndReadUnlockedImages());
+        }
+        // or from the Main Menu
+        else{
+            // allow free moving.
         }
     }
 
+    // unlocks images and plays a sound manager, if there are multiple images we wait between them
+    private IEnumerator ShowPreview(){
+        currentPageType = 5;
+        ShowPage(5);
+        SetPreviewText(preview_text);
+        if(isChapterOdd){ // total of 5 images
+            currentImage = 5;
+        }
+        else{ // total of 4 images
+            currentImage = 5;
+        }
+        SetChapterUI(preview_image);
+        WaitForSeconds wait = new WaitForSeconds(/*tempo do voice */ 5) ;
+        yield return wait ;
+        // we showed the preview - Bye Narrative screen: Start Session!!
+        SequenceManager.nextExercise();
+    }
+
+    // unlocks images and plays a sound manager, if there are multiple images we wait between them
+    private IEnumerator ShowAndReadUnlockedImages(){
+
+        // TODO find SoundManager clip being played m_AudioSource.clip.length
+        WaitForSeconds wait = new WaitForSeconds(/*tempo do voice */ 5) ;
+
+        for(int i = 0; i < SequenceManager.unlockedChaptersEncoding.Count; i ++){
+            if(SequenceManager.unlockedChaptersEncoding[i] == 1){
+                currentImage = i + 1;
+                switch(currentImage){
+                    case 1: // 2) Chapter name and 1st Image
+                        ShowPage(2); // shows the correct pagetype
+                        SetChapterTitle(chapterName_text); // sets the title of the chapter
+                        SetChapterUI(right_chapter_2); // grabs currentImage and places it on the chapterEntry photograph 
+                        yield return wait ;
+                        break;
+                    case 2: // 3) Two images (first one)
+                        ShowPage(3); 
+                        SetChapterUI(left_chapter_3);
+                        right_chapter_3.gameObject.SetActive(false);
+                        yield return wait ; 
+                        break;
+                    case 3: // 3) Two images (first and second)
+                        ShowPage(3); 
+                        currentImage = i; // [special] scenario where we want to load the first photo 
+                        SetChapterUI(left_chapter_3); 
+                        currentImage = i + 1;
+                        SetChapterUI(right_chapter_3); 
+                        yield return wait ; 
+                        break;
+                    case 4: 
+                        if(isChapterOdd){ // We have 2 more images to show: 3) Two images (first one)
+                            ShowPage(3); 
+                            SetChapterUI(left_chapter_3); 
+                            right_chapter_3.gameObject.SetActive(false);
+                        }
+                        else{ // Last image: 4) Left image and empty
+                            SetChapterUI(left_chapter_4);
+                        }
+                        yield return wait ; 
+                        break;
+                    case 5: // Oddchapter only: 3) Two images (first and second)
+                        ShowPage(3); 
+                        currentImage = i; // [special] scenario where we want to load the first photo 
+                        SetChapterUI(left_chapter_3); 
+                        currentImage = i + 1;
+                        SetChapterUI(right_chapter_3); 
+                        yield return wait ; 
+                        break;
+
+                }
+                //SequenceManager.unlockedChaptersEncoding[i] = -1;
+            }
+        }
+        // we showed all the unlocked images - Bye Narrative screen: Return to Exercise!!
+        SequenceManager.nextExercise();
+    }
+
+    // Sets page object active and closes others
     public void ShowPage(int pagetype){
         // hide all pages
         for(int i = 0; i < pageTypes.Length; i++){
@@ -87,6 +167,7 @@ public class ChapterManager : MonoBehaviour
         currentPage = pageTypes[pagetype - 1];
     }
 
+    // fetches the chapter title and the title text
     public void SetChapterTitle(TMP_Text title){
         string titlePath = Application.dataPath + "/Resources/Narrative Materials/Chapter"+currentChapter.ToString() +"/Text/Title.txt";
 
@@ -102,13 +183,14 @@ public class ChapterManager : MonoBehaviour
         }
     }
 
+    // fetches the preview text and places 
     public void SetPreviewText(TMP_Text prev){
         string previewPath = Application.dataPath + "/Resources/Narrative Materials/Chapter"+currentChapter.ToString() +"/Text/Preview.txt";
 
         if (System.IO.File.Exists( previewPath)){ 
             //Read the title directly from the Title.txt
             StreamReader reader = new StreamReader(previewPath);
-            prev.text = reader.ReadToEnd();
+            prev.text = reader.ReadLine();
             reader.Close();
         }
         else{
@@ -121,76 +203,7 @@ public class ChapterManager : MonoBehaviour
     public void SetChapterUI(ChapterEntry vis){
         vis.SetPhotograph(currentChapter,currentImage);
         vis.SetText(currentChapter,currentImage);
-    }
-
-    // gives the number of the unlocked image
-    int GetCurrentImage(){
-        bool isCapituloImpar;
-        // check the level and progress to unlock the image
-        switch(SessionInfo.getXP()){
-            case 0: // o que fazer?? quando vem do main menu
-                return 1;
-            case 1:
-                isCapituloImpar = false;
-                break;
-            case 2:
-                isCapituloImpar = true;
-                break;
-            case 3:
-                isCapituloImpar = false;
-                break;
-            case 4:
-                isCapituloImpar = true;
-                break;
-            case 5:
-                isCapituloImpar = false;
-                break;
-            default:
-                Debug.Log("XP marado: não é multiplo de 100 entre 0 e 500."+SessionInfo.getXP());
-                return -1;
-        }
-        if(isCapituloImpar){
-            // 5 images per chapter - we want to unlock one image every 20% sessionProgression is completed
-            switch(SequenceManager.GetSessionProgressionPerc()){
-                case >= 1f:
-                    return 5;
-                case >= 0.80f:
-                    return 4;
-                case >= 0.60f:
-                    return 3;
-                case >= 0.40f:
-                    return 2;
-                case >= 0.20f:
-                    return 1;
-                default:
-                    Debug.Log("sessionProgress is too low to unlock images: " + SequenceManager.GetSessionProgressionPerc());
-                    return -1;
-            }
-        }
-        else{
-            // 4 images per chapter - we want to unlock one image every 25% sessionProgression is completed
-            switch(SequenceManager.GetSessionProgressionPerc()){
-                case >= 1f:
-                    return 4;
-                case >= 0.75f:
-                    return 3;
-                case >= 0.50f:
-                    return 2;
-                case >= 0.25f:
-                    return 1;
-                default:
-                    Debug.Log("sessionProgress is too low to unlock images: " + SequenceManager.GetSessionProgressionPerc());
-                    return -1;
-            }
-        }
-    }
-
-
-    void Start()
-    {
-        // Open the correct page
-        ShowNarrative();
-        
+        vis.gameObject.SetActive(true);
     }
 
     // open the next page

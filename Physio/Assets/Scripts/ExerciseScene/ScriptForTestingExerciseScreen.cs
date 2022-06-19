@@ -23,6 +23,8 @@ public class ScriptForTestingExerciseScreen : MonoBehaviour
                 // chatpter is odd and has 5 Images to unlock
                  SequenceManager.unlockedChaptersEncoding = new List<int>() {0,0,0,0,0};
             }
+            // when we start a new Session we want to watch the last chapter's preview
+            SequenceManager.hasPreviewToUnlock = true;
 
             // Add 1nd sequence
             // Creates new sequence

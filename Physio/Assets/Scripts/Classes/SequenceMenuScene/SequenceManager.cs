@@ -28,6 +28,8 @@ public static class SequenceManager
     // 0: not yet unlocked; 1: unlocked and waiting to have it image placed; -1: image placed
     public static List<int> unlockedChaptersEncoding ;  
     private static int currentChapter; // current Level
+    public static bool hasImagesToUnlock = false;
+    public static bool hasPreviewToUnlock = false; // only becomes true on the start of the session.
 
     // Setters and Getters
     public static void SetSeqIndex(int i){
@@ -155,6 +157,7 @@ public static class SequenceManager
             case 0:
                 // we want to unlock this image for the first time
                 unlockedChaptersEncoding[i] = 1;
+                hasImagesToUnlock = true;
                 break;
             case 1:
                 // we want to unlock this image but it was flaged before
@@ -165,12 +168,6 @@ public static class SequenceManager
                 // DO nothing
                 break;
         }
-    }
-
-    // we are going to inspect weather we are going to Narrative screen
-    // if yes which images do we want to unlock, and Animate them in order.
-    static public void CheckForImagesToUnlock(){
-
     }
 
     // called by SequenceMenuScript.CreateNewSequence()
@@ -216,6 +213,9 @@ public static class SequenceManager
         // Reset the sessionProgressionPercentage
         sessionProgressionPerc = 0;
 
+        // when we start a new Session we want to watch the last chapter's preview
+        hasPreviewToUnlock = true;
+
         //Calculate the PercPerRepetition
         CalculatePercPerRepetition();
 
@@ -234,7 +234,7 @@ public static class SequenceManager
             totalRepetitions += sequencesToRun[i].getTotalRepetitions();
         }
         // set the variable percePerRepetition
-        percPerRepetition = (100 / totalRepetitions) * 0.01f;
+        percPerRepetition = (100f / (float)totalRepetitions) * 0.01f;
         // here we want to set in which percentages we need to unlock images from the chapter
 
     }
@@ -246,8 +246,7 @@ public static class SequenceManager
             // Assign the current sequence
             sequence = sequencesToRun[sequenceIndex];
             index = 0;
-            // TODO: here we want to check for narrative pictures to show!
-            CheckForImagesToUnlock();
+            
             nextExercise();
         }
         else
@@ -262,25 +261,32 @@ public static class SequenceManager
     // this method is called after each exercise is complete
     public static void nextExercise()
     {
-        if (index < sequence.getLength())
-        {
-            Exercise tempExercise = sequence.getExercise(index);
-            State.exercise = tempExercise;
-            SceneManager.LoadScene(tempExercise.getScenePath());
-            index++;
+        // here we want to check for narrative pictures to show!
+        if(hasPreviewToUnlock || hasImagesToUnlock){
+            SceneManager.LoadScene("NarrativeMenu");
         }
-        else
-        {
-            // THIS SEQUENCE IS FINISHED
-            // Save Sequence
-            sequence.toFile();
-            // go to next!
-            sequenceIndex ++;
-            nextSequence();
+        else{
+            if (index < sequence.getLength())
+            {
+                Exercise tempExercise = sequence.getExercise(index);
+                State.exercise = tempExercise;
+                SceneManager.LoadScene(tempExercise.getScenePath());
+                index++;
+            }
+            else
+            {
+                // THIS SEQUENCE IS FINISHED
+                // Save Sequence
+                sequence.toFile();
+                // go to next!
+                sequenceIndex ++;
+                nextSequence();
 
-            // NOT ANYMORE: here we should go back to the session screen for the rest duration!
-            //SceneManager.LoadScene("MainMenu");
+                // NOT ANYMORE: here we should go back to the session screen for the rest duration!
+                //SceneManager.LoadScene("MainMenu");
+            }
         }
+        
     }
     
     // this method returns the **1st Exercise from the next Sequence** and is usefull to show in the panel of exercise scene

@@ -22,7 +22,6 @@ public class ShowNextExercise : MonoBehaviour
     void Start()
     {
         PopulatePanel();
-        Debug.Log(SequenceManager.isNextPanelOn);
         info.SetActive(SequenceManager.isNextPanelOn);
     }
 

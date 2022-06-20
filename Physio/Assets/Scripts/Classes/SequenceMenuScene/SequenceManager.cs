@@ -265,8 +265,8 @@ public static class SequenceManager
     public static void nextExercise()
     {
         // here we want to check for narrative pictures to show!
-        if(hasPreviewToUnlock || hasImagesToUnlock){
-            //SceneManager.LoadScene("NarrativeMenu");
+        if(/*hasPreviewToUnlock ||*/ hasImagesToUnlock){
+            SceneManager.LoadScene("NarrativeMenu");
         }
         else{
             if (index < sequence.getLength())

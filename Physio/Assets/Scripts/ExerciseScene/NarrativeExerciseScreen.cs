@@ -96,9 +96,9 @@ public class NarrativeExerciseScreen : MonoBehaviour
         handleText.text = ((int)(SequenceManager.GetSessionProgressionPerc() * 100) ).ToString() + "%";
         
         if(SequenceManager.hasImagesToUnlock){
-            // TODO potentially updates an image to look like (Hey its unlocked and you will see it when you finish that serie!)
+            // updates an image to look like (Hey its unlocked and you will see it when you finish that serie!)
             // Play some ongoing animation
-            
+            chosenBarCheckpoint.AnimateCheckpoints();
         }
 
         // progressively clears the blurry of the next chapter image

@@ -12,17 +12,15 @@ public class BarCheckpoints : MonoBehaviour
     public Image lastImage;
 
     // capitulos pares: Lenght of 3; capitulos ímpares: Lenght of 4
-    public Image[] chapterImages; 
-    public Image[] numberBackgrounds;
-    public TMP_Text[] numberTexts;
+    public BarCheckpointAnimation[] barCheckpoints;
 
     [Header("For Debugging")]
     public List<Sprite> sprites;
 
     // Hides all photographs
     public void HidePhotographs(){
-        for(int i = 0; i < chapterImages.Length; i++){
-            chapterImages[i].gameObject.SetActive(false);
+        for(int i = 0; i < barCheckpoints.Length; i++){
+            barCheckpoints[i].chapterImage.gameObject.SetActive(false);
         }
     }
 
@@ -37,15 +35,13 @@ public class BarCheckpoints : MonoBehaviour
         for(int i = 0; i< SequenceManager.unlockedChaptersEncoding.Count; i++){
             if(SequenceManager.unlockedChaptersEncoding[i] == -1){
                 // Unlock it
-                chapterImages[i].gameObject.SetActive(true);
-                chapterImages[i].sprite = sprites[i];
+                barCheckpoints[i].chapterImage.gameObject.SetActive(true);
+                barCheckpoints[i].chapterImage.sprite = sprites[i];
             }
             else if(SequenceManager.unlockedChaptersEncoding[i] == 1){
                 // Unlock it
-                chapterImages[i].gameObject.SetActive(true);
-                chapterImages[i].sprite = sprites[i];
-                // TODO make some animations / color to the text and background
-
+                barCheckpoints[i].chapterImage.gameObject.SetActive(true);
+                barCheckpoints[i].chapterImage.sprite = sprites[i];
                 // and Set to code -1: unlocked 
                 SequenceManager.unlockedChaptersEncoding[i] = -1;
             }
@@ -57,12 +53,7 @@ public class BarCheckpoints : MonoBehaviour
         for(int i = 0; i< SequenceManager.unlockedChaptersEncoding.Count; i++){
             if(SequenceManager.unlockedChaptersEncoding[i] == 1){
                 // Animate it
-                chapterImages[i].gameObject.SetActive(true);
-                chapterImages[i].sprite = sprites[i];
-                // TODO make some animations / color to the text and background
-                
-                // and Set to code -1: unlocked 
-                SequenceManager.unlockedChaptersEncoding[i] = -1;
+                barCheckpoints[i].StartAnimationLoop();
             }
         }
     }

@@ -4,18 +4,16 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 
-// Used in Main Menu, Narrative Menu, all Exercises,
+// Used in all menus. These managers pass on from scene to scene. They are spawned in Main Menu and 1st Exercise scene (2 different songs for each menu)
 public class SoundManager : MonoBehaviour
 {
     public Sound[] sounds;
+    public bool isMainMenuSM;
+
     List<AudioSource> allSources;
-
-    [SerializeField] bool sm_musicIsOn;
-
-    public Sound GetSound(string name){
-        Sound s =  Array.Find(sounds, sound => sound.name == name);
-        return s;
-    }
+    
+    [Header("For Debugging")]
+    public bool sm_musicIsOn;
 
     void Awake(){
         // We want the music to not stop when we enter a new exercise 
@@ -24,11 +22,17 @@ public class SoundManager : MonoBehaviour
 
         if(soundManagersInScene.Length > 1){
             // If we are entering Main Menu from a scene that has a SoundManager (i.e ExerciseScene) we want to delete the last
-            if(scene == "MainMenu"){
-                for(int i = 0; i < soundManagersInScene.Length; i++){
-                    if(soundManagersInScene[i] != this.gameObject){
-                        Destroy(soundManagersInScene[i]);
+
+            if(isMainMenuSM){
+                if(scene == "MainMenu"){
+                    for(int i = 0; i < soundManagersInScene.Length; i++){
+                        if(soundManagersInScene[i] != this.gameObject){
+                            Destroy(soundManagersInScene[i]); // Delete other
+                        }
                     }
+                }
+                else if(scene == "Exercise1Scene" || scene == "Exercise2Scene" || scene == "Exercise0Scene"){
+                    Destroy(this.gameObject); // delete MainMenuSM and leave Exercise scene SM
                 }
             }
             // If we are loading another scene, we want to destroy that scene's soundManager
@@ -36,7 +40,8 @@ public class SoundManager : MonoBehaviour
                 Destroy(this.gameObject);
             }
         }
-        // if we got here, we want this SoundManager to DontDestroyOnLoad
+
+        // We want this SoundManager to DontDestroyOnLoad
         if ( scene == "MainMenu" || scene == "Exercise1Scene" || scene == "Exercise2Scene" || scene == "Exercise0Scene" ){
             DontDestroyOnLoad(gameObject);
         }
@@ -54,6 +59,7 @@ public class SoundManager : MonoBehaviour
 
         }
     }
+
     public string musicToPlayOnStart; 
     public void Start(){
         sm_musicIsOn = SessionInfo.isMusicOn();
@@ -65,6 +71,11 @@ public class SoundManager : MonoBehaviour
         }
     }
     
+    public Sound GetSound(string name){
+        Sound s =  Array.Find(sounds, sound => sound.name == name);
+        return s;
+    }
+
     public void Play(string name){
         if(!sm_musicIsOn) return;
         Sound s = GetSound(name);

@@ -39,9 +39,7 @@ public class SequenceListControl : MonoBehaviour
         clearDialogue.SetActive(false);
     }
     
-    // Destroi o botao 
-    // TODO: [NOT: destruir e o txt da selectedSequence - because the file will only be created after completing a sequence]
-    // TODO: depois de destruir um botao queremos dar update nos XP esperados
+    // Destroi o botao da lista
     public void DestroySequence()
     {
         //Apaga o botão da sequência

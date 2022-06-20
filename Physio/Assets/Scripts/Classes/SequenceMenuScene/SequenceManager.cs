@@ -195,7 +195,7 @@ public static class SequenceManager
             Sequence seqToAdd = eachChild.GetComponent<SequenceListElement>().GetSequence();
             
             if(seqToAdd == null){
-                Debug.Log("ERROR: tried to Add a Sequence from List Content but it is null.");
+                Debug.LogError("ERROR: tried to Add a null Sequence from List Content.");
             }
             else{
                 sequencesToRun.Add(seqToAdd);
@@ -203,6 +203,7 @@ public static class SequenceManager
         }
         // assign the current level
         currentChapter =  SessionInfo.getXP() / 100 + 1;
+
         if(currentChapter%2 == 0){
             // chatpter is even and has 4 Images to unlock
             unlockedChaptersEncoding = new List<int>() {0,0,0,0};
@@ -265,7 +266,7 @@ public static class SequenceManager
     {
         // here we want to check for narrative pictures to show!
         if(hasPreviewToUnlock || hasImagesToUnlock){
-            SceneManager.LoadScene("NarrativeMenu");
+            //SceneManager.LoadScene("NarrativeMenu");
         }
         else{
             if (index < sequence.getLength())

@@ -64,6 +64,30 @@ public static class SessionInfo
         loadInfo();
     }
 
+    private static void loadInfo()
+    {
+        string line = "";
+        Debug.Log("username: " + _username);
+        if(_username == string.Empty) _username = "kiko12"; // For testing
+        StreamReader reader = new StreamReader(Application.dataPath + "/Users/" + _username + ".txt");
+        {
+            line = reader.ReadLine();
+            while (line != null)
+            {
+                string[] data = line.Split('=');
+                if (data[0] == "Name") _name = data[1];
+                else if (data[0] == "Age") _age = data[1];
+                else if (data[0] == "Gender") _gender = data[1];
+                else if (data[0] == "Nr_Utente") _nrSaude = data[1];
+                else if (data[0] == "XP") _XP = int.Parse(data[1]);
+                else if (data[0] == "MusicOn") _isMusicOn = (data[1] == "true");
+                else if (data[0] == "VoicOn") _isVoiceOn = (data[1] == "true");
+                line = reader.ReadLine();
+            }
+        }
+        Debug.Log("LoadedInfo");
+        reader.Close();
+    }
 
     // This is called when we logout from the MainMenu to Login
     public static void logout()
@@ -74,7 +98,7 @@ public static class SessionInfo
 
         // write to the user file the settings and XP
         StreamWriter writer = new StreamWriter(userfile);
-
+        // old stuff (always the same)
         writer.WriteLine("Username=" + _username);
         writer.WriteLine("Name=" + _name);
         writer.WriteLine("Age=" + _age);
@@ -86,9 +110,6 @@ public static class SessionInfo
         writer.WriteLine("VoiceOn=" + _isVoiceOn);
 
         writer.Close();
-
-        SessionInfo.setUsername(_username);
-        
     }
 
     public static int getExerciseId()
@@ -132,29 +153,6 @@ public static class SessionInfo
 
     public static void setVoice(bool intention){
         _isVoiceOn = intention;
-    }
-
-    private static void loadInfo()
-    {
-        string line = "";
-        StreamReader reader = new StreamReader(Application.dataPath + "/Users/" + _username + ".txt");
-        {
-            line = reader.ReadLine();
-            while (line != null)
-            {
-                string[] data = line.Split('=');
-                if (data[0] == "Name") _name = data[1];
-                else if (data[0] == "Age") _age = data[1];
-                else if (data[0] == "Gender") _gender = data[1];
-                else if (data[0] == "Nr_Utente") _nrSaude = data[1];
-                else if (data[0] == "XP") _XP = int.Parse(data[1]);
-                else if (data[0] == "MusicOn") _isMusicOn = (data[1] == "true");
-                else if (data[0] == "VoicOn") _isVoiceOn = (data[1] == "true");
-                line = reader.ReadLine();
-            }
-        }
-        Debug.Log("LoadedInfo");
-        reader.Close();
     }
 
     // TODO: save session file in the end of the session (last exercise from last sequence OR Quitting during the exercises)
@@ -240,7 +238,7 @@ public static class SessionInfo
         _toView = "";
         _timestampSession = "";
         _username = "";
-        _username = "kiko1244";
+        _username = "";
         _name= "";
         _age= "";
         _gender= "";

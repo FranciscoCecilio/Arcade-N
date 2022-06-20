@@ -19,6 +19,12 @@ public class BarCheckpoints : MonoBehaviour
     [Header("For Debugging")]
     public List<Sprite> sprites;
 
+    // Hides all photographs
+    public void HidePhotographs(){
+        for(int i = 0; i < chapterImages.Length; i++){
+            chapterImages[i].gameObject.SetActive(false);
+        }
+    }
 
     // Load the images from Narrative Exercise Screen
     public void SetImages(List<Sprite> images){
@@ -29,12 +35,32 @@ public class BarCheckpoints : MonoBehaviour
     // Before this function, we had a transiction to the Narrative screen showing the pictures
     public void UnlockCheckpoints(){
         for(int i = 0; i< SequenceManager.unlockedChaptersEncoding.Count; i++){
-            if(SequenceManager.unlockedChaptersEncoding[i] == 1){
+            if(SequenceManager.unlockedChaptersEncoding[i] == -1){
+                // Unlock it
+                chapterImages[i].gameObject.SetActive(true);
+                chapterImages[i].sprite = sprites[i];
+            }
+            else if(SequenceManager.unlockedChaptersEncoding[i] == 1){
                 // Unlock it
                 chapterImages[i].gameObject.SetActive(true);
                 chapterImages[i].sprite = sprites[i];
                 // TODO make some animations / color to the text and background
 
+                // and Set to code -1: unlocked 
+                SequenceManager.unlockedChaptersEncoding[i] = -1;
+            }
+        }
+    }
+
+    // Animate Checkpoints to be unlocked
+    public void AnimateCheckpoints(){
+        for(int i = 0; i< SequenceManager.unlockedChaptersEncoding.Count; i++){
+            if(SequenceManager.unlockedChaptersEncoding[i] == 1){
+                // Animate it
+                chapterImages[i].gameObject.SetActive(true);
+                chapterImages[i].sprite = sprites[i];
+                // TODO make some animations / color to the text and background
+                
                 // and Set to code -1: unlocked 
                 SequenceManager.unlockedChaptersEncoding[i] = -1;
             }

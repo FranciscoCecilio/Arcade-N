@@ -71,13 +71,16 @@ public class MainMenuScript : MonoBehaviour {
             greetingsText = "BOM DIA, ";
             voiceAssistant.PlayVoiceLine("bom_dia");
         }
-        // place image and text
-        SetMainPage();
-        
         // this method loads the User in the SessionInfo
         SessionInfo.loadUser();
         
-        helloText.text = greetingsText + SessionInfo.getName().ToUpper() + "!";
+        // place image and text
+        SetMainPage();
+
+        // set " Bom dia, <username> " text
+        string firstName = SessionInfo.getName().Split(' ')[0];
+        helloText.text = greetingsText + firstName.ToUpper() + "!";
+        
         //age_and_gender.text = SessionInfo.getGender() + ", " + SessionInfo.getAge();
         if (SessionInfo.getGender() == "Female")
         {

@@ -1,8 +1,0 @@
-Username=kiko1244
-Name=
-Age=
-Gender=
-Nr_Utente=
-XP=0
-MusicOn=False
-VoiceOn=True

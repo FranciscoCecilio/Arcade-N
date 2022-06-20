@@ -11,15 +11,17 @@ public class SoundButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     public bool isVoiceButton;
     public bool isMuteButton;
 
+    [Header("Prefab objects")]
+    public GameObject otherButton;
+    public GameObject white;
+    float tweenTime = 0.2f;
+    
     [Header("Are we on the exerciseScene?")]
     public bool isExerciseScene;
 
-    public GameObject otherButton;
-
-    public GameObject white;
-    float tweenTime = 0.2f;
-    SoundManager soundManager; // if the user clicks on the music buttons, we tell SoundManager
+    [Header("If is voice button")]
     public VoiceAssistant voiceAssistant; // one per scene
+    SoundManager soundManager; // if the user clicks on the music buttons, we search the soundManager in the scene
 
     // Start is called before the first frame update
     void Start()
@@ -65,9 +67,6 @@ public class SoundButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         else{
             Debug.Log("ERROR: we have to assign the button identity in the editor");
         }
-        //SessionInfo.
-        // fetch correct size
-
     }
 
     public void ScaleSideway(){
@@ -119,22 +118,24 @@ public class SoundButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         else{
             Debug.Log("ERROR: we have to assign the button identity in the editor");
         }
-        // Update SoundManager
+        // Find SoundManager if its null
         if(soundManager == null){
             soundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>();
             if(soundManager == null){
                 Debug.Log("ERROR: could not find a SoundManager in this scene!");
             }
         }
-        // Change settings
+        // Change settings for music button:
+        // 1) SoundManager for music
         if(isMusicButton){
             soundManager.MusicSettingsChanged();
         }
+        // 2) VoiceAssistant for voice button
         else if(isVoiceButton && voiceAssistant != null){
             voiceAssistant.VoiceSettingsChanged();
         }
         
-        // Play Sound
+        // Play click Sound
         soundManager.PlayOneShot("button_click2");
         
         // Show and Hide buttons

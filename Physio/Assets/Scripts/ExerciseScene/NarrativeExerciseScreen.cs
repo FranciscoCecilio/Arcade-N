@@ -10,6 +10,7 @@ public class NarrativeExerciseScreen : MonoBehaviour
 {
     [Header("For Debugging")]
     public List<Sprite> loadedChapterImages = new List<Sprite>(); // loaded on start from resources folder
+    [HideInInspector]
     public BarCheckpoints chosenBarCheckpoint;
     
     public BarCheckpoints oddChapterCheckpoints; // has lastchapter_preview + 5 images TODO make class
@@ -42,9 +43,11 @@ public class NarrativeExerciseScreen : MonoBehaviour
             evenChapterCheckpoints.gameObject.SetActive(false);
             chosenBarCheckpoint = oddChapterCheckpoints;
         }
+
         // load images of current chapter from the Resources folder
         LoadChapterImages();
-        
+        // Hide all the images 
+        chosenBarCheckpoint.HidePhotographs();
         // place the correct images into the chosenBarCheckpoints
         chosenBarCheckpoint.gameObject.SetActive(true);
         chosenBarCheckpoint.SetImages(loadedChapterImages);
@@ -91,7 +94,12 @@ public class NarrativeExerciseScreen : MonoBehaviour
         progressBar.value = SequenceManager.GetSessionProgressionPerc();
         // updates value text
         handleText.text = ((int)(SequenceManager.GetSessionProgressionPerc() * 100) ).ToString() + "%";
-        // TODO potentially updates an image to look like (Hey its unlocked and you will see it when you finish that serie!)
+        
+        if(SequenceManager.hasImagesToUnlock){
+            // TODO potentially updates an image to look like (Hey its unlocked and you will see it when you finish that serie!)
+            // Play some ongoing animation
+            
+        }
 
         // progressively clears the blurry of the next chapter image
         CalculateBlurSize();

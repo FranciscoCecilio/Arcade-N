@@ -67,6 +67,7 @@ public class ExerciseParametersFlow : MonoBehaviour
     }
 
     // Cancels the Edition (called by CANCEL button) and restores the previous values
+    // TODO remove button in list if we cancel the 1st edition (litle bug)
     public void CancelEditing(){
         // Close all possible screens
         CloseAllPanels();

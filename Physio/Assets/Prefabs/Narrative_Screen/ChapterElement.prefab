@@ -321,6 +321,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   caption: {fileID: 963026826933029843}
   photograph: {fileID: 963026825271189881}
+  textWriter: {fileID: 6146160244709036249}
 --- !u!1 &963026826933029853
 GameObject:
   m_ObjectHideFlags: 0
@@ -331,9 +332,10 @@ GameObject:
   m_Component:
   - component: {fileID: 963026826933029852}
   - component: {fileID: 963026826933029842}
+  - component: {fileID: 6146160244709036249}
   - component: {fileID: 963026826933029843}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Caption
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -367,6 +369,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963026826933029853}
   m_CullTransparentMesh: 1
+--- !u!114 &6146160244709036249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963026826933029853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31cc966a85eb0d94c98c2f4c3caa8188, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &963026826933029843
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -69,6 +69,8 @@ public static class SequenceManager
     }
 
     public static int GetCurrentChapter(){
+        if(currentChapter == 0) 
+            currentChapter = 1;
         return currentChapter;
     }
 

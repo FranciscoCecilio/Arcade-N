@@ -1,0 +1,16 @@
+timestamp=20220619T194653
+name=Vertical
+arm=right
+nrReps=2
+correctReps=2
+tries=10
+outOfPath=8
+duration=60
+restTime=2
+avgTime=01:02 m
+totalTime=02:05 min
+regShouldComp=False
+regSpineComp=False
+leftShoulderComp=0
+rightShoulderComp=0
+spineComp=0

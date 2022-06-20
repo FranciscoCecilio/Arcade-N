@@ -19,6 +19,7 @@ public class SoundButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     public GameObject white;
     float tweenTime = 0.2f;
     SoundManager soundManager; // if the user clicks on the music buttons, we tell SoundManager
+    public VoiceAssistant voiceAssistant; // one per scene
 
     // Start is called before the first frame update
     void Start()
@@ -126,9 +127,13 @@ public class SoundButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             }
         }
         // Change settings
-        if(isMusicButton) soundManager.MusicSettingsChanged();
-        else if(isVoiceButton) soundManager.VoiceSettingsChanged();
-
+        if(isMusicButton){
+            soundManager.MusicSettingsChanged();
+        }
+        else if(isVoiceButton && voiceAssistant != null){
+            voiceAssistant.VoiceSettingsChanged();
+        }
+        
         // Play Sound
         soundManager.PlayOneShot("button_click2");
         

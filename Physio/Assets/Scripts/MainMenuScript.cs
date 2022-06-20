@@ -18,7 +18,12 @@ public class MainMenuScript : MonoBehaviour {
     public GameObject afterDeleteUI;
     public TMP_Text afterDeleteText;
 
-    SoundManager soundManager;
+    [Header("Narrative on the right")]
+    public Image chapterImg;
+    public TMP_Text chapterText;
+
+    public SoundManager soundManager;
+    public VoiceAssistant voiceAssistant;
 
     public void loadSequenceScene()
     {
@@ -56,10 +61,19 @@ public class MainMenuScript : MonoBehaviour {
         
         // verificar a hora do dia! para dizer Bom dia, Boa tarde
         int sysHour = System.DateTime.Now.Hour; //gives you the current hour as an integer.
-        string greetingsText = "BOM DIA, ";
+        string greetingsText;
+        
         if(sysHour > 12){
             greetingsText = "BOA TARDE, ";
+            voiceAssistant.PlayVoiceLine("boa_tarde");
         }
+        else{
+            greetingsText = "BOM DIA, ";
+            voiceAssistant.PlayVoiceLine("bom_dia");
+        }
+        // place image and text
+        SetMainPage();
+        
         // this method loads the User in the SessionInfo
         SessionInfo.loadUser();
         
@@ -71,6 +85,28 @@ public class MainMenuScript : MonoBehaviour {
             femaleAvatar.SetActive(true);
         }
 	}
+
+    void SetMainPage(){
+        int currentChapter =  SessionInfo.getXP() / 100 + 1;
+        int lastImg;
+        if(currentChapter % 2 == 0){
+            lastImg = 4;
+        }
+        else{
+            lastImg = 5;
+        }
+        //  SET IMAGE
+        Sprite sprite = Resources.Load<Sprite>("Narrative Materials/Chapter" + currentChapter.ToString() +"/"+ lastImg.ToString());
+
+        if(sprite == null){
+            Debug.LogError("ERROR: Sprite not found in Resources/Narrative Materials/Chapter"+currentChapter.ToString() +"/"+ lastImg.ToString()+ " not found.");
+        }
+        else{
+            chapterImg.sprite = sprite;
+            chapterText.text = "CAPÍTULO " + currentChapter;
+        }
+    }
+
     // called by the button
     public void Quit(){
         SessionInfo.logout();
@@ -85,6 +121,17 @@ public class MainMenuScript : MonoBehaviour {
 
     public void previousScreen()
     {
+        if(SessionInfo.isVoiceOn()){
+            StartCoroutine(previousScreenAndBye());     
+        }
+        else{
+            SessionInfo.logout();
+            SceneManager.LoadScene("LoginMenu2");
+        }
+    }
+    IEnumerator previousScreenAndBye(){
+        float clipLenght = voiceAssistant.PlayRandomBye();
+        yield return new WaitForSeconds(clipLenght);
         SessionInfo.logout();
         SceneManager.LoadScene("LoginMenu2");
     }

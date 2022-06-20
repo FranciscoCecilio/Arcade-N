@@ -1,0 +1,9 @@
+timestamp=20220619T190027
+totalDuration=00:48:00 horas
+name=0
+series=3
+restDuration=0
+exe=2=Vertical=Exercise2Scene=right=2=60=2
+exe=2=Vertical=Exercise2Scene=right=2=60=2
+exe=2=Vertical=Exercise2Scene=right=2=60=2
+performance=0,333333333333333

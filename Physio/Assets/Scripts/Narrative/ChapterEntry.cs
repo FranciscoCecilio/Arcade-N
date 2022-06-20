@@ -7,15 +7,17 @@ using TMPro;
 
 public class ChapterEntry : MonoBehaviour
 {
-    public TMP_Text caption;
     public Image photograph;
+    public TMP_Text caption;
+    public TextWriter textWriter;
 
     void Awake()
     {
-        gameObject.SetActive(false);
+        photograph.gameObject.SetActive(false);
+        caption.gameObject.SetActive(false);
     }
 
-    public void SetPhotograph(int chapterNum, int chapterImg){
+    public void SetPhotograph(int chapterNum, int chapterImg, bool shouldAnimate){
         
         Sprite sprite = Resources.Load<Sprite>("Narrative Materials/Chapter"+chapterNum.ToString() +"/"+ chapterImg.ToString());
 
@@ -24,18 +26,33 @@ public class ChapterEntry : MonoBehaviour
             // TODO put a default Is missing picture
         }
         else{
-            photograph.sprite = sprite;
+            photograph.gameObject.SetActive(true);
+            if(shouldAnimate){
+                // TODO set animation!
+                photograph.sprite = sprite;
+            }
+            else{
+                photograph.sprite = sprite;
+            }
+            
         }
     } 
 
-    public void SetText(int chapterNum, int chapterImg){
+    public void SetText(int chapterNum, int chapterImg, bool shouldAnimate){
         string textPath = Application.dataPath + "/Resources/Narrative Materials/Chapter"+chapterNum.ToString() +"/Text/"+ chapterImg.ToString()+".txt";
 
         if (System.IO.File.Exists( textPath)){ 
             //Read the text from the .txt file
+            caption.gameObject.SetActive(true);
             StreamReader reader = new StreamReader(textPath);
-            caption.text = reader.ReadToEnd();
+            string textToWrite = reader.ReadToEnd();
             reader.Close();
+            if(shouldAnimate){
+                textWriter.AddWriter(caption, textToWrite, .05f, true);
+            }
+            else{
+                caption.text = textToWrite;
+            }
         }
         else{
             Debug.LogError("ERROR: Text not found in " + textPath + " not found.");

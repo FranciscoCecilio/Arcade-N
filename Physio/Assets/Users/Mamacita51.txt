@@ -2,3 +2,7 @@ Username=Mamacita51
 Name=Mamacita
 Age=41
 Gender=Female
+Nr_Utente=
+XP=0
+MusicOn=True
+VoiceOn=True

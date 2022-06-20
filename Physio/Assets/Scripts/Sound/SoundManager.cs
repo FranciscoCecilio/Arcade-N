@@ -11,7 +11,6 @@ public class SoundManager : MonoBehaviour
     List<AudioSource> allSources;
 
     [SerializeField] bool sm_musicIsOn;
-    [SerializeField] bool sm_voiceIsOn;
 
     public Sound GetSound(string name){
         Sound s =  Array.Find(sounds, sound => sound.name == name);
@@ -59,7 +58,6 @@ public class SoundManager : MonoBehaviour
     public void Start(){
         sm_musicIsOn = SessionInfo.isMusicOn();
         Debug.Log("seinfo: " + SessionInfo.isMusicOn());
-        sm_voiceIsOn = SessionInfo.isVoiceOn();
         // We only want to play music if the user wants it
         if(sm_musicIsOn && !musicToPlayOnStart.Equals(string.Empty)){
             //Play("Sunny Sunday");
@@ -151,46 +149,6 @@ public class SoundManager : MonoBehaviour
                 else{
                     Play(music.name);
                 }
-            }
-            else{
-                // Do Nothing: don't play anithghing
-                sm_musicIsOn = false;
-            }
-        }
-    }
-
-    // When a Voice button is pressed we run this method
-    public void VoiceSettingsChanged(){
-        // Music -----------------------------------
-        AudioSource music = null;
-        foreach(AudioSource a in allSources){
-            if(a.name.Equals(musicToPlayOnStart)){
-                music = a; // get original music
-            }
-        }
-        // Music is playing
-        if(music != null && music.isPlaying){
-            if(SessionInfo.isMusicOn()){
-                // Do Nothing: keep playing the music
-                sm_musicIsOn = true;
-            }
-            else{
-                // Pause the music
-                music.Pause();
-                sm_musicIsOn = false;
-            }
-        }
-        // Music is not playing
-        else{
-            if(SessionInfo.isMusicOn()){
-                // Then we need to Unpause the music or Play it from start
-                if(music.time > 0){
-                    music.UnPause();
-                }
-                else{
-                    Play(music.name);
-                }
-                sm_musicIsOn = true;
             }
             else{
                 // Do Nothing: don't play anithghing

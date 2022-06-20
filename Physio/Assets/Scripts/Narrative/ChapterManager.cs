@@ -76,6 +76,7 @@ public class ChapterManager : MonoBehaviour
         // or from the Main Menu
         else{
             // allow free moving.
+            StartCoroutine(ShowPreview());
         }
     }
 
@@ -90,11 +91,11 @@ public class ChapterManager : MonoBehaviour
         else{ // total of 4 images
             currentImage = 5;
         }
-        SetChapterUI(preview_image);
+        SetChapterUI(preview_image, false);
         WaitForSeconds wait = new WaitForSeconds(/*tempo do voice */ 5) ;
         yield return wait ;
         // we showed the preview - Bye Narrative screen: Start Session!!
-        SequenceManager.nextExercise();
+        if(SequenceManager.sequence != null) SequenceManager.nextExercise();
     }
 
     // unlocks images and plays a sound manager, if there are multiple images we wait between them
@@ -110,40 +111,40 @@ public class ChapterManager : MonoBehaviour
                     case 1: // 2) Chapter name and 1st Image
                         ShowPage(2); // shows the correct pagetype
                         SetChapterTitle(chapterName_text); // sets the title of the chapter
-                        SetChapterUI(right_chapter_2); // grabs currentImage and places it on the chapterEntry photograph 
+                        SetChapterUI(right_chapter_2, true); // grabs currentImage and places it on the chapterEntry photograph 
                         yield return wait ;
                         break;
                     case 2: // 3) Two images (first one)
                         ShowPage(3); 
-                        SetChapterUI(left_chapter_3);
+                        SetChapterUI(left_chapter_3, true);
                         right_chapter_3.gameObject.SetActive(false);
                         yield return wait ; 
                         break;
                     case 3: // 3) Two images (first and second)
                         ShowPage(3); 
                         currentImage = i; // [special] scenario where we want to load the first photo 
-                        SetChapterUI(left_chapter_3); 
+                        SetChapterUI(left_chapter_3, false); 
                         currentImage = i + 1;
-                        SetChapterUI(right_chapter_3); 
+                        SetChapterUI(right_chapter_3, true); 
                         yield return wait ; 
                         break;
                     case 4: 
                         if(isChapterOdd){ // We have 2 more images to show: 3) Two images (first one)
                             ShowPage(3); 
-                            SetChapterUI(left_chapter_3); 
+                            SetChapterUI(left_chapter_3, true); 
                             right_chapter_3.gameObject.SetActive(false);
                         }
                         else{ // Last image: 4) Left image and empty
-                            SetChapterUI(left_chapter_4);
+                            SetChapterUI(left_chapter_4, true);
                         }
                         yield return wait ; 
                         break;
                     case 5: // Oddchapter only: 3) Two images (first and second)
                         ShowPage(3); 
                         currentImage = i; // [special] scenario where we want to load the first photo 
-                        SetChapterUI(left_chapter_3); 
+                        SetChapterUI(left_chapter_3, false); 
                         currentImage = i + 1;
-                        SetChapterUI(right_chapter_3); 
+                        SetChapterUI(right_chapter_3, true); 
                         yield return wait ; 
                         break;
 
@@ -152,7 +153,7 @@ public class ChapterManager : MonoBehaviour
             }
         }
         // we showed all the unlocked images - Bye Narrative screen: Return to Exercise!!
-        SequenceManager.nextExercise();
+        if(SequenceManager.sequence != null) SequenceManager.nextExercise();
     }
 
     // Sets page object active and closes others
@@ -200,10 +201,9 @@ public class ChapterManager : MonoBehaviour
     }
 
     // modifies a chapterVis with the correct photograph and text
-    public void SetChapterUI(ChapterEntry vis){
-        vis.SetPhotograph(currentChapter,currentImage);
-        vis.SetText(currentChapter,currentImage);
-        vis.gameObject.SetActive(true);
+    public void SetChapterUI(ChapterEntry vis, bool shouldAnimate){
+        vis.SetPhotograph(currentChapter,currentImage, shouldAnimate);
+        vis.SetText(currentChapter,currentImage, shouldAnimate);
     }
 
     // open the next page

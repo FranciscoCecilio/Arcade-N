@@ -1,8 +1,8 @@
 Username=kiko1244
-Name=kiko12
-Age=23
-Gender=Male
-Nr_Utente=123456789
+Name=
+Age=
+Gender=
+Nr_Utente=
 XP=0
-MusicOn=True
+MusicOn=False
 VoiceOn=True

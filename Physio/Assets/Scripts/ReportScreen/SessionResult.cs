@@ -279,8 +279,9 @@ public class SessionResult : MonoBehaviour
 
     void CalculateSessionPerformance(){
         // calculate average performance
-        double average = performances.Count > 0 ? performances.Average() : 0.0;        
-        performanceText.text = (average * 100).ToString() + " %";
+        double average = performances.Count > 0 ? performances.Average() : 0.0;      
+        double rounded_avg = Math.Round(average, 2); //rounds 1.5362 to 1.54
+        performanceText.text = (rounded_avg * 100).ToString() + " %";
     }
 
 

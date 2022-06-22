@@ -11,10 +11,11 @@ public class VoiceAssistant : MonoBehaviour
     public Sound[] sounds;
     List<AudioSource> allSources;
 
-    public string[] byeSoundsNames;
+    public string[] byeSoundsNames; // played when we logout
+    public string[] endOfSessionSoundsNames; // played on the session rewards scene
 
     [Header("For Debug")]
-    [SerializeField] bool sm_voiceIsOn;
+    [SerializeField] bool _voiceIsOn;
 
     public Sound GetSound(string name){
         Sound s =  Array.Find(sounds, sound => sound.name == name);
@@ -37,12 +38,12 @@ public class VoiceAssistant : MonoBehaviour
     }
 
     public void Start(){
-        sm_voiceIsOn = SessionInfo.isVoiceOn();
+        _voiceIsOn = SessionInfo.isVoiceOn();
     }
 
-    // it returns the lenght of the clip being played
+    // returns the lenght of the clip being played
     public float PlayVoiceLine(string name){
-        //if(!sm_musicIsOn) return;
+        if(!_voiceIsOn) return 0;
         Sound s = GetSound(name);
         if( s == null){
             Debug.LogWarning("Sound: " + name + " not found!");
@@ -56,47 +57,24 @@ public class VoiceAssistant : MonoBehaviour
     public float PlayRandomBye(){
         // Play one of the "bye" sounds randomly
         int index = UnityEngine.Random.Range (0, byeSoundsNames.Length);
-        string chosenByeSound  = byeSoundsNames[index];
-        return PlayVoiceLine(chosenByeSound);
+        string chosenSound  = byeSoundsNames[index];
+        return PlayVoiceLine(chosenSound);
+    }
+
+    public float PlayRandomEndOfSession(){
+        // Play one of the "Boa Sessão!" sounds randomly
+        int index = UnityEngine.Random.Range (0, endOfSessionSoundsNames.Length);
+        string chosenSound  = endOfSessionSoundsNames[index];
+        return PlayVoiceLine(chosenSound);
     }
 
     // When a Voice button is pressed we run this method
     public void VoiceSettingsChanged(){
-        // Music -----------------------------------
-        /*AudioSource music = null;
-        foreach(AudioSource a in allSources){
-            if(a.name.Equals(musicToPlayOnStart)){
-                music = a; // get original music
-            }
+        if(SessionInfo.isVoiceOn()){
+            _voiceIsOn = true;
         }
-        // Music is playing
-        if(music != null && music.isPlaying){
-            if(SessionInfo.isMusicOn()){
-                // Do Nothing: keep playing the music
-                sm_musicIsOn = true;
-            }
-            else{
-                // Pause the music
-                music.Pause();
-                sm_musicIsOn = false;
-            }
-        }
-        // Music is not playing
         else{
-            if(SessionInfo.isMusicOn()){
-                // Then we need to Unpause the music or Play it from start
-                if(music.time > 0){
-                    music.UnPause();
-                }
-                else{
-                    Play(music.name);
-                }
-                sm_musicIsOn = true;
-            }
-            else{
-                // Do Nothing: don't play anithghing
-                sm_musicIsOn = false;
-            }
-        }*/
+            _voiceIsOn = false;
+        }
     }
 }

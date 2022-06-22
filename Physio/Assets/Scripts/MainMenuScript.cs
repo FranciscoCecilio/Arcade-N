@@ -164,10 +164,14 @@ public class MainMenuScript : MonoBehaviour {
     
     public void PlaySoundManager(string sound){
         // Update SoundManager
+        // Find SoundManager if its null
         if(soundManager == null){
-            soundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>();
+            GameObject soundManagerObj = GameObject.FindGameObjectWithTag("SoundManager");
             if(soundManager == null){
-                Debug.Log("ERROR: could not find a SoundManager in this scene!");
+                Debug.LogError("ERROR: could not find a SoundManager in this scene!");
+            }
+            else{
+                soundManager = soundManagerObj.GetComponent<SoundManager>();
             }
         }
         soundManager.PlayOneShot(sound);

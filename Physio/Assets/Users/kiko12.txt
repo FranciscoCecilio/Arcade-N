@@ -4,5 +4,5 @@ Age=22
 Gender=masculino
 Nr_Utente=213456789
 XP=0
-MusicOn=False
+MusicOn=True
 VoiceOn=True

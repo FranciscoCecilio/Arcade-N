@@ -11,6 +11,7 @@ public class SoundManager : MonoBehaviour
     public bool isMainMenuSM;
 
     List<AudioSource> allSources;
+    public string musicToPlayOnStart; 
     
     [Header("For Debugging")]
     public bool sm_musicIsOn;
@@ -60,7 +61,6 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    public string musicToPlayOnStart; 
     public void Start(){
         sm_musicIsOn = SessionInfo.isMusicOn();
         Debug.Log("seinfo: " + SessionInfo.isMusicOn());
@@ -77,6 +77,7 @@ public class SoundManager : MonoBehaviour
     }
 
     public void Play(string name){
+        Debug.Log("sm_musicOn: " + sm_musicIsOn);
         if(!sm_musicIsOn) return;
         Sound s = GetSound(name);
         if( s == null){
@@ -126,7 +127,6 @@ public class SoundManager : MonoBehaviour
         // Music -----------------------------------
         AudioSource music = null;
         foreach(AudioSource a in allSources){
-            Debug.Log(a.clip.name + " vs " + musicToPlayOnStart);
             if(a.clip.name.Equals(musicToPlayOnStart)){
                 music = a; // get original music
                 break;
@@ -153,12 +153,11 @@ public class SoundManager : MonoBehaviour
             if(SessionInfo.isMusicOn()){
                 // Then we need to Unpause the music or Play it from start
                 sm_musicIsOn = true;
-                Debug.Log("music.time: " + music.time);
                 if(music.time > 0){
                     music.UnPause();
                 }
                 else{
-                    Play(music.name);
+                    Play(music.clip.name);
                 }
             }
             else{

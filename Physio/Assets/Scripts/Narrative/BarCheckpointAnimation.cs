@@ -22,8 +22,15 @@ public class BarCheckpointAnimation : MonoBehaviour
         
         // Play joyfull unlocking sound
         SoundManager soundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>();
+        // Find SoundManager if its null
         if(soundManager == null){
-            Debug.Log("ERROR: could not find a SoundManager in this scene!");
+            GameObject soundManagerObj = GameObject.FindGameObjectWithTag("SoundManager");
+            if(soundManagerObj == null){
+                Debug.LogError("ERROR: could not find a SoundManager in this scene!");
+            }
+            else{
+                soundManager = soundManagerObj.GetComponent<SoundManager>();
+            }
         }
         soundManager.PlayOneShot("bar_checkpoint");
         

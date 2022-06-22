@@ -104,6 +104,7 @@ public class SoundButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             }
             else{ // ON
                 SessionInfo.setMusic(true);
+                Debug.Log("just altered sessionInfo: "+SessionInfo.isMusicOn());
             }
         }
         else if(isVoiceButton){
@@ -118,25 +119,34 @@ public class SoundButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         else{
             Debug.Log("ERROR: we have to assign the button identity in the editor");
         }
-        // Find SoundManager if its null
-        if(soundManager == null){
-            soundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>();
-            if(soundManager == null){
-                Debug.Log("ERROR: could not find a SoundManager in this scene!");
-            }
-        }
+        
         // Change settings for music button:
         // 1) SoundManager for music
         if(isMusicButton){
+            // Find SoundManager if its null
+            if(soundManager == null){
+                Debug.Log(GameObject.FindGameObjectWithTag("SoundManager"));
+                Debug.Log(GameObject.FindGameObjectsWithTag("SoundManager"));
+                Debug.Log(GameObject.FindGameObjectsWithTag("SoundManager")[0]);
+
+                GameObject soundManagerObj = GameObject.FindGameObjectWithTag("SoundManager");
+                if(soundManagerObj == null){
+                    Debug.LogError("ERROR: could not find a SoundManager in this scene!");
+                }
+                else{
+                    soundManager = soundManagerObj.GetComponent<SoundManager>();
+                }
+            }
             soundManager.MusicSettingsChanged();
         }
+
         // 2) VoiceAssistant for voice button
         else if(isVoiceButton && voiceAssistant != null){
             voiceAssistant.VoiceSettingsChanged();
         }
         
         // Play click Sound
-        soundManager.PlayOneShot("button_click2");
+        if(soundManager) soundManager.PlayOneShot("button_click2");
         
         // Show and Hide buttons
         otherButton.SetActive(true);

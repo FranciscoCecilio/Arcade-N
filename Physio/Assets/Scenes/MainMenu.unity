@@ -315,7 +315,7 @@ MonoBehaviour:
   afterDeleteText: {fileID: 1880129729}
   chapterImg: {fileID: 153307233}
   chapterText: {fileID: 2107991609}
-  soundManager: {fileID: 206850574}
+  soundManager: {fileID: 4960769679871452090}
   voiceAssistant: {fileID: 1726784485}
 --- !u!114 &11643915
 MonoBehaviour:
@@ -1147,89 +1147,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 195552533}
   m_CullTransparentMesh: 1
---- !u!1 &206850573
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 206850575}
-  - component: {fileID: 206850574}
-  m_Layer: 0
-  m_Name: SoundManager
-  m_TagString: SoundManager
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &206850574
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 206850573}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 001409fcf12982a4c807835190ffb895, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sounds:
-  - name: swipesy cakewalk
-    clip: {fileID: 8300000, guid: 9a041dbe054c93b439c13cbf4353dbdd, type: 3}
-    volume: 0.09
-    pitch: 1
-    loop: 0
-    source: {fileID: 0}
-    web_url_source: https://www.youtube.com/watch?v=o9_Gu3TI4IY
-  - name: button_click1
-    clip: {fileID: 8300000, guid: 9e64eab1da8e20f4ba49d7c0badf2570, type: 3}
-    volume: 0.3
-    pitch: 1
-    loop: 0
-    source: {fileID: 0}
-    web_url_source: https://www.zapsplat.com/sound-effect-category/button-clicks/page/4/
-  - name: button_click2
-    clip: {fileID: 8300000, guid: 56c6ae9a33768d34d9b1f723c8dd1699, type: 3}
-    volume: 0.2
-    pitch: 1
-    loop: 0
-    source: {fileID: 0}
-    web_url_source: https://www.zapsplat.com/sound-effect-category/button-clicks/page/4/
-  - name: mouseover
-    clip: {fileID: 8300000, guid: d02ebfc1f0408a946bc166a810cca2fb, type: 3}
-    volume: 0.5
-    pitch: 1
-    loop: 0
-    source: {fileID: 0}
-    web_url_source: https://freesound.org/people/Fachii/sounds/338229/
-  - name: mouseover2
-    clip: {fileID: 8300000, guid: d02ebfc1f0408a946bc166a810cca2fb, type: 3}
-    volume: 0.5
-    pitch: 2
-    loop: 0
-    source: {fileID: 0}
-    web_url_source: https://freesound.org/people/Fachii/sounds/338229/
-  isMainMenuSM: 1
-  sm_musicIsOn: 0
-  musicToPlayOnStart: swipesy cakewalk
---- !u!4 &206850575
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 206850573}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 21.850098, y: 17.396763, z: -19.256989}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &216091668
 GameObject:
   m_ObjectHideFlags: 0
@@ -4538,77 +4455,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!1 &1726784484
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1726784486}
-  - component: {fileID: 1726784485}
-  m_Layer: 0
-  m_Name: Voice Assistant
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1726784485
+--- !u!114 &1726784485 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 6020491582646027026, guid: 00e0f31f4c4a059489e580bfba49cd89,
+    type: 3}
+  m_PrefabInstance: {fileID: 6020491582064828663}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1726784484}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0db5d22dd091d394f88735fd2bcd057c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sounds:
-  - name: sunny_sundae
-    clip: {fileID: 8300000, guid: b3d845a4a9ba81f41abe8f209ccf5fc8, type: 3}
-    volume: 1
-    pitch: 2.27
-    loop: 0
-    source: {fileID: 0}
-    web_url_source: 
-  - name: beep
-    clip: {fileID: 8300000, guid: 2576467c0e116ef4982914ef71aa60f7, type: 3}
-    volume: 1
-    pitch: 1
-    loop: 0
-    source: {fileID: 0}
-    web_url_source: 
-  - name: flip
-    clip: {fileID: 8300000, guid: 2f4f2a55944cbea409c20e77389f0fa8, type: 3}
-    volume: 1
-    pitch: 1
-    loop: 0
-    source: {fileID: 0}
-    web_url_source: 
-  byeSoundsNames:
-  - flip
-  - flip
-  - beep
-  sm_voiceIsOn: 0
---- !u!4 &1726784486
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1726784484}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 21.850098, y: 17.396763, z: -19.256989}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!850595691 &1765347739
 LightingSettings:
   m_ObjectHideFlags: 0
@@ -6415,6 +6273,99 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 39951b171426b6a4abecb60ce7f68a25, type: 3}
+--- !u!1001 &4960769679871452089
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 2
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7288278027476380820, guid: 9f9b86102aacc1040b8328c22e2a8878,
+        type: 3}
+      propertyPath: isMainMenuSM
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7288278027476380820, guid: 9f9b86102aacc1040b8328c22e2a8878,
+        type: 3}
+      propertyPath: musicToPlayOnStart
+      value: swipesy cakewalk
+      objectReference: {fileID: 0}
+    - target: {fileID: 7288278027476380821, guid: 9f9b86102aacc1040b8328c22e2a8878,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7288278027476380821, guid: 9f9b86102aacc1040b8328c22e2a8878,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 659.1919
+      objectReference: {fileID: 0}
+    - target: {fileID: 7288278027476380821, guid: 9f9b86102aacc1040b8328c22e2a8878,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 115.98187
+      objectReference: {fileID: 0}
+    - target: {fileID: 7288278027476380821, guid: 9f9b86102aacc1040b8328c22e2a8878,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7288278027476380821, guid: 9f9b86102aacc1040b8328c22e2a8878,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7288278027476380821, guid: 9f9b86102aacc1040b8328c22e2a8878,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7288278027476380821, guid: 9f9b86102aacc1040b8328c22e2a8878,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7288278027476380821, guid: 9f9b86102aacc1040b8328c22e2a8878,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7288278027476380821, guid: 9f9b86102aacc1040b8328c22e2a8878,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7288278027476380821, guid: 9f9b86102aacc1040b8328c22e2a8878,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7288278027476380821, guid: 9f9b86102aacc1040b8328c22e2a8878,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7288278027476380827, guid: 9f9b86102aacc1040b8328c22e2a8878,
+        type: 3}
+      propertyPath: m_Name
+      value: SoundManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_AddedGameObjects: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9f9b86102aacc1040b8328c22e2a8878, type: 3}
+--- !u!114 &4960769679871452090 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7288278027476380820, guid: 9f9b86102aacc1040b8328c22e2a8878,
+    type: 3}
+  m_PrefabInstance: {fileID: 4960769679871452089}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 001409fcf12982a4c807835190ffb895, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5554447331040336637
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6486,6 +6437,77 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: bfedfdceca90ffe4ab3ee2d08c102be3, type: 3}
+--- !u!1001 &6020491582064828663
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 2
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6020491582646027025, guid: 00e0f31f4c4a059489e580bfba49cd89,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6020491582646027025, guid: 00e0f31f4c4a059489e580bfba49cd89,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 21.850098
+      objectReference: {fileID: 0}
+    - target: {fileID: 6020491582646027025, guid: 00e0f31f4c4a059489e580bfba49cd89,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 17.396763
+      objectReference: {fileID: 0}
+    - target: {fileID: 6020491582646027025, guid: 00e0f31f4c4a059489e580bfba49cd89,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -19.256989
+      objectReference: {fileID: 0}
+    - target: {fileID: 6020491582646027025, guid: 00e0f31f4c4a059489e580bfba49cd89,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6020491582646027025, guid: 00e0f31f4c4a059489e580bfba49cd89,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6020491582646027025, guid: 00e0f31f4c4a059489e580bfba49cd89,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6020491582646027025, guid: 00e0f31f4c4a059489e580bfba49cd89,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6020491582646027025, guid: 00e0f31f4c4a059489e580bfba49cd89,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6020491582646027025, guid: 00e0f31f4c4a059489e580bfba49cd89,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6020491582646027025, guid: 00e0f31f4c4a059489e580bfba49cd89,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6020491582646027027, guid: 00e0f31f4c4a059489e580bfba49cd89,
+        type: 3}
+      propertyPath: m_Name
+      value: Voice Assistant
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_AddedGameObjects: []
+  m_SourcePrefab: {fileID: 100100000, guid: 00e0f31f4c4a059489e580bfba49cd89, type: 3}
 --- !u!1001 &8225276861446729060
 PrefabInstance:
   m_ObjectHideFlags: 0

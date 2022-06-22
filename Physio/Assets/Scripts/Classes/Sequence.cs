@@ -12,11 +12,13 @@ public class Sequence
     private int _id; // never used?
     private string _name;
     private string _timestamp; // format: SequenceyyyyMMddTHHmmss
-    // New variable - Francisco Cecílio
     private int _series; // _series is equal to the Lenght of _exerciseList
-    // New variable - Francisco Cecílio
     private int _restDuration; // rest time between series (or exercises from the list)
     private int totalRepetitions = 0; // this variable is usefull to calculate the Percentage_per_Repetition during the Exercise Screen
+    
+    // calculated to save in file
+    private string _totalDuration;
+    private double _performance;
 
     private List<Exercise> _exerciseList = new List<Exercise>();
 
@@ -68,6 +70,14 @@ public class Sequence
     public string getTimestamp()
     {
         return _timestamp;
+    }
+
+    public string getTotalDuration(){
+        return _totalDuration;
+    }
+
+    public double getPerformance(){
+        return _performance;
     }
 
     // It must receive a string in this format "SequenceyyyyMMddTHHmmss"
@@ -146,7 +156,7 @@ public class Sequence
         System.DateTime timestamp = DateTime.ParseExact(_timestamp.Replace("Sequence",string.Empty), "yyyyMMddTHHmmss",System.Globalization.CultureInfo.InvariantCulture); 
         System.DateTime  now = System.DateTime.Now;
         TimeSpan difference = now - timestamp;
-        string totalDuration = string.Format("{0:D2}:{1:D2}:{2:D2} horas", difference.Hours, difference.Minutes, difference.Seconds);
+        _totalDuration = string.Format("{0:D2}:{1:D2}:{2:D2} horas", difference.Hours, difference.Minutes, difference.Seconds);
 
         // We need the overall Performance of Sequence (correctReps / tries)
         List<int> exPerformances = new List<int>();
@@ -155,7 +165,7 @@ public class Sequence
         using (var writer = new StreamWriter(stream))
         {
             writer.WriteLine("timestamp=" + _timestamp.Replace("Sequence", string.Empty) );
-            writer.WriteLine("totalDuration=" + totalDuration );
+            writer.WriteLine("totalDuration=" + _totalDuration );
             writer.WriteLine("name=" + _name);  
             writer.WriteLine("series=" + _series);  
             writer.WriteLine("restDuration=" + _restDuration);  
@@ -170,8 +180,10 @@ public class Sequence
             }
             // calculate average performance
             double average = exPerformances.Count > 0 ? exPerformances.Average() : 0.0;
-            Debug.Log("Calculated avg performance for sequence: " + average);
-            writer.WriteLine("performance=" + average);  
+            double rounded_avg = Math.Round(average, 2); //rounds 1.5362 to 1.54
+            _performance = rounded_avg;
+            Debug.Log("Calculated avg performance for sequence: " + rounded_avg);
+            writer.WriteLine("performance=" + _performance);  // goes from 0 to 1
 
             writer.Close();
             stream.Close();

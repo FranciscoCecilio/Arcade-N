@@ -126,8 +126,15 @@ public class BodyScreenController : MonoBehaviour {
     }
 
     public void TurnMusicOn(){
+        // Find SoundManager if its null
         if(soundManager == null){
-            soundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>();
+            GameObject soundManagerObj = GameObject.FindGameObjectWithTag("SoundManager");
+            if(soundManager == null){
+                Debug.LogError("ERROR: could not find a SoundManager in this scene!");
+            }
+            else{
+                soundManager = soundManagerObj.GetComponent<SoundManager>();
+            }
         }
         soundManager.PlayMusicAgain();
         SessionInfo.setMusic(true);
@@ -136,8 +143,15 @@ public class BodyScreenController : MonoBehaviour {
     }
 
     public void TurnMusicOff(){
+        // Find SoundManager if its null
         if(soundManager == null){
-            soundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>();
+            GameObject soundManagerObj = GameObject.FindGameObjectWithTag("SoundManager");
+            if(soundManager == null){
+                Debug.LogError("ERROR: could not find a SoundManager in this scene!");
+            }
+            else{
+                soundManager = soundManagerObj.GetComponent<SoundManager>();
+            }
         }
         soundManager.MuteMusic();
         SessionInfo.setMusic(false);

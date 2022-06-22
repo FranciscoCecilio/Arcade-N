@@ -69,10 +69,14 @@ public class ExerciseManager : MonoBehaviour {
         //set the correct targets
         setArea();
 
+        // Find SoundManager if its null
         if(soundManager == null){
-            soundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>();
-            if(soundManager == null){
-                Debug.Log("ERROR: could not find a SoundManager in this scene!");
+            GameObject soundManagerObj = GameObject.FindGameObjectWithTag("SoundManager");
+            if(soundManagerObj == null){
+                Debug.LogError("ERROR: could not find a SoundManager in this scene!");
+            }
+            else{
+                soundManager = soundManagerObj.GetComponent<SoundManager>();
             }
         }
 

@@ -1,8 +1,0 @@
-Username=
-Name=
-Age=
-Gender=
-Nr_Utente=
-XP=0
-MusicOn=True
-VoiceOn=True

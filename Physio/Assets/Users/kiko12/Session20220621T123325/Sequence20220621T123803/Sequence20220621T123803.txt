@@ -1,9 +1,0 @@
-timestamp=20220621T123803
-totalDuration=00:21:56 horas
-name=1
-series=3
-restDuration=0
-exe=2=Vertical=Exercise2Scene=right=2=60=1
-exe=2=Vertical=Exercise2Scene=right=2=60=1
-exe=2=Vertical=Exercise2Scene=right=2=60=1
-performance=0,666666666666667

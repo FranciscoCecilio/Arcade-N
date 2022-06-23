@@ -1,5 +1,0 @@
-Username=HannaMontana21
-Name=Hanna Montana
-Age=21
-Gender=Female
-Nr_Utente=987456321

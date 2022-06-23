@@ -56,6 +56,12 @@ public class MainMenuScript : MonoBehaviour {
         SceneManager.LoadScene("NarrativeMenu");
     }
 
+    void Awake()
+    {
+        // this method loads the User in the SessionInfo
+        SessionInfo.loadUser();
+    }
+
 	// Use this for initialization
 	void Start () {
         
@@ -71,9 +77,6 @@ public class MainMenuScript : MonoBehaviour {
             greetingsText = "BOM DIA, ";
             voiceAssistant.PlayVoiceLine("bom_dia");
         }
-        // this method loads the User in the SessionInfo
-        SessionInfo.loadUser();
-        
         // place image and text
         SetMainPage();
 
@@ -112,7 +115,6 @@ public class MainMenuScript : MonoBehaviour {
 
     // called by the button
     public void Quit(){
-        SessionInfo.saveUserProgress();
         Application.Quit();
     }
     // in case someone ALT+F4
@@ -124,6 +126,7 @@ public class MainMenuScript : MonoBehaviour {
 
     public void previousScreen()
     {
+        Destroy(soundManager.gameObject);
         if(SessionInfo.isVoiceOn()){
             StartCoroutine(previousScreenAndBye());     
         }
@@ -133,9 +136,9 @@ public class MainMenuScript : MonoBehaviour {
         }
     }
     IEnumerator previousScreenAndBye(){
+        SessionInfo.saveUserProgress();
         float clipLenght = voiceAssistant.PlayRandomBye();
         yield return new WaitForSeconds(clipLenght);
-        SessionInfo.saveUserProgress();
         SceneManager.LoadScene("LoginMenu2");
     }
 

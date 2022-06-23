@@ -6526,6 +6526,11 @@ PrefabInstance:
       propertyPath: voiceAssistant
       value: 
       objectReference: {fileID: 1726784485}
+    - target: {fileID: 8225276860910045625, guid: 0f77d61839283b34ca2b1d47060ee6c6,
+        type: 3}
+      propertyPath: voiceAssistant
+      value: 
+      objectReference: {fileID: 1726784485}
     - target: {fileID: 8225276861090313782, guid: 0f77d61839283b34ca2b1d47060ee6c6,
         type: 3}
       propertyPath: m_Name
@@ -6636,6 +6641,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8225276861240351191, guid: 0f77d61839283b34ca2b1d47060ee6c6,
+        type: 3}
+      propertyPath: voiceAssistant
+      value: 
+      objectReference: {fileID: 1726784485}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f77d61839283b34ca2b1d47060ee6c6, type: 3}

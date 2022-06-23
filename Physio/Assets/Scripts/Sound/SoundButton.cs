@@ -29,20 +29,20 @@ public class SoundButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         if(!isExerciseScene) white.SetActive(false);
         // Make it On or Off depending on sessionInfo and tell it to SoundManager after finding it
         if(isMusicButton){
-            if(SessionInfo.isMusicOn()){
-                if(!isMuteButton){
-                    otherButton.SetActive(false);
+            if(SessionInfo.isMusicOn()){ // we want the music ON
+                if(!isMuteButton){ // if its On button
+                    otherButton.SetActive(false); // Mute OFF
                 }
                 else{
-                    this.gameObject.SetActive(false);
+                    this.gameObject.SetActive(true); // On button ON
                 }
             }
-            else{
-                if(!isMuteButton){
-                    otherButton.SetActive(true);
+            else{ // we want the music OFF
+                if(!isMuteButton){ // if its On button
+                    otherButton.SetActive(true);  // Mute ON
                 }
                 else{
-                    this.gameObject.SetActive(true);
+                    this.gameObject.SetActive(false); // On button OFF
                 }
             }
         }
@@ -52,7 +52,7 @@ public class SoundButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
                     otherButton.SetActive(false);
                 }
                 else{
-                    this.gameObject.SetActive(false);
+                    this.gameObject.SetActive(true);
                 }
             }
             else{
@@ -60,7 +60,7 @@ public class SoundButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
                     otherButton.SetActive(true);
                 }
                 else{
-                    this.gameObject.SetActive(true);
+                    this.gameObject.SetActive(false);
                 }
             }
         }
@@ -125,10 +125,6 @@ public class SoundButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         if(isMusicButton){
             // Find SoundManager if its null
             if(soundManager == null){
-                Debug.Log(GameObject.FindGameObjectWithTag("SoundManager"));
-                Debug.Log(GameObject.FindGameObjectsWithTag("SoundManager"));
-                Debug.Log(GameObject.FindGameObjectsWithTag("SoundManager")[0]);
-
                 GameObject soundManagerObj = GameObject.FindGameObjectWithTag("SoundManager");
                 if(soundManagerObj == null){
                     Debug.LogError("ERROR: could not find a SoundManager in this scene!");

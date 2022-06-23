@@ -1,5 +1,0 @@
-Username=JoaquimFerreira82
-Name=Joaquim Ferreira
-Age=77
-Gender=Male
-Nr_Utente=852369741

@@ -1,7 +1,0 @@
-timestamp=20220620T170529
-totalDuration=00:01:30 horas
-name=testSequence2
-series=1
-restDuration=0
-exe=2=nome2=Exercise2Scene=right=1=40=2
-performance=1

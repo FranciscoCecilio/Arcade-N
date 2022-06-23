@@ -1,5 +1,0 @@
-Username=MiguelGuerreiro17
-Name=Miguel Guerreiro
-Age=23
-Gender=Male
-Nr_Utente=753159628

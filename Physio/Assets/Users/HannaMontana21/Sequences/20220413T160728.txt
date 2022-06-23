@@ -1,3 +1,0 @@
-timestamp=20220413T160728
-name=hana mont
-exe=1=Up/Down=Exercise1Scene=left=10=60=60

@@ -1,0 +1,8 @@
+Username=kiko1295
+Name=kiko12
+Age=22
+Gender=Male
+Nr_Utente=123456789
+XP=0
+MusicOn=True
+VoiceOn=True

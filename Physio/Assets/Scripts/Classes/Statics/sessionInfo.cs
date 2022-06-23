@@ -61,11 +61,6 @@ public static class SessionInfo
      // This is called on MainMenu after the login
     public static void loadUser()
     { 
-        loadInfo();
-    }
-
-    private static void loadInfo()
-    {
         string line = "";
         Debug.Log("username: " + _username);
         if(_username == string.Empty) _username = "kiko12"; // For testing
@@ -80,16 +75,20 @@ public static class SessionInfo
                 else if (data[0] == "Gender") _gender = data[1];
                 else if (data[0] == "Nr_Utente") _nrSaude = data[1];
                 else if (data[0] == "XP") _XP = int.Parse(data[1]);
-                else if (data[0] == "MusicOn") _isMusicOn = (data[1] == "true");
-                else if (data[0] == "VoicOn") _isVoiceOn = (data[1] == "true");
+                else if (data[0] == "MusicOn") {
+                    Debug.Log(data[1]);
+                    Debug.Log(data[1] == "True");
+                    _isMusicOn = (data[1] == "True");
+                }
+                else if (data[0] == "VoicOn") _isVoiceOn = (data[1] == "True");
                 line = reader.ReadLine();
             }
         }
-        Debug.Log("LoadedInfo");
+        Debug.Log("LoadedInfo - musicOn:" + _isMusicOn);
         reader.Close();
     }
 
-    // This is called when we logout AND session ends
+    // This is called when we LOGOUT or QUIT
     public static void saveUserProgress(){
         string userfile = Application.dataPath + "/Users/" + _username + ".txt";
 

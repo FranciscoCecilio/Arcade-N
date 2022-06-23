@@ -62,13 +62,14 @@ public class SoundManager : MonoBehaviour
     }
 
     public void Start(){
-        sm_musicIsOn = SessionInfo.isMusicOn();
-        Debug.Log("seinfo: " + SessionInfo.isMusicOn());
         // We only want to play music if the user wants it
-        if(sm_musicIsOn && !musicToPlayOnStart.Equals(string.Empty)){
+        sm_musicIsOn = SessionInfo.isMusicOn();
+        Debug.Log("SM start: sm_musicOn: " + sm_musicIsOn);
+        if(sm_musicIsOn){
             //Play("Sunny Sunday");
             Play(musicToPlayOnStart);
         }
+        
     }
     
     public Sound GetSound(string name){

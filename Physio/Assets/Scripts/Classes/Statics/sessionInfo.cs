@@ -22,7 +22,7 @@ public static class SessionInfo
     private static int _exerciseId = 1;
 
     // DEFINITIONS
-    private static int _XP = 0; // TODO or level (0 to 500 in multiples of 100)
+    private static int _XP = 0; // (0 to 500 in multiples of 100)
     private static bool _isMusicOn = true;
     private static bool _isVoiceOn = true;
 
@@ -89,9 +89,8 @@ public static class SessionInfo
         reader.Close();
     }
 
-    // This is called when we logout from the MainMenu to Login
-    public static void logout()
-    {
+    // This is called when we logout AND session ends
+    public static void saveUserProgress(){
         string userfile = Application.dataPath + "/Users/" + _username + ".txt";
 
         if(File.Exists(userfile)) File.Delete(userfile);
@@ -110,7 +109,7 @@ public static class SessionInfo
         writer.WriteLine("VoiceOn=" + _isVoiceOn);
 
         writer.Close();
-    }
+    } 
 
     public static int getExerciseId()
     {
@@ -157,7 +156,7 @@ public static class SessionInfo
 
     // TODO: save session file in the end of the session (last exercise from last sequence OR Quitting during the exercises)
     public static void saveSession(){
-        
+        saveUserProgress();
     }
 
     public static void DeleteUser(TMP_Text afterDeleteText) 

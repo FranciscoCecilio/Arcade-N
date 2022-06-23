@@ -254,10 +254,11 @@ public static class SequenceManager
         }
         else
         {
-            // END of Session! - 
-            // TODO: Show congratulations, give the user the xp, show results in a panel, show narrative screen with the prize
-            // TODO : save session 
-            SceneManager.LoadScene("MainMenu");
+            // END of Session!
+            // Give the user the xp - save session
+            SessionInfo.saveSession();
+            // Show congratulations and show results
+            SceneManager.LoadScene("SessionRewards");
         }
     }
 
@@ -265,7 +266,7 @@ public static class SequenceManager
     public static void nextExercise()
     {
         // here we want to check for narrative pictures to show!
-        if(/*hasPreviewToUnlock ||*/ hasImagesToUnlock){
+        if(hasPreviewToUnlock || hasImagesToUnlock){
             SceneManager.LoadScene("NarrativeMenu");
         }
         else{

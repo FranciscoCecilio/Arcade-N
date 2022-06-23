@@ -112,14 +112,14 @@ public class MainMenuScript : MonoBehaviour {
 
     // called by the button
     public void Quit(){
-        SessionInfo.logout();
+        SessionInfo.saveUserProgress();
         Application.Quit();
     }
     // in case someone ALT+F4
     public void OnApplicationQuit()
     {
         Debug.Log("Application ending after " + Time.time + " seconds");
-        SessionInfo.logout();
+        SessionInfo.saveUserProgress();
     }
 
     public void previousScreen()
@@ -128,14 +128,14 @@ public class MainMenuScript : MonoBehaviour {
             StartCoroutine(previousScreenAndBye());     
         }
         else{
-            SessionInfo.logout();
+            SessionInfo.saveUserProgress();
             SceneManager.LoadScene("LoginMenu2");
         }
     }
     IEnumerator previousScreenAndBye(){
         float clipLenght = voiceAssistant.PlayRandomBye();
         yield return new WaitForSeconds(clipLenght);
-        SessionInfo.logout();
+        SessionInfo.saveUserProgress();
         SceneManager.LoadScene("LoginMenu2");
     }
 
@@ -167,7 +167,7 @@ public class MainMenuScript : MonoBehaviour {
         // Find SoundManager if its null
         if(soundManager == null){
             GameObject soundManagerObj = GameObject.FindGameObjectWithTag("SoundManager");
-            if(soundManager == null){
+            if(soundManagerObj == null){
                 Debug.LogError("ERROR: could not find a SoundManager in this scene!");
             }
             else{

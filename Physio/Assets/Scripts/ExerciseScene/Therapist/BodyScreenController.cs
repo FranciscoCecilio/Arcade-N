@@ -129,7 +129,7 @@ public class BodyScreenController : MonoBehaviour {
         // Find SoundManager if its null
         if(soundManager == null){
             GameObject soundManagerObj = GameObject.FindGameObjectWithTag("SoundManager");
-            if(soundManager == null){
+            if(soundManagerObj == null){
                 Debug.LogError("ERROR: could not find a SoundManager in this scene!");
             }
             else{
@@ -146,7 +146,7 @@ public class BodyScreenController : MonoBehaviour {
         // Find SoundManager if its null
         if(soundManager == null){
             GameObject soundManagerObj = GameObject.FindGameObjectWithTag("SoundManager");
-            if(soundManager == null){
+            if(soundManagerObj == null){
                 Debug.LogError("ERROR: could not find a SoundManager in this scene!");
             }
             else{

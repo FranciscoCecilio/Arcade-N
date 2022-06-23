@@ -43,14 +43,16 @@ public class VoiceAssistant : MonoBehaviour
 
     // returns the lenght of the clip being played
     public float PlayVoiceLine(string name){
-        if(!_voiceIsOn) return 0;
+        if(!_voiceIsOn) return 5;
         Sound s = GetSound(name);
         if( s == null){
             Debug.LogWarning("Sound: " + name + " not found!");
-            return 0f;
+            return 5f;
         }
         s.source.PlayOneShot(s.clip);
         Debug.Log("Audio clip length : " + s.source.clip.length);
+        
+        if(s.source.clip.length == 0) return 5;
         return s.source.clip.length;
     }
 

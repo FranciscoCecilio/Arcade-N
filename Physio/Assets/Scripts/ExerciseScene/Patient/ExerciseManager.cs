@@ -50,6 +50,7 @@ public class ExerciseManager : MonoBehaviour {
 
     // Sound Manager
     SoundManager soundManager;
+    public VoiceAssistant voiceAssistant;
 
     private void Start() {
         init();
@@ -171,7 +172,9 @@ public class ExerciseManager : MonoBehaviour {
                             State.exercise.incCorrectReps();
                             // updates the session progression 
                             narrativeScript.IncNarrativePerc();
-                            
+                            // plary good sound
+                            if(UnityEngine.Random.Range(1,3) >= 1) voiceAssistant.PlayRandomGood();
+
                             reversePath = false;
 
                             int minutes = (State.sessionTimeInt / State.exercise.getCorrectReps()) / 60;

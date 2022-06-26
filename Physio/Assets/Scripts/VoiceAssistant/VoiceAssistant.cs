@@ -4,18 +4,26 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
  using System.Collections;
- 
+using TMPro;
+using System.IO;
+
 // Used in Main Menu, Narrative Menu, all Exercises,
 public class VoiceAssistant : MonoBehaviour
 {
     public Sound[] sounds;
     List<AudioSource> allSources;
 
+    public string[] goodSoundsNames; // played when we successfully hit a target during Exercise
     public string[] byeSoundsNames; // played when we logout
     public string[] endOfSessionSoundsNames; // played on the session rewards scene
 
     [Header("For Debug")]
     [SerializeField] bool _voiceIsOn;
+
+    [Header("Voice Text")]
+    public GameObject VoiceLine;
+    public TMP_Text voiceLineText;
+
 
     public Sound GetSound(string name){
         Sound s =  Array.Find(sounds, sound => sound.name == name);
@@ -41,19 +49,68 @@ public class VoiceAssistant : MonoBehaviour
         _voiceIsOn = SessionInfo.isVoiceOn();
     }
 
-    // returns the lenght of the clip being played
+    // returns the lenght of the clip being played or 5 seconds by default
     public float PlayVoiceLine(string name){
-        if(!_voiceIsOn) return 5;
+        
+        if(!_voiceIsOn){
+            return 5f;
+        }
+        
         Sound s = GetSound(name);
         if( s == null){
             Debug.LogWarning("Sound: " + name + " not found!");
             return 5f;
         }
+
         s.source.PlayOneShot(s.clip);
         Debug.Log("Audio clip length : " + s.source.clip.length);
-        
-        if(s.source.clip.length == 0) return 5;
-        return s.source.clip.length;
+
+        float clipLength = s.source.clip.length;
+
+        if(clipLength == 0){
+            if(VoiceLine != null) StartCoroutine(ShowVoiceLine(5, name));
+            return 5f;
+        } 
+        else{
+            if(VoiceLine != null) StartCoroutine(ShowVoiceLine(clipLength, name));
+            return clipLength;
+        }
+    }
+
+    IEnumerator ShowVoiceLine(float clipDuration, string clipName){
+        // load TEXT
+        string textPath = Application.dataPath + "/Resources/Sounds/VoiceActing/ExpressionsScripts/" + clipName;
+        if (System.IO.File.Exists(textPath)){ 
+            //Read the text from the .txt file
+            StreamReader reader = new StreamReader(textPath);
+            string textToWrite = reader.ReadToEnd();
+            reader.Close();
+
+            // scale to zero
+            VoiceLine.transform.localScale = Vector3.zero;
+
+            // fade in 
+            VoiceLine.SetActive(true);
+            LeanTween.scale(VoiceLine, Vector3.one ,1f).setEase(LeanTweenType.easeShake); //punch
+
+            // place text
+            voiceLineText.text = textToWrite;
+            
+            // wait for its duration to hide
+            yield return new WaitForSeconds(clipDuration);
+            VoiceLine.SetActive(false);
+        }
+        else{
+            Debug.LogError("ERROR: Voice Line text " + textPath + " not found.");
+            yield return 0;
+        }
+    }
+
+    public float PlayRandomGood(){
+        // Play one of the "good" sounds randomly
+        int index = UnityEngine.Random.Range (0, goodSoundsNames.Length);
+        string chosenSound  = goodSoundsNames[index];
+        return PlayVoiceLine(chosenSound);
     }
 
     public float PlayRandomBye(){

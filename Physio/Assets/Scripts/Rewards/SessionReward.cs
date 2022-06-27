@@ -39,7 +39,7 @@ public class SessionReward : MonoBehaviour
         voiceAssistant.PlayRandomEndOfSession();
 
         // Performance and Duration
-        //CalculateParameters();
+        CalculateParameters();
 
         // Animate medal
         Vector3 initScale = Medal.gameObject.transform.localScale ;
@@ -69,13 +69,14 @@ public class SessionReward : MonoBehaviour
             TimeSpan ts = TimeSpan.ParseExact(expression, "hh\\:mm\\:ss", System.Globalization.CultureInfo.InvariantCulture);
             totalTime += ts;
         }
+        Debug.Log("totalTime_: " + totalTime);
         // assign the variable (finally)        
         Duration.text = string.Format("{0:D2}:{1:D2}:{2:D2}", totalTime.Hours, totalTime.Minutes, totalTime.Seconds);
      
         // Calculate total performance ----------------
         double average = seqPerformances.Count > 0 ? seqPerformances.Average() : 0.0;      
         double rounded_avg = Math.Round(average, 2); //rounds 1.5362 to 1.54
-        Performance.text = (rounded_avg * 100).ToString() + " %";
+        Performance.text = "Performance: " + (rounded_avg).ToString() + " %";
         // change medal image
 
         if(rounded_avg < 0.5f) Medal.sprite = medalSprites[2];

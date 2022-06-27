@@ -12,9 +12,10 @@ public class ScriptForTestingExerciseScreen : MonoBehaviour
             // Set View
             SessionInfo.setView("RunSequence");
             SessionInfo.createSessionPath();
+            SessionInfo.loadUser();
 
             // assign the current level
-            SequenceManager.SetCurrentChapter(SessionInfo.getXP() / 100 + 1);
+            SequenceManager.SetCurrentChapter(SessionInfo.getXP() / 100);
             if( SequenceManager.GetCurrentChapter() %2 == 0){
             // chatpter is even and has 4 Images to unlock
                  SequenceManager.unlockedChaptersEncoding = new List<int>() {0,0,0,0};
@@ -44,7 +45,7 @@ public class ScriptForTestingExerciseScreen : MonoBehaviour
             // Add Exercise(int id, string name, string scenePath, int armCode, int nreps, int duration, int restTime)
             testSequence2.addExercise(new Exercise(2, "nome2", "Exercise2Scene", 1, 1, 40, 2));
             // Add sequence to seq to run
-            SequenceManager.sequencesToRun.Add(testSequence2);
+            //SequenceManager.sequencesToRun.Add(testSequence2);
 
             // Run sequences
             SequenceManager.SetSessionProgressionPerc(0);

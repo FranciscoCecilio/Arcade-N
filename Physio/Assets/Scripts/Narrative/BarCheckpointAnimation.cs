@@ -39,11 +39,10 @@ public class BarCheckpointAnimation : MonoBehaviour
         littleStar2.SetActive(true);
         littleStar3.SetActive(true);
 
-        // change the circle color from white to green
-        circle.GetComponent<Image>().color = green; // green
+        setGreen();
 
         // shake it like you mean it
-        LeanTween.moveLocalY(circle, 0.0002f, 0.5f).setEase(LeanTweenType.easeShake).setRepeat(-1);
+        LeanTween.moveLocalY(circle, 0.1f, 2f).setEase(LeanTweenType.easeShake);
 
         // rotate (little stars)
         LeanTween.rotateAround(littleStar1, -Vector3.forward, 360, 2.5f).setRepeat(-1);
@@ -51,8 +50,8 @@ public class BarCheckpointAnimation : MonoBehaviour
         LeanTween.rotateAround(littleStar3, -Vector3.forward, 360, 2.5f).setRepeat(-1);
     }
     
-    void Start()
-    {
-        //StartAnimationLoop();
+    public void setGreen(){
+        // change the circle color from white to green
+        circle.GetComponent<Image>().color = green; // green
     }
 }

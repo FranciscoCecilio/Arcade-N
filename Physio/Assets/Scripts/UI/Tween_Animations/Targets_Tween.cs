@@ -4,21 +4,27 @@ using UnityEngine;
 
 public class Targets_Tween : MonoBehaviour
 {
+    Vector3 initialScale;
+
     void Start()
     {
-        //Shake_Target();
+        initialScale = transform.localScale;
+        Shake_Target();
         SquashAndStretch();
     }
 
     public void Shake_Target(){
-        //2
         LeanTween.cancel(gameObject);
-        //3
-        LeanTween.moveX(gameObject, transform.position.x - 0.5f, 0.5f).setEaseShake(); 
+        LeanTween.moveLocalX(gameObject, 0f, 0.5f).setEaseShake(); 
     }
 
     public void SquashAndStretch(){
-        gameObject.transform.localScale = new Vector3(10f,10f,10f);
-        LeanTween.scale(gameObject, new Vector3(35f,35f,35f), 2f).setEase(LeanTweenType.easeOutElastic);
+        // scale down
+        gameObject.transform.localScale = new Vector3(initialScale.x * 0.3f,initialScale.y * 0.3f,initialScale.z * 0.3f);
+        // scale up elastic
+        LeanTween.scale(gameObject, initialScale, 1f).setEase(LeanTweenType.easeOutElastic);
     }
+
+
+    
 }

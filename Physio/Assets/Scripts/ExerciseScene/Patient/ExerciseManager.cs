@@ -160,7 +160,10 @@ public class ExerciseManager : MonoBehaviour {
                             State.hasStartedExercise = true;
                         }
 
+                        // play target hit animation
+                        targets.transform.GetChild(State.currentTarget).GetComponent<Targets_Tween>().SquashAndStretch();
                         targets.transform.GetChild(State.currentTarget).gameObject.GetComponent<Renderer>().material.color = new Color(1, 1, 1);
+
                         if (State.currentTarget == (targets.transform.childCount - 1)) {
                             reversePath = true;
                             State.currentTarget--;
@@ -172,8 +175,8 @@ public class ExerciseManager : MonoBehaviour {
                             State.exercise.incCorrectReps();
                             // updates the session progression 
                             narrativeScript.IncNarrativePerc();
-                            // plary good sound
-                            if(UnityEngine.Random.Range(1,3) >= 1) voiceAssistant.PlayRandomGood();
+                            // play good sound + text
+                            if(UnityEngine.Random.Range(0f,1f) >= 0.5f) voiceAssistant.PlayRandomGood();
 
                             reversePath = false;
 
@@ -221,12 +224,15 @@ public class ExerciseManager : MonoBehaviour {
             else { // the cursor isn't inside of the area
                 if (State.hasStartedExercise) {
                     foreach (Transform exerciseBox in exerciseBoxGroup.transform) {
+                        //make exercise box red
                         exerciseBox.gameObject.GetComponent<Renderer>().material.color = new Color(1, 0, 0, 0.3f);
                     }
                     if (!hasRegisteredOutOfPath) {
                         State.exercise.incOutOfPath() ;
                         State.exercise.incTries();
                         hasRegisteredOutOfPath = true;
+                        soundManager.PlayOneShot("out_of_path");
+                        voiceAssistant.PlayRandomBad();
                     }
                     State.compensationInCurrentRep = true;
                 }

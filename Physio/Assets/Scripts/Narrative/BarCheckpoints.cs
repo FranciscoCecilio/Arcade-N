@@ -37,11 +37,13 @@ public class BarCheckpoints : MonoBehaviour
                 // Unlock it
                 barCheckpoints[i].chapterImage.gameObject.SetActive(true);
                 barCheckpoints[i].chapterImage.sprite = sprites[i];
+                barCheckpoints[i].setGreen();
             }
             else if(SequenceManager.unlockedChaptersEncoding[i] == 1){
                 // Unlock it
                 barCheckpoints[i].chapterImage.gameObject.SetActive(true);
                 barCheckpoints[i].chapterImage.sprite = sprites[i];
+                barCheckpoints[i].setGreen();
                 // and Set to code -1: unlocked 
                 SequenceManager.unlockedChaptersEncoding[i] = -1;
             }
@@ -50,7 +52,8 @@ public class BarCheckpoints : MonoBehaviour
 
     // Animate Checkpoints to be unlocked
     public void AnimateCheckpoints(){
-        for(int i = 0; i< SequenceManager.unlockedChaptersEncoding.Count; i++){
+        // ATENTION: we don't want to animate if is the Final image of the chapter, hence the -1
+        for(int i = 0; i< SequenceManager.unlockedChaptersEncoding.Count - 1; i++){
             if(SequenceManager.unlockedChaptersEncoding[i] == 1){
                 // Animate it
                 barCheckpoints[i].StartAnimationLoop();

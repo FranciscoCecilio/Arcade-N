@@ -35,7 +35,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -9.23}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -106, y: -67}
+  m_AnchoredPosition: {x: -107.6, y: -70.3}
   m_SizeDelta: {x: 600, y: 551}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &963026824999017425
@@ -103,7 +103,7 @@ RectTransform:
   m_GameObject: {fileID: 963026825271189883}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.07, y: 0.07, z: 0.07}
+  m_LocalScale: {x: 0.08, y: 0.08, z: 0.08}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 963026826864923890}
@@ -187,7 +187,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -9.23}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 105, y: 71}
+  m_AnchoredPosition: {x: 105, y: 65.3}
   m_SizeDelta: {x: 600, y: 551}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &963026825655266270
@@ -253,7 +253,7 @@ RectTransform:
   m_GameObject: {fileID: 963026826057400387}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.15, y: 1.15, z: 1.15}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 963026825655266264}
@@ -358,8 +358,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.69, y: -166}
-  m_SizeDelta: {x: 280.08, y: 131.6}
+  m_AnchoredPosition: {x: 0.69, y: -210.38}
+  m_SizeDelta: {x: 280.08, y: 194.08}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &963026826933029842
 CanvasRenderer:
@@ -401,11 +401,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Porque a riqueza \xE9 tudo aquilo que n\xE3o se pode comprar. Pedro compreendeu
-    isso, ali, numa ilha sem nome a mais de 10 mil quil\xF3metros de casa. Longe
-    de tudo o que acreditava precisar, ele encontrou o verdadeiro tesouro que todo
-    o homem procura. Liberdade, paz, amor... Vida. E ele nunca se sentira t\xE3o
-    rico."
+  m_text: "Passaram 10 anos desde que Pedro viu o av\xF4 pela \xFAltima vez."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7f4f67051143a124cbc5b1bc40733a8d, type: 2}
   m_sharedMaterial: {fileID: -3982096778254385821, guid: 7f4f67051143a124cbc5b1bc40733a8d,
@@ -433,12 +429,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 12.2
+  m_fontSize: 25
   m_fontSizeBase: 15.7
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 0
-  m_fontSizeMax: 12.2
+  m_fontSizeMax: 25
   m_fontStyle: 0
   m_HorizontalAlignment: 8
   m_VerticalAlignment: 256
@@ -502,7 +498,7 @@ RectTransform:
   m_GameObject: {fileID: 963026826978337979}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.24000001, y: 0.24000001, z: 0.24000001}
+  m_LocalScale: {x: 0.27, y: 0.27, z: 0.27}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 963026826864923890}

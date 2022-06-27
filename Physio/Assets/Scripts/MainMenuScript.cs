@@ -22,7 +22,7 @@ public class MainMenuScript : MonoBehaviour {
     public Image chapterImg;
     public TMP_Text chapterText;
 
-    public SoundManager soundManager;
+    SoundManager soundManager;
     public VoiceAssistant voiceAssistant;
 
     public void loadSequenceScene()
@@ -93,7 +93,10 @@ public class MainMenuScript : MonoBehaviour {
 	}
 
     void SetMainPage(){
-        int currentChapter =  SessionInfo.getXP() / 100 + 1;
+        // we want to show the last chapter unlocked (and we win XP in the end of the session, i.e. if we unlocked chapter 2 in the last session, our XP is 300)
+        int currentChapter =  SessionInfo.getXP() / 100 - 1;
+        if(currentChapter < 1) currentChapter = 1;
+        
         int lastImg;
         if(currentChapter % 2 == 0){
             lastImg = 4;
@@ -105,7 +108,11 @@ public class MainMenuScript : MonoBehaviour {
         Sprite sprite = Resources.Load<Sprite>("Narrative Materials/Chapter" + currentChapter.ToString() +"/"+ lastImg.ToString());
 
         if(sprite == null){
-            Debug.LogError("ERROR: Sprite not found in Resources/Narrative Materials/Chapter"+currentChapter.ToString() +"/"+ lastImg.ToString()+ " not found.");
+            Debug.LogWarning("Warning: Sprite not found in Resources/Narrative Materials/Chapter"+currentChapter.ToString() +"/"+ lastImg.ToString()+ " not found.");
+            //  SET default
+            sprite = Resources.Load<Sprite>("Narrative Materials/Chapter5/5");
+            chapterImg.sprite = sprite;
+            chapterText.text = "CAPÍTULO 5";
         }
         else{
             chapterImg.sprite = sprite;
@@ -126,7 +133,8 @@ public class MainMenuScript : MonoBehaviour {
 
     public void previousScreen()
     {
-        Destroy(soundManager.gameObject);
+        if(soundManager) Destroy(soundManager.gameObject);
+
         if(SessionInfo.isVoiceOn()){
             StartCoroutine(previousScreenAndBye());     
         }

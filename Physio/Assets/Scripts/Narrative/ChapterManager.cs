@@ -153,21 +153,29 @@ public class ChapterManager : MonoBehaviour
             }
         }
         // we showed all the unlocked images - Bye Narrative screen: Return to Exercise!!
+        if(SequenceManager.GetCurrentChapter() < 2) SequenceManager.SetCurrentChapter(2);
         if(SequenceManager.sequence != null) SequenceManager.nextExercise();
     }
 
-    // unlocks images and plays a voice line, and wait for the duration of the voice line
+    // displays the last chapter last image and shows a preview text on the right page and plays a voice line
     private IEnumerator ShowPreview(){
+        // set the current chapter to previous
+        currentChapter -= 1;
+
         currentPageType = 5;
         ShowPage(5);
         SetPreviewText(preview_text);
-        if(isChapterOdd){ // total of 5 images
-            currentImage = 5;
-        }
-        else{ // total of 4 images
+        if(currentChapter %2 == 0){ // total of 4 images
             currentImage = 4;
         }
+        else{ // total of 5 images
+            currentImage = 5;
+        }
         SetChapterUI(preview_image, false);
+
+        // set the current chapter to previous
+        currentChapter += 1;
+
         float clipLength = voiceAssistant.PlayVoiceLine("prvcap"+currentChapter); // i.e. prvcap2
         yield return new WaitForSeconds(clipLength);
         // we showed the preview - Bye Narrative screen: Start Session!!

@@ -25,8 +25,7 @@ public static class SequenceManager
     private static float percPerRepetition = 0; // each repetition has a percentage associated to it (0 to 1)
 
     // Narrative variables
-    // 0: not yet unlocked; 1: unlocked and waiting to have it image placed; -1: image placed
-    public static List<int> unlockedChaptersEncoding ;  
+    public static List<int> unlockedChaptersEncoding ;  // 0: not yet unlocked; 1: unlocked and waiting to have it image placed; -1: image placed
     private static int currentChapter; // current Level
     public static bool hasImagesToUnlock = false;
     public static bool hasPreviewToUnlock = false; // only becomes true on the start of the session.
@@ -78,6 +77,9 @@ public static class SequenceManager
         // increment the percentage
         sessionProgressionPerc += percPerRepetition;
 
+        Debug.Log(sessionProgressionPerc);
+        if(sessionProgressionPerc>0.98f) sessionProgressionPerc = 1.0f;
+
         // update the encoding
         if(currentChapter%2 == 0){
             // chatpter is even and has 4 Images to unlock
@@ -95,13 +97,14 @@ public static class SequenceManager
                     UpdateEncoding(1);
                     UpdateEncoding(2);
                     break;
-                case < 1f:
+                case < 0.99f:
                     // check if we reach image 1, 2, 3 and assign it
                     UpdateEncoding(1);
                     UpdateEncoding(2);
                     UpdateEncoding(3);
                     break;
-                case >= 1f:
+                case >= 0.99f:
+                    Debug.Log("updates encoding for last image even");
                     // check if we reach image 1, 2, 3, 4 and assign it
                     UpdateEncoding(1);
                     UpdateEncoding(2);
@@ -139,7 +142,8 @@ public static class SequenceManager
                     UpdateEncoding(3);
                     UpdateEncoding(4);
                     break;
-                case >= 1f:
+                case >= 0.99f:
+                    Debug.Log("updates encoding for last image odd");
                     // check if we reach image 1, 2, 3, 4, 5 and assign it
                     UpdateEncoding(1);
                     UpdateEncoding(2);
@@ -158,6 +162,7 @@ public static class SequenceManager
         switch(code){
             case 0:
                 // we want to unlock this image for the first time
+                Debug.Log("Updated encoding for image:" + i);
                 unlockedChaptersEncoding[i] = 1;
                 hasImagesToUnlock = true;
                 break;
@@ -255,10 +260,7 @@ public static class SequenceManager
         else
         {
             // END of Session!
-            // Give the user the xp - save session
-            SessionInfo.saveSession();
-            // Show congratulations and show results
-            SceneManager.LoadScene("SessionRewards");
+            EndOfSession(); 
         }
     }
 
@@ -266,7 +268,7 @@ public static class SequenceManager
     public static void nextExercise()
     {
         // here we want to check for narrative pictures to show!
-        if(hasPreviewToUnlock || hasImagesToUnlock){
+        if(1 == 2 /*hasPreviewToUnlock || hasImagesToUnlock*/){
             SceneManager.LoadScene("NarrativeMenu");
         }
         else{
@@ -290,9 +292,17 @@ public static class SequenceManager
                 //SceneManager.LoadScene("MainMenu");
             }
         }
-        
     }
     
+    public static void EndOfSession(){
+        // Give the user the xp - Level up
+        SessionInfo.setXP((currentChapter + 1) * 100);
+        // Save session
+        SessionInfo.saveSession();
+        // Show congratulations and show results
+        SceneManager.LoadScene("SessionRewards");
+    }
+
     // this method returns the **1st Exercise from the next Sequence** and is usefull to show in the panel of exercise scene
     public static Exercise GetNextExercise(){
         int nextSIndex = sequenceIndex + 1;

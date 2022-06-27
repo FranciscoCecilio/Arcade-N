@@ -34,6 +34,7 @@ public static class SessionInfo
     public static void createSessionPath()
     {
         _timestampSession = "Session" + DateTime.Now.ToString("yyyyMMddTHHmmss");
+        if(_username.Equals(string.Empty)) _username = "kiko12";
         System.IO.Directory.CreateDirectory(Application.dataPath + "/Users/" + _username + "/" + _timestampSession);
     }
 
@@ -76,8 +77,6 @@ public static class SessionInfo
                 else if (data[0] == "Nr_Utente") _nrSaude = data[1];
                 else if (data[0] == "XP") _XP = int.Parse(data[1]);
                 else if (data[0] == "MusicOn") {
-                    Debug.Log(data[1]);
-                    Debug.Log(data[1] == "True");
                     _isMusicOn = (data[1] == "True");
                 }
                 else if (data[0] == "VoicOn") _isVoiceOn = (data[1] == "True");
@@ -87,28 +86,6 @@ public static class SessionInfo
         Debug.Log("LoadedInfo - musicOn:" + _isMusicOn);
         reader.Close();
     }
-
-    // This is called when we LOGOUT or QUIT
-    public static void saveUserProgress(){
-        string userfile = Application.dataPath + "/Users/" + _username + ".txt";
-
-        if(File.Exists(userfile)) File.Delete(userfile);
-
-        // write to the user file the settings and XP
-        StreamWriter writer = new StreamWriter(userfile);
-        // old stuff (always the same)
-        writer.WriteLine("Username=" + _username);
-        writer.WriteLine("Name=" + _name);
-        writer.WriteLine("Age=" + _age);
-        writer.WriteLine("Gender=" + _gender);
-        if(_nrSaude != "") writer.WriteLine("Nr_Utente=" + _nrSaude);
-        // new stuff
-        writer.WriteLine("XP=" + _XP);
-        writer.WriteLine("MusicOn=" + _isMusicOn);
-        writer.WriteLine("VoiceOn=" + _isVoiceOn);
-
-        writer.Close();
-    } 
 
     public static int getExerciseId()
     {
@@ -128,6 +105,10 @@ public static class SessionInfo
     public static int getXP()
     {
         return _XP;
+    }
+
+    public static void setXP(int XP){
+        _XP = XP;
     }
 
     public static string toView()
@@ -153,10 +134,33 @@ public static class SessionInfo
         _isVoiceOn = intention;
     }
 
-    // TODO: save session file in the end of the session (last exercise from last sequence OR Quitting during the exercises)
+    // save session file in the end of the session 
+    // (called when last exercise from last sequence OR Quitting during the exercises)
     public static void saveSession(){
         saveUserProgress();
     }
+
+    // This is called when we end session or QUIT
+    public static void saveUserProgress(){
+        string userfile = Application.dataPath + "/Users/" + _username + ".txt";
+
+        if(File.Exists(userfile)) File.Delete(userfile);
+
+        // write to the user file the settings and XP
+        StreamWriter writer = new StreamWriter(userfile);
+        // old stuff (always the same)
+        writer.WriteLine("Username=" + _username);
+        writer.WriteLine("Name=" + _name);
+        writer.WriteLine("Age=" + _age);
+        writer.WriteLine("Gender=" + _gender);
+        if(_nrSaude != "") writer.WriteLine("Nr_Utente=" + _nrSaude);
+        // new stuff
+        writer.WriteLine("XP=" + _XP);
+        writer.WriteLine("MusicOn=" + _isMusicOn);
+        writer.WriteLine("VoiceOn=" + _isVoiceOn);
+
+        writer.Close();
+    } 
 
     public static void DeleteUser(TMP_Text afterDeleteText) 
     {

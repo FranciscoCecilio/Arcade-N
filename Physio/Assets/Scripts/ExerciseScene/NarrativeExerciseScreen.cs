@@ -10,17 +10,21 @@ public class NarrativeExerciseScreen : MonoBehaviour
 {
     [Header("For Debugging")]
     public List<Sprite> loadedChapterImages = new List<Sprite>(); // loaded on start from resources folder
+    
     [HideInInspector]
     public BarCheckpoints chosenBarCheckpoint;
-    
+    [Header("Bar Checkpoints")]
     public BarCheckpoints oddChapterCheckpoints; // has lastchapter_preview + 5 images TODO make class
     public BarCheckpoints evenChapterCheckpoints; // has lastchapter_preview + 4 images 
 
-    public Image nextPlaceHolder;
-    public TMP_Text nextChapterText;
-    public TMP_Text lastChapterText;
+    [Header("Previous and Final images")]
+    public TMP_Text previousChapterText;
+    public Image previousChapterImage;
+    public Image finalImage;
     public Material blur; // max size = 6 for the max blurr ; this blur is applied to this chapter last image
+    Sprite previousChapterImg;
 
+    [Header("Slider")]
     public Slider progressBar;
     public TMP_Text handleText;
     
@@ -43,7 +47,7 @@ public class NarrativeExerciseScreen : MonoBehaviour
             evenChapterCheckpoints.gameObject.SetActive(false);
             chosenBarCheckpoint = oddChapterCheckpoints;
         }
-
+        
         // load images of current chapter from the Resources folder
         LoadChapterImages();
         // Hide all the images 
@@ -53,6 +57,10 @@ public class NarrativeExerciseScreen : MonoBehaviour
         chosenBarCheckpoint.SetImages(loadedChapterImages);
         chosenBarCheckpoint.UnlockCheckpoints();
         
+        // Place Previous and Final chapter images
+        previousChapterImage.sprite = previousChapterImg;
+        finalImage.sprite = loadedChapterImages[loadedChapterImages.Count-1];
+
         // blurrs the last image according the current session_progress
         CalculateBlurSize();
 
@@ -60,11 +68,12 @@ public class NarrativeExerciseScreen : MonoBehaviour
         progressBar.value = SequenceManager.GetSessionProgressionPerc();
 
         // update the number
-        handleText.text = ((int)(SequenceManager.GetSessionProgressionPerc() * 100) ).ToString() + "%";
+        handleText.text = Mathf.RoundToInt(SequenceManager.GetSessionProgressionPerc() * 100).ToString() + "%";
     }
 
     // fetch the images from resource folder
     public void LoadChapterImages(){
+        // Load current chapter images
         int chapterNum = SequenceManager.GetCurrentChapter();
         string chapterFolder = Application.dataPath + "/Resources/Narrative Materials/Chapter"+chapterNum.ToString();
         if(!Directory.Exists(chapterFolder)){
@@ -72,15 +81,44 @@ public class NarrativeExerciseScreen : MonoBehaviour
             return;
         }
         string[] files = Directory.GetFiles(chapterFolder);
+        int imageNum = 0;
         // iterate the chapter folder looking for images to load
         for(int i = 0; i < files.Length; i ++){
             // make sure its an image
             string[] filename = files[i].Split('.');
-            if(filename[1].Equals("png") || filename[1].Equals("jpg") || filename[1].Equals("jpeg")){
+            if(filename.Length <= 2 && (filename[1].Equals("png") || filename[1].Equals("jpg") || filename[1].Equals("jpeg"))){
                 // load image and store on the list
-                int imageNum = i + 1;
+                imageNum++;
                 Sprite sprite = Resources.Load<Sprite>("Narrative Materials/Chapter" + chapterNum.ToString() + "/" + imageNum.ToString());
+                //Debug.Log("passou aqui: " + filename[0]);
                 loadedChapterImages.Add(sprite);
+            }
+        }
+
+        // Load previous chapter image
+        chapterNum -= 1;
+        chapterFolder = Application.dataPath + "/Resources/Narrative Materials/Chapter" + chapterNum.ToString();
+        if(!Directory.Exists(chapterFolder)){
+            return;
+        }
+        // we find the last image on the chapter folder
+        string[] lastfiles = Directory.GetFiles(chapterFolder);
+        for(int i = lastfiles.Length - 1; i > 0; i --){
+            // make sure its an image
+            string[] lastfilename = lastfiles[i].Split('.');
+            if(lastfilename[1].Equals("png") || lastfilename[1].Equals("jpg") || lastfilename[1].Equals("jpeg")){
+                // load image and store on the list
+                if(chapterNum%2 == 0){
+                    // chatpter is even and has 4 Images to unlock
+                    imageNum = 4;
+                }
+                else{
+                    // chatpter is odd and has 5 Images to unlock
+                    imageNum = 5;
+                }
+                Sprite sprite = Resources.Load<Sprite>("Narrative Materials/Chapter" + chapterNum.ToString() + "/" + imageNum.ToString());
+                previousChapterImg = sprite;
+                break;
             }
         }
     }

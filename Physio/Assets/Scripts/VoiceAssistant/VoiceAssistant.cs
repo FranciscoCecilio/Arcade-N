@@ -13,7 +13,8 @@ public class VoiceAssistant : MonoBehaviour
     public Sound[] sounds;
     List<AudioSource> allSources;
 
-    public string[] goodSoundsNames; // played when we successfully hit a target during Exercise
+    public string[] goodSoundsNames; // played when the user successfully hit a target during Exercise
+    public string[] badSoundsNames; // played when the user goes out of path during Exercise
     public string[] byeSoundsNames; // played when we logout
     public string[] endOfSessionSoundsNames; // played on the session rewards scene
 
@@ -59,6 +60,7 @@ public class VoiceAssistant : MonoBehaviour
         Sound s = GetSound(name);
         if( s == null){
             Debug.LogWarning("Sound: " + name + " not found!");
+            if(VoiceLine != null) StartCoroutine(ShowVoiceLine(5, name));
             return 5f;
         }
 
@@ -79,7 +81,7 @@ public class VoiceAssistant : MonoBehaviour
 
     IEnumerator ShowVoiceLine(float clipDuration, string clipName){
         // load TEXT
-        string textPath = Application.dataPath + "/Resources/Sounds/VoiceActing/ExpressionsScripts/" + clipName;
+        string textPath = Application.dataPath + "/Resources/Sounds/VoiceActing/ExpressionsScripts/" + clipName + ".txt";
         if (System.IO.File.Exists(textPath)){ 
             //Read the text from the .txt file
             StreamReader reader = new StreamReader(textPath);
@@ -91,14 +93,16 @@ public class VoiceAssistant : MonoBehaviour
 
             // fade in 
             VoiceLine.SetActive(true);
-            LeanTween.scale(VoiceLine, Vector3.one ,1f).setEase(LeanTweenType.easeShake); //punch
+            LeanTween.scale(VoiceLine, Vector3.one ,0.5f).setEase(LeanTweenType.easeInBack); 
 
             // place text
             voiceLineText.text = textToWrite;
             
             // wait for its duration to hide
             yield return new WaitForSeconds(clipDuration);
-            VoiceLine.SetActive(false);
+            LeanTween.scale(VoiceLine, Vector3.zero, 0.5f).setEase(LeanTweenType.easeOutBack); 
+
+            //VoiceLine.SetActive(false);
         }
         else{
             Debug.LogError("ERROR: Voice Line text " + textPath + " not found.");
@@ -110,6 +114,13 @@ public class VoiceAssistant : MonoBehaviour
         // Play one of the "good" sounds randomly
         int index = UnityEngine.Random.Range (0, goodSoundsNames.Length);
         string chosenSound  = goodSoundsNames[index];
+        return PlayVoiceLine(chosenSound);
+    }
+
+    public float PlayRandomBad(){
+        // Play one of the "out_of_path" sounds randomly
+        int index = UnityEngine.Random.Range (0, badSoundsNames.Length);
+        string chosenSound  = badSoundsNames[index];
         return PlayVoiceLine(chosenSound);
     }
 

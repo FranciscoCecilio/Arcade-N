@@ -15,6 +15,7 @@ public class VoiceAssistant : MonoBehaviour
 
     public string[] goodSoundsNames; // played when the user successfully hit a target during Exercise
     public string[] badSoundsNames; // played when the user goes out of path during Exercise
+    public string[] restSoundsNames; // played when the user is waiting to start the exercise
     public string[] byeSoundsNames; // played when we logout
     public string[] endOfSessionSoundsNames; // played on the session rewards scene
 
@@ -60,7 +61,11 @@ public class VoiceAssistant : MonoBehaviour
         Sound s = GetSound(name);
         if( s == null){
             Debug.LogWarning("Sound: " + name + " not found!");
-            if(VoiceLine != null) StartCoroutine(ShowVoiceLine(5, name));
+            if(VoiceLine != null) 
+            {
+                StopCoroutine("ShowVoiceLine");
+                StartCoroutine(ShowVoiceLine(5, name));
+            }
             return 5f;
         }
 
@@ -70,11 +75,17 @@ public class VoiceAssistant : MonoBehaviour
         float clipLength = s.source.clip.length;
 
         if(clipLength == 0){
-            if(VoiceLine != null) StartCoroutine(ShowVoiceLine(5, name));
+            if(VoiceLine != null) {
+                StopCoroutine("ShowVoiceLine");
+                StartCoroutine(ShowVoiceLine(5, name));
+            }
             return 5f;
         } 
         else{
-            if(VoiceLine != null) StartCoroutine(ShowVoiceLine(clipLength, name));
+            if(VoiceLine != null) {
+                StopCoroutine("ShowVoiceLine");
+                StartCoroutine(ShowVoiceLine(clipLength, name));
+            }
             return clipLength;
         }
     }
@@ -93,14 +104,14 @@ public class VoiceAssistant : MonoBehaviour
 
             // fade in 
             VoiceLine.SetActive(true);
-            LeanTween.scale(VoiceLine, Vector3.one ,0.5f).setEase(LeanTweenType.easeInBack); 
+            LeanTween.scale(VoiceLine, Vector3.one ,0.2f).setEase(LeanTweenType.easeInBack); 
 
             // place text
             voiceLineText.text = textToWrite;
             
             // wait for its duration to hide
             yield return new WaitForSeconds(clipDuration);
-            LeanTween.scale(VoiceLine, Vector3.zero, 0.5f).setEase(LeanTweenType.easeOutBack); 
+            LeanTween.scale(VoiceLine, Vector3.zero, 0.2f).setEase(LeanTweenType.easeOutBack); 
 
             //VoiceLine.SetActive(false);
         }
@@ -111,7 +122,7 @@ public class VoiceAssistant : MonoBehaviour
     }
 
     public float PlayRandomGood(){
-        // Play one of the "good" sounds randomly
+        // Play one of the "good job" sounds randomly
         int index = UnityEngine.Random.Range (0, goodSoundsNames.Length);
         string chosenSound  = goodSoundsNames[index];
         return PlayVoiceLine(chosenSound);
@@ -121,6 +132,13 @@ public class VoiceAssistant : MonoBehaviour
         // Play one of the "out_of_path" sounds randomly
         int index = UnityEngine.Random.Range (0, badSoundsNames.Length);
         string chosenSound  = badSoundsNames[index];
+        return PlayVoiceLine(chosenSound);
+    }
+
+    public float PlayRandomRest(){
+        // Play one of the "take a rest" sounds randomly
+        int index = UnityEngine.Random.Range (0, restSoundsNames.Length);
+        string chosenSound  = restSoundsNames[index];
         return PlayVoiceLine(chosenSound);
     }
 

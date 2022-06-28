@@ -18,7 +18,7 @@ public class ClickToOpen : MonoBehaviour, IPointerClickHandler
             SequenceManager.isNextPanelOn = objectToOpen.activeSelf;
         }
         else if(isTherapistInfo){
-            SequenceManager.isNextPanelOn = objectToOpen.activeSelf;
+            SequenceManager.isTherapistInfoOn = objectToOpen.activeSelf;
         }
     }
     

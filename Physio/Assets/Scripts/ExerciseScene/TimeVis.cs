@@ -7,7 +7,8 @@ using TMPro;
 // Class responsible for invoking the Countdowns
 public class TimeVis : MonoBehaviour {
     [Header("Countdown on Start")]
-    public TMP_Text counterOnStart;
+    public GameObject counterOnStart;
+    public TMP_Text counterOnStartText;
 
     [Header("Session Time")]
     public TMP_Text sessionTimeCounter;
@@ -16,7 +17,8 @@ public class TimeVis : MonoBehaviour {
     public TMP_Text timeUntilNextRestCounter;
 
     [Header("Is Resting")]
-    public GameObject isRestingMessage;
+    public GameObject isRestingVis;
+    public Image isRestingRadialBar;
     public TMP_Text isRestingCounter;
 
     private int sessionTimeInt;
@@ -25,6 +27,9 @@ public class TimeVis : MonoBehaviour {
     private int startCounterInt;
     private bool wasInitialized = false;
     
+    SoundManager soundManager;
+    public VoiceAssistant voiceAssistant;
+
     private void OnEnable() {
         //init();
     }
@@ -38,12 +43,15 @@ public class TimeVis : MonoBehaviour {
     void Update() {
         if(!wasInitialized) 
             return;
-        if (State.exercise.isCompleted()) {
+        if (State.exercise.isCompleted()) { 
             counterOnStart.transform.gameObject.SetActive(false);
             CancelInvoke("countDown");
             CancelInvoke("restTimeDec");
             CancelInvoke("setTimeDec");
             CancelInvoke("sessionTimeInc");
+        }
+        if(isRestingVis.activeSelf){
+            isRestingRadialBar.fillAmount = (float) (SequenceManager.RestTimeLeft.TotalSeconds / SequenceManager.GetTotalRestTime()); // 5s/60s = 1/12
         }
         //VERIFICAR ISTO TODO
         //completed.SetActive(State.exercise.isCompleted());
@@ -58,29 +66,61 @@ public class TimeVis : MonoBehaviour {
     public void init() {
         // allow update to run
         wasInitialized = true;
-        // turn off the rest message
-        isRestingMessage.SetActive(false);
-        // start the countdown on start
+
+        // start the restin timer countdown (it can be non-existing if we have no time left, and in that case we jump straight to intiial countdown)
         startCounterInt = 4;
-        counterOnStart.transform.gameObject.SetActive(true);
-        InvokeRepeating("initialCountDown", 0, 1);
+        if (SequenceManager.RestTimeLeft.TotalSeconds > startCounterInt){
+            isRestingVis.SetActive(true);
+            // voice line
+            voiceAssistant.PlayRandomRest();
+            InvokeRepeating("initRestCountDown", 0, 1);
+        }
+        else{
+            StartCountDown();
+        }
+        
     }
 
-    private void initialCountDown() {
-        if (startCounterInt <= 0) {
-            // start the session timer
-            initSessionTime(); // goes up
-            initUntilNextRestTimer(); // goes down
-            counterOnStart.transform.gameObject.SetActive(false);
-            State.isTherapyOnGoing = true;
-            CancelInvoke("initialCountDown");
+    private void initRestCountDown() {
+        // when resting duration is on 4 seconds to end, invoke inistial countdown
+        if (SequenceManager.RestTimeLeft.TotalSeconds <= startCounterInt) {
+            Debug.Log("rest ended! Is going to init countdown! ");
+            isRestingVis.SetActive(false);
+            StartCountDown();
+            CancelInvoke("initRestCountDown");
         }
-        startCounterInt--;
-        counterOnStart.text = "" + startCounterInt;
+        // show resting time vis 
+        isRestingCounter.text = string.Format("{0:D2} : {1:D2}",(int) SequenceManager.RestTimeLeft.TotalMinutes, (int)SequenceManager.RestTimeLeft.TotalSeconds);
     }
 
     // Starts the session timer (goes Up)
-    private void initSessionTime() {
+    private void StartCountDown() {
+        counterOnStart.gameObject.SetActive(true);
+        LeanTween.scale(counterOnStart, new Vector3(1.1f, 1.1f, 1.1f), 0.5f).setLoopType(LeanTweenType.pingPong);
+        InvokeRepeating("initCountDown", 0, 1);
+    }
+
+    private void initCountDown() {
+            Debug.Log("Is inside Initial Countdown (x4) ");
+
+        if (startCounterInt <= 0) {
+            // start the session timer
+            startSessionTimer(); // goes up
+            //initUntilNextRestTimer(); // TODO not anymore
+            counterOnStart.gameObject.SetActive(false);
+            State.isTherapyOnGoing = true;
+            LeanTween.cancel(counterOnStart); // cancel animations
+            CancelInvoke("initCountDown");
+        }
+        startCounterInt--;
+        if(startCounterInt == 0) 
+            counterOnStartText.text = "AÇÃO!";
+        else 
+            counterOnStartText.text = "" + startCounterInt;
+    }
+
+    // Starts the session timer (goes Up)
+    private void startSessionTimer() {
         sessionTimeInt = 0;
         InvokeRepeating("sessionTimeInc", 0, 1);
     }
@@ -118,7 +158,7 @@ public class TimeVis : MonoBehaviour {
 
     // Shows the Is Resting Message and starts the resting countdown
     private void activateRest() {
-        isRestingMessage.SetActive(true);
+        isRestingVis.SetActive(true);
         State.isTherapyOnGoing = false;
         State.restCount++;
         initIsRestingTimer();
@@ -146,7 +186,7 @@ public class TimeVis : MonoBehaviour {
     // close message and restart until_next_rest counter
     private void activateSet() {
         //restPatient.SetActive(false);
-        isRestingMessage.SetActive(false);
+        isRestingVis.SetActive(false);
         State.isTherapyOnGoing = true;
         initUntilNextRestTimer();
     }

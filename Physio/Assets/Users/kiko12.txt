@@ -3,6 +3,6 @@ Name=Kiko
 Age=22
 Gender=masculino
 Nr_Utente=123456789
-XP=200
+XP=400
 MusicOn=False
 VoiceOn=True

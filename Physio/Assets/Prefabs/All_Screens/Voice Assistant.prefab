@@ -44,28 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0db5d22dd091d394f88735fd2bcd057c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sounds:
-  - name: sunny_sundae
-    clip: {fileID: 8300000, guid: b3d845a4a9ba81f41abe8f209ccf5fc8, type: 3}
-    volume: 1
-    pitch: 2.27
-    loop: 0
-    source: {fileID: 0}
-    web_url_source: 
-  - name: beep
-    clip: {fileID: 8300000, guid: 2576467c0e116ef4982914ef71aa60f7, type: 3}
-    volume: 1
-    pitch: 1
-    loop: 0
-    source: {fileID: 0}
-    web_url_source: 
-  - name: flip
-    clip: {fileID: 8300000, guid: 2f4f2a55944cbea409c20e77389f0fa8, type: 3}
-    volume: 1
-    pitch: 1
-    loop: 0
-    source: {fileID: 0}
-    web_url_source: 
+  sounds: []
   goodSoundsNames:
   - good1
   - good2
@@ -77,6 +56,9 @@ MonoBehaviour:
   - bad2
   - bad3
   - bad4
+  restSoundsNames:
+  - rest1
+  - rest2
   byeSoundsNames:
   - bye1
   - bye2

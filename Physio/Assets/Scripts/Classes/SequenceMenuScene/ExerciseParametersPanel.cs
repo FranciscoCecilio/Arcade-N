@@ -68,7 +68,7 @@ public class ExerciseParametersPanel : MonoBehaviour
             RestTimerText.text = "-";
         }
         else{
-            exTypeIndex = seq.getExercisesIds()[0];
+            exTypeIndex = seq.getExercisesId();
             armIndex = seq.getExercise(0).isLeftArm() ? 0 : 1 ; // armIndex is 0 if isLeftArm is true
             NSeriesText.text = seq.getSeries().ToString();
             NRepsText.text =  seq.getExercise(0).getNReps().ToString();

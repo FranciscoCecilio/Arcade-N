@@ -316,6 +316,10 @@ public class ExerciseManager : MonoBehaviour {
 
         // Save the Exercise Preferences
         preferencesScript.SavePreferencesToFile();
+
+        // Start calculating resting time
+        SequenceManager.StartRestCountDown(TimeSpan.FromSeconds(SequenceManager.sequence.getRestDuration()));
+
         // Play next Exercise
         SequenceManager.nextExercise();
     }

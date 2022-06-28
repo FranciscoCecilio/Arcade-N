@@ -44,8 +44,8 @@ public class BodyScreenController : MonoBehaviour {
             musicOffButton.SetActive(true); 
         }
 
-        // If we are running the 1st exercise of a sequence, then we want to Setup/Edit
-        if(SequenceManager.GetExerciseIndex() == 1){
+        // If we are running the 1st exercise of a sequence and we have not run this exercise type in this session, then we want to Setup/Edit
+        if(SequenceManager.ShouldOpenExerciseEdition() == true){
             exerciseEdition.SetActive(true);
         }   
         else{
@@ -77,7 +77,8 @@ public class BodyScreenController : MonoBehaviour {
         // Deactivate button
         startButton.SetActive(false);
         // Fade out the exercise Edition
-        StartCoroutine(FadeOutObject(exerciseEdition, fadeSpeedTest));
+        if(exerciseEdition.activeSelf) 
+            StartCoroutine(FadeOutObject(exerciseEdition, fadeSpeedTest));
     }
 
     // Pause Button - show Finish and Restart Buttons / Start Stuff / UnPause Button

@@ -79,8 +79,8 @@ public class SessionReward : MonoBehaviour
         Performance.text = "Performance: " + (rounded_avg).ToString() + " %";
         // change medal image
 
-        if(rounded_avg < 0.5f) Medal.sprite = medalSprites[2];
-        else if(rounded_avg < 0.8f) Medal.sprite = medalSprites[1];
+        if(rounded_avg < 50f) Medal.sprite = medalSprites[2];
+        else if(rounded_avg < 80f) Medal.sprite = medalSprites[1];
         else Medal.sprite = medalSprites[0];
 
     }

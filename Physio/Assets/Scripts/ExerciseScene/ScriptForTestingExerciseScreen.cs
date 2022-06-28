@@ -32,8 +32,8 @@ public class ScriptForTestingExerciseScreen : MonoBehaviour
             SequenceManager.newSequence("testSequence1");
             Sequence testSequence1 = SequenceManager.sequence;
             // Add Exercise(int id, string name, string scenePath, int armCode, int nreps, int duration, int restTime)
-            testSequence1.addExercise(new Exercise(2, "nome1", "Exercise2Scene", 1, 3, 40, 2));
-            testSequence1.addExercise(new Exercise(2, "nome1", "Exercise2Scene", 1, 2, 40, 5));
+            testSequence1.addExercise(new Exercise(2, "nome1", "Exercise2Scene", 1, 1, 40, 20));
+            //testSequence1.addExercise(new Exercise(2, "nome1", "Exercise2Scene", 1, 2, 40, 5));
             // Add sequence to seq to run
             SequenceManager.sequencesToRun = new List<Sequence>();
             SequenceManager.sequencesToRun.Add(testSequence1);
@@ -43,9 +43,10 @@ public class ScriptForTestingExerciseScreen : MonoBehaviour
             SequenceManager.newSequence("testSequence2");
             Sequence testSequence2 = SequenceManager.sequence;
             // Add Exercise(int id, string name, string scenePath, int armCode, int nreps, int duration, int restTime)
-            testSequence2.addExercise(new Exercise(2, "nome2", "Exercise2Scene", 1, 1, 40, 2));
+            testSequence2.addExercise(new Exercise(2, "nome2", "Exercise2Scene", 1, 1, 40, 15));
             // Add sequence to seq to run
-            //SequenceManager.sequencesToRun.Add(testSequence2);
+            SequenceManager.sequencesToRun.Add(testSequence2);
+            SequenceManager.sequencesToRun.Add(testSequence2);
 
             // Run sequences
             SequenceManager.SetSessionProgressionPerc(0);

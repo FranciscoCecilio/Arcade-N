@@ -23,12 +23,12 @@ public class SequenceListButton : MonoBehaviour
         foreach (GameObject exerc in exercs) GameObject.Destroy(exerc);
 
         //Procurar exercicios
-        List<int> exercisesIds = _sequence.getExercisesIds();
-        for (int i = 0; i < exercisesIds.Count; i++)
+        int sequenceLength = _sequence.getLength();
+        for (int i = 0; i < sequenceLength; i++)
         {
             string exerciseName = "";
             string line = "";
-            StreamReader reader = new StreamReader(Application.dataPath + "/Exercises/exercise" + exercisesIds[i].ToString() + ".txt");
+            StreamReader reader = new StreamReader(Application.dataPath + "/Exercises/exercise" + _sequence.getExercisesId() + ".txt");
             {
                 line = reader.ReadLine();
                 while (line != null)
@@ -62,7 +62,7 @@ public class SequenceListButton : MonoBehaviour
         exerciseListText.SetActive(true);
 
         runButton.SetActive(true);
-        if (_sequence.getExercisesIds().Count == 0) runButton.GetComponent<Button>().interactable = false;
+        if (_sequence.getLength() == 0) runButton.GetComponent<Button>().interactable = false;
         else runButton.GetComponent<Button>().interactable = true;
 
         deleteButton.SetActive(true);

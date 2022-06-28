@@ -45,7 +45,7 @@ public class SequenceListElement : MonoBehaviour
             restTime = 0;        
         }
         else{
-            exTypeIndex = _sequence.getExercisesIds()[0];
+            exTypeIndex = _sequence.getExercisesId();
             // var beverage = (age >= 21) ? "Beer" : "Juice";
             armIndex = _sequence.getExercise(0).isLeftArm() ? 0 : 1 ; // armIndex is 0 if isLeftArm is true
             nSeries= _sequence.getSeries();

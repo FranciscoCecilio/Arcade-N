@@ -104,7 +104,6 @@ public class SoundButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             }
             else{ // ON
                 SessionInfo.setMusic(true);
-                Debug.Log("just altered sessionInfo: "+SessionInfo.isMusicOn());
             }
         }
         else if(isVoiceButton){

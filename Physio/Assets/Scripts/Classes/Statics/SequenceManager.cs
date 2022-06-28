@@ -20,9 +20,13 @@ public static class SequenceManager
     // index gives the number of the exercise of the given sequence (if the sequence has 3 exercises and we are running the 1st exercise, index = 0)
     private static int index = 0;
 
+    // grid, horizontal, vertical (it becomes 1 if in this session we played that exercise)
+    private static int[] runnedExerciseTypes = new int[3] {0, 0, 0}; 
+    
     // these are not actually percentages bc they go from 0 to 1.
     private static float sessionProgressionPerc = 0; // current progress (0 to 1)
     private static float percPerRepetition = 0; // each repetition has a percentage associated to it (0 to 1)
+    
 
     // Narrative variables
     public static List<int> unlockedChaptersEncoding ;  // 0: not yet unlocked; 1: unlocked and waiting to have it image placed; -1: image placed
@@ -43,6 +47,10 @@ public static class SequenceManager
         index = i;
     }
 
+    public static bool ShouldOpenExerciseEdition(){
+        // we want to open exercise_setup automatically when we start a new exercise type
+        return index == 1 && runnedExerciseTypes[sequence.getExercisesId()] == 0;
+    }
     public static int GetExerciseIndex(){
         return index;
     }
@@ -234,6 +242,7 @@ public static class SequenceManager
         }
     }
 
+    
     // calculates the impact one repetition has on the percentageBar during the exercise
     public static void CalculatePercPerRepetition(){
         int totalRepetitions = 0;
@@ -253,8 +262,8 @@ public static class SequenceManager
         {
             // Assign the current sequence
             sequence = sequencesToRun[sequenceIndex];
+            // Restart exercises index
             index = 0;
-            
             nextExercise();
         }
         else
@@ -284,14 +293,42 @@ public static class SequenceManager
                 // THIS SEQUENCE IS FINISHED
                 // Save Sequence
                 sequence.toFile();
+                // Update runned exercise types
+                runnedExerciseTypes[sequence.getExercisesId()] = 1; // i.e. if we run a vertical sequence: runnedExerciseTypes= {0,0,1}
                 // go to next!
                 sequenceIndex ++;
                 nextSequence();
-
-                // NOT ANYMORE: here we should go back to the session screen for the rest duration!
-                //SceneManager.LoadScene("MainMenu");
             }
         }
+    }
+
+    static DateTime RestTimeStarted;
+    static TimeSpan TotalRestTime;
+
+    // GlobalCountDown.StartCountDown(TimeSpan.FromMinutes(5));
+    // Called before nextExercise() on ExerciseManager
+    public static void StartRestCountDown(TimeSpan totalTime)
+    {
+        RestTimeStarted = DateTime.UtcNow;
+        TotalRestTime = totalTime;
+    }
+
+    // returns the timespan with the time left to rest
+    public static TimeSpan RestTimeLeft
+    {
+        get
+        {
+            if(TotalRestTime == null) return  TimeSpan.Zero; // if we didnt assign (for testing for example)
+
+            var result = TotalRestTime - (DateTime.UtcNow - RestTimeStarted);
+            if (result.TotalSeconds <= 0)
+                return TimeSpan.Zero;
+            return result;
+        }
+    }
+
+    public static double GetTotalRestTime(){
+        return TotalRestTime.TotalSeconds;
     }
     
     public static void EndOfSession(){
@@ -322,10 +359,9 @@ public static class SequenceManager
     //-----------------------------------------------------------------------------------------------------------------------------------
     // Settings during the session (maybe passar para sessionInfo e dar upload no text do user)
     
-    public static bool isNextPanelOn = false;
-    public static bool isTherapistInfoOn = false;
+    public static bool isNextPanelOn = true;
+    public static bool isTherapistInfoOn = true;
     public static float chapterBarPercentage = 0;
-    public static int nextRest = 96;
 
 
     // This resets the State because we changed Project Settings> Editor > Enter Play Mode > (disable) Domain Reload
@@ -337,10 +373,9 @@ public static class SequenceManager
         sequencesToRun = null;
         sequenceIndex = 0;
         index = 0;
-        isNextPanelOn = false;
-        isTherapistInfoOn = false;
+        isNextPanelOn = true;
+        isTherapistInfoOn = true;
         chapterBarPercentage = 0;
-        nextRest = 96;
         Debug.Log("SequenceManager reset.");
     }
 }

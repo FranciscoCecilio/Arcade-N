@@ -9,11 +9,10 @@ using UnityEngine;
 // When a Sequence is played, we are playing the same Exercise <_nSeries> times.
 public class Sequence
 {
-    private int _id; // never used?
     private string _name;
     private string _timestamp; // format: SequenceyyyyMMddTHHmmss
     private int _series; // _series is equal to the Lenght of _exerciseList
-    private int _restDuration; // rest time between series (or exercises from the list)
+    private int _restDuration; // rest time in seconds between series
     private int totalRepetitions = 0; // this variable is usefull to calculate the Percentage_per_Repetition during the Exercise Screen
     
     // calculated to save in file
@@ -42,24 +41,10 @@ public class Sequence
         return _name;
     }
 
-    public List<int> getExercisesIds()
+    // represents the exercise type 0 grid, 1 horizontal, 2 vertical
+    public int getExercisesId()
     {
-        List<int> _exercisesIdList = new List<int>();
-        for (int i = 0; i < _exerciseList.Count; i++)
-        {
-            _exercisesIdList.Add(_exerciseList[i].getId());
-        }
-        return _exercisesIdList;
-    }
-
-    public void setId(int id)
-    {
-        _id = id;
-    }
-
-    public int getId()
-    {
-        return _id;
+        return _exerciseList[0].getId();
     }
 
     public int getLength()
@@ -111,6 +96,7 @@ public class Sequence
         totalRepetitions += exercise.getNReps(); // everytime we add an exercise we change the value of totalRepetitions
         _exerciseList.Add(exercise);
         _series = _exerciseList.Count;
+        _restDuration = exercise.getRestTime();
     }
 
     public int getTotalRepetitions(){

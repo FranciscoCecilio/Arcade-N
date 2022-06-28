@@ -83,7 +83,6 @@ public static class SessionInfo
                 line = reader.ReadLine();
             }
         }
-        Debug.Log("LoadedInfo - musicOn:" + _isMusicOn);
         reader.Close();
     }
 

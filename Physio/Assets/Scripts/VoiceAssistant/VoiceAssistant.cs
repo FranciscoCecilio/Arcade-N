@@ -116,6 +116,7 @@ public class VoiceAssistant : MonoBehaviour
             //VoiceLine.SetActive(false);
         }
         else{
+            
             Debug.LogError("ERROR: Voice Line text " + textPath + " not found.");
             yield return 0;
         }

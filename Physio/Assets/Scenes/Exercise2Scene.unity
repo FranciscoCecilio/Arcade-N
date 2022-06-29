@@ -6789,6 +6789,7 @@ RectTransform:
   m_Children:
   - {fileID: 1454029933}
   - {fileID: 1872076103}
+  - {fileID: 1074003255}
   - {fileID: 1935594293}
   m_Father: {fileID: 0}
   m_RootOrder: 1
@@ -8026,7 +8027,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &365837900
 RectTransform:
   m_ObjectHideFlags: 0
@@ -21664,7 +21665,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1074003255
 RectTransform:
   m_ObjectHideFlags: 0
@@ -21677,15 +21678,14 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1430617731}
   - {fileID: 365837900}
   - {fileID: 709552865}
-  m_Father: {fileID: 1872076103}
+  m_Father: {fileID: 300773808}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -3.4799635, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1075486496
@@ -23255,7 +23255,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1143059521
 RectTransform:
   m_ObjectHideFlags: 0
@@ -23276,7 +23276,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 3.4799635, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1147144743
@@ -29164,7 +29164,7 @@ GameObject:
   - component: {fileID: 1420180195}
   - component: {fileID: 1420180194}
   m_Layer: 9
-  m_Name: Button
+  m_Name: Skip Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29249,7 +29249,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1420180196}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1872076106}
+        m_TargetAssemblyTypeName: TimeVis, Assembly-CSharp
+        m_MethodName: SkipRestingTime
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1420180196
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29466,11 +29478,11 @@ RectTransform:
   m_GameObject: {fileID: 1430617730}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
+  m_LocalScale: {x: 0.6999999, y: 0.6999999, z: 0.6999999}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1687383336}
-  m_Father: {fileID: 1074003255}
+  m_Father: {fileID: 1872076103}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -40206,7 +40218,6 @@ RectTransform:
   - {fileID: 1215486590}
   - {fileID: 224547764}
   - {fileID: 1012321777}
-  - {fileID: 1074003255}
   - {fileID: 1194442155}
   - {fileID: 1233382990}
   - {fileID: 1489179116}
@@ -40215,6 +40226,7 @@ RectTransform:
   - {fileID: 1296976448}
   - {fileID: 2030269546}
   - {fileID: 304942626}
+  - {fileID: 1430617731}
   - {fileID: 1410352149}
   m_Father: {fileID: 300773808}
   m_RootOrder: 1
@@ -42755,7 +42767,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000118255615, y: -17}
+  m_AnchoredPosition: {x: 0, y: -17}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2034840548
@@ -45001,7 +45013,7 @@ PrefabInstance:
     - target: {fileID: 2362016628541296795, guid: f3e52ae2890bebb478b8597523169c1c,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []

@@ -26,6 +26,7 @@ public class TimeVis : MonoBehaviour {
     private int restTimeInt;
     private int startCounterInt;
     private bool wasInitialized = false;
+    private bool timerSkip = false;
     
     SoundManager soundManager;
     public VoiceAssistant voiceAssistant;
@@ -80,10 +81,14 @@ public class TimeVis : MonoBehaviour {
         }
         
     }
-
+    
+    // called by the skip button
+    public void SkipRestingTime(){
+        timerSkip = true;
+    }
     private void initRestCountDown() {
         // when resting duration is on 4 seconds to end, invoke inistial countdown
-        if (SequenceManager.RestTimeLeft.TotalSeconds <= startCounterInt) {
+        if (SequenceManager.RestTimeLeft.TotalSeconds <= startCounterInt || timerSkip) {
             Debug.Log("rest ended! Is going to init countdown! ");
             isRestingVis.SetActive(false);
             StartCountDown();

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+// Left panel about Leaned and Comps text
 public class ExerciseProgress : MonoBehaviour
 {
     [Header("Exercise")]

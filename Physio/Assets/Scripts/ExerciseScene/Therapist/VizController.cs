@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-// This script needs to stop using Update to manage the animations. It should instead use Invoke and coroutines. because animations only play on start
+// TODO FC - This script needs to stop using Update to manage the animations. It should instead use Invoke and coroutines. because animations only play on start
 public class VizController : MonoBehaviour
 {
     public Camera worldCamera;

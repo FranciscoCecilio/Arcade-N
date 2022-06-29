@@ -199,6 +199,8 @@ public class ExerciseManager : MonoBehaviour {
                                 preferencesScript.SaveEverything();
                                 // Reset State stuff
                                 State.exercise.setTotalTime(State.sessionTimeInt);
+        Debug.Log("Finished exercise, sets exercise has completed");
+
                                 State.exercise.setCompleted(true);
                                 Debug.Log("Reseted state after completed ex.");
                                 State.isTherapyOnGoing = false; //???

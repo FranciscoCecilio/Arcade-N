@@ -113,11 +113,9 @@ public class ExercisePreferencesSetup : MonoBehaviour
 
     // Exercise finished - Save everything
     public void SaveEverything(){
-                                Debug.Log("Save everything START.");
         savePathPosition();
         saveTargetPositions();
         SavePreferencesToFile();
-                                Debug.Log("Save everything END.");
     }
     
     // When we EDIT the exercise preferences, we want to write it in the User/ExercisePreferences/<exercise>.txt 

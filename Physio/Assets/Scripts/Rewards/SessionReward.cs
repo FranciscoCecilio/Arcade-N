@@ -43,11 +43,8 @@ public class SessionReward : MonoBehaviour
 
         // Animate medal
         Vector3 initScale = Medal.gameObject.transform.localScale ;
-        Debug.Log(initScale);
         Medal.gameObject.transform.localScale = new Vector3(0,0,0);
-        Debug.Log(Medal.gameObject.transform.localScale);
         LeanTween.scale(Medal.gameObject, initScale, 3f).setEase(LeanTweenType.easeOutElastic);   
-        Debug.Log(Medal.gameObject.transform.localScale);
 
     }
 
@@ -56,6 +53,7 @@ public class SessionReward : MonoBehaviour
         List<string> seqDurations = new List<string>();
         for(int i = 0; i < SequenceManager.sequencesToRun.Count ; i++){
             Sequence seq = SequenceManager.sequencesToRun[i];
+            Debug.Log("Adding performance: " +seq.getPerformance() * 100+ " duration: " + seq.getTotalDuration()+" on seq number" + i);
             seqPerformances.Add(seq.getPerformance() * 100);
             seqDurations.Add(seq.getTotalDuration());
         }
@@ -83,6 +81,7 @@ public class SessionReward : MonoBehaviour
         else if(rounded_avg < 80f) Medal.sprite = medalSprites[1];
         else Medal.sprite = medalSprites[0];
 
+        SequenceManager.ResetAfterEndOfSession();
     }
 
 

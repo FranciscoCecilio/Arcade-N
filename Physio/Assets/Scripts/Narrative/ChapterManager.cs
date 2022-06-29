@@ -71,7 +71,10 @@ public class ChapterManager : MonoBehaviour
             else{
                 // ANIMATE preview 
                 // 1. look at the preview of the _lastchapter; 2. go to exercise screen
-                StartCoroutine(ShowPreview());
+                //StartCoroutine(ShowPreview());
+                
+                // UPDATE : shoe entire chapter instead of a preview text
+                StartCoroutine(ShowEntireChapter(currentChapter));
             }
             
         }
@@ -86,11 +89,11 @@ public class ChapterManager : MonoBehaviour
         else{
             // Show the entire last chapter
             StartCoroutine(ShowEntireChapter(currentChapter));
-
         }
     }
 
-    // unlocks images and plays a voice line, and wait for the duration of the voice line
+    
+    // unlocks all images from a given chapter. plays a voice line for each image (used to preview previous chapter)
     private IEnumerator ShowEntireChapter(int chapterToSee){
         float clipLength;
         int chapterImages = 0;
@@ -105,58 +108,112 @@ public class ChapterManager : MonoBehaviour
         }
         for(int i = 0; i < chapterImages; i++){
             currentImage = i + 1;
-            switch(currentImage){
-                case 1: // 2) Chapter name and 1st Image
-                    ShowPage(2); // shows the correct pagetype
-                    SetChapterTitle(chapterName_text); // sets the title of the chapter
-                    SetChapterUI(right_chapter_2, true); // grabs currentImage and places it on the chapterEntry photograph 
-                    clipLength = voiceAssistant.PlayVoiceLine("cap"+currentChapter+"img"+currentImage); // i.e. cap1img3
-                    yield return new WaitForSeconds(clipLength);
-                    break;
-                case 2: // 3) Two images (first one)
-                    ShowPage(3); 
-                    SetChapterUI(left_chapter_3, true);
-                    right_chapter_3.gameObject.SetActive(false);
-                    clipLength = voiceAssistant.PlayVoiceLine("cap"+currentChapter+"img"+currentImage); 
-                    yield return new WaitForSeconds(clipLength);
-                    break;
-                case 3: // 3) Two images (first and second)
-                    ShowPage(3); 
-                    currentImage = i; // [special] scenario where we want to load the first photo 
-                    SetChapterUI(left_chapter_3, false); 
-                    currentImage = i + 1;
-                    SetChapterUI(right_chapter_3, true); 
-                    clipLength = voiceAssistant.PlayVoiceLine("cap"+currentChapter+"img"+currentImage); 
-                    yield return new WaitForSeconds(clipLength);
-                    break;
-                case 4: 
-                    if(isChapterOdd){ // We have 2 more images to show: 3) Two images (first one)
-                            ShowPage(3); 
-                            SetChapterUI(left_chapter_3, true); 
-                            right_chapter_3.gameObject.SetActive(false);
-                    }
-                    else{ // Last image: 4) Left image and empty
-                        SetChapterUI(left_chapter_4, true);
-                    }
-                    clipLength = voiceAssistant.PlayVoiceLine("cap"+currentChapter+"img"+currentImage); 
-                    yield return new WaitForSeconds(clipLength); 
-                    break;
-                case 5: // Oddchapter only: 3) Two images (first and second)
-                    ShowPage(3); 
-                    currentImage = i; // [special] scenario where we want to load the first photo 
-                    SetChapterUI(left_chapter_3, false); 
-                    currentImage = i + 1;
-                    SetChapterUI(right_chapter_3, true); 
-                    clipLength = voiceAssistant.PlayVoiceLine("cap"+currentChapter+"img"+currentImage); 
-                    yield return new WaitForSeconds(clipLength); 
-                    break;
-            }
+            clipLength = ShowImageAndText(currentImage);
+            yield return new WaitForSeconds(clipLength);
         }
         // we showed all the unlocked images - Bye Narrative screen: Return to Exercise!!
         if(SequenceManager.GetCurrentChapter() < 2) SequenceManager.SetCurrentChapter(2);
         if(SequenceManager.sequence != null) SequenceManager.nextExercise();
     }
 
+     // unlocks all images that were unlocked in exercise. plays a voice line for each image
+    private IEnumerator ShowAndReadUnlockedImages(){
+        float clipLength;
+        for(int i = 0; i < SequenceManager.unlockedChaptersEncoding.Count; i ++){
+            if(SequenceManager.unlockedChaptersEncoding[i] == 1){
+                currentImage = i + 1;
+                clipLength = ShowImageAndText(currentImage);
+                yield return new WaitForSeconds(clipLength);
+            }
+        }
+        // we showed all the unlocked images - Bye Narrative screen: Return to Exercise!!
+        if(SequenceManager.sequence != null) SequenceManager.nextExercise();
+    }
+
+    // returns the clipLenght
+    public float ShowImageAndText(int imageToShow){
+        float clipLength = 0;
+        switch(imageToShow){
+            case 1: // 2) Chapter name and 1st Image
+                ShowPage(2); // shows the correct pagetype
+                SetChapterTitle(chapterName_text); // sets the title of the chapter
+                SetChapterUI(right_chapter_2, true); // grabs imageToShow and places it on the chapterEntry photograph 
+                clipLength = voiceAssistant.PlayVoiceLine("cap"+currentChapter+"img"+imageToShow); // i.e. cap5img3
+                break;
+            case 2: // 3) Two images (first one)
+                ShowPage(3); 
+                SetChapterUI(left_chapter_3, true);
+                right_chapter_3.gameObject.SetActive(false);
+                clipLength = voiceAssistant.PlayVoiceLine("cap"+currentChapter+"img"+imageToShow); // i.e. cap5img3
+                break;
+            case 3: // 3) Two images (first and second)
+                ShowPage(3); 
+                imageToShow -= 1; // [special] scenario where we want to load the first photo 
+                SetChapterUI(left_chapter_3, false); 
+                imageToShow += 1;
+                SetChapterUI(right_chapter_3, true); 
+                clipLength = voiceAssistant.PlayVoiceLine("cap"+currentChapter+"img"+imageToShow); // i.e. cap5img3
+                break;
+            case 4: 
+                if(isChapterOdd){ // We have 2 more images to show: 3) Two images (first one)
+                    ShowPage(3); 
+                    SetChapterUI(left_chapter_3, true); 
+                    right_chapter_3.gameObject.SetActive(false);
+                }
+                else{ // Last image: 4) Left image and empty
+                    SetChapterUI(left_chapter_4, true);
+                }
+                clipLength = voiceAssistant.PlayVoiceLine("cap"+currentChapter+"img"+imageToShow); // i.e. cap5img3
+                break;
+            case 5: // Oddchapter only: 3) Two images (first and second)
+                ShowPage(3); 
+                imageToShow -= 1; // [special] scenario where we want to load the first photo 
+                SetChapterUI(left_chapter_3, false); 
+                imageToShow += 1;
+                SetChapterUI(right_chapter_3, true); 
+                clipLength = voiceAssistant.PlayVoiceLine("cap"+currentChapter+"img"+imageToShow); // i.e. cap5img3
+                break;
+        }
+        return clipLength;
+    }
+
+    // Sets page object active and closes others
+    public void ShowPage(int pagetype){
+        // hide all pages
+        for(int i = 0; i < pageTypes.Length; i++){
+            pageTypes[i].SetActive(false);
+        }
+        // reveal the correct
+        pageTypes[pagetype - 1].SetActive(true);
+        // set the currentPage
+        currentPage = pageTypes[pagetype - 1];
+    }
+
+    // modifies a chapterVis with the correct photograph and text
+    public void SetChapterUI(ChapterEntry vis, bool shouldAnimate){
+        if(!vis.gameObject.activeSelf) vis.gameObject.SetActive(true);
+        vis.SetPhotograph(currentChapter,currentImage, shouldAnimate);
+        vis.SetText(currentChapter,currentImage, shouldAnimate);
+    }
+
+    ///////////////////////////////////////////////////////////////////// OLD functions ////////////////////////////////////////////////////////////////////
+    // fetches the chapter title and the title text
+    public void SetChapterTitle(TMP_Text title){
+        string titlePath = Application.dataPath + "/Resources/Narrative Materials/Chapter"+currentChapter.ToString() +"/Text/Title.txt";
+
+        if (System.IO.File.Exists( titlePath)){ 
+            //Read the title directly from the Title.txt
+            StreamReader reader = new StreamReader(titlePath);
+            title.text = reader.ReadToEnd();
+            reader.Close();
+        }
+        else{
+            Debug.Log("ERROR: " + titlePath + " not found.");
+            title.text = "ERRO: " + titlePath + " not found.";
+        }
+    }
+
+    // NOTE: It will not be used anymore
     // displays the last chapter last image and shows a preview text on the right page and plays a voice line
     private IEnumerator ShowPreview(){
         // set the current chapter to previous
@@ -182,92 +239,7 @@ public class ChapterManager : MonoBehaviour
         if(SequenceManager.sequence != null) SequenceManager.nextExercise();
     }
 
-    // unlocks images and plays a voice line, and wait for the duration of the voice line
-    private IEnumerator ShowAndReadUnlockedImages(){
-        float clipLength;
-        for(int i = 0; i < SequenceManager.unlockedChaptersEncoding.Count; i ++){
-            if(SequenceManager.unlockedChaptersEncoding[i] == 1){
-                currentImage = i + 1;
-                switch(currentImage){
-                    case 1: // 2) Chapter name and 1st Image
-                        ShowPage(2); // shows the correct pagetype
-                        SetChapterTitle(chapterName_text); // sets the title of the chapter
-                        SetChapterUI(right_chapter_2, true); // grabs currentImage and places it on the chapterEntry photograph 
-                        clipLength = voiceAssistant.PlayVoiceLine("cap"+currentChapter+"img"+currentImage); // i.e. cap5img3
-                        yield return new WaitForSeconds(clipLength);
-                        break;
-                    case 2: // 3) Two images (first one)
-                        ShowPage(3); 
-                        SetChapterUI(left_chapter_3, true);
-                        right_chapter_3.gameObject.SetActive(false);
-                        clipLength = voiceAssistant.PlayVoiceLine("cap"+currentChapter+"img"+currentImage); // i.e. cap5img3
-                        yield return new WaitForSeconds(clipLength);
-                        break;
-                    case 3: // 3) Two images (first and second)
-                        ShowPage(3); 
-                        currentImage = i; // [special] scenario where we want to load the first photo 
-                        SetChapterUI(left_chapter_3, false); 
-                        currentImage = i + 1;
-                        SetChapterUI(right_chapter_3, true); 
-                        clipLength = voiceAssistant.PlayVoiceLine("cap"+currentChapter+"img"+currentImage); // i.e. cap5img3
-                        yield return new WaitForSeconds(clipLength);
-                        break;
-                    case 4: 
-                        if(isChapterOdd){ // We have 2 more images to show: 3) Two images (first one)
-                            ShowPage(3); 
-                            SetChapterUI(left_chapter_3, true); 
-                            right_chapter_3.gameObject.SetActive(false);
-                        }
-                        else{ // Last image: 4) Left image and empty
-                            SetChapterUI(left_chapter_4, true);
-                        }
-                        clipLength = voiceAssistant.PlayVoiceLine("cap"+currentChapter+"img"+currentImage); // i.e. cap5img3
-                        yield return new WaitForSeconds(clipLength);
-                        break;
-                    case 5: // Oddchapter only: 3) Two images (first and second)
-                        ShowPage(3); 
-                        currentImage = i; // [special] scenario where we want to load the first photo 
-                        SetChapterUI(left_chapter_3, false); 
-                        currentImage = i + 1;
-                        SetChapterUI(right_chapter_3, true); 
-                        clipLength = voiceAssistant.PlayVoiceLine("cap"+currentChapter+"img"+currentImage); // i.e. cap5img3
-                        yield return new WaitForSeconds(clipLength); 
-                        break;
-                }
-            }
-        }
-        // we showed all the unlocked images - Bye Narrative screen: Return to Exercise!!
-        if(SequenceManager.sequence != null) SequenceManager.nextExercise();
-    }
-
-    // Sets page object active and closes others
-    public void ShowPage(int pagetype){
-        // hide all pages
-        for(int i = 0; i < pageTypes.Length; i++){
-            pageTypes[i].SetActive(false);
-        }
-        // reveal the correct
-        pageTypes[pagetype - 1].SetActive(true);
-        // set the currentPage
-        currentPage = pageTypes[pagetype - 1];
-    }
-
-    // fetches the chapter title and the title text
-    public void SetChapterTitle(TMP_Text title){
-        string titlePath = Application.dataPath + "/Resources/Narrative Materials/Chapter"+currentChapter.ToString() +"/Text/Title.txt";
-
-        if (System.IO.File.Exists( titlePath)){ 
-            //Read the title directly from the Title.txt
-            StreamReader reader = new StreamReader(titlePath);
-            title.text = reader.ReadToEnd();
-            reader.Close();
-        }
-        else{
-            Debug.Log("ERROR: " + titlePath + " not found.");
-            title.text = "ERRO: " + titlePath + " not found.";
-        }
-    }
-
+    // NOTE: it will not be used anymore
     // fetches the preview text and places 
     public void SetPreviewText(TMP_Text prev){
         string previewPath = Application.dataPath + "/Resources/Narrative Materials/Chapter"+currentChapter.ToString() +"/Text/Preview.txt";
@@ -282,13 +254,6 @@ public class ChapterManager : MonoBehaviour
             Debug.Log("ERROR: " + previewPath + " not found.");
             prev.text = "ERRO: " + previewPath + " not found.";
         }
-    }
-
-    // modifies a chapterVis with the correct photograph and text
-    public void SetChapterUI(ChapterEntry vis, bool shouldAnimate){
-        if(!vis.gameObject.activeSelf) vis.gameObject.SetActive(true);
-        vis.SetPhotograph(currentChapter,currentImage, shouldAnimate);
-        vis.SetText(currentChapter,currentImage, shouldAnimate);
     }
 
     // open the next page

@@ -16,7 +16,7 @@ public static class SessionInfo
     private static string _username; // txt file name 
     private static string _name; // nome *bonito* dentro do .txt
     private static string _age;
-    private static string _gender;
+    private static string _gender; // "masculino" or "feminino"
     private static string _nrSaude; // we don't use it outside login
 
     private static int _exerciseId = 1;
@@ -71,6 +71,7 @@ public static class SessionInfo
             while (line != null)
             {
                 string[] data = line.Split('=');
+                Debug.Log(data[0]);
                 if (data[0] == "Name") _name = data[1];
                 else if (data[0] == "Age") _age = data[1];
                 else if (data[0] == "Gender") _gender = data[1];

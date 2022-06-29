@@ -27,6 +27,9 @@ public static class SequenceManager
     private static float sessionProgressionPerc = 0; // current progress (0 to 1)
     private static float percPerRepetition = 0; // each repetition has a percentage associated to it (0 to 1)
     
+    // Resting time between series 
+    static DateTime RestTimeStarted;
+    static TimeSpan TotalRestTime;
 
     // Narrative variables
     public static List<int> unlockedChaptersEncoding ;  // 0: not yet unlocked; 1: unlocked and waiting to have it image placed; -1: image placed
@@ -170,7 +173,6 @@ public static class SequenceManager
         switch(code){
             case 0:
                 // we want to unlock this image for the first time
-                Debug.Log("Updated encoding for image:" + i);
                 unlockedChaptersEncoding[i] = 1;
                 hasImagesToUnlock = true;
                 break;
@@ -267,7 +269,7 @@ public static class SequenceManager
             nextExercise();
         }
         else
-        {
+        {   
             // END of Session!
             EndOfSession(); 
         }
@@ -302,8 +304,7 @@ public static class SequenceManager
         }
     }
 
-    static DateTime RestTimeStarted;
-    static TimeSpan TotalRestTime;
+ 
 
     // GlobalCountDown.StartCountDown(TimeSpan.FromMinutes(5));
     // Called before nextExercise() on ExerciseManager
@@ -332,12 +333,28 @@ public static class SequenceManager
     }
     
     public static void EndOfSession(){
-        // Give the user the xp - Level up
-        SessionInfo.setXP((currentChapter + 1) * 100);
+        // Give the user the xp - Level up (NOTE: CAP of 500 XP)
+        int updatedXP = (currentChapter + 1) * 100;
+        if(updatedXP <= 500) SessionInfo.setXP(updatedXP);
         // Save session
         SessionInfo.saveSession();
         // Show congratulations and show results
         SceneManager.LoadScene("SessionRewards");
+    }
+
+    // called by Session Rewards
+    public static void ResetAfterEndOfSession(){
+        // after loading SessionRewards
+        // clear variables
+        sequencesToRun.Clear();
+        // Reset the sessionProgressionPercentage
+        sessionProgressionPerc = 0;
+        // reset narrative stuff
+        hasPreviewToUnlock = false;
+        hasImagesToUnlock = false;
+        // reset indexes
+        sequenceIndex = 0;
+        index = 0;
     }
 
     // this method returns the **1st Exercise from the next Sequence** and is usefull to show in the panel of exercise scene

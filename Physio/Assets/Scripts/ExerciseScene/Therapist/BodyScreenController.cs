@@ -55,10 +55,6 @@ public class BodyScreenController : MonoBehaviour {
     }
     
     public void Update() {
-        if(State.exercise.isCompleted()) {
-            StopTherapy();
-        }
-
         if(Input.GetKeyDown(KeyCode.Escape)){
             if(pauseButton.activeSelf && !unPauseButton.activeSelf){
                 PauseTherapy();
@@ -112,18 +108,6 @@ public class BodyScreenController : MonoBehaviour {
             exerciseEdition.SetActive(false);
         }
         //pauseMessage.SetActive(false);
-    }
-
-    // Finish Button
-    public void StopTherapy() {
-        State.exercise.setCompleted(true);
-        State.isTherapyOnGoing = false;
-        if (SessionInfo.toView() == "RunSequence") nextButton.SetActive(true);
-        else
-        {
-            quitButton.SetActive(true);
-            restartButton.SetActive(true);
-        }
     }
 
     public void TurnMusicOn(){

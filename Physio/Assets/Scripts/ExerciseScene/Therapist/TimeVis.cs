@@ -27,9 +27,11 @@ public class TimeVis : MonoBehaviour {
     private int startCounterInt;
     private bool wasInitialized = false;
     private bool timerSkip = false;
+    bool exerciseCompleted = false; // just a performance flag
     
     SoundManager soundManager;
     public VoiceAssistant voiceAssistant;
+    public DragEditionManager dragManager;
 
     private void OnEnable() {
         //init();
@@ -44,12 +46,13 @@ public class TimeVis : MonoBehaviour {
     void Update() {
         if(!wasInitialized) 
             return;
-        if (State.exercise.isCompleted()) { 
+        if (exerciseCompleted && State.exercise.isCompleted()) { 
             counterOnStart.transform.gameObject.SetActive(false);
-            CancelInvoke("countDown");
+            CancelInvoke("initRestCountDown");
             CancelInvoke("restTimeDec");
             CancelInvoke("setTimeDec");
             CancelInvoke("sessionTimeInc");
+            exerciseCompleted = true;
         }
         if(isRestingVis.activeSelf){
             isRestingRadialBar.fillAmount = (float) (SequenceManager.RestTimeLeft.TotalSeconds / SequenceManager.GetTotalRestTime()); // 5s/60s = 1/12
@@ -67,6 +70,7 @@ public class TimeVis : MonoBehaviour {
     public void init() {
         // allow update to run
         wasInitialized = true;
+        dragManager.LockEdition();
 
         // start the restin timer countdown (it can be non-existing if we have no time left, and in that case we jump straight to intiial countdown)
         startCounterInt = 4;
@@ -86,10 +90,10 @@ public class TimeVis : MonoBehaviour {
     public void SkipRestingTime(){
         timerSkip = true;
     }
+
     private void initRestCountDown() {
         // when resting duration is on 4 seconds to end, invoke inistial countdown
         if (SequenceManager.RestTimeLeft.TotalSeconds <= startCounterInt || timerSkip) {
-            Debug.Log("rest ended! Is going to init countdown! ");
             isRestingVis.SetActive(false);
             StartCountDown();
             CancelInvoke("initRestCountDown");
@@ -106,15 +110,15 @@ public class TimeVis : MonoBehaviour {
     }
 
     private void initCountDown() {
-            Debug.Log("Is inside Initial Countdown (x4) ");
 
         if (startCounterInt <= 0) {
-            // start the session timer
             startSessionTimer(); // goes up
+
             //initUntilNextRestTimer(); // TODO not anymore
-            counterOnStart.gameObject.SetActive(false);
-            State.isTherapyOnGoing = true;
             LeanTween.cancel(counterOnStart); // cancel animations
+            counterOnStart.SetActive(false);
+
+            State.isTherapyOnGoing = true;
             CancelInvoke("initCountDown");
         }
         startCounterInt--;

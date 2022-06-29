@@ -58,6 +58,7 @@ public class Sequence
     }
 
     public string getTotalDuration(){
+        if(_totalDuration.Equals(string.Empty)) _totalDuration = "00:00:00";
         return _totalDuration;
     }
 
@@ -145,7 +146,7 @@ public class Sequence
         _totalDuration = string.Format("{0:D2}:{1:D2}:{2:D2} horas", difference.Hours, difference.Minutes, difference.Seconds);
 
         // We need the overall Performance of Sequence (correctReps / tries)
-        List<int> exPerformances = new List<int>();
+        List<float> exPerformances = new List<float>();
 
         using (var stream = new FileStream(filepath, FileMode.CreateNew, FileAccess.Write, FileShare.Write))
         using (var writer = new StreamWriter(stream))
@@ -160,7 +161,8 @@ public class Sequence
             {
                 writer.WriteLine("exe=" + _exerciseList[i].toSequenceFile());
                 // calculate each exercise performance
-                int exPerformance = _exerciseList[i].getCorrectReps() / _exerciseList[i].getTries();
+                Debug.Log((float)_exerciseList[i].getCorrectReps() + " / " +(float) _exerciseList[i].getTries() + " = " + ((float) _exerciseList[i].getCorrectReps() / (float) _exerciseList[i].getTries()).ToString());
+                float exPerformance = (float) _exerciseList[i].getCorrectReps() / _exerciseList[i].getTries();
                 exPerformances.Add(exPerformance);
                 Debug.Log("Calculated performance for exercise"+i+" : " + exPerformance);
             }

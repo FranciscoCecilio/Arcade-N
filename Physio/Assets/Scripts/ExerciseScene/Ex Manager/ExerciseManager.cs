@@ -49,7 +49,7 @@ public class ExerciseManager : MonoBehaviour {
     private int lastrep = 0;
 
     // Sound Manager
-    SoundManager soundManager;
+    public SoundManager soundManager;
     public VoiceAssistant voiceAssistant;
 
     private void Start() {
@@ -70,16 +70,7 @@ public class ExerciseManager : MonoBehaviour {
         //set the correct targets
         setArea();
 
-        // Find SoundManager if its null
-        if(soundManager == null){
-            GameObject soundManagerObj = GameObject.FindGameObjectWithTag("SoundManager");
-            if(soundManagerObj == null){
-                Debug.LogError("ERROR: could not find a SoundManager in this scene!");
-            }
-            else{
-                soundManager = soundManagerObj.GetComponent<SoundManager>();
-            }
-        }
+        
 
         Renderer renderer = targets.transform.GetChild(0).gameObject.GetComponent<Renderer>();
         Color color = renderer.material.color;
@@ -87,6 +78,16 @@ public class ExerciseManager : MonoBehaviour {
         color.g += 1;
 
         renderer.material.color = color;
+    }
+
+    public void FindSoundManager(){
+        GameObject soundManagerObj = GameObject.FindGameObjectWithTag("SoundManager");
+        if(soundManagerObj == null){
+            Debug.LogError("ERROR: could not find a SoundManager in this scene!");
+        }
+        else{
+            soundManager = soundManagerObj.GetComponent<SoundManager>();
+        }
     }
 
     // Disable the incorrect targets
@@ -219,6 +220,7 @@ public class ExerciseManager : MonoBehaviour {
                             State.currentTarget--;
                         }
 
+                        if(soundManager == null) FindSoundManager();
                         soundManager.PlayOneShot("beep");
                     }
                 }
@@ -233,6 +235,7 @@ public class ExerciseManager : MonoBehaviour {
                         State.exercise.incOutOfPath() ;
                         State.exercise.incTries();
                         hasRegisteredOutOfPath = true;
+                        if(soundManager == null) FindSoundManager();
                         soundManager.PlayOneShot("out_of_path");
                         voiceAssistant.PlayRandomBad();
                     }

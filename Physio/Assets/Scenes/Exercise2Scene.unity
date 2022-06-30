@@ -15948,9 +15948,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ExerciseParametersFlow, Assembly-CSharp
-        m_MethodName: StartEditing
+      - m_Target: {fileID: 1872076104}
+        m_TargetAssemblyTypeName: BodyScreenController, Assembly-CSharp
+        m_MethodName: Next
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

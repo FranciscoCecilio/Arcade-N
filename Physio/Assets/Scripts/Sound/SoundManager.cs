@@ -10,11 +10,11 @@ public class SoundManager : MonoBehaviour
     public Sound[] sounds;
     public bool isMainMenuSM;
 
-    List<AudioSource> allSources;
     public string musicToPlayOnStart; 
     
     [Header("For Debugging")]
     public bool sm_musicIsOn;
+    public List<AudioSource> allSources;
 
     void Awake(){
         // We want the music to not stop when we enter a new exercise 
@@ -24,16 +24,28 @@ public class SoundManager : MonoBehaviour
         if(soundManagersInScene.Length > 1){
             // If we are entering Main Menu from a scene that has a SoundManager (i.e ExerciseScene) we want to delete the last
 
-            if(isMainMenuSM){
-                if(scene == "MainMenu"){
-                    for(int i = 0; i < soundManagersInScene.Length; i++){
-                        if(soundManagersInScene[i] != this.gameObject){
-                            Destroy(soundManagersInScene[i]); // Delete other
+            if(scene == "MainMenu"){
+                for(int i = 0; i < soundManagersInScene.Length; i++){
+                    if(soundManagersInScene[i] != this.gameObject){
+                        if(soundManagersInScene[i].GetComponent<SoundManager>().isMainMenuSM){
+                            Destroy(this.gameObject); // delete the duplicate main menu sound manager
+                        }
+                        else{
+                            Destroy(soundManagersInScene[i]); // Delete the exercise sound manager
                         }
                     }
                 }
-                else if(scene == "Exercise1Scene" || scene == "Exercise2Scene" || scene == "Exercise0Scene"){
-                    Destroy(this.gameObject); // delete MainMenuSM and leave Exercise scene SM
+            }
+            else if(scene == "Exercise1Scene" || scene == "Exercise2Scene" || scene == "Exercise0Scene"){
+                for(int i = 0; i < soundManagersInScene.Length; i++){
+                    if(soundManagersInScene[i] != this.gameObject){
+                        if(soundManagersInScene[i].GetComponent<SoundManager>().isMainMenuSM){
+                            Destroy(soundManagersInScene[i]); // delete MainMenuSM and leave Exercise scene SM
+                        }
+                        else{
+                            Destroy(this.gameObject); // delete the duplicate exercise sound manager
+                        }
+                    }
                 }
             }
             // If we are loading another scene, we want to destroy that scene's soundManager
@@ -47,6 +59,10 @@ public class SoundManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
 
+        
+    }
+
+    public void Start(){
         // Initializae all sounds
         allSources = new List<AudioSource>();
         foreach(Sound s in sounds){
@@ -57,11 +73,8 @@ public class SoundManager : MonoBehaviour
             s.source.loop = s.loop;
             // Add audiosource to list
             allSources.Add(s.source);
-
         }
-    }
 
-    public void Start(){
         // We only want to play music if the user wants it
         sm_musicIsOn = SessionInfo.isMusicOn();
         if(sm_musicIsOn){

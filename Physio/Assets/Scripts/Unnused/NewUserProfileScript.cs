@@ -55,8 +55,8 @@ public class NewUserProfileScript : MonoBehaviour {
 
     private void setGender()
     {
-        if (IsMale.isOn) _gender = "Male";
-        else if (IsFemale.isOn) _gender = "Female";
+        if (IsMale.isOn) _gender = "masculino";
+        else if (IsFemale.isOn) _gender = "feminino";
         else if (IsOther.isOn) _gender = "Other";
     }
 

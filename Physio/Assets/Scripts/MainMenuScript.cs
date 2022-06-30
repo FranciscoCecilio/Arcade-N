@@ -10,9 +10,6 @@ public class MainMenuScript : MonoBehaviour {
     public TMP_Text helloText;
     public TMP_Text age_and_gender;
 
-    public GameObject maleAvatar;
-    public GameObject femaleAvatar;
-
     public GameObject deleteUI;
     public TMP_Text deleteMessageNameText;
     public GameObject afterDeleteUI;
@@ -84,12 +81,6 @@ public class MainMenuScript : MonoBehaviour {
         string firstName = SessionInfo.getName().Split(' ')[0];
         helloText.text = greetingsText + firstName.ToUpper() + "!";
         
-        //age_and_gender.text = SessionInfo.getGender() + ", " + SessionInfo.getAge();
-        if (SessionInfo.getGender() == "Female")
-        {
-            maleAvatar.SetActive(false);
-            femaleAvatar.SetActive(true);
-        }
 	}
 
     void SetMainPage(){
@@ -174,7 +165,6 @@ public class MainMenuScript : MonoBehaviour {
 
     
     public void PlaySoundManager(string sound){
-        // Update SoundManager
         // Find SoundManager if its null
         if(soundManager == null){
             GameObject soundManagerObj = GameObject.FindGameObjectWithTag("SoundManager");

@@ -79,8 +79,9 @@ public static class SequenceManager
     }
 
     public static int GetCurrentChapter(){
-        if(currentChapter == 0) 
-            currentChapter = 1;
+        currentChapter =  SessionInfo.getXP() / 100;
+        if(currentChapter == 0 ||currentChapter == 1 ) 
+            currentChapter = 2;
         return currentChapter;
     }
 
@@ -217,7 +218,7 @@ public static class SequenceManager
             }
         }
         // assign the current level
-        currentChapter =  SessionInfo.getXP() / 100 + 1;
+        currentChapter =  SessionInfo.getXP() / 100;
 
         if(currentChapter%2 == 0){
             // chatpter is even and has 4 Images to unlock
@@ -279,7 +280,8 @@ public static class SequenceManager
     public static void nextExercise()
     {
         // here we want to check for narrative pictures to show!
-        if(1 == 2 /*hasPreviewToUnlock || hasImagesToUnlock*/){
+        if(1 == 2){
+        //if(hasPreviewToUnlock || hasImagesToUnlock){
             SceneManager.LoadScene("NarrativeMenu");
         }
         else{
@@ -347,6 +349,7 @@ public static class SequenceManager
         // after loading SessionRewards
         // clear variables
         sequencesToRun.Clear();
+        sequence = null;
         // Reset the sessionProgressionPercentage
         sessionProgressionPerc = 0;
         // reset narrative stuff

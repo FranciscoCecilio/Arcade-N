@@ -69,10 +69,11 @@ public class Register2 : MonoBehaviour
 
     private void setGender()
     {
-        if (IsMale.isOn) _gender = "Male";
-        else if (IsFemale.isOn) _gender = "Female";
+        if (IsMale.isOn) _gender = "masculino";
+        else if (IsFemale.isOn) _gender = "feminino";
     }
 
+    // we always start with 100 XP
     private void saveInfo()
     {
         string username = createUsername(_name);
@@ -84,7 +85,7 @@ public class Register2 : MonoBehaviour
         writer.WriteLine("Age=" + _age);
         writer.WriteLine("Gender=" + _gender);
         if(_nrSaude != "") writer.WriteLine("Nr_Utente=" + _nrSaude);
-        writer.WriteLine("XP=" + 0);
+        writer.WriteLine("XP=" + 100);
 
         writer.Close();
 

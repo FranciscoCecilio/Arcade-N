@@ -2530,6 +2530,11 @@ PrefabInstance:
         type: 2}
     - target: {fileID: 963026826933029843, guid: 42a853f1e35e029439d6be99be3d1f5a,
         type: 3}
+      propertyPath: m_fontSizeMax
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 963026826933029843, guid: 42a853f1e35e029439d6be99be3d1f5a,
+        type: 3}
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4100,6 +4105,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ChapterElement (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 963026826933029843, guid: 42a853f1e35e029439d6be99be3d1f5a,
+        type: 3}
+      propertyPath: m_fontSizeMax
+      value: 24
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 42a853f1e35e029439d6be99be3d1f5a, type: 3}
@@ -5141,6 +5151,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ChapterElement
       objectReference: {fileID: 0}
+    - target: {fileID: 963026826933029843, guid: 42a853f1e35e029439d6be99be3d1f5a,
+        type: 3}
+      propertyPath: m_fontSizeMax
+      value: 24
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 42a853f1e35e029439d6be99be3d1f5a, type: 3}
@@ -5977,7 +5992,7 @@ PrefabInstance:
     - target: {fileID: 963026826933029843, guid: 42a853f1e35e029439d6be99be3d1f5a,
         type: 3}
       propertyPath: m_fontSizeMax
-      value: 25
+      value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 963026826933029843, guid: 42a853f1e35e029439d6be99be3d1f5a,
         type: 3}
@@ -8835,6 +8850,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 963026826933029843, guid: 42a853f1e35e029439d6be99be3d1f5a,
         type: 3}
+      propertyPath: m_fontSizeMax
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 963026826933029843, guid: 42a853f1e35e029439d6be99be3d1f5a,
+        type: 3}
       propertyPath: m_fontColor32.rgba
       value: 2953190982
       objectReference: {fileID: 0}
@@ -9755,6 +9775,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 1495812322}
+    - target: {fileID: 6126991192092632596, guid: 47c707d033bd7be4180db3dbeb98f92a,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: BackToMainMenuButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 6126991192092632596, guid: 47c707d033bd7be4180db3dbeb98f92a,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ChapterManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 6126991192092632597, guid: 47c707d033bd7be4180db3dbeb98f92a,
         type: 3}
@@ -9901,37 +9931,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 2091508250}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &2091508252 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6126991192092632618, guid: 47c707d033bd7be4180db3dbeb98f92a,
-    type: 3}
-  m_PrefabInstance: {fileID: 2091508250}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &2091508253 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6126991192092632599, guid: 47c707d033bd7be4180db3dbeb98f92a,
     type: 3}
   m_PrefabInstance: {fileID: 2091508250}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2091508252}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2091508254
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2091508252}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88f91e29a6c07e14994d03c25ead5968, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialscale: {x: 0, y: 0, z: 0}
 --- !u!1001 &2117326810
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10130,7 +10141,7 @@ PrefabInstance:
     - target: {fileID: 963026826933029843, guid: 42a853f1e35e029439d6be99be3d1f5a,
         type: 3}
       propertyPath: m_fontSizeMax
-      value: 25
+      value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 963026826933029843, guid: 42a853f1e35e029439d6be99be3d1f5a,
         type: 3}

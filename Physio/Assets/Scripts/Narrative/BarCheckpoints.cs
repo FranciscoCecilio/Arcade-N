@@ -55,8 +55,14 @@ public class BarCheckpoints : MonoBehaviour
         // ATENTION: we don't want to animate if is the Final image of the chapter, hence the -1
         for(int i = 0; i< SequenceManager.unlockedChaptersEncoding.Count - 1; i++){
             if(SequenceManager.unlockedChaptersEncoding[i] == 1){
-                // Animate it
-                barCheckpoints[i].StartAnimationLoop();
+                if(i < barCheckpoints.Length){
+                    // Animate it
+                    barCheckpoints[i].StartAnimationLoop();
+                }
+                else{
+                    Debug.LogWarning("ERROR: tried to animate barcheckpoints but it goes over the size of unlockedchapters");
+                }
+                
             }
         }
     }

@@ -280,8 +280,8 @@ public static class SequenceManager
     public static void nextExercise()
     {
         // here we want to check for narrative pictures to show!
-        if(1 == 2){
-        //if(hasPreviewToUnlock || hasImagesToUnlock){
+        //if(1 == 2){
+        if(hasPreviewToUnlock || hasImagesToUnlock){
             SceneManager.LoadScene("NarrativeMenu");
         }
         else{
@@ -350,6 +350,7 @@ public static class SequenceManager
         // clear variables
         sequencesToRun.Clear();
         sequence = null;
+        TotalRestTime =  TimeSpan.Zero;
         // Reset the sessionProgressionPercentage
         sessionProgressionPerc = 0;
         // reset narrative stuff

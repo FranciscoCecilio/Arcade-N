@@ -13,6 +13,7 @@ public class SessionReward : MonoBehaviour
     public TMP_Text Performance;
 
     public Image Medal;
+    public GameObject Pedro;
     [Header("0 gold ; 1 silver ; 3 bronze")]
     public Sprite[] medalSprites; 
     
@@ -27,7 +28,7 @@ public class SessionReward : MonoBehaviour
         if(soundManager == null){
             GameObject soundManagerObj = GameObject.FindGameObjectWithTag("SoundManager");
             if(soundManagerObj == null){
-                Debug.LogError("ERROR: could not find a SoundManager in this scene!");
+                Debug.LogWarning("ERROR: could not find a SoundManager in this scene!");
             }
             else{
                 soundManager = soundManagerObj.GetComponent<SoundManager>();
@@ -39,12 +40,22 @@ public class SessionReward : MonoBehaviour
         voiceAssistant.PlayRandomEndOfSession();
 
         // Performance and Duration
-        CalculateParameters();
+        //CalculateParameters();
 
         // Animate medal
         Vector3 initScale = Medal.gameObject.transform.localScale ;
         Medal.gameObject.transform.localScale = new Vector3(0,0,0);
         LeanTween.scale(Medal.gameObject, initScale, 3f).setEase(LeanTweenType.easeOutElastic);   
+        LeanTween.scale(Medal.gameObject, initScale + new Vector3(0.01f, 0.01f, 0.01f), 1f).setDelay(3f).setLoopType(LeanTweenType.pingPong);
+        // Animate Pedro
+        float initialY = Pedro.transform.localPosition.y;
+        float initialX = Pedro.transform.localPosition.x;
+        Vector3 initScaleP = Pedro.transform.localScale ;
+        LeanTween.moveLocalY(Pedro, -500 ,0f);
+        LeanTween.moveLocalY(Pedro, initialY , 1f).setEase(LeanTweenType.easeInBack);
+        LeanTween.moveLocalX(Pedro, initialX + 5f, 3f).setDelay(1f).setLoopType(LeanTweenType.pingPong);
+        LeanTween.moveLocalY(Pedro, initialY + 0.3f, 3f).setDelay(1f).setLoopType(LeanTweenType.pingPong);
+        LeanTween.scale(Pedro, initScaleP + new Vector3(0.004f, 0.004f, 0.004f), 3f).setDelay(1f).setLoopType(LeanTweenType.pingPong);
 
     }
 

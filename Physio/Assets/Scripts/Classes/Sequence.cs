@@ -161,8 +161,12 @@ public class Sequence
             {
                 writer.WriteLine("exe=" + _exerciseList[i].toSequenceFile());
                 // calculate each exercise performance
-                Debug.Log((float)_exerciseList[i].getCorrectReps() + " / " +(float) _exerciseList[i].getTries() + " = " + ((float) _exerciseList[i].getCorrectReps() / (float) _exerciseList[i].getTries()).ToString());
-                float exPerformance = (float) _exerciseList[i].getCorrectReps() / _exerciseList[i].getTries();
+                float exPerformance = 0;
+                if(_exerciseList[i].getTries() != 0){ // we don't want to divide by zero and mess average up
+                    Debug.Log((float)_exerciseList[i].getCorrectReps() + " / " +(float) _exerciseList[i].getTries() + " = " + ((float) _exerciseList[i].getCorrectReps() / (float) _exerciseList[i].getTries()).ToString());
+                    exPerformance = (float) _exerciseList[i].getCorrectReps() / _exerciseList[i].getTries();
+                }
+                
                 exPerformances.Add(exPerformance);
                 Debug.Log("Calculated performance for exercise"+i+" : " + exPerformance);
             }

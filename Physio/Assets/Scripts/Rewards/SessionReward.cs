@@ -40,7 +40,7 @@ public class SessionReward : MonoBehaviour
         voiceAssistant.PlayRandomEndOfSession();
 
         // Performance and Duration
-        //CalculateParameters();
+        CalculateParameters();
 
         // Animate medal
         Vector3 initScale = Medal.gameObject.transform.localScale ;

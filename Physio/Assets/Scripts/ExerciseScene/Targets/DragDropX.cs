@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// Used to Translate the green Box (exercise trajectory)
+// Used to Translate the green Box (exercise trajectory) in both x and y
 public class DragDropX : MonoBehaviour {
 
     public GameObject associatedObj; // targets

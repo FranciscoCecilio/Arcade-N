@@ -12,8 +12,9 @@ public class ExerciseManager : MonoBehaviour {
     public bool hasSecondaryCursor;
 
     [Header("Time")]
-    public Text avgTime;
-    public Text lastrepTime;
+    public Text avgTime; // these are not used
+    public Text lastrepTime; // these are not used
+    int lastrep = 0;
 
     [Header("Exercise")]
     public ExercisePreferencesSetup preferencesScript;
@@ -29,8 +30,7 @@ public class ExerciseManager : MonoBehaviour {
     public NarrativeExerciseScreen narrativeScript;
     public GameObject exercisedFinishedMsg;
     public GameObject pathSize;
-    public Toggle restartRepToggle;
-    public string exerciseName;
+    public Toggle restartRepToggle; // TODO check this compensation thing 
 
     // AUDIO
     private AudioClip beep;
@@ -45,11 +45,9 @@ public class ExerciseManager : MonoBehaviour {
     private bool showArrows = false;
 
     private GameObject[] _arrows;
-    private int repCounter;
-    private int lastrep = 0;
 
     // Sound Manager
-    public SoundManager soundManager;
+    SoundManager soundManager;
     public VoiceAssistant voiceAssistant;
 
     private void Start() {
@@ -70,8 +68,7 @@ public class ExerciseManager : MonoBehaviour {
         //set the correct targets
         setArea();
 
-        
-
+        // color the targets
         Renderer renderer = targets.transform.GetChild(0).gameObject.GetComponent<Renderer>();
         Color color = renderer.material.color;
         color.r = color.b = 0;
@@ -181,18 +178,20 @@ public class ExerciseManager : MonoBehaviour {
 
                             reversePath = false;
 
+                            // this is not used anymore-----------------
                             int minutes = (State.sessionTimeInt / State.exercise.getCorrectReps()) / 60;
                             int seconds = (State.sessionTimeInt / State.exercise.getCorrectReps()) % 60;
 
                             int lastm = (State.sessionTimeInt - lastrep) / 60;
                             int lasts = (State.sessionTimeInt - lastrep) % 60;
-
+                            
                             avgTime.text = minutes.ToString("00") + ":" + seconds.ToString("00") + " m";
                             State.exercise.setAvgTime(avgTime.text);
 
                             lastrepTime.text = lastm.ToString("00") + ":" + lasts.ToString("00") + " m";
 
                             lastrep = State.sessionTimeInt;
+                            // this is not used anymore-----------------
 
                             // Finished the exercise > Play Animation > Play next exercise
                             if (State.exercise.getCorrectReps() >= State.exercise.getNReps()) { // done all the needed reps
@@ -200,10 +199,7 @@ public class ExerciseManager : MonoBehaviour {
                                 preferencesScript.SaveEverything();
                                 // Reset State stuff
                                 State.exercise.setTotalTime(State.sessionTimeInt);
-        Debug.Log("Finished exercise, sets exercise has completed");
-
                                 State.exercise.setCompleted(true);
-                                Debug.Log("Reseted state after completed ex.");
                                 State.isTherapyOnGoing = false; //???
                                 State.resetState();
                                 // Show congratulations

@@ -63,7 +63,6 @@ public static class SessionInfo
     public static void loadUser()
     { 
         string line = "";
-        Debug.Log("username: " + _username);
         if(_username == string.Empty) _username = "kiko12"; // For testing
         StreamReader reader = new StreamReader(Application.dataPath + "/Users/" + _username + ".txt");
         {
@@ -71,7 +70,6 @@ public static class SessionInfo
             while (line != null)
             {
                 string[] data = line.Split('=');
-                Debug.Log(data[0]);
                 if (data[0] == "Name") _name = data[1];
                 else if (data[0] == "Age") _age = data[1];
                 else if (data[0] == "Gender") _gender = data[1];

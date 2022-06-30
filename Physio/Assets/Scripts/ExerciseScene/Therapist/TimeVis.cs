@@ -70,7 +70,7 @@ public class TimeVis : MonoBehaviour {
     public void init() {
         // allow update to run
         wasInitialized = true;
-        dragManager.LockEdition();
+        if(dragManager!=null) dragManager.LockEdition();
 
         // start the restin timer countdown (it can be non-existing if we have no time left, and in that case we jump straight to intiial countdown)
         startCounterInt = 4;

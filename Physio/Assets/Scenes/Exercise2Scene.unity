@@ -4074,8 +4074,12 @@ MonoBehaviour:
   y_value: 0
   otherTarget_y: 0
   barInitialHeight: 0
+  x_value: 0
+  otherTarget_x: 0
+  barInitialWidth: 0
   barInitialZScale: 0
   dragDetected: 0
+  isVerticalScene: 0
 --- !u!114 &208944052
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4794,8 +4798,12 @@ MonoBehaviour:
   y_value: 0
   otherTarget_y: 0
   barInitialHeight: 0
+  x_value: 0
+  otherTarget_x: 0
+  barInitialWidth: 0
   barInitialZScale: 0
   dragDetected: 0
+  isVerticalScene: 0
 --- !u!114 &251340875
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8707,8 +8715,12 @@ MonoBehaviour:
   y_value: 0
   otherTarget_y: 0
   barInitialHeight: 0
+  x_value: 0
+  otherTarget_x: 0
+  barInitialWidth: 0
   barInitialZScale: 0
   dragDetected: 0
+  isVerticalScene: 0
 --- !u!114 &419212994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21134,8 +21146,12 @@ MonoBehaviour:
   y_value: 0
   otherTarget_y: 0
   barInitialHeight: 0
+  x_value: 0
+  otherTarget_x: 0
+  barInitialWidth: 0
   barInitialZScale: 0
   dragDetected: 0
+  isVerticalScene: 0
 --- !u!114 &1115150682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41151,7 +41167,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2046087689
 MonoBehaviour:
   m_ObjectHideFlags: 0

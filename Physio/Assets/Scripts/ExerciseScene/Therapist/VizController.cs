@@ -106,7 +106,7 @@ public class VizController : MonoBehaviour
 
     void RepetitionsVis()
     {
-        if (State.exercise.getTries() != 0)
+        if (State.exercise.getTries() > 0 &&  State.exercise.getNReps() > 0)
         {
             // FC - Doesnt make sense for grid
             if (SceneManager.GetActiveScene().name == "Exercise3Scene") {

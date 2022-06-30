@@ -1,0 +1,16 @@
+timestamp=20220630T171712
+name=horizontal1
+arm=left
+nrReps=2
+correctReps=2
+tries=2
+outOfPath=0
+duration=40
+restTime=20
+avgTime=00:03 m
+totalTime=00:07 min
+regShouldComp=False
+regSpineComp=False
+leftShoulderComp=0
+rightShoulderComp=0
+spineComp=0

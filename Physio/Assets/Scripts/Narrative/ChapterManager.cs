@@ -38,6 +38,7 @@ public class ChapterManager : MonoBehaviour
     
     [Header("Voice Assistant")]
     public VoiceAssistant voiceAssistant;
+    public SoundManager soundManager;
 
     [Header("Debugging")]
     public int currentPageIndex;
@@ -144,12 +145,14 @@ public class ChapterManager : MonoBehaviour
                 ShowPage(2); // shows the correct pagetype
                 SetChapterTitle(chapterName_text); // sets the title of the chapter
                 SetChapterUI(right_chapter_2, true); // grabs imageToShow and places it on the chapterEntry photograph 
+                soundManager.PlayOneShot("PageFlip");
                 clipLength = voiceAssistant.PlayVoiceLine("cap"+currentChapter+"img"+currentImage); // i.e. cap5img3
                 break;
             case 2: // 3) Two images (first one)
                 ShowPage(3); 
                 SetChapterUI(left_chapter_3, true);
                 right_chapter_3.gameObject.SetActive(false);
+                soundManager.PlayOneShot("PageFlip");
                 clipLength = voiceAssistant.PlayVoiceLine("cap"+currentChapter+"img"+currentImage); // i.e. cap5img3
                 break;
             case 3: // 3) Two images (first and second)
@@ -164,6 +167,7 @@ public class ChapterManager : MonoBehaviour
                 ShowPage(3); // 3) Two images (first)
                 SetChapterUI(left_chapter_3, true); 
                 right_chapter_3.gameObject.SetActive(false);
+                soundManager.PlayOneShot("PageFlip");
                 clipLength = voiceAssistant.PlayVoiceLine("cap"+currentChapter+"img"+currentImage); // i.e. cap5img3
                 break;
             case 5: // Oddchapter only: 3) Two images (first and second)

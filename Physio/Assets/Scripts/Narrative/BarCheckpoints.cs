@@ -33,6 +33,10 @@ public class BarCheckpoints : MonoBehaviour
     // Before this function, we had a transiction to the Narrative screen showing the pictures
     public void UnlockCheckpoints(){
         for(int i = 0; i< SequenceManager.unlockedChaptersEncoding.Count; i++){
+            if(i >= barCheckpoints.Length) {
+                Debug.LogWarning("Encoding size:"+SequenceManager.unlockedChaptersEncoding.Count+ " vs barCheckpoints size: " + barCheckpoints.Length);
+                break;
+            }
             if(SequenceManager.unlockedChaptersEncoding[i] == -1){
                 // Unlock it
                 barCheckpoints[i].chapterImage.gameObject.SetActive(true);

@@ -1,0 +1,7 @@
+timestamp=20220630T171219
+totalDuration=00:00:43 horas
+name=testSequence2
+series=1
+restDuration=15
+exe=1=horizontal2=Exercise1Scene=right=1=40=15
+performance=1

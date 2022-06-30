@@ -7,67 +7,69 @@ using UnityEngine.UI;
 // Grid exercise manager
 public class ExerciseManager3 : MonoBehaviour {
 
+    [Header("Cursors")]
     public GameObject cursor;
     public bool hasSecondaryCursor;
 
-    public Text avgTime;
-    public Text lastrepTime;
+    [Header("Time")]
+    public Text avgTime; // these are not used
+    public Text lastrepTime; // these are not used
+    int lastrep = 0;
 
-    private int lastrep = 0;
-
-    public string exerciseName;
-
-    public GameObject leftExerciseBox;
-    public GameObject rightExerciseBox;
-
+    [Header("Exercise")]
+    public ExercisePreferencesSetup preferencesScript;
+    GameObject[] targetsArray;
     public GameObject leftTargets;
     public GameObject rightTargets;
 
-    private int targetHitCounter = 0;
-    private bool[] targetHits;
-    private GameObject[] targetsArray;
+    int targetHitCounter = 0;
+    bool[] targetHits;
 
+    [Header("Other Objects")]
+    public NarrativeExerciseScreen narrativeScript;
+    public GameObject exercisedFinishedMsg;
+    
+    // AUDIO
     private AudioClip beep;
     private AudioSource audioSource;
 
+    // Booleans
     private bool isGroing;
-
     private bool isBlinking;
 
-    public Toggle restartRepToggle;
 
-    public GameObject wellDoneMessage;
-
-    public GameObject pathSize;
+    // Sound Manager
+    SoundManager soundManager;
+    public VoiceAssistant voiceAssistant;
 
     // Use this for initialization
     void Start () {
+        init();
+    }
+
+    private void OnDisable() {
+        CancelInvoke();
     }
 
     void init() {
         State.hasSecondaryCursor = hasSecondaryCursor;
         State.hasStartedExercise = false;
-        activate(State.exercise.isLeftArm());
+
+        activateCorrectTargets();
 
         beep = (AudioClip)Resources.Load("Sounds/beep");
         audioSource = GetComponent<AudioSource>();
     }
-
-    private void OnEnable() {
-        Debug.Log("Enabled");
-        init();
-    }
-
-    private void OnDisable() {
-        Debug.Log("Disabled");
-        CancelInvoke();
-    }
-
-    private void activate(bool left) {
+   
+    // Disable the incorrect grid targets
+    private void activateCorrectTargets() {
+        // hide the incorrect targets
+        bool left = State.exercise.isLeftArm();
         leftTargets.SetActive(left);
         rightTargets.SetActive(!left);
-
+        // fetch the array of active targets
         targetsArray = GameObject.FindGameObjectsWithTag("TargetCollider");
+        // initialize the bool array
         targetHits = new bool[targetsArray.Length];
         for (int i = 0; i < targetHits.Length; i++) targetHits[i] = false;
     }
@@ -183,26 +185,29 @@ public class ExerciseManager3 : MonoBehaviour {
                             break;
                         }
                     }
-                    // FC - Isto mete o targetHits[0] sempre a true??
+                    // We hit a target -> targetsArray[tagetIndex]
                     if (targetHits[targetIndex] == false)
                     {
                         targetHits[targetIndex] = true;
-
+                        // declare the exercise has started
                         if (!State.hasStartedExercise)
                         {
                             State.hasStartedExercise = true;
                         }
-                        // Change the color of the target hit
+                        // play target hit animation
+                        targetsArray[targetIndex].GetComponent<Targets_Tween>().SquashAndStretch();
+                        // Change the color of the target hit to "blueish"
                         targetsArray[targetIndex].GetComponent<Renderer>().material.color = new Color(0.5f, 0.5f, 1);
                         // Increment the number of targets hit
                         targetHitCounter++;
                         // If all targets were hit then...
                         if (targetHitCounter == targetsArray.Length)
                         {
-                            // Increment the number of repetitions
+                            // Increment the number of repetitions ( a repetition means all targets hit)
                             State.exercise.incTries();
-                            State.exercise.incCorrectReps();
+                            State.exercise.incCorrectReps(); // we cannot have incorrect reps
                             
+                            // this is not used anymore-----------------
                             // Calculate the average time per Repetition
                             int minutes = (State.sessionTimeInt / State.exercise.getCorrectReps()) / 60;
                             int seconds = (State.sessionTimeInt / State.exercise.getCorrectReps()) % 60;
@@ -214,26 +219,39 @@ public class ExerciseManager3 : MonoBehaviour {
                             int lasts = (State.sessionTimeInt - lastrep) % 60;
                             lastrepTime.text = lastm.ToString("00") + ":" + lasts.ToString("00") + " m";
                             lastrep = State.sessionTimeInt;
+                            // this is not used anymore-----------------
 
+                            // Finished the exercise > Play Animation > Play next exercise
                             if (State.exercise.getCorrectReps() >= State.exercise.getNReps())
                             { // done all the needed reps: finish Exercise
+                                // TODO Save the Exercise Preferences (grid: save the mode)
+                                //preferencesScript.SaveEverything();
+                                // Reset State stuff
                                 State.exercise.setTotalTime(State.sessionTimeInt);
                                 State.exercise.setCompleted(true);
-                                State.isTherapyOnGoing = false;
+                                State.isTherapyOnGoing = false; //???
                                 State.resetState();
-                                StartCoroutine(showWellDoneMessage());
+                                // Show congratulations
+                                StartCoroutine(showExerciseFinishedMessage());
                             } 
                             else
-                            {   // some repetitions are left!
+                            {   // some repetitions are left! - we want to clear the grid
                                 targetHitCounter = 0;
                                 for (int i=0; i < targetHits.Length; i++)
                                 {
                                     targetHits[i] = false;
                                     targetsArray[i].GetComponent<Renderer>().material.color = new Color(0, 1, 0);
                                 }
+                                // TODO show some animation! Doing a grid repetition is hard, even if there are more to come
                             }
                         }
-
+                        // FC - if all targets are NOT hit, we have to highlight the next one!
+                        else{
+                            // retrieve the next targetIndex
+                            // grab it from the array
+                            // change its color
+                            // mark it has the next 
+                        }
                         audioSource.PlayOneShot(beep);
                     }
                 }
@@ -311,12 +329,24 @@ public class ExerciseManager3 : MonoBehaviour {
 
         renderer.material.color = color;
     }
-    private IEnumerator showWellDoneMessage()
+
+    private IEnumerator showExerciseFinishedMessage()
     {
+        // Hide Exercise
         leftTargets.SetActive(false);
         rightTargets.SetActive(false);
-        wellDoneMessage.SetActive(true);
+        // Show the message for 5 secs
+        exercisedFinishedMsg.SetActive(true);
         yield return new WaitForSeconds(5);
-        wellDoneMessage.SetActive(false);
+        exercisedFinishedMsg.SetActive(false);
+
+        // Save the Exercise Preferences
+        preferencesScript.SavePreferencesToFile();
+
+        // Start calculating resting time
+        SequenceManager.StartRestCountDown(TimeSpan.FromSeconds(SequenceManager.sequence.getRestDuration()));
+
+        // Play next Exercise
+        SequenceManager.nextExercise();
     }
 }

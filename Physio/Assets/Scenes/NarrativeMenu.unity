@@ -7006,6 +7006,7 @@ MonoBehaviour:
   preview_image: {fileID: 1787924970}
   preview_text: {fileID: 1685759773}
   voiceAssistant: {fileID: 1955818542}
+  soundManager: {fileID: 1511503972}
   currentPageIndex: 0
   currentPageType: 0
   currentPage: {fileID: 0}
@@ -7081,6 +7082,18 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f9b86102aacc1040b8328c22e2a8878, type: 3}
+--- !u!114 &1511503972 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7288278027476380820, guid: 9f9b86102aacc1040b8328c22e2a8878,
+    type: 3}
+  m_PrefabInstance: {fileID: 1511503971}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 001409fcf12982a4c807835190ffb895, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1530945260
 PrefabInstance:
   m_ObjectHideFlags: 0

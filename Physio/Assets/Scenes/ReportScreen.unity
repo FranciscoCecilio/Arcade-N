@@ -2196,6 +2196,7 @@ GameObject:
   - component: {fileID: 407949485}
   - component: {fileID: 407949488}
   - component: {fileID: 407949487}
+  - component: {fileID: 407949489}
   - component: {fileID: 407949486}
   m_Layer: 5
   m_Name: ScrollViewport
@@ -2277,6 +2278,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 407949484}
   m_CullTransparentMesh: 0
+--- !u!114 &407949489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 407949484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1aa08ab6e0800fa44ae55d278d1423e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Content: {fileID: 1222995374}
+  m_Horizontal: 1
+  m_Vertical: 1
+  m_MovementType: 1
+  m_Elasticity: 0.1
+  m_Inertia: 1
+  m_DecelerationRate: 0.135
+  m_ScrollSensitivity: 20
+  m_Viewport: {fileID: 407949485}
+  m_HorizontalScrollbar: {fileID: 0}
+  m_VerticalScrollbar: {fileID: 0}
+  m_HorizontalScrollbarVisibility: 0
+  m_VerticalScrollbarVisibility: 0
+  m_HorizontalScrollbarSpacing: 0
+  m_VerticalScrollbarSpacing: 0
+  m_OnValueChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &411404974
 GameObject:
   m_ObjectHideFlags: 0
@@ -14008,31 +14039,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77543562650216f4da000f684f3aa593, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  username: {fileID: 0}
-  age: {fileID: 0}
-  gender: {fileID: 0}
-  exerDropdown: {fileID: 0}
-  sessionDropdown: {fileID: 0}
-  _firstView: {fileID: 0}
-  _secondView: {fileID: 0}
-  sucess: {fileID: 0}
-  tries: {fileID: 0}
-  correctReps: {fileID: 0}
-  avgTime: {fileID: 0}
-  outOfPath: {fileID: 0}
-  totalTime: {fileID: 0}
-  lShoulderComp: {fileID: 0}
-  lShoulderImage: {fileID: 0}
-  rShoulderComp: {fileID: 0}
-  rShoulderImage: {fileID: 0}
-  spineComp: {fileID: 0}
-  spineImage: {fileID: 0}
-  person: {fileID: 0}
-  arm: {fileID: 0}
-  viewObservationsButtonText: {fileID: 0}
-  observations: {fileID: 0}
-  results: {fileID: 0}
-  noResults: {fileID: 0}
   nr_sessions: {fileID: 1737332395}
   performance: {fileID: 554191469}
   totalTherapyTime: {fileID: 467210154}

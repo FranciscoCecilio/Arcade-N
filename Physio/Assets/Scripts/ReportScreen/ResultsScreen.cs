@@ -10,7 +10,7 @@ using System;
 // used to instantiate all session buttons
 public class ResultsScreen : MonoBehaviour
 {
-    public Text username;
+    /*public Text username;
     public Text age;
     public Text gender;
 
@@ -66,7 +66,7 @@ public class ResultsScreen : MonoBehaviour
     public GameObject noResults;
 
     bool regShoulderComp = false;
-    bool regSpineComp = false;
+    bool regSpineComp = false;*/
 
     [Header("Main Info")]
     public TMP_Text nr_sessions;
@@ -108,13 +108,21 @@ public class ResultsScreen : MonoBehaviour
         {
             string[] folders = Directory.GetDirectories(folderpath);
             // For each Session folder we instantiate a SessionResult Button
-            for (int i = folders.Length - 1; i > -1; i--) 
+            int foldersLength = folders.Length; // we will delete stuff so its important to keep the initial size
+            for (int i = foldersLength - 1; i > -1; i--) 
             {
-                string folderName = folders[i].Substring(folderpath.Length+1);
+                // check if its an empty session folder -> delete && continue
+                if(Directory.GetFiles(folders[i]).Length == 0){
+                    Directory.Delete(folders[i]);
+                    File.Delete(folders[i]+".meta");
+                    continue;
+                }
 
-                // We found a exercise folder -> continue
+                // We found the exercise folder -> continue
+                string folderName = folders[i].Substring(folderpath.Length+1);
                 if(folderName.Equals("ExercisePreferences")) continue;
 
+                
                 // inc the session_number
                 sessionNumber ++;
 
@@ -126,6 +134,8 @@ public class ResultsScreen : MonoBehaviour
                 SessionResult result = GenerateSessionResultButton(sessionNumber,sessionDate,folderName,folders[i]);
                 sessionTimespans.Add(result.GetTotalTimeSpan());
             }
+            // clean any deleted files
+            RefreshEditorProjectWindow();
             // at the end, after creating one button for each session, we calculate total therapy time
             CalculateTherapyTime();
         }
@@ -176,14 +186,21 @@ public class ResultsScreen : MonoBehaviour
 
     void PopulateUserInfo()
     {
-        username.text = SessionInfo.getName();
+        /*username.text = SessionInfo.getName();
         age.text = SessionInfo.getAge();
-        gender.text = SessionInfo.getGender();
+        gender.text = SessionInfo.getGender();*/
     }
     
     public void previousScreen()
     {
         SceneManager.LoadScene("MainMenu");
+    }
+
+    private static void  RefreshEditorProjectWindow() 
+    {
+        #if UNITY_EDITOR
+        UnityEditor.AssetDatabase.Refresh();
+        #endif
     }
 
 }

@@ -10,9 +10,10 @@ public class ChapterEntry : MonoBehaviour
     public Image photograph;
     public TMP_Text caption;
     public TextWriter textWriter;
-
+    public bool isOverviewPanel;
     void Awake()
     {
+        if(isOverviewPanel) return;
         photograph.gameObject.SetActive(false);
         caption.gameObject.SetActive(false);
     }

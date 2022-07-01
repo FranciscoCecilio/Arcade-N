@@ -98,7 +98,9 @@ public class SessionReward : MonoBehaviour
 
     public void LoadMainMenu(){
         if(soundManager) soundManager.PlayOneShot("button_click1");
-        SceneManager.LoadScene("MainMenu");
+
+        if(SequenceManager.showOverview) SceneManager.LoadScene("NarrativeMenu");
+        else SceneManager.LoadScene("MainMenu");
     }
     
 }

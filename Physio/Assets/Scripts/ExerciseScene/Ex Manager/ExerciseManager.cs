@@ -32,11 +32,6 @@ public class ExerciseManager : MonoBehaviour {
     public GameObject pathSize;
     public Toggle restartRepToggle; // TODO check this compensation thing 
 
-    // AUDIO
-    private AudioClip beep;
-    private AudioSource audioSource;
-
-
     // Booleans
     private bool reversePath;
     private bool isGroing;
@@ -143,7 +138,7 @@ public class ExerciseManager : MonoBehaviour {
                 if (hit.collider.tag == "ExerciseCollider") { // is inside of the exercise area
                     if (State.hasStartedExercise) {
                         foreach (Transform exerciseBox in exerciseBoxGroup.transform) {
-                            exerciseBox.gameObject.GetComponent<Renderer>().material.color = new Color(0, 1, 0, 0.3f);
+                            exerciseBox.gameObject.GetComponent<Renderer>().material.color = new Color(0.2f, 0.7f, 0.2f, 0.5f); // greenish
                         }
                     }
                 }
@@ -225,7 +220,7 @@ public class ExerciseManager : MonoBehaviour {
                 if (State.hasStartedExercise) {
                     foreach (Transform exerciseBox in exerciseBoxGroup.transform) {
                         //make exercise box red
-                        exerciseBox.gameObject.GetComponent<Renderer>().material.color = new Color(1, 0, 0, 0.3f);
+                        exerciseBox.gameObject.GetComponent<Renderer>().material.color = new Color(0.7f, 0.2f, 0.2f, 0.5f); // redish
                     }
                     if (!hasRegisteredOutOfPath) {
                         State.exercise.incOutOfPath() ;

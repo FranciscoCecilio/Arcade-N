@@ -36,6 +36,7 @@ public static class SequenceManager
     private static int currentChapter; // current Level
     public static bool hasImagesToUnlock = false;
     public static bool hasPreviewToUnlock = false; // only becomes true on the start of the session.
+    public static bool showOverview = false;
 
     // Setters and Getters
     public static void SetSeqIndex(int i){
@@ -280,8 +281,8 @@ public static class SequenceManager
     public static void nextExercise()
     {
         // here we want to check for narrative pictures to show!
-        //if(1 == 2){
-        if(hasPreviewToUnlock || hasImagesToUnlock){
+        if(1 == 2){
+        //if(hasPreviewToUnlock || hasImagesToUnlock){
             SceneManager.LoadScene("NarrativeMenu");
         }
         else{
@@ -337,7 +338,12 @@ public static class SequenceManager
     public static void EndOfSession(){
         // Give the user the xp - Level up (NOTE: CAP of 500 XP)
         int updatedXP = (currentChapter + 1) * 100;
-        if(updatedXP <= 500) SessionInfo.setXP(updatedXP);
+        if(updatedXP <= 500){
+            SessionInfo.setXP(updatedXP);
+        } 
+        else{
+            showOverview = true;
+        }
         // Save session
         SessionInfo.saveSession();
         // Show congratulations and show results

@@ -22,7 +22,7 @@ public class ChapterManager : MonoBehaviour
     
     public GameObject[] pageTypes;
     
-    [Header("1) Index")]
+    [Header("1) Overview")]
     //public TMP_Text indice;
     [Header("2) Chapter name and 1st Image")]
     public TMP_Text chapterName_text;
@@ -48,7 +48,14 @@ public class ChapterManager : MonoBehaviour
 
     void Start()
     {
-        ShowNarrative();
+        // when there are no more chapters to unlock we just show overview "the end"
+        if(SequenceManager.showOverview){
+            SequenceManager.showOverview = false;
+            ShowPage(1);
+        }
+        else{
+            ShowNarrative();
+        }
     }
 
     public void ShowNarrative(){
@@ -213,7 +220,7 @@ public class ChapterManager : MonoBehaviour
         if (System.IO.File.Exists( titlePath)){ 
             //Read the title directly from the Title.txt
             StreamReader reader = new StreamReader(titlePath);
-            title.text = reader.ReadToEnd();
+            title.text = "CAPÍTULO " + currentChapter +"\n" + reader.ReadToEnd();
             reader.Close();
         }
         else{

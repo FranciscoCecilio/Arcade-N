@@ -11,6 +11,7 @@ public class Targets_Tween : MonoBehaviour
         initialScale = transform.localScale;
         if(!SceneManager.GetActiveScene().name.Equals("Exercise0Scene"))    Shake_Target();
         SquashAndStretch();
+        StartCoroutine(SetInitialSize());
     }
 
     public void Shake_Target(){
@@ -23,6 +24,12 @@ public class Targets_Tween : MonoBehaviour
         gameObject.transform.localScale = new Vector3(initialScale.x * 0.3f,initialScale.y * 0.3f,initialScale.z * 0.3f);
         // scale up elastic
         LeanTween.scale(gameObject, initialScale, 1f).setEase(LeanTweenType.easeOutElastic);
+    }
+
+    // sometimes the ball would be little... this is a prevention method
+    public IEnumerator SetInitialSize(){
+        yield return new WaitForSeconds(2);
+        gameObject.transform.localScale = initialScale;
     }
 
 

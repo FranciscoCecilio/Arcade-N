@@ -124,7 +124,11 @@ public class MainMenuScript : MonoBehaviour {
 
     public void previousScreen()
     {
-        if(soundManager) Destroy(soundManager.gameObject);
+        
+        if(soundManager){
+            soundManager.PlayOneShot("button_click1");
+            Destroy(soundManager.gameObject, 0.5f);
+        }
 
         if(SessionInfo.isVoiceOn()){
             StartCoroutine(previousScreenAndBye());     
@@ -136,6 +140,7 @@ public class MainMenuScript : MonoBehaviour {
     }
     IEnumerator previousScreenAndBye(){
         SessionInfo.saveUserProgress();
+        soundManager.PlayOneShot("button_click1");
         float clipLenght = voiceAssistant.PlayRandomBye();
         yield return new WaitForSeconds(clipLenght);
         SceneManager.LoadScene("LoginMenu2");

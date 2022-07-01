@@ -1,0 +1,7 @@
+timestamp=20220701T142622
+totalDuration=00:04:34 horas
+name=4
+series=1
+restDuration=20
+exe=2=Vertical=Exercise2Scene=left=2=60=20
+performance=0,67

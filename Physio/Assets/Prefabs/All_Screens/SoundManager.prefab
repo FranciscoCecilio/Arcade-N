@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7288278027476380820
 MonoBehaviour:
@@ -108,6 +108,14 @@ MonoBehaviour:
     loop: 1
     source: {fileID: 0}
     web_url_source: 
+  - name: Page_flip
+    clip: {fileID: 8300000, guid: 2f4f2a55944cbea409c20e77389f0fa8, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+    web_url_source: 
   isMainMenuSM: 0
   musicToPlayOnStart: Sunny Sunday
   sm_musicIsOn: 0
+  allSources: []

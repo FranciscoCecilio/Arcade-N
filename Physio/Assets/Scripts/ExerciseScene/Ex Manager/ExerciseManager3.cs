@@ -29,10 +29,6 @@ public class ExerciseManager3 : MonoBehaviour {
     public NarrativeExerciseScreen narrativeScript;
     public GameObject exercisedFinishedMsg;
     
-    // AUDIO
-    private AudioClip beep;
-    private AudioSource audioSource;
-
     // Booleans
     private bool isGroing;
     private bool isBlinking;
@@ -57,8 +53,6 @@ public class ExerciseManager3 : MonoBehaviour {
 
         activateCorrectTargets();
 
-        beep = (AudioClip)Resources.Load("Sounds/beep");
-        audioSource = GetComponent<AudioSource>();
     }
    
     // Disable the incorrect grid targets
@@ -72,6 +66,16 @@ public class ExerciseManager3 : MonoBehaviour {
         // initialize the bool array
         targetHits = new bool[targetsArray.Length];
         for (int i = 0; i < targetHits.Length; i++) targetHits[i] = false;
+    }
+
+    public void FindSoundManager(){
+        GameObject soundManagerObj = GameObject.FindGameObjectWithTag("SoundManager");
+        if(soundManagerObj == null){
+            Debug.LogError("ERROR: could not find a SoundManager in this scene!");
+        }
+        else{
+            soundManager = soundManagerObj.GetComponent<SoundManager>();
+        }
     }
 
     // Update is called once per frame
@@ -252,7 +256,8 @@ public class ExerciseManager3 : MonoBehaviour {
                             // change its color
                             // mark it has the next 
                         }
-                        audioSource.PlayOneShot(beep);
+                        if(soundManager == null) FindSoundManager();
+                        soundManager.PlayOneShot("beep");
                     }
                 }
             }

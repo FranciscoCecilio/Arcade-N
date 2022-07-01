@@ -99,7 +99,7 @@ public class SessionResult : MonoBehaviour
         {
             // sequenceFolders[i]: Application.dataPath + "/Users/" + SessionInfo.getUsername() "/" <SessionTS> "/" <Sequencefolder i>
             string[] sequenceFolders = Directory.GetDirectories(sessionFolderPath);
-
+            
             // For each Sequence folder we fetch its Exercises and instantiate one ExerciseResult Button
             for (int i = sequenceFolders.Length - 1; i > -1; i--) 
             {
@@ -115,6 +115,7 @@ public class SessionResult : MonoBehaviour
                 string specificSequence = sequenceFolders[i];
                 string[] exfiles = Directory.GetFiles(specificSequence);
                
+                int listIndex = 0;
                 // For each Exercise file we fetch and store its parameters
                 foreach (string file in exfiles)
                 {
@@ -136,7 +137,6 @@ public class SessionResult : MonoBehaviour
                     //Debug.Log("is inside exercise:" + file);
                     // dictionary <key, value>
                     Dictionary<string, string> newExerciseResultdictionary = new Dictionary<string, string>();
-                    int listIndex = 0;
                     string line = "";
                     StreamReader reader = new StreamReader(file);
                     {
@@ -179,13 +179,14 @@ public class SessionResult : MonoBehaviour
                         }
                     }
                     reader.Close();
-                    // increement the variable that has the order in the exercise_result list
+                    // increment the variable that has the order in the exercise_result list
+                    listIndex++;
                     newExerciseResultdictionary.Add("lastIndex", listIndex.ToString());
-                    listIndex ++;
                     // Add the exercise serie
                     newButton.AddExerciseInfo(newExerciseResultdictionary);
 
                 }
+                
                 newButton.PopulateExerciseListElement();
             }
         }
@@ -249,7 +250,9 @@ public class SessionResult : MonoBehaviour
                                 timespans.Add(data[1]); // Get what we came for and store: Duration 00:15:12
                             }
                             else if(data[0] == "performance"){
-                                performances.Add(double.Parse(data[1], System.Globalization.CultureInfo.InvariantCulture)); // Get what we came for and store: 00:15:12
+                                Debug.Log("data[1]: " + Convert.ToDouble(data[1]));
+                                performances.Add(Convert.ToDouble(data[1])); // Get what we came for and performance: 0.7
+                                //performances.Add(double.Parse(data[1], System.Globalization.CultureInfo.InvariantCulture)); // Get what we came for and performance: 0.7
                             }
                             line = reader.ReadLine();
                         }
@@ -279,7 +282,11 @@ public class SessionResult : MonoBehaviour
 
     void CalculateSessionPerformance(){
         // calculate average performance
-        double average = performances.Count > 0 ? performances.Average() : 0.0;      
+        double average = 0;
+        if(performances.Count>0){
+            average = performances.Average();
+        }
+        Debug.Log("AVG: "+average);
         double rounded_avg = Math.Round(average, 2); //rounds 1.5362 to 1.54
         performanceText.text = (rounded_avg * 100).ToString() + " %";
     }

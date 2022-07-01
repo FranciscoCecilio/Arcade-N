@@ -122,7 +122,6 @@ public class ResultsScreen : MonoBehaviour
                 string folderName = folders[i].Substring(folderpath.Length+1);
                 if(folderName.Equals("ExercisePreferences")) continue;
 
-                
                 // inc the session_number
                 sessionNumber ++;
 

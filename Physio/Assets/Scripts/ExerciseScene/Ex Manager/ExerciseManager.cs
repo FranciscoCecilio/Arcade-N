@@ -173,7 +173,8 @@ public class ExerciseManager : MonoBehaviour {
 
                             reversePath = false;
 
-                            // this is not used anymore-----------------
+                            // this is not used anymore: Calculate the average time per Repetition
+                            /*
                             int minutes = (State.sessionTimeInt / State.exercise.getCorrectReps()) / 60;
                             int seconds = (State.sessionTimeInt / State.exercise.getCorrectReps()) % 60;
 
@@ -186,7 +187,7 @@ public class ExerciseManager : MonoBehaviour {
                             lastrepTime.text = lastm.ToString("00") + ":" + lasts.ToString("00") + " m";
 
                             lastrep = State.sessionTimeInt;
-                            // this is not used anymore-----------------
+                            */
 
                             // Finished the exercise > Play Animation > Play next exercise
                             if (State.exercise.getCorrectReps() >= State.exercise.getNReps()) { // done all the needed reps

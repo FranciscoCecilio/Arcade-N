@@ -118,7 +118,7 @@ public class TimeVis : MonoBehaviour {
             LeanTween.cancel(counterOnStart); // cancel animations
             counterOnStart.SetActive(false);
 
-            State.isTherapyOnGoing = true;
+            State.isTherapyOnGoing = true; // very improtant line of code: allows the exercise manager to run its Update
             CancelInvoke("initCountDown");
         }
         startCounterInt--;

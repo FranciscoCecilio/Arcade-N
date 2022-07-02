@@ -17,77 +17,113 @@ public class ExercisePreferencesSetup : MonoBehaviour
 
     public Slider pathSizeSlider; // to update with the correct value on start
 
-    void Start()
-    {
-        PositionObjects();
-    }
+    GridPaternManager gridManager; // the script needs to be on the same obejct as this script
 
-    // Fetches and applies the positions of the path and targets from the Last folder (TODO for grid)
-    private void PositionObjects()
+    void Start()
     {
         string scene = SceneManager.GetActiveScene().name;
         if ( scene == "Exercise1Scene" || scene == "Exercise2Scene")
         {
-            // Defines the variable _arm
-            string _arm = "";
-            if (State.exercise.isLeftArm()){
-                _arm = "left";
-            } 
-            else{
-                _arm = "right";
-            }
+            PositionObjects();
+        }
+        else if(scene == "Exercise0Scene"){
+            gridManager = GetComponent<GridPaternManager>();
+            SetGridPatern();
+        }
+    }
 
-            // Defines the filepath to the text file in "Last" folder corresponding to the exercise
-            string filepath = Application.dataPath + "/Users/" + SessionInfo.getUsername() + "/ExercisePreferences/" + scene + ".txt";
-            
-            // If the file exists:
-            // Fetches the correct [Path and Target position] from the last exercise and applies
-            if (System.IO.File.Exists(filepath))
+    // Fetches and applies the last used grid patern
+    private void SetGridPatern()
+    {
+        string scene = SceneManager.GetActiveScene().name;
+        string filepath = Application.dataPath + "/Users/" + SessionInfo.getUsername() + "/ExercisePreferences/" + scene + ".txt";
+        
+        // If the file exists:
+        // Fetches the grid patern from the last exercise and applies
+        if (System.IO.File.Exists(filepath))
+        {
+            string line = "";
+            StreamReader reader = new StreamReader(filepath);
             {
-                string line = "";
-                StreamReader reader = new StreamReader(filepath);
+                line = reader.ReadLine();
+                while (line != null)
                 {
-                    line = reader.ReadLine();
-                    while (line != null)
+                    string[] data = line.Split('=');
+                    if (data[0] == "gridPatern")
                     {
-                        string[] data = line.Split('=');
-                        if (data[0] == "arm")
-                        {
-                            if (!data[1].Equals(_arm)) break;
-                        }
-                        if (data[0] == "pathSize")
-                        {
-                            Vector3 pathSize = StringToVector3(data[1]);
-                            GameObject path = GameObject.FindGameObjectWithTag("ExerciseCollider");
-                            path.transform.localScale = pathSize;
-                            pathSizeSlider.value = pathSize.x;
-                        }
-                        else if (data[0] == "pathPosition")
-                        {
-                            Vector3 pathPosition = StringToVector3(data[1]);
-                            GameObject path = GameObject.FindGameObjectWithTag("ExerciseCollider");
-                            path.transform.position = worldCamera.ScreenToWorldPoint(pathPosition);
-                        }
-                        else if (data[0] == "target0")
-                        {
-                            Vector3 target1Position = StringToVector3(data[1]);
-                            GameObject[] targets = GameObject.FindGameObjectsWithTag("TargetCollider");
-                            //targets[0].transform.position = worldCamera.ScreenToWorldPoint(target1Position);
-                            targets[0].transform.localPosition = target1Position;
-                        }
-                        else if (data[0] == "target1")
-                        {
-                            Vector3 target2Position = StringToVector3(data[1]);
-                            GameObject[] targets = GameObject.FindGameObjectsWithTag("TargetCollider");
-                            //targets[1].transform.position = worldCamera.ScreenToWorldPoint(target2Position);
-                            targets[1].transform.localPosition = target2Position;
-                        }
-                        line = reader.ReadLine();
+                       gridManager.SetChosenPatern(data[1]);
                     }
+                    line = reader.ReadLine();
                 }
             }
         }
     }
+
+    // Fetches and applies the positions of the path and targets from the last exercise
+    private void PositionObjects()
+    {
+        string scene = SceneManager.GetActiveScene().name;
+        // Defines the variable _arm
+        string _arm = "";
+        if (State.exercise.isLeftArm()){
+            _arm = "left";
+        } 
+        else{
+            _arm = "right";
+        }
+
+        // Defines the filepath to the text file in "Last" folder corresponding to the exercise
+        string filepath = Application.dataPath + "/Users/" + SessionInfo.getUsername() + "/ExercisePreferences/" + scene + ".txt";
+        
+        // If the file exists:
+        // Fetches the correct [Path and Target position] from the last exercise and applies
+        if (System.IO.File.Exists(filepath))
+        {
+            string line = "";
+            StreamReader reader = new StreamReader(filepath);
+            {
+                line = reader.ReadLine();
+                while (line != null)
+                {
+                    string[] data = line.Split('=');
+                    if (data[0] == "arm")
+                    {
+                        if (!data[1].Equals(_arm)) break;
+                    }
+                    if (data[0] == "pathSize")
+                    {
+                        Vector3 pathSize = StringToVector3(data[1]);
+                        GameObject path = GameObject.FindGameObjectWithTag("ExerciseCollider");
+                        path.transform.localScale = pathSize;
+                        pathSizeSlider.value = pathSize.x;
+                    }
+                    else if (data[0] == "pathPosition")
+                    {
+                        Vector3 pathPosition = StringToVector3(data[1]);
+                        GameObject path = GameObject.FindGameObjectWithTag("ExerciseCollider");
+                        path.transform.position = worldCamera.ScreenToWorldPoint(pathPosition);
+                    }
+                    else if (data[0] == "target0")
+                    {
+                        Vector3 target1Position = StringToVector3(data[1]);
+                        GameObject[] targets = GameObject.FindGameObjectsWithTag("TargetCollider");
+                        //targets[0].transform.position = worldCamera.ScreenToWorldPoint(target1Position);
+                        targets[0].transform.localPosition = target1Position;
+                    }
+                    else if (data[0] == "target1")
+                    {
+                        Vector3 target2Position = StringToVector3(data[1]);
+                        GameObject[] targets = GameObject.FindGameObjectsWithTag("TargetCollider");
+                        //targets[1].transform.position = worldCamera.ScreenToWorldPoint(target2Position);
+                        targets[1].transform.localPosition = target2Position;
+                    }
+                    line = reader.ReadLine();
+                }
+            }
+        }
+    }
+
+    
 
     // aux function
     public static Vector3 StringToVector3(string sVector)
@@ -111,7 +147,7 @@ public class ExercisePreferencesSetup : MonoBehaviour
         return result;
     }
 
-    // Exercise finished - Save everything
+    // Exercise finished - Save everything for vertical and horizontal exercises
     public void SaveEverything(){
         savePathPosition();
         saveTargetPositions();
@@ -119,7 +155,8 @@ public class ExercisePreferencesSetup : MonoBehaviour
     }
     
     // When we EDIT the exercise preferences, we want to write it in the User/ExercisePreferences/<exercise>.txt 
-    // This is called on ExerciseManager and needs the State.exercise to be set
+    // HORZIONTAL and VERTICAL exercises: This is called on ExerciseManager and needs the State.exercise to be set
+    // GRID exercise: This is called on ExerciseManager3 OR GridPaternManager when we click a grid button
     public void SavePreferencesToFile(){
 
         // It means that, despite the exercise started and was runed, the user never edited the path or target
@@ -133,7 +170,7 @@ public class ExercisePreferencesSetup : MonoBehaviour
         String folderPath = Application.dataPath + "/Users/" + SessionInfo.getUsername() + "/ExercisePreferences/";
         if(!Directory.Exists(folderPath)){
             Directory.CreateDirectory(folderPath);
-            Debug.Log("Criou folder ExercisePreferences.");
+            Debug.Log("Created folder ExercisePreferences.");
         }
 
         // Create the ExercisePreferences File
@@ -187,9 +224,23 @@ public class ExercisePreferencesSetup : MonoBehaviour
             }
         }
         else if(scene == "Exercise0Scene"){
-            // TODO GRID
+            using (var stream = new FileStream(filepath, FileMode.CreateNew, FileAccess.Write, FileShare.Write))
+            using (var writer = new StreamWriter(stream))
+            {
+                writer.WriteLine("arm=" + _arm );
+                if (!gridManager.chosenPaternName.Equals(String.Empty))
+                {
+                    writer.WriteLine("gridPatern=" + gridManager.chosenPaternName);
+                }
+                else{
+                    Debug.LogWarning("Saving an empty gridPatern to exercise preferences File.");
+                }
+
+                writer.Close();
+                stream.Close();
+            }   
+            Debug.Log("Saved preferences to file.");
         }
-        Debug.Log("Saved preferences to file.");
 
     }
 

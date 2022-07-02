@@ -22,12 +22,12 @@ public class ExerciseManager3 : MonoBehaviour {
     public GameObject leftTargets;
     public GameObject rightTargets;
 
-    int targetHitCounter = 0;
-    bool[] targetHits;
+    bool[] targetHits; // not used anymore
 
     [Header("Other Objects")]
     public NarrativeExerciseScreen narrativeScript;
     public GameObject exercisedFinishedMsg;
+    public GridPaternManager gridManager;
     
     // Booleans
     private bool isGroing;
@@ -63,9 +63,21 @@ public class ExerciseManager3 : MonoBehaviour {
         rightTargets.SetActive(!left);
         // fetch the array of active targets
         targetsArray = GameObject.FindGameObjectsWithTag("TargetCollider");
-        // initialize the bool array
+        Array.Sort( targetsArray, CompareObNames );
+        for(int i = 0; i < targetsArray.Length; i ++){
+            Debug.Log(targetsArray[i].gameObject.name);
+
+        }
+        // initialize the bool array --- we dont need anymore bcs we have order now
         targetHits = new bool[targetsArray.Length];
         for (int i = 0; i < targetHits.Length; i++) targetHits[i] = false;
+    }
+
+    int CompareObNames( GameObject x, GameObject y )
+    {
+
+        return Int32.Parse(x.name).CompareTo( Int32.Parse(y.name) );
+        //return x.name.CompareTo( y.name );
     }
 
     public void FindSoundManager(){
@@ -78,97 +90,14 @@ public class ExerciseManager3 : MonoBehaviour {
         }
     }
 
-    // Update is called once per frame
-    /*void Update () {
-        RaycastHit hit;
-        Ray landingRay = new Ray(cursor.transform.position, Vector3.back);
-
-        if(State.isTherapyOnGoing) {
-
-            if(!isBlinking) {
-                InvokeRepeating("blinkTarget", 0, 0.05f);
-                isBlinking = true;
-            }
-
-            if (Physics.Raycast(landingRay, out hit)) {
-
-                if (hit.collider.tag == "TargetCollider") { // has hit a target
-
-                    bool hasHitTheCurrentTarget = false;
-                    int targetIndex = 0;
-                    for (int i = 0; i < targetsArray.Length; i++)
-                    {
-                        hasHitTheCurrentTarget = hit.transform.position == targetsArray[i].transform.position;
-                        if (hasHitTheCurrentTarget)
-                        {
-                            targetIndex = i;
-                            break;
-                        }
-                    }
-                    // FC - Isto mete o targetHits[0] sempre a true??
-                    if (targetHits[targetIndex] == false)
-                    {
-                        targetHits[targetIndex] = true;
-
-                        if (!State.hasStartedExercise)
-                        {
-                            State.hasStartedExercise = true;
-                        }
-                        // Change the color of the target hit
-                        targetsArray[targetIndex].GetComponent<Renderer>().material.color = new Color(0.5f, 0.5f, 1);
-                        // Increment the number of targets hit
-                        targetHitCounter++;
-                        // If all targets were hit then...
-                        if (targetHitCounter == targetsArray.Length)
-                        {
-                            // Increment the number of repetitions
-                            State.exercise.incTries();
-                            State.exercise.incCorrectReps();
-                            
-                            // Calculate the average time per Repetition
-                            int minutes = (State.sessionTimeInt / State.exercise.getCorrectReps()) / 60;
-                            int seconds = (State.sessionTimeInt / State.exercise.getCorrectReps()) % 60;
-                            avgTime.text = minutes.ToString("00") + ":" + seconds.ToString("00") + " m";
-                            State.exercise.setAvgTime(avgTime.text);
-
-                            // Set the time it took to do this repetition
-                            int lastm = (State.sessionTimeInt - lastrep) / 60;
-                            int lasts = (State.sessionTimeInt - lastrep) % 60;
-                            lastrepTime.text = lastm.ToString("00") + ":" + lasts.ToString("00") + " m";
-                            lastrep = State.sessionTimeInt;
-
-                            if (State.exercise.getCorrectReps() >= State.exercise.getNReps())
-                            { // done all the needed reps: finish Exercise
-                                State.exercise.setTotalTime(State.sessionTimeInt);
-                                State.exercise.setCompleted(true);
-                                State.isTherapyOnGoing = false;
-                                State.resetState();
-                                StartCoroutine(showWellDoneMessage());
-                            } 
-                            else
-                            {   // some repetitions are left!
-                                targetHitCounter = 0;
-                                for (int i=0; i < targetHits.Length; i++)
-                                {
-                                    targetHits[i] = false;
-                                    targetsArray[i].GetComponent<Renderer>().material.color = new Color(0, 1, 0);
-                                }
-                            }
-                        }
-
-                        audioSource.PlayOneShot(beep);
-                    }
-                }
-            }
-        }
-    }*/
 
     void Update () {
         RaycastHit hit;
         Ray landingRay = new Ray(cursor.transform.position, Vector3.back);
-
+        
+        // TimeVis.cs sets true State-IsTherapyOnGoing
         if(State.isTherapyOnGoing) {
-            // Makes the remaining targets blink
+            // Makes the correct target blink every second
             if(!isBlinking) {
                 InvokeRepeating("blinkTarget", 0, 0.05f);
                 isBlinking = true;
@@ -178,21 +107,15 @@ public class ExerciseManager3 : MonoBehaviour {
 
                 if (hit.collider.tag == "TargetCollider") { // has hit a target
 
-                    bool hasHitTheCurrentTarget = false;
-                    int targetIndex = 0;
-                    for (int i = 0; i < targetsArray.Length; i++)
-                    {
-                        hasHitTheCurrentTarget = hit.transform.position == targetsArray[i].transform.position;
-                        if (hasHitTheCurrentTarget)
-                        {
-                            targetIndex = i;
-                            break;
-                        }
-                    }
+                    Vector3 currentTargetPos = targetsArray[gridManager.GetCurrentTargetID()].transform.position;
+                   
                     // We hit a target -> targetsArray[tagetIndex]
-                    if (targetHits[targetIndex] == false)
+                    //if (targetHits[targetIndex] == false)
+                    if(hit.transform.position == currentTargetPos)
                     {
-                        targetHits[targetIndex] = true;
+                        int targetIndex = gridManager.GetCurrentTargetID(); // Target with ID = 0 is the target with index 0 in the targetsArray
+                        targetHits[targetIndex] = true; // we dont need this anymore but still ...
+
                         // declare the exercise has started
                         if (!State.hasStartedExercise)
                         {
@@ -200,19 +123,19 @@ public class ExerciseManager3 : MonoBehaviour {
                         }
                         // play target hit animation
                         targetsArray[targetIndex].GetComponent<Targets_Tween>().SquashAndStretch();
-                        // Change the color of the target hit to "blueish"
-                        targetsArray[targetIndex].GetComponent<Renderer>().material.color = new Color(0.5f, 0.5f, 1);
+                        // Change the color of the target hit to "green"
+                        targetsArray[targetIndex].GetComponent<Renderer>().material.color = new Color(0.2f, 0.7f, 0.2f, 0.5f); // greenish
                         // Increment the number of targets hit
-                        targetHitCounter++;
+                        gridManager.IncrementTargetHitCounter(); // targetHitCounter ++;
                         // If all targets were hit then...
-                        if (targetHitCounter == targetsArray.Length)
+                        if (gridManager.GetTargetHitCounter() >= targetsArray.Length)
                         {
                             // Increment the number of repetitions ( a repetition means all targets hit)
                             State.exercise.incTries();
                             State.exercise.incCorrectReps(); // we cannot have incorrect reps
                             
-                            // this is not used anymore-----------------
-                            // Calculate the average time per Repetition
+                            // this is not used anymore: Calculate the average time per Repetition
+                            /* 
                             int minutes = (State.sessionTimeInt / State.exercise.getCorrectReps()) / 60;
                             int seconds = (State.sessionTimeInt / State.exercise.getCorrectReps()) % 60;
                             avgTime.text = minutes.ToString("00") + ":" + seconds.ToString("00") + " m";
@@ -223,7 +146,7 @@ public class ExerciseManager3 : MonoBehaviour {
                             int lasts = (State.sessionTimeInt - lastrep) % 60;
                             lastrepTime.text = lastm.ToString("00") + ":" + lasts.ToString("00") + " m";
                             lastrep = State.sessionTimeInt;
-                            // this is not used anymore-----------------
+                            */ 
 
                             // Finished the exercise > Play Animation > Play next exercise
                             if (State.exercise.getCorrectReps() >= State.exercise.getNReps())
@@ -240,13 +163,17 @@ public class ExerciseManager3 : MonoBehaviour {
                             } 
                             else
                             {   // some repetitions are left! - we want to clear the grid
-                                targetHitCounter = 0;
+                                // reset TargetHitCounter 
+                                gridManager.SetTargetHitCounter(0);
+                                // reset the unnused targetsHit array
                                 for (int i=0; i < targetHits.Length; i++)
                                 {
                                     targetHits[i] = false;
                                     targetsArray[i].GetComponent<Renderer>().material.color = new Color(0, 1, 0);
                                 }
                                 // TODO show some animation! Doing a grid repetition is hard, even if there are more to come
+                                // Play Voice line
+                                voiceAssistant.PlayRandomGood();
                             }
                         }
                         // FC - if all targets are NOT hit, we have to highlight the next one!
@@ -264,44 +191,9 @@ public class ExerciseManager3 : MonoBehaviour {
         }
     }
    
-    // This method blinks the remaining targets (the ones that aren't yet hit)
-    /*private void blinkTarget() {
-
-        float delta;
-
-        for (int i = 0; i < targetsArray.Length; i++)
-        {
-            if (!targetHits[i])
-            {
-                Renderer renderer = targetsArray[i].GetComponent<Renderer>();
-                if (isGroing && renderer.material.color.r > 1)
-                {
-                    isGroing = false;
-                }
-                else if (!isGroing && renderer.material.color.r < 0)
-                {
-                    isGroing = true;
-                }
-
-                if (isGroing)
-                {
-                    delta = 0.1f;
-                }
-                else
-                {
-                    delta = -0.1f;
-                }
-
-                Color color = renderer.material.color;
-                color.r += delta;
-                color.b += delta;
-
-                renderer.material.color = color;
-            }
-        }
-    }*/
     
-    // This method blinks the remaining targets (the ones that aren't yet hit)
+    // This method blinks the correct target to hit on the grid
+    // TODO when is this called? once per second? or once.
     private void blinkTarget() {
         
         if (targetsArray.Length == 0)
@@ -309,8 +201,11 @@ public class ExerciseManager3 : MonoBehaviour {
         if(State.currentTarget < 0 || State.currentTarget > targetsArray.Length)
             return;
 
+        // define whats the correct target
+        int currentTargetIndex = gridManager.GetTargetHitCounter();
+
         // State.currentTarget should be decided in Update randomly from the remaining targets
-        Renderer renderer = targetsArray[State.currentTarget].GetComponent<Renderer>();
+        Renderer renderer = targetsArray[currentTargetIndex].GetComponent<Renderer>();
 
         float delta;
 

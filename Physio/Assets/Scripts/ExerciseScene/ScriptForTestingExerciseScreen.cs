@@ -43,9 +43,9 @@ public class ScriptForTestingExerciseScreen : MonoBehaviour
             SequenceManager.newSequence("testSequence2");
             Sequence testSequence2 = SequenceManager.sequence;
             // Add Exercise(int id, string name, string scenePath, int armCode, int nreps, int duration, int restTime)
-            testSequence2.addExercise(new Exercise(1, "horizontal2", "Exercise1Scene", 1, 1, 40, 15));
+            testSequence2.addExercise(new Exercise(0, "grid1", "Exercise0Scene", 0, 1, 40, 20));
             // Add sequence to seq to run
-            //SequenceManager.sequencesToRun.Add(testSequence2);
+            SequenceManager.sequencesToRun.Add(testSequence2);
             //SequenceManager.sequencesToRun.Add(testSequence2);
 
             // Run sequences

@@ -24,7 +24,8 @@ public class GridPaternManager : MonoBehaviour
     public ExercisePreferencesSetup exercisePreferences; // to restart
 
     public int GetCurrentTargetID(){
-        // returns the id of the current target (random number 0 to 11)
+        // returns the id of the current target (any number 0 to 11)
+        if(targetHitCounter >= chosenPatern.Length) return chosenPatern[chosenPatern.Length - 1];
         return chosenPatern[targetHitCounter];
     }
 

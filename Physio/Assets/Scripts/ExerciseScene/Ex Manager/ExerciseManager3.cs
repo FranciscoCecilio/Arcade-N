@@ -64,10 +64,6 @@ public class ExerciseManager3 : MonoBehaviour {
         // fetch the array of active targets
         targetsArray = GameObject.FindGameObjectsWithTag("TargetCollider");
         Array.Sort( targetsArray, CompareObNames );
-        for(int i = 0; i < targetsArray.Length; i ++){
-            Debug.Log(targetsArray[i].gameObject.name);
-
-        }
         // initialize the bool array --- we dont need anymore bcs we have order now
         targetHits = new bool[targetsArray.Length];
         for (int i = 0; i < targetHits.Length; i++) targetHits[i] = false;
@@ -75,7 +71,6 @@ public class ExerciseManager3 : MonoBehaviour {
 
     int CompareObNames( GameObject x, GameObject y )
     {
-
         return Int32.Parse(x.name).CompareTo( Int32.Parse(y.name) );
         //return x.name.CompareTo( y.name );
     }
@@ -202,7 +197,8 @@ public class ExerciseManager3 : MonoBehaviour {
             return;
 
         // define whats the correct target
-        int currentTargetIndex = gridManager.GetTargetHitCounter();
+        int currentTargetIndex = gridManager.GetCurrentTargetID();
+        if(currentTargetIndex >= targetsArray.Length) return;
 
         // State.currentTarget should be decided in Update randomly from the remaining targets
         Renderer renderer = targetsArray[currentTargetIndex].GetComponent<Renderer>();
@@ -237,11 +233,12 @@ public class ExerciseManager3 : MonoBehaviour {
         rightTargets.SetActive(false);
         // Show the message for 5 secs
         exercisedFinishedMsg.SetActive(true);
+        // Save the Exercise Preferences
+        preferencesScript.SavePreferencesToFile();
         yield return new WaitForSeconds(5);
         exercisedFinishedMsg.SetActive(false);
 
-        // Save the Exercise Preferences
-        preferencesScript.SavePreferencesToFile();
+        
 
         // Start calculating resting time
         SequenceManager.StartRestCountDown(TimeSpan.FromSeconds(SequenceManager.sequence.getRestDuration()));

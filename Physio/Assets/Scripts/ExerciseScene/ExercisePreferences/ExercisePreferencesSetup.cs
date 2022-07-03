@@ -158,9 +158,12 @@ public class ExercisePreferencesSetup : MonoBehaviour
     // HORZIONTAL and VERTICAL exercises: This is called on ExerciseManager and needs the State.exercise to be set
     // GRID exercise: This is called on ExerciseManager3 OR GridPaternManager when we click a grid button
     public void SavePreferencesToFile(){
+        Debug.Log("Preferences! grid manager:" + gridManager);
+        // Create the ExercisePreferences File
+        string scene = SceneManager.GetActiveScene().name;
 
         // It means that, despite the exercise started and was runed, the user never edited the path or target
-        if(preferencesChanged == false){
+        if((scene == "Exercise1Scene" || scene == "Exercise2Scene") && preferencesChanged == false){
             return;
         }
         // Otherwise we made changes and will now save them
@@ -174,7 +177,6 @@ public class ExercisePreferencesSetup : MonoBehaviour
         }
 
         // Create the ExercisePreferences File
-        string scene = SceneManager.GetActiveScene().name;
         String filename = scene;
         String filepath = folderPath + filename + ".txt";
         Debug.Log("We will save preferences here:"  + filepath);
@@ -223,6 +225,7 @@ public class ExercisePreferencesSetup : MonoBehaviour
                 stream.Close();
             }
         }
+        // GRID scene - save the gridPatern
         else if(scene == "Exercise0Scene"){
             using (var stream = new FileStream(filepath, FileMode.CreateNew, FileAccess.Write, FileShare.Write))
             using (var writer = new StreamWriter(stream))

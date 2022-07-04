@@ -23,19 +23,34 @@ public class GridPaternManager : MonoBehaviour
     public BodyScreenController bodyController; // to restart
     public ExercisePreferencesSetup exercisePreferences; // to restart
 
+    // returns the id of the current target (any number 0 to 11)
     public int GetCurrentTargetID(){
-        // returns the id of the current target (any number 0 to 11)
-        if(targetHitCounter >= chosenPatern.Length) return chosenPatern[chosenPatern.Length - 1];
+        // in the end of the exercise we would get an error
+        if(targetHitCounter >= chosenPatern.Length) 
+            return chosenPatern[chosenPatern.Length - 1];
+
         return chosenPatern[targetHitCounter];
+    }
+
+    public int GetNextTargetID(){
+        // in the end of the exercise we would get an error
+        if(targetHitCounter + 1 >= chosenPatern.Length) 
+            return chosenPatern[chosenPatern.Length - 1];
+
+        return chosenPatern[targetHitCounter + 1];
     }
 
     public int GetTargetHitCounter(){
         // returns the indicator of progress 
         return targetHitCounter;
     }
-
+    
     public void IncrementTargetHitCounter(){
         targetHitCounter ++;
+    }
+
+    public void DecreaseTargetHitCounter(){
+        targetHitCounter --;
     }
 
     // used to reset the counter between repetitions of the same serie
@@ -70,7 +85,8 @@ public class GridPaternManager : MonoBehaviour
         // define the chosen patern name
         chosenPaternName = paterName;
 
-        if(State.isTherapyOnGoing){
+        Debug.Log("bodyController.isEditingOnStart)" + bodyController.isEditingOnStart);
+        if(!bodyController.isEditingOnStart){
             StartCoroutine(SaveAndRestart());
         }
     }

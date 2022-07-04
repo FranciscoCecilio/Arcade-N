@@ -56,6 +56,11 @@ public class ExercisePreferencesSetup : MonoBehaviour
                     line = reader.ReadLine();
                 }
             }
+            reader.Close();
+        }
+        else{
+            // by default if the user didnt chose any patern, we use spiralPatern
+            gridManager.SetChosenPatern("spiralPatern");
         }
     }
 

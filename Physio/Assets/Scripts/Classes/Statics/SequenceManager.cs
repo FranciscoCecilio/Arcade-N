@@ -256,8 +256,8 @@ public static class SequenceManager
         }
         // set the variable percePerRepetition
         percPerRepetition = (100f / (float)totalRepetitions) * 0.01f;
-        // here we want to set in which percentages we need to unlock images from the chapter
-
+        Debug.Log("numberReps: " + totalRepetitions);
+        Debug.Log("percPerRep: " + percPerRepetition);
     }
 
     public static void nextSequence()

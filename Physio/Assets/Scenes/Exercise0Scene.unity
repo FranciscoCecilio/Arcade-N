@@ -666,7 +666,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1872076104}
         m_TargetAssemblyTypeName: BodyScreenController, Assembly-CSharp
-        m_MethodName: PauseTherapy
+        m_MethodName: Quit
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6418,18 +6418,6 @@ MonoBehaviour:
       - m_Target: {fileID: 1872076104}
         m_TargetAssemblyTypeName: BodyScreenController, Assembly-CSharp
         m_MethodName: UnPauseTherapy
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: DragEditionManager, Assembly-CSharp
-        m_MethodName: LockEdition
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -16633,7 +16621,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1872076104}
         m_TargetAssemblyTypeName: BodyScreenController, Assembly-CSharp
-        m_MethodName: PauseTherapy
+        m_MethodName: Restart
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -17591,18 +17579,6 @@ MonoBehaviour:
       - m_Target: {fileID: 1872076104}
         m_TargetAssemblyTypeName: BodyScreenController, Assembly-CSharp
         m_MethodName: UnPauseTherapy
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: DragEditionManager, Assembly-CSharp
-        m_MethodName: LockEdition
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -38151,6 +38127,7 @@ GameObject:
   - component: {fileID: 1857613800}
   - component: {fileID: 1857613799}
   - component: {fileID: 1857613798}
+  - component: {fileID: 1857613801}
   m_Layer: 8
   m_Name: Dark BG
   m_TagString: Untagged
@@ -38206,7 +38183,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.34191883, g: 0.5275635, b: 0.5377358, a: 0.29803923}
+  m_Color: {r: 0.4433962, g: 0.4433962, b: 0.4433962, a: 0.29803923}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -38231,6 +38208,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1857613796}
   m_CullTransparentMesh: 1
+--- !u!225 &1857613801
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1857613796}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1001 &1859218156
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -38948,6 +38937,7 @@ MonoBehaviour:
   quitButton: {fileID: 1437423264}
   restartButton: {fileID: 1871212422}
   nextButton: {fileID: 1843444074}
+  isEditingOnStart: 0
 --- !u!114 &1872076105
 MonoBehaviour:
   m_ObjectHideFlags: 0

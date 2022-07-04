@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6020491582646027026
 MonoBehaviour:
@@ -44,7 +44,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0db5d22dd091d394f88735fd2bcd057c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sounds: []
+  sounds:
+  - name: bad1
+    clip: {fileID: 8300000, guid: 25a70224541a61e43877834f74d2ec81, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    web_url_source: 
+  - name: bye1
+    clip: {fileID: 8300000, guid: 07327c3d190f27c448ff1c6c30a6a7c9, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    web_url_source: 
+  - name: 
+    clip: {fileID: 0}
+    volume: 0
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+    web_url_source: 
+  - name: 
+    clip: {fileID: 0}
+    volume: 0
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+    web_url_source: 
   goodSoundsNames:
   - good1
   - good2

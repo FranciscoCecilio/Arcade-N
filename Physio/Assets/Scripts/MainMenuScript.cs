@@ -140,7 +140,6 @@ public class MainMenuScript : MonoBehaviour {
     }
     IEnumerator previousScreenAndBye(){
         SessionInfo.saveUserProgress();
-        soundManager.PlayOneShot("button_click1");
         float clipLenght = voiceAssistant.PlayRandomBye();
         yield return new WaitForSeconds(clipLenght);
         SceneManager.LoadScene("LoginMenu2");

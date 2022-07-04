@@ -147,7 +147,8 @@ public class VoiceAssistant : MonoBehaviour
         // Play one of the "bye" sounds randomly
         int index = UnityEngine.Random.Range (0, byeSoundsNames.Length);
         string chosenSound  = byeSoundsNames[index];
-        return PlayVoiceLine(chosenSound);
+        //return PlayVoiceLine(chosenSound);
+        return PlayVoiceLine("bye1");
     }
 
     public float PlayRandomEndOfSession(){

@@ -193,15 +193,29 @@ public class ExerciseManager3 : MonoBehaviour {
         
         if (targetsArray.Length == 0)
             return;
-        if(State.currentTarget < 0 || State.currentTarget > targetsArray.Length)
-            return;
+        /*if(State.currentTarget < 0 || State.currentTarget > targetsArray.Length)
+            return;*/
 
         // define whats the correct target
-        int currentTargetIndex = gridManager.GetCurrentTargetID();
-        if(currentTargetIndex >= targetsArray.Length) return;
+        int currentTargetID = gridManager.GetCurrentTargetID();
+        if(gridManager.GetTargetHitCounter() >= targetsArray.Length) return;
 
-        // State.currentTarget should be decided in Update randomly from the remaining targets
-        Renderer renderer = targetsArray[currentTargetIndex].GetComponent<Renderer>();
+        // color the next-next target
+        if(gridManager.GetTargetHitCounter() + 1 < targetsArray.Length) 
+        {
+            int nextTargetID = gridManager.GetNextTargetID();
+
+            Renderer renderer2 = targetsArray[nextTargetID].GetComponent<Renderer>();
+
+            Color32 color2 = new Color(0.53725f, 0.81176f, 0.94118f) ;
+
+            renderer2.material.color = color2;
+
+
+        }
+
+        // blink the currentTarget
+        Renderer renderer = targetsArray[currentTargetID].GetComponent<Renderer>();
 
         float delta;
 
@@ -218,12 +232,15 @@ public class ExerciseManager3 : MonoBehaviour {
         else {
             delta = -0.1f;
         }
-
         Color color = renderer.material.color;
+        if(color == new Color(0.53725f, 0.81176f, 0.94118f)) color = new Color (0,1,0, 1);
+        //Color color = new Color(renderer.material.color.r,1,renderer.material.color.b,renderer.material.color.a);
         color.r += delta;
         color.b += delta;
 
         renderer.material.color = color;
+
+        
     }
 
     private IEnumerator showExerciseFinishedMessage()

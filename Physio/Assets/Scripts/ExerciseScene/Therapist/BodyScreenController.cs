@@ -29,11 +29,14 @@ public class BodyScreenController : MonoBehaviour {
     public GameObject restartButton;
     public GameObject nextButton;
 
-    bool isEditingOnStart;
+    [HideInInspector]
+    public bool isEditingOnStart = true;
 
+    void Awake(){
+        isEditingOnStart = true; //important that this is set to true on Awake
+    }
     void Start()
     {
-        isEditingOnStart = true;
         // Enable the correct music button according the settings (TODO: Do the same for the voice assistant)
         if(SessionInfo.isMusicOn()){
             musicOnButton.SetActive(true);
@@ -152,6 +155,7 @@ public class BodyScreenController : MonoBehaviour {
 
     public void Restart()
     {
+        Debug.Log("Will restart");
         State.resetState();
         State.exercise.restart();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);

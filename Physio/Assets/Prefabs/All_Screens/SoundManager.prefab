@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7288278027476380820
 MonoBehaviour:
@@ -47,7 +47,7 @@ MonoBehaviour:
   sounds:
   - name: swipesy cakewalk
     clip: {fileID: 8300000, guid: 9a041dbe054c93b439c13cbf4353dbdd, type: 3}
-    volume: 0.09
+    volume: 0.05
     pitch: 1
     loop: 1
     source: {fileID: 0}
@@ -89,7 +89,7 @@ MonoBehaviour:
     web_url_source: 
   - name: Sunny Sunday
     clip: {fileID: 8300000, guid: b3d845a4a9ba81f41abe8f209ccf5fc8, type: 3}
-    volume: 0.09
+    volume: 0.05
     pitch: 1
     loop: 1
     source: {fileID: 0}

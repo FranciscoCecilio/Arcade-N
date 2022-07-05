@@ -1,0 +1,7 @@
+timestamp=20220705T114915
+totalDuration=00:06:15 horas
+name=3
+series=1
+restDuration=60
+exe=0=Grelha=Exercise0Scene=right=1=60=60
+performance=1

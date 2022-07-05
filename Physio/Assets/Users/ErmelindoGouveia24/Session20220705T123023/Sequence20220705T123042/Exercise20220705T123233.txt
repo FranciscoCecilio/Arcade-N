@@ -1,0 +1,16 @@
+timestamp=20220705T123233
+name=Horizontal
+arm=right
+nrReps=2
+correctReps=2
+tries=3
+outOfPath=1
+duration=60
+restTime=60
+avgTime=
+totalTime=00:13 min
+regShouldComp=False
+regSpineComp=False
+leftShoulderComp=0
+rightShoulderComp=0
+spineComp=0

@@ -1,0 +1,16 @@
+timestamp=20220705T115525
+name=Grelha
+arm=right
+nrReps=1
+correctReps=1
+tries=1
+outOfPath=0
+duration=60
+restTime=60
+avgTime=
+totalTime=00:04 min
+regShouldComp=False
+regSpineComp=False
+leftShoulderComp=0
+rightShoulderComp=0
+spineComp=0

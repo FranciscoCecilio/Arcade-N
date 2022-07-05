@@ -1,0 +1,7 @@
+Username=MiguelCeclio60
+Name=Miguel Cecílio
+Age=54
+Gender=masculino
+XP=300
+MusicOn=True
+VoiceOn=True

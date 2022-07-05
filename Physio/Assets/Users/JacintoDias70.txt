@@ -1,0 +1,7 @@
+Username=JacintoDias70
+Name=Jacinto Dias
+Age=76
+Gender=masculino
+XP=100
+MusicOn=True
+VoiceOn=True

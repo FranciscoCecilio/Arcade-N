@@ -68,11 +68,12 @@ public class MainMenuScript : MonoBehaviour {
         
         if(sysHour > 12){
             greetingsText = "BOA TARDE, ";
-            voiceAssistant.PlayVoiceLine("boa_tarde");
+            voiceAssistant.PlayRandomGreet(sysHour);
         }
         else{
             greetingsText = "BOM DIA, ";
-            voiceAssistant.PlayVoiceLine("bom_dia");
+            Debug.Log("BOOOOOM DIAAA");
+            voiceAssistant.PlayRandomGreet(sysHour);
         }
         // place image and text
         SetMainPage();

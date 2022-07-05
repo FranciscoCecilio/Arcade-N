@@ -15,7 +15,9 @@ public class VoiceAssistant : MonoBehaviour
 
     public string[] goodSoundsNames; // played when the user successfully hit a target during Exercise
     public string[] badSoundsNames; // played when the user goes out of path during Exercise
+    public string[] encSoundsNames; // played when the user goes out of path during Exercise
     public string[] restSoundsNames; // played when the user is waiting to start the exercise
+    public string[] greetingSoundsNames; // played when we login
     public string[] byeSoundsNames; // played when we logout
     public string[] endOfSessionSoundsNames; // played on the session rewards scene
 
@@ -26,6 +28,7 @@ public class VoiceAssistant : MonoBehaviour
     public GameObject VoiceLine;
     public TMP_Text voiceLineText;
 
+    bool hasStarted = false;
 
     public Sound GetSound(string name){
         Sound s =  Array.Find(sounds, sound => sound.name == name);
@@ -43,20 +46,22 @@ public class VoiceAssistant : MonoBehaviour
             s.source.loop = s.loop;
             // Add audiosource to list
             allSources.Add(s.source);
-
         }
     }
 
     public void Start(){
         _voiceIsOn = SessionInfo.isVoiceOn();
+        hasStarted = true;
     }
 
     // returns the lenght of the clip being played or 5 seconds by default
     public float PlayVoiceLine(string name){
-        
-        if(!_voiceIsOn){
+
+        if(!hasStarted)
+             _voiceIsOn = SessionInfo.isVoiceOn(); // in the mainmenu we play greeting before this script run Start
+
+        if(!_voiceIsOn)
             return 5f;
-        }
         
         Sound s = GetSound(name);
         if( s == null){
@@ -133,6 +138,9 @@ public class VoiceAssistant : MonoBehaviour
         // Play one of the "out_of_path" sounds randomly
         int index = UnityEngine.Random.Range (0, badSoundsNames.Length);
         string chosenSound  = badSoundsNames[index];
+        // bad3 = "Desviado" ; bad4 = "Desviada"
+        if(chosenSound.Equals("bad3") && SessionInfo.getGender().Equals("feminino")) chosenSound = "bad4";
+        else if(chosenSound.Equals("bad4") && SessionInfo.getGender().Equals("masculino")) chosenSound = "bad3";
         return PlayVoiceLine(chosenSound);
     }
 
@@ -140,6 +148,20 @@ public class VoiceAssistant : MonoBehaviour
         // Play one of the "take a rest" sounds randomly
         int index = UnityEngine.Random.Range (0, restSoundsNames.Length);
         string chosenSound  = restSoundsNames[index];
+        return PlayVoiceLine(chosenSound);
+    }
+
+    public float PlayRandomGreet(int sysHour){
+        // Play one of the "Bom dia" sounds randomly
+        int index = UnityEngine.Random.Range (0, greetingSoundsNames.Length);
+        string chosenSound  = greetingSoundsNames[index];
+        Debug.Log(chosenSound);
+        // greet1 = "Bom dia" ; greet2 = "Boa tarde" ; greet3 = "Ola" ; greet 4 = "Bem vindo" ; greet5 = "Bem vinda"
+        if(chosenSound.Equals("greet1") && sysHour >= 12) chosenSound = "greet2";
+        else if(chosenSound.Equals("greet2") && sysHour < 12) chosenSound = "greet1";
+        else if(chosenSound.Equals("greet4") && SessionInfo.getGender().Equals("feminino")) chosenSound = "greet5";
+        else if(chosenSound.Equals("greet5") && SessionInfo.getGender().Equals("masculino")) chosenSound = "greet4";
+
         return PlayVoiceLine(chosenSound);
     }
 

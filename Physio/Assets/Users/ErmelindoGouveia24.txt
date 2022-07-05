@@ -1,0 +1,7 @@
+Username=ErmelindoGouveia24
+Name=Ermelindo Gouveia
+Age=75
+Gender=masculino
+XP=300
+MusicOn=True
+VoiceOn=True

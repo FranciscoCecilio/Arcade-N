@@ -52,6 +52,27 @@ MonoBehaviour:
     loop: 0
     source: {fileID: 0}
     web_url_source: 
+  - name: bad2
+    clip: {fileID: 8300000, guid: 70678b436e00ca74c83bb57ceef68324, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    web_url_source: 
+  - name: bad3
+    clip: {fileID: 8300000, guid: ec0ecbee87d764f44867fc1673dfff06, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    web_url_source: 
+  - name: bad4
+    clip: {fileID: 8300000, guid: 4c95b977a53079b4c94038572e22d384, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    web_url_source: 
   - name: bye1
     clip: {fileID: 8300000, guid: 07327c3d190f27c448ff1c6c30a6a7c9, type: 3}
     volume: 1
@@ -59,17 +80,206 @@ MonoBehaviour:
     loop: 0
     source: {fileID: 0}
     web_url_source: 
-  - name: 
-    clip: {fileID: 0}
-    volume: 0
-    pitch: 0
+  - name: bye2
+    clip: {fileID: 8300000, guid: b14e66edab329194eb9d58d7ddc57965, type: 3}
+    volume: 1
+    pitch: 1
     loop: 0
     source: {fileID: 0}
     web_url_source: 
-  - name: 
-    clip: {fileID: 0}
-    volume: 0
-    pitch: 0
+  - name: greet1
+    clip: {fileID: 8300000, guid: 22dd81651a26a3f4db105bdc7facd981, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    web_url_source: 
+  - name: greet2
+    clip: {fileID: 8300000, guid: abf9b181c29668446a6ff85056edc3c9, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    web_url_source: 
+  - name: greet3
+    clip: {fileID: 8300000, guid: 7f02ad8ddc2abca4ebbd229bc93a2837, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    web_url_source: 
+  - name: greet4
+    clip: {fileID: 8300000, guid: 3f3afe8c1dbdfc54e969f9f42f51ebff, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    web_url_source: 
+  - name: greet5
+    clip: {fileID: 8300000, guid: f600dba0af220dd42ad110fe55cc41ba, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    web_url_source: 
+  - name: enc1
+    clip: {fileID: 8300000, guid: c59800c72d7ef6e43816807fee55bcd0, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    web_url_source: 
+  - name: enc2
+    clip: {fileID: 8300000, guid: 9e13488f29ffa0849a863114fad98525, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    web_url_source: 
+  - name: rest1
+    clip: {fileID: 8300000, guid: 51f3a2f6f4bd12848b1b918b9327d1b9, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    web_url_source: 
+  - name: rest2
+    clip: {fileID: 8300000, guid: 07943b6c2901dcf49bea40f2b21712a9, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    web_url_source: 
+  - name: rest3
+    clip: {fileID: 8300000, guid: 26318dec64966de4f90f7819b94ca272, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    web_url_source: 
+  - name: rest4
+    clip: {fileID: 8300000, guid: a31b548e49808f647896b7d5bbd1118c, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    web_url_source: 
+  - name: result1
+    clip: {fileID: 8300000, guid: 091b55889da936f43a29910b9c34094b, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    web_url_source: 
+  - name: result2
+    clip: {fileID: 8300000, guid: 85b3cf7593f00b148aed8d4093ea3b1a, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    web_url_source: 
+  - name: result3
+    clip: {fileID: 8300000, guid: dd4f3e361a5408846a2942cf91ca525e, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    web_url_source: 
+  - name: good1
+    clip: {fileID: 8300000, guid: c91933fa21ed1934c98c4bf0a7cbcb72, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    web_url_source: 
+  - name: good2
+    clip: {fileID: 8300000, guid: 2682cac67b1023a41b5db7d77fe531db, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    web_url_source: 
+  - name: good3
+    clip: {fileID: 8300000, guid: b3d248cccd3878c4a97e836bbf8ad0b4, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    web_url_source: 
+  - name: good4
+    clip: {fileID: 8300000, guid: 78ea348ca936ba3488e96267d8a7cedb, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    web_url_source: 
+  - name: good5
+    clip: {fileID: 8300000, guid: 95d88debb3394b3408b59542d830bdc4, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    web_url_source: 
+  - name: cap1img1
+    clip: {fileID: 8300000, guid: dee312ca212661f48ae46d90c824ff95, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    web_url_source: 
+  - name: cap1img2
+    clip: {fileID: 8300000, guid: 3dc86a1218ad1634294429574afba388, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    web_url_source: 
+  - name: cap1img3
+    clip: {fileID: 8300000, guid: 005d486a9d0467348bbe57a2b4c42a1c, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    web_url_source: 
+  - name: cap1img4
+    clip: {fileID: 8300000, guid: bf9add3de1da85141808431e536a39ff, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    web_url_source: 
+  - name: cap1img5
+    clip: {fileID: 8300000, guid: bcfb52693ed815841959d3a97a0e6cb6, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    web_url_source: 
+  - name: cap2img1
+    clip: {fileID: 8300000, guid: dee312ca212661f48ae46d90c824ff95, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    web_url_source: 
+  - name: cap2img2
+    clip: {fileID: 8300000, guid: 5497b5edc4bdfea468ccf2e782354efe, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    web_url_source: 
+  - name: cap2img3
+    clip: {fileID: 8300000, guid: daf9433b5e9eb4745b2d4e75c30565b2, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    web_url_source: 
+  - name: cap2img4
+    clip: {fileID: 8300000, guid: d8dee8e5cffdab54b8edb900fa538314, type: 3}
+    volume: 1
+    pitch: 1
     loop: 0
     source: {fileID: 0}
     web_url_source: 
@@ -79,18 +289,28 @@ MonoBehaviour:
   - good3
   - good4
   - good5
+  - enc1
+  - enc2
   badSoundsNames:
   - bad1
   - bad2
   - bad3
   - bad4
+  encSoundsNames: []
   restSoundsNames:
   - rest1
   - rest2
+  - rest3
+  - rest4
+  greetingSoundsNames:
+  - greet1
+  - greet2
+  - greet3
+  - greet4
+  - greet5
   byeSoundsNames:
   - bye1
   - bye2
-  - bye3
   endOfSessionSoundsNames:
   - result1
   - result2

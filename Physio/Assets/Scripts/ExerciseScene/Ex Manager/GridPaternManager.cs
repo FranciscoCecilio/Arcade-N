@@ -57,7 +57,6 @@ public class GridPaternManager : MonoBehaviour
     public void SetTargetHitCounter(int count){
         targetHitCounter = count;
     } 
-
     // ----------------------------------- when we are Editing we have a button for every patern. OR at START by ExercisePreferences script
     public void SetChosenPatern(string paterName){
         // Clear the highlighted buttons

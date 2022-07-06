@@ -229,7 +229,7 @@ public class ExerciseManager : MonoBehaviour {
                         hasRegisteredOutOfPath = true;
                         if(soundManager == null) FindSoundManager();
                         soundManager.PlayOneShot("out_of_path");
-                        voiceAssistant.PlayRandomBad();
+                        if(UnityEngine.Random.Range(0f,1f) >= 0.5f) voiceAssistant.PlayRandomBad();
                     }
                     State.compensationInCurrentRep = true;
                 }

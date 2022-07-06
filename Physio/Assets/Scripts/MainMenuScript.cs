@@ -66,7 +66,7 @@ public class MainMenuScript : MonoBehaviour {
         int sysHour = System.DateTime.Now.Hour; //gives you the current hour as an integer.
         string greetingsText;
         
-        if(sysHour > 12){
+        if(sysHour >= 12){
             greetingsText = "BOA TARDE, ";
             voiceAssistant.PlayRandomGreet(sysHour);
         }

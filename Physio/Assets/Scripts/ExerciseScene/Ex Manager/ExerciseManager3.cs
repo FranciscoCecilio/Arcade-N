@@ -128,7 +128,9 @@ public class ExerciseManager3 : MonoBehaviour {
                             // Increment the number of repetitions ( a repetition means all targets hit)
                             State.exercise.incTries();
                             State.exercise.incCorrectReps(); // we cannot have incorrect reps
-                            
+                            // updates the session progression 
+                            narrativeScript.IncNarrativePerc();
+
                             // this is not used anymore: Calculate the average time per Repetition
                             /* 
                             int minutes = (State.sessionTimeInt / State.exercise.getCorrectReps()) / 60;
@@ -164,7 +166,7 @@ public class ExerciseManager3 : MonoBehaviour {
                                 for (int i=0; i < targetHits.Length; i++)
                                 {
                                     targetHits[i] = false;
-                                    targetsArray[i].GetComponent<Renderer>().material.color = new Color(0, 1, 0);
+                                    targetsArray[i].GetComponent<Renderer>().material.color = new Color(1, 1, 1);
                                 }
                                 // TODO show some animation! Doing a grid repetition is hard, even if there are more to come
                                 // Play Voice line
@@ -263,4 +265,5 @@ public class ExerciseManager3 : MonoBehaviour {
         // Play next Exercise
         SequenceManager.nextExercise();
     }
+
 }

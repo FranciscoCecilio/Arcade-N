@@ -18,8 +18,11 @@ public class BarCheckpointAnimation : MonoBehaviour
     [Header("Narrative")]
     public Image chapterImage; 
 
+    bool hasAnimatedOnce = false;
+
     public void StartAnimationLoop(){
-        
+        if(hasAnimatedOnce) return;
+        hasAnimatedOnce = true;
         // Play joyfull unlocking sound
         SoundManager soundManager = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>();
         // Find SoundManager if its null

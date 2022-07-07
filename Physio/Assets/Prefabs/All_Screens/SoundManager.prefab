@@ -47,7 +47,7 @@ MonoBehaviour:
   sounds:
   - name: swipesy cakewalk
     clip: {fileID: 8300000, guid: 9a041dbe054c93b439c13cbf4353dbdd, type: 3}
-    volume: 0.05
+    volume: 0.04
     pitch: 1
     loop: 1
     source: {fileID: 0}
@@ -89,7 +89,7 @@ MonoBehaviour:
     web_url_source: 
   - name: Sunny Sunday
     clip: {fileID: 8300000, guid: b3d845a4a9ba81f41abe8f209ccf5fc8, type: 3}
-    volume: 0.05
+    volume: 0.008
     pitch: 1
     loop: 1
     source: {fileID: 0}

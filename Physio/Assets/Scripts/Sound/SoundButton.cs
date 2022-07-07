@@ -96,6 +96,10 @@ public class SoundButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     // called by clicking the button 
     public void OnClick(){
+        // Show and Hide buttons
+        otherButton.SetActive(true);
+        this.gameObject.SetActive(false);
+        
         // Find SoundManager if its null
         if(soundManager == null){
             GameObject soundManagerObj = GameObject.FindGameObjectWithTag("SoundManager");
@@ -143,8 +147,6 @@ public class SoundButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         // Play click Sound
         if(soundManager) soundManager.PlayOneShot("button_click2");
         
-        // Show and Hide buttons
-        otherButton.SetActive(true);
-        this.gameObject.SetActive(false);
+        
     }
 }

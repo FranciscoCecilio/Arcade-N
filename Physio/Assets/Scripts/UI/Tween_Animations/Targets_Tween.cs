@@ -29,7 +29,9 @@ public class Targets_Tween : MonoBehaviour
     // sometimes the ball would be little... this is a prevention method
     public IEnumerator SetInitialSize(){
         yield return new WaitForSeconds(2);
-        gameObject.transform.localScale = initialScale;
+        //gameObject.transform.localScale = initialScale; ITS NOT WORKING
+        gameObject.transform.localScale = new Vector3(35,35,35);
+
     }
 
 

@@ -187,7 +187,7 @@ public static class SessionInfo
                 Debug.Log( "Ficheiro de "+ "\"" + _username + "\" encontrado! Apagando..." );
             }
             catch(IOException ioex){
-                afterDeleteText.text = "ERRO ao apagar o ficheiro com nome: \"" + _username + ".txt\"";
+                afterDeleteText.text += "\nERRO ao apagar o ficheiro com nome: \"" + _username + ".txt\"";
                 Debug.Log( ioex.Message);
                 return;
             }

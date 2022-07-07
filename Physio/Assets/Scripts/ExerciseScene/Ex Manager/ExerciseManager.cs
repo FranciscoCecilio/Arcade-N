@@ -138,7 +138,7 @@ public class ExerciseManager : MonoBehaviour {
                 if (hit.collider.tag == "ExerciseCollider") { // is inside of the exercise area
                     if (State.hasStartedExercise) {
                         foreach (Transform exerciseBox in exerciseBoxGroup.transform) {
-                            exerciseBox.gameObject.GetComponent<Renderer>().material.color = new Color(0.2f, 0.7f, 0.2f, 0.5f); // greenish
+                            exerciseBox.gameObject.GetComponent<Renderer>().material.color = new Color(0.2f, 0.7f, 0.2f, 0.3f); // greenish
                         }
                     }
                 }
@@ -168,8 +168,7 @@ public class ExerciseManager : MonoBehaviour {
                             State.exercise.incCorrectReps();
                             // updates the session progression 
                             narrativeScript.IncNarrativePerc();
-                            // play good sound + text
-                            if(UnityEngine.Random.Range(0f,1f) >= 0.5f) voiceAssistant.PlayRandomGood();
+                            
 
                             reversePath = false;
 
@@ -202,6 +201,10 @@ public class ExerciseManager : MonoBehaviour {
                                 StartCoroutine(showExerciseFinishedMessage());
                                 
                             }
+                            else{
+                                // play good sound + text
+                                if(UnityEngine.Random.Range(0f,1f) >= 0.5f) voiceAssistant.PlayRandomGood();
+                            }
                         }
 
                         else if (!reversePath) {
@@ -221,7 +224,7 @@ public class ExerciseManager : MonoBehaviour {
                 if (State.hasStartedExercise) {
                     foreach (Transform exerciseBox in exerciseBoxGroup.transform) {
                         //make exercise box red
-                        exerciseBox.gameObject.GetComponent<Renderer>().material.color = new Color(0.7f, 0.2f, 0.2f, 0.5f); // redish
+                        exerciseBox.gameObject.GetComponent<Renderer>().material.color = new Color(0.7f, 0.2f, 0.2f, 0.3f); // redish
                     }
                     if (!hasRegisteredOutOfPath) {
                         State.exercise.incOutOfPath() ;
@@ -308,6 +311,8 @@ public class ExerciseManager : MonoBehaviour {
         rightExerciseBox.SetActive(false);
         // Show the message for 5 secs
         exercisedFinishedMsg.SetActive(true);
+        // ALWAYS play good sound + text
+        voiceAssistant.PlayRandomGood();
         yield return new WaitForSeconds(5);
         exercisedFinishedMsg.SetActive(false);
 

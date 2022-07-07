@@ -99,6 +99,8 @@ public class ChapterManager : MonoBehaviour
         // or from the Main Menu
         else{
             // Show the entire last chapter
+            currentChapter =  SessionInfo.getXP() / 100 - 1;
+            if(currentChapter < 1) currentChapter = 1;
             StartCoroutine(ShowEntireChapter(currentChapter));
         }
     }

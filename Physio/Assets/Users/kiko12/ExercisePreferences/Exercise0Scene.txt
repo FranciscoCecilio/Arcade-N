@@ -1,2 +1,2 @@
-arm=right
-gridPatern=horizontalSPatern
+arm=left
+gridPatern=spiralPatern

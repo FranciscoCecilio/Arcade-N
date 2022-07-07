@@ -130,7 +130,8 @@ public class ExerciseManager3 : MonoBehaviour {
                             State.exercise.incCorrectReps(); // we cannot have incorrect reps
                             // updates the session progression 
                             narrativeScript.IncNarrativePerc();
-
+                            // ALWAYS play good sound + text
+                            voiceAssistant.PlayRandomGood();
                             // this is not used anymore: Calculate the average time per Repetition
                             /* 
                             int minutes = (State.sessionTimeInt / State.exercise.getCorrectReps()) / 60;
@@ -148,8 +149,6 @@ public class ExerciseManager3 : MonoBehaviour {
                             // Finished the exercise > Play Animation > Play next exercise
                             if (State.exercise.getCorrectReps() >= State.exercise.getNReps())
                             { // done all the needed reps: finish Exercise
-                                // TODO Save the Exercise Preferences (grid: save the mode)
-                                //preferencesScript.SaveEverything();
                                 // Reset State stuff
                                 State.exercise.setTotalTime(State.sessionTimeInt);
                                 State.exercise.setCompleted(true);
@@ -169,8 +168,7 @@ public class ExerciseManager3 : MonoBehaviour {
                                     targetsArray[i].GetComponent<Renderer>().material.color = new Color(1, 1, 1);
                                 }
                                 // TODO show some animation! Doing a grid repetition is hard, even if there are more to come
-                                // Play Voice line
-                                voiceAssistant.PlayRandomGood();
+                                
                             }
                         }
                         // FC - if all targets are NOT hit, we have to highlight the next one!
@@ -256,8 +254,6 @@ public class ExerciseManager3 : MonoBehaviour {
         preferencesScript.SavePreferencesToFile();
         yield return new WaitForSeconds(5);
         exercisedFinishedMsg.SetActive(false);
-
-        
 
         // Start calculating resting time
         SequenceManager.StartRestCountDown(TimeSpan.FromSeconds(SequenceManager.sequence.getRestDuration()));

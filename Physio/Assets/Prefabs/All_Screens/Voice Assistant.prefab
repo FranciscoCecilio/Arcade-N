@@ -89,35 +89,35 @@ MonoBehaviour:
     web_url_source: 
   - name: greet1
     clip: {fileID: 8300000, guid: 22dd81651a26a3f4db105bdc7facd981, type: 3}
-    volume: 1
+    volume: 0.8
     pitch: 1
     loop: 0
     source: {fileID: 0}
     web_url_source: 
   - name: greet2
     clip: {fileID: 8300000, guid: abf9b181c29668446a6ff85056edc3c9, type: 3}
-    volume: 1
+    volume: 0.8
     pitch: 1
     loop: 0
     source: {fileID: 0}
     web_url_source: 
   - name: greet3
     clip: {fileID: 8300000, guid: 7f02ad8ddc2abca4ebbd229bc93a2837, type: 3}
-    volume: 1
+    volume: 0.8
     pitch: 1
     loop: 0
     source: {fileID: 0}
     web_url_source: 
   - name: greet4
     clip: {fileID: 8300000, guid: 3f3afe8c1dbdfc54e969f9f42f51ebff, type: 3}
-    volume: 1
+    volume: 0.8
     pitch: 1
     loop: 0
     source: {fileID: 0}
     web_url_source: 
   - name: greet5
     clip: {fileID: 8300000, guid: f600dba0af220dd42ad110fe55cc41ba, type: 3}
-    volume: 1
+    volume: 0.8
     pitch: 1
     loop: 0
     source: {fileID: 0}

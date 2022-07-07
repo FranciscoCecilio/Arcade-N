@@ -2,6 +2,7 @@ Username=ErmelindoGouveia24
 Name=Ermelindo Gouveia
 Age=75
 Gender=masculino
+Nr_Utente=
 XP=300
 MusicOn=True
 VoiceOn=True

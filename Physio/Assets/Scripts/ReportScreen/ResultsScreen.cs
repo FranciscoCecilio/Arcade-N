@@ -81,6 +81,9 @@ public class ResultsScreen : MonoBehaviour
     public GameObject sessionResultPrefab;
     public Transform specificSessionListContent;
 
+    public TMP_Text errorLog;
+
+
     // we want to populate the 
     void Start()
     {
@@ -106,20 +109,29 @@ public class ResultsScreen : MonoBehaviour
         int sessionNumber = 0;
         if (Directory.Exists(folderpath))
         {
+            errorLog.gameObject.SetActive(false);
             string[] folders = Directory.GetDirectories(folderpath);
             // For each Session folder we instantiate a SessionResult Button
             int foldersLength = folders.Length; // we will delete stuff so its important to keep the initial size
+            errorLog.text += "\n foldersLenght:" + foldersLength;
             for (int i = foldersLength - 1; i > -1; i--) 
             {
+                errorLog.text += "\n i:" + i + " + folder[i] " + folders[i] ;
+                
                 // check if its an empty session folder -> delete && continue
+                /* EDITOR ONLY - this doesn't work on a BUILD
                 if(Directory.GetFiles(folders[i]).Length == 0){
                     Directory.Delete(folders[i]);
-                    File.Delete(folders[i]+".meta");
+                    if(File.Exists(folders[i]+".meta")) 
+                        File.Delete(folders[i]+".meta");
                     continue;
                 }
+                 EDITOR ONLY
+                 */
 
                 // We found the exercise folder -> continue
                 string folderName = folders[i].Substring(folderpath.Length+1);
+                errorLog.text += "\n folderName" + folderName;
                 if(folderName.Equals("ExercisePreferences")) continue;
 
                 // inc the session_number
@@ -134,7 +146,7 @@ public class ResultsScreen : MonoBehaviour
                 sessionTimespans.Add(result.GetTotalTimeSpan());
             }
             // clean any deleted files
-            RefreshEditorProjectWindow();
+            //RefreshEditorProjectWindow();
             // at the end, after creating one button for each session, we calculate total therapy time
             CalculateTherapyTime();
         }
@@ -172,6 +184,8 @@ public class ResultsScreen : MonoBehaviour
 
     // Generates a session button
     public SessionResult GenerateSessionResultButton(/*will receive session result info*/ int sessionNumber, string sessionDate, string sessionTS, string folderPath){
+        errorLog.text += "\n generates btn " + sessionTS;
+        
         //Instantiate prefab
         GameObject button = Instantiate(sessionResultPrefab) as GameObject;
         button.name = sessionTS;

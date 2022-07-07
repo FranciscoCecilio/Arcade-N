@@ -6,29 +6,29 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Exercise2Scene.unity
-    guid: 365f73d17a94482479eb0d41059b6e55
-  - enabled: 1
-    path: Assets/Scenes/SequenceMenu.unity
-    guid: ecc723e9171af6044a01f5ca47dd3aa3
-  - enabled: 1
     path: Assets/Scenes/LoginMenu2.unity
     guid: 694866dd67226604a89f562dc0985ae4
-  - enabled: 1
-    path: Assets/Scenes/MainMenu.unity
-    guid: edf6f8ec2df2fe34fbec5168daae180f
   - enabled: 1
     path: Assets/Scenes/RegisterProfile2.unity
     guid: 8c6f9a0283fe2064cafa75b3810eb918
   - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: edf6f8ec2df2fe34fbec5168daae180f
+  - enabled: 1
+    path: Assets/Scenes/SequenceMenu.unity
+    guid: ecc723e9171af6044a01f5ca47dd3aa3
+  - enabled: 1
     path: Assets/Scenes/Exercise0Scene.unity
     guid: 1540f1b5cca0ab24c909c3772d902d28
   - enabled: 1
-    path: Assets/Scenes/NarrativeMenu.unity
-    guid: 248e84b86e2beab4b9bab9c43266a9dd
-  - enabled: 1
     path: Assets/Scenes/Exercise1Scene.unity
     guid: dede136d6040dc04eb9373d4fb5cb290
+  - enabled: 1
+    path: Assets/Scenes/Exercise2Scene.unity
+    guid: 365f73d17a94482479eb0d41059b6e55
+  - enabled: 1
+    path: Assets/Scenes/NarrativeMenu.unity
+    guid: 248e84b86e2beab4b9bab9c43266a9dd
   - enabled: 1
     path: Assets/Scenes/ReportScreen.unity
     guid: 48da98c12f8ec3846b2eb18189aed2e3

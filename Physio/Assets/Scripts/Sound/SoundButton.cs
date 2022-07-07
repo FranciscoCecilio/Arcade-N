@@ -96,6 +96,16 @@ public class SoundButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     // called by clicking the button 
     public void OnClick(){
+        // Find SoundManager if its null
+        if(soundManager == null){
+            GameObject soundManagerObj = GameObject.FindGameObjectWithTag("SoundManager");
+            if(soundManagerObj == null){
+                Debug.LogError("ERROR: could not find a SoundManager in this scene!");
+            }
+            else{
+                soundManager = soundManagerObj.GetComponent<SoundManager>();
+            }
+        }
         // update SessionInfo and SoundManager
         if(isMusicButton){
             // Set sessionInfo variable
@@ -122,16 +132,6 @@ public class SoundButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         // Change settings for music button:
         // 1) SoundManager for music
         if(isMusicButton){
-            // Find SoundManager if its null
-            if(soundManager == null){
-                GameObject soundManagerObj = GameObject.FindGameObjectWithTag("SoundManager");
-                if(soundManagerObj == null){
-                    Debug.LogError("ERROR: could not find a SoundManager in this scene!");
-                }
-                else{
-                    soundManager = soundManagerObj.GetComponent<SoundManager>();
-                }
-            }
             soundManager.MusicSettingsChanged();
         }
 

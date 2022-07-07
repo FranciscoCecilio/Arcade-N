@@ -68,13 +68,12 @@ public class MainMenuScript : MonoBehaviour {
         
         if(sysHour >= 12){
             greetingsText = "BOA TARDE, ";
-            voiceAssistant.PlayRandomGreet(sysHour);
+            
         }
         else{
             greetingsText = "BOM DIA, ";
-            Debug.Log("BOOOOOM DIAAA");
-            voiceAssistant.PlayRandomGreet(sysHour);
         }
+        if(LastScene._lastSceneIndex < 3) voiceAssistant.PlayRandomGreet(sysHour); // play "Bom dia" if we came from login or register screens
         // place image and text
         SetMainPage();
 

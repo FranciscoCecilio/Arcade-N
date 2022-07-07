@@ -2373,7 +2373,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 161797243}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 647261dbac5fed542b98b9c8d9a0c9a1, type: 3}
   m_Name: 
@@ -2382,14 +2382,13 @@ MonoBehaviour:
   hasSecondaryCursor: 0
   avgTime: {fileID: 1038219311}
   lastrepTime: {fileID: 1324464307}
-  exerciseName: Front raise
-  leftExerciseBox: {fileID: 0}
-  rightExerciseBox: {fileID: 0}
+  preferencesScript: {fileID: 0}
   leftTargets: {fileID: 1431502981}
   rightTargets: {fileID: 322908693}
-  restartRepToggle: {fileID: 1295840516}
-  wellDoneMessage: {fileID: 1489179115}
-  pathSize: {fileID: 2112051999}
+  narrativeScript: {fileID: 0}
+  exercisedFinishedMsg: {fileID: 0}
+  gridManager: {fileID: 0}
+  voiceAssistant: {fileID: 0}
 --- !u!1001 &192574549
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7529,7 +7528,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 24.98999, y: 63.97998}
+  m_AnchoredPosition: {x: 24.98999, y: 63.97999}
   m_SizeDelta: {x: 25.874, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &541437812
@@ -11048,7 +11047,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 805197574}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a579d050a39cf4813ad1ec40d5455a6f, type: 3}
   m_Name: 
@@ -15493,7 +15492,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 23.289734, y: 107.47998}
+  m_AnchoredPosition: {x: 23.289734, y: 107.47999}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1147144745
@@ -20970,20 +20969,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7317337c1a4691b4aa4c50d6fa01f36e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  completed: {fileID: 744342307}
   correctRepetitionsPatient: {fileID: 229444231}
-  setTimePatient: {fileID: 630916737}
-  restTimePatient: {fileID: 706646864}
-  startCounterPatient: {fileID: 0}
-  sessionTimePatient: {fileID: 1865788958}
-  sessionTimeTherapist: {fileID: 0}
   correctRepetitionsTherapist: {fileID: 1774872442}
-  setTimeTherapist: {fileID: 1397376065}
-  restTimeTherapist: {fileID: 1848355065}
   triesTherapist: {fileID: 1280157542}
   totalReps: {fileID: 1707985808}
+  restTimeTherapist: {fileID: 0}
+  setTimeTherapist: {fileID: 1397376065}
+  setTimePatient: {fileID: 630916737}
+  restTimePatient: {fileID: 706646864}
   restPatient: {fileID: 1600134760}
   restTherapist: {fileID: 2030269545}
-  completed: {fileID: 744342307}
+  sessionTimePatient: {fileID: 1865788958}
+  sessionTimeTherapist: {fileID: 0}
+  startCounterPatient: {fileID: 0}
 --- !u!1 &1527231357
 GameObject:
   m_ObjectHideFlags: 0
@@ -27298,25 +27297,25 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1872076102}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5078676123e204346b7dbb0a5032cedb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  worldCamera: {fileID: 0}
+  timeVis: {fileID: 0}
+  fadeSpeedTest: 0
   startButton: {fileID: 1430617730}
-  startStuff: {fileID: 0}
+  exerciseEdition: {fileID: 0}
   pauseButton: {fileID: 0}
   unPauseButton: {fileID: 0}
-  pauseStuff: {fileID: 0}
+  pauseMessage: {fileID: 0}
+  musicOnButton: {fileID: 0}
+  musicOffButton: {fileID: 0}
   quitButton: {fileID: 1091582947}
   restartButton: {fileID: 1760175818}
   nextButton: {fileID: 1941109079}
-  patientCanvas: {fileID: 1526526314}
-  leaned: {fileID: 0}
-  shoulderLift: {fileID: 0}
-  outOfPath: {fileID: 0}
-  exerciseName: {fileID: 0}
-  worldCamera: {fileID: 0}
+  isEditingOnStart: 1
 --- !u!114 &1872076105
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27324,7 +27323,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1872076102}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 973b41c9bf3d72747b07991298b6665d, type: 3}
   m_Name: 
@@ -27339,10 +27338,8 @@ MonoBehaviour:
   restTime: {fileID: 1353597662}
   repTime: {fileID: 1345433938}
   last: {fileID: 1872915784}
-  success: {fileID: 1088222797}
-  succ: {fileID: 1027692702}
+  repetitionsVis: {fileID: 0}
   SuccSlider: {fileID: 1685680497}
-  previousSuccSlider: {fileID: 956561501}
   correctReps: {fileID: 0}
   totalReps: {fileID: 1707985808}
   settingsButton: {fileID: 365837901}

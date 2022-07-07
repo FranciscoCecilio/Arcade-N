@@ -1,0 +1,16 @@
+timestamp=20220707T121032
+name=grid1
+arm=left
+nrReps=3
+correctReps=3
+tries=4
+outOfPath=1
+duration=40
+restTime=20
+avgTime=
+totalTime=00:27 min
+regShouldComp=False
+regSpineComp=False
+leftShoulderComp=0
+rightShoulderComp=0
+spineComp=0

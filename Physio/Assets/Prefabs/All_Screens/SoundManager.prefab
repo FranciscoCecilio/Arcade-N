@@ -96,9 +96,9 @@ MonoBehaviour:
     web_url_source: 
   - name: end_of_session
     clip: {fileID: 8300000, guid: c2fe4b389ecafc747a40d4c2e07e4a65, type: 3}
-    volume: 0.05
+    volume: 0.2
     pitch: 1
-    loop: 1
+    loop: 0
     source: {fileID: 0}
     web_url_source: 
   - name: out_of_path

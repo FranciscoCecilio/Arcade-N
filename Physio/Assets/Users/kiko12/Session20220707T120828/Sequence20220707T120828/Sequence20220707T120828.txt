@@ -1,0 +1,7 @@
+timestamp=20220707T120828
+totalDuration=00:02:09 horas
+name=testSequence1
+series=1
+restDuration=20
+exe=0=grid1=Exercise1Scene=left=3=40=20
+performance=0,75

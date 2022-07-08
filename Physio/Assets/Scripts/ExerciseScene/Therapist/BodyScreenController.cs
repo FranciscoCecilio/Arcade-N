@@ -19,11 +19,12 @@ public class BodyScreenController : MonoBehaviour {
 
     public GameObject pauseButton;
     public GameObject unPauseButton;
-    public GameObject pauseMessage;
 
     SoundManager soundManager; // if the user clicks on the music buttons, we tell SoundManager
     public GameObject musicOnButton;
     public GameObject musicOffButton;
+    public GameObject voiceOnButton;
+    public GameObject voiceOffButton;
 
     public GameObject quitButton;
     public GameObject restartButton;
@@ -37,7 +38,7 @@ public class BodyScreenController : MonoBehaviour {
     }
     void Start()
     {
-        // Enable the correct music button according the settings (TODO: Do the same for the voice assistant)
+        // Enable the correct music button according the settings 
         if(SessionInfo.isMusicOn()){
             musicOnButton.SetActive(true);
             musicOffButton.SetActive(false);
@@ -45,6 +46,15 @@ public class BodyScreenController : MonoBehaviour {
         else{
             musicOnButton.SetActive(false);
             musicOffButton.SetActive(true); 
+        }
+        // Enable the correct voice button according the settings
+        if(SessionInfo.isMusicOn()){
+            voiceOnButton.SetActive(true);
+            voiceOffButton.SetActive(false);
+        }
+        else{
+            voiceOnButton.SetActive(false);
+            voiceOffButton.SetActive(true); 
         }
 
         // If we are running the 1st exercise of a sequence and we have not run this exercise type in this session, then we want to Setup/Edit
@@ -92,8 +102,25 @@ public class BodyScreenController : MonoBehaviour {
         State.isTherapyOnGoing = false;
         // SHOW Start Stuff (to edit path)
         exerciseEdition.SetActive(true);
-
         //pauseMessage.SetActive(true);
+
+        // Bug preventing - hard fix settings button!
+        if(SessionInfo.isMusicOn()){
+            musicOnButton.SetActive(true);
+            musicOffButton.SetActive(false);
+        }
+        else{
+            musicOnButton.SetActive(false);
+            musicOffButton.SetActive(true); 
+        }
+        if(SessionInfo.isMusicOn()){
+            voiceOnButton.SetActive(true);
+            voiceOffButton.SetActive(false);
+        }
+        else{
+            voiceOnButton.SetActive(false);
+            voiceOffButton.SetActive(true); 
+        }
     }
 
     // UnPause Button

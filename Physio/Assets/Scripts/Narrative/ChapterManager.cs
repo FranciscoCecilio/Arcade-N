@@ -21,7 +21,8 @@ public class ChapterManager : MonoBehaviour
     // There are 4 types of pages: 1) Index; 2) Chapter name and 1st Image; 3) Two images 4) Left image and empty page (TODO: this could have the chapter preview)
     
     public GameObject[] pageTypes;
-    
+    public Button skipButton;
+
     [Header("1) Overview")]
     //public TMP_Text indice;
     [Header("2) Chapter name and 1st Image")]
@@ -46,6 +47,7 @@ public class ChapterManager : MonoBehaviour
     public GameObject currentPage;
     public bool isChapterOdd;
 
+    bool skipFlag_showChapter = false;
     void Start()
     {
         // when there are no more chapters to unlock we just show overview "the end"
@@ -94,12 +96,17 @@ public class ChapterManager : MonoBehaviour
             // ANIMATE images 
             // we want to 1. unlock the image or images according to the XP and session_progress; 2. nextExercise()
             SequenceManager.hasImagesToUnlock = false;
+            // Set the SKIP button to false (because there is no time to code when we need to unlock images)
+            skipButton.gameObject.SetActive(false);
             StartCoroutine(ShowAndReadUnlockedImages());
         }
         // or from the Main Menu
         else{
             // Show the entire last chapter
             currentChapter =  SessionInfo.getXP() / 100 - 1;
+            // Set the SKIP button to false (because we only use it to go back to exercise screen)
+            skipButton.gameObject.SetActive(false);
+
             if(currentChapter < 1) currentChapter = 1;
             StartCoroutine(ShowEntireChapter(currentChapter));
         }
@@ -214,6 +221,12 @@ public class ChapterManager : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
     
+    public void SkipShowingNarrative(){
+        // it's like we showed all the unlocked images - Bye Narrative screen: Return to Exercise!!
+        if(SequenceManager.GetCurrentChapter() < 2) SequenceManager.SetCurrentChapter(2);
+        if(SequenceManager.sequence != null) SequenceManager.nextExercise();
+    }
+
     ///////////////////////////////////////////////////////////////////// OLD functions ////////////////////////////////////////////////////////////////////
     // fetches the chapter title and the title text
     public void SetChapterTitle(TMP_Text title){

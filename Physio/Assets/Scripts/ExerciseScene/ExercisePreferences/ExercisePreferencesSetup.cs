@@ -7,7 +7,7 @@ using System.IO;
 using UnityEngine.UI;
 
 
-// At the start of each exercise, we want to set it according to the last run. (path and target positions; path width; grid order;)
+// At the start of each exercise 1 and 2, we want to set it according to the last run. (path and target positions; path width; grid order;)
 // This script is also responsible to save those preferences in each User/ExercisePreferences folder
 public class ExercisePreferencesSetup : MonoBehaviour
 {
@@ -64,7 +64,7 @@ public class ExercisePreferencesSetup : MonoBehaviour
         }
     }
 
-    // Fetches and applies the positions of the path and targets from the last exercise
+    // Fetches and applies the positions of the path and targets and sets the pathSize from the last exercise
     private void PositionObjects()
     {
         string scene = SceneManager.GetActiveScene().name;
@@ -269,7 +269,6 @@ public class ExercisePreferencesSetup : MonoBehaviour
     {
         GameObject path = GameObject.FindGameObjectWithTag("ExerciseCollider"); //Right Exercise Box
         State.exercise.savePathPosition(worldCamera.WorldToScreenPoint(path.transform.position));
-        // TODO record Path Size
         State.exercise.savePathSize(path.transform.localScale);
     }
 }

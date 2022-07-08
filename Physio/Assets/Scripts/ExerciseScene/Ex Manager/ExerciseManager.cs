@@ -295,10 +295,10 @@ public class ExerciseManager : MonoBehaviour {
         // Set _arrows with the correct direction
         for (int i = 0; i < _arrows.Length; i++)
         {
-            if (target == 0 && _arrows[i].transform.parent.name == "UpArrows") _arrows[i].SetActive(false);
-            if (target == 1 && _arrows[i].transform.parent.name == "UpArrows") _arrows[i].SetActive(true);
-            if (target == 0 && _arrows[i].transform.parent.name == "DownArrows") _arrows[i].SetActive(true);
-            if (target == 1 && _arrows[i].transform.parent.name == "DownArrows") _arrows[i].SetActive(false);
+            if (target == 0 && _arrows[i].transform.parent.name == "UpArrows") _arrows[i].SetActive(true);
+            if (target == 1 && _arrows[i].transform.parent.name == "UpArrows") _arrows[i].SetActive(false);
+            if (target == 0 && _arrows[i].transform.parent.name == "DownArrows") _arrows[i].SetActive(false);
+            if (target == 1 && _arrows[i].transform.parent.name == "DownArrows") _arrows[i].SetActive(true);
         }
     }
 
@@ -332,5 +332,6 @@ public class ExerciseManager : MonoBehaviour {
         {
             child.localScale = new Vector3(slider.GetComponent<Slider>().value, child.localScale.y, child.localScale.z);
         }
+        ExercisePreferencesSetup.preferencesChanged = true;
     }
 }

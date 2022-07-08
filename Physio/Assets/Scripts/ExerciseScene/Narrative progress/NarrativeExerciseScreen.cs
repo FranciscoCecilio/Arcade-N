@@ -17,9 +17,10 @@ public class NarrativeExerciseScreen : MonoBehaviour
     public BarCheckpoints oddChapterCheckpoints; // has lastchapter_preview + 5 images TODO make class
     public BarCheckpoints evenChapterCheckpoints; // has lastchapter_preview + 4 images 
 
-    [Header("Previous and Final images")]
-    public TMP_Text previousChapterText;
+    [Header("Previous images")]
     public Image previousChapterImage;
+    [Header("Final images")]
+    public TMP_Text nextChapterText;
     public Image finalImage;
     public Material blur; // max size = 6 for the max blurr ; this blur is applied to this chapter last image
     Sprite previousChapterImg;
@@ -60,6 +61,7 @@ public class NarrativeExerciseScreen : MonoBehaviour
         // Place Previous and Final chapter images
         previousChapterImage.sprite = previousChapterImg;
         finalImage.sprite = loadedChapterImages[loadedChapterImages.Count-1];
+        nextChapterText.text = "CAPÍTULO " + SequenceManager.GetCurrentChapter();
 
         // blurrs the last image according the current session_progress
         CalculateBlurSize();
@@ -137,6 +139,8 @@ public class NarrativeExerciseScreen : MonoBehaviour
             // updates an image to look like (Hey its unlocked and you will see it when you finish that serie!)
             // Play some ongoing animation
             chosenBarCheckpoint.AnimateCheckpoints();
+            // shake the whole vis horizontally
+            LeanTween.moveLocalX(gameObject, 10f, 0.2f).setLoopType(LeanTweenType.pingPong).setRepeat(2);
         }
 
         // progressively clears the blurry of the next chapter image

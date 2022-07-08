@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
+using System.IO;
 
 public class MainMenuScript : MonoBehaviour {
 
@@ -18,6 +19,7 @@ public class MainMenuScript : MonoBehaviour {
     [Header("Narrative on the right")]
     public Image chapterImg;
     public TMP_Text chapterText;
+    public TMP_Text proverbioText;
 
     SoundManager soundManager;
     public VoiceAssistant voiceAssistant;
@@ -102,13 +104,23 @@ public class MainMenuScript : MonoBehaviour {
             Debug.LogWarning("Warning: Sprite not found in Resources/Narrative Materials/Chapter"+currentChapter.ToString() +"/"+ lastImg.ToString()+ " not found.");
             //  SET default
             sprite = Resources.Load<Sprite>("Narrative Materials/Chapter5/5");
-            chapterImg.sprite = sprite;
-            chapterText.text = "CAPÍTULO 5";
+        }
+        chapterImg.sprite = sprite;
+
+        //  SET TEXT
+        string titlePath = Application.dataPath + "/Resources/Narrative Materials/Chapter"+currentChapter.ToString() +"/Text/Title.txt";
+        chapterText.text = "CAPÍTULO " + currentChapter;
+        
+        if (System.IO.File.Exists( titlePath)){ 
+            //Read the title directly from the Title.txt
+            StreamReader reader = new StreamReader(titlePath);
+            proverbioText.text = reader.ReadToEnd();
+            reader.Close();
         }
         else{
-            chapterImg.sprite = sprite;
-            chapterText.text = "CAPÍTULO " + currentChapter;
-        }
+            Debug.Log("ERROR: " + titlePath + " not found.");
+            proverbioText.text = "A alegria é um tesouro que vale muito mais que ouro";
+        } 
     }
 
     // called by the button

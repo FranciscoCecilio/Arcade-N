@@ -30587,6 +30587,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1442082112}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1442082114 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8225276860472935896, guid: 0f77d61839283b34ca2b1d47060ee6c6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1442082112}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1442082115 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8225276860900366341, guid: 0f77d61839283b34ca2b1d47060ee6c6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1442082112}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1442259881
 GameObject:
   m_ObjectHideFlags: 0
@@ -36591,8 +36603,8 @@ MonoBehaviour:
   chosenBarCheckpoint: {fileID: 0}
   oddChapterCheckpoints: {fileID: 841591947}
   evenChapterCheckpoints: {fileID: 1687988453}
-  previousChapterText: {fileID: 1625797058}
   previousChapterImage: {fileID: 1571566457}
+  nextChapterText: {fileID: 1149687908}
   finalImage: {fileID: 1408065436}
   blur: {fileID: 2100000, guid: 3d5096576f6ba40c6ac884ebb6aa61db, type: 2}
   progressBar: {fileID: 276628165}
@@ -40301,9 +40313,10 @@ MonoBehaviour:
   exerciseEdition: {fileID: 1012321776}
   pauseButton: {fileID: 2035208411}
   unPauseButton: {fileID: 312349998}
-  pauseMessage: {fileID: 0}
   musicOnButton: {fileID: 1863144403}
   musicOffButton: {fileID: 487701432}
+  voiceOnButton: {fileID: 1442082115}
+  voiceOffButton: {fileID: 1442082114}
   quitButton: {fileID: 1437423264}
   restartButton: {fileID: 1871212422}
   nextButton: {fileID: 1843444074}
@@ -42019,7 +42032,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 0}
-  m_Type: 1
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4

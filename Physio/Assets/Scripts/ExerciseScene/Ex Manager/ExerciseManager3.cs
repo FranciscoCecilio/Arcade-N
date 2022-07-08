@@ -119,7 +119,8 @@ public class ExerciseManager3 : MonoBehaviour {
                         // play target hit animation
                         targetsArray[targetIndex].GetComponent<Targets_Tween>().SquashAndStretch();
                         // Change the color of the target hit to "green"
-                        targetsArray[targetIndex].GetComponent<Renderer>().material.color = new Color(0.2f, 0.7f, 0.2f, 0.5f); // greenish
+                        //targetsArray[targetIndex].GetComponent<Renderer>().material.color = new Color(0.2f, 0.7f, 0.2f, 0.5f); // greenish 
+                        targetsArray[targetIndex].GetComponent<Renderer>().material.color = new Color(0, 0.5f, 1, 1f); // baby blue 
                         // Increment the number of targets hit
                         gridManager.IncrementTargetHitCounter(); // targetHitCounter ++;
                         // If all targets were hit then...
@@ -171,13 +172,6 @@ public class ExerciseManager3 : MonoBehaviour {
                                 
                             }
                         }
-                        // FC - if all targets are NOT hit, we have to highlight the next one!
-                        else{
-                            // retrieve the next targetIndex
-                            // grab it from the array
-                            // change its color
-                            // mark it has the next 
-                        }
                         if(soundManager == null) FindSoundManager();
                         soundManager.PlayOneShot("beep");
                     }
@@ -188,20 +182,17 @@ public class ExerciseManager3 : MonoBehaviour {
    
     
     // This method blinks the correct target to hit on the grid
-    // TODO when is this called? once per second? or once.
     private void blinkTarget() {
         
         if (targetsArray.Length == 0)
             return;
-        /*if(State.currentTarget < 0 || State.currentTarget > targetsArray.Length)
-            return;*/
 
         // define whats the correct target
         int currentTargetID = gridManager.GetCurrentTargetID();
         if(gridManager.GetTargetHitCounter() >= targetsArray.Length) return;
 
-        // color the next-next target
-        if(gridManager.GetTargetHitCounter() + 1 < targetsArray.Length) 
+        // color the next-next target - it was deemed as not helpful
+       /* if(gridManager.GetTargetHitCounter() + 1 < targetsArray.Length) 
         {
             int nextTargetID = gridManager.GetNextTargetID();
 
@@ -212,7 +203,7 @@ public class ExerciseManager3 : MonoBehaviour {
             renderer2.material.color = color2;
 
 
-        }
+        }*/
 
         // blink the currentTarget
         Renderer renderer = targetsArray[currentTargetID].GetComponent<Renderer>();
@@ -233,7 +224,7 @@ public class ExerciseManager3 : MonoBehaviour {
             delta = -0.1f;
         }
         Color color = renderer.material.color;
-        if(color == new Color(0.53725f, 0.81176f, 0.94118f)) color = new Color (0,1,0, 1);
+        //if(color == new Color(0.53725f, 0.81176f, 0.94118f)) color = new Color (0,1,0, 1);
         //Color color = new Color(renderer.material.color.r,1,renderer.material.color.b,renderer.material.color.a);
         color.r += delta;
         color.b += delta;

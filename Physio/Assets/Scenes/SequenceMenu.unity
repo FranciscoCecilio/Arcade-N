@@ -11266,7 +11266,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "COME\xC7AR SESS\xC2O"
+  m_text: "COME\xC7AR SESS\xC3O"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b6e969e00fec55d47a284801f57df022, type: 2}
   m_sharedMaterial: {fileID: -3333783852899443252, guid: b6e969e00fec55d47a284801f57df022,

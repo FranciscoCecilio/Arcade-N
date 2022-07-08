@@ -2731,7 +2731,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Maculino
+  m_text: Masculino
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7f4f67051143a124cbc5b1bc40733a8d, type: 2}
   m_sharedMaterial: {fileID: -3982096778254385821, guid: 7f4f67051143a124cbc5b1bc40733a8d,

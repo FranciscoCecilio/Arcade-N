@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-// TODO Francisco - do we want to have patient stuff? ? - I passed to TimeVis script
+// TODO Francisco - do we want to have patient stuff? ? - I transfered some code to TimeVis script
 // OLD SCRIPT!
 public class PatientController : MonoBehaviour {
     public GameObject completed;

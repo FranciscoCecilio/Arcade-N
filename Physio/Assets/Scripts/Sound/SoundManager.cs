@@ -16,6 +16,8 @@ public class SoundManager : MonoBehaviour
     public bool sm_musicIsOn;
     public List<AudioSource> allSources;
 
+    bool musicVolumeWasReduced = false;
+
     void Awake(){
         // We want the music to not stop when we enter a new exercise 
         GameObject[] soundManagersInScene = GameObject.FindGameObjectsWithTag("SoundManager");
@@ -134,6 +136,32 @@ public class SoundManager : MonoBehaviour
         }
     }
 
+    // called when we enter narrative screen - we want to lower the volume of the music
+    public void ReduceMusicVolume(){
+        Sound soundToLower = GetSound(musicToPlayOnStart);
+        if( soundToLower == null){
+            Debug.LogWarning("Sound to lower: " + name + " not found!");
+            return;
+        }
+        soundToLower.source.volume *= 0.5f;
+        musicVolumeWasReduced = true;
+    }
+
+    // called when we enter narrative screen - we want to lower the volume of the music
+    public void ReturnMusicToOrginalVolume(){
+        if(!musicVolumeWasReduced){
+            Debug.Log("We are trying to double the volume of a music that was not reduced!");
+            return;
+        }
+        Sound soundToLower = GetSound(musicToPlayOnStart);
+        if( soundToLower == null){
+            Debug.LogWarning("Sound to lower: " + name + " not found!");
+            return;
+        }
+        soundToLower.source.volume *= 2f;
+        musicVolumeWasReduced = false;
+    }
+    
     // When a Music button is pressed we run this method
     public void MusicSettingsChanged(){
         // Music -----------------------------------

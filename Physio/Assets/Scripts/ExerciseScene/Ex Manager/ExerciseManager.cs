@@ -11,10 +11,10 @@ public class ExerciseManager : MonoBehaviour {
     public GameObject cursor;
     public bool hasSecondaryCursor;
 
-    [Header("Time")]
+    /*[Header("Time")]
     public Text avgTime; // these are not used
     public Text lastrepTime; // these are not used
-    int lastrep = 0;
+    int lastrep = 0;*/
 
     [Header("Exercise")]
     public ExercisePreferencesSetup preferencesScript;
@@ -249,7 +249,7 @@ public class ExerciseManager : MonoBehaviour {
         }
     }
 
-    // This method maked the correct target to blink 
+    // This method makes the correct target to blink 
     // AND updates the _arrows to point in the correct direction
     private void blinkTarget() {
         if (targets.transform.childCount == 0)

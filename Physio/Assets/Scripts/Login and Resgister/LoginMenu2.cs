@@ -15,12 +15,23 @@ public class LoginMenu2 : MonoBehaviour
     
     private int _selectedNameIndex = 0;
 
+    [Header("Tweeing")]
+    public GameObject circle;
+    public GameObject Title;
+
     // Start is called before the first frame update
     void Awake()
     {
         populateUsersDropdown();
     }
 
+    void Start()
+    {
+        // animate
+        LeanTween.scale(circle, new Vector3(0.7f,0.7f,0.7f) , 2f).setLoopType(LeanTweenType.pingPong).setRepeat(-1);
+        LeanTween.scale(Title, new Vector3(0.95f,0.95f,0.95f), 1f).setEase(LeanTweenType.easeOutElastic).setLoopType(LeanTweenType.pingPong).setRepeat(-1);
+
+    }
     public void login()
     {
         SessionInfo.setUsername(_usernames[_selectedNameIndex]);

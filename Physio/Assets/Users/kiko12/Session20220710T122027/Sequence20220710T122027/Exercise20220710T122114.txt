@@ -1,0 +1,16 @@
+timestamp=20220710T122114
+name=grid1
+arm=left
+nrReps=3
+correctReps=3
+tries=11
+outOfPath=8
+duration=40
+restTime=20
+avgTime=
+totalTime=00:32 min
+regShouldComp=False
+regSpineComp=False
+leftShoulderComp=0
+rightShoulderComp=0
+spineComp=0

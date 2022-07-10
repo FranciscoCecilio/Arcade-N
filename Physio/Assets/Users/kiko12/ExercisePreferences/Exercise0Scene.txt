@@ -1,2 +1,2 @@
-arm=left
+arm=right
 gridPatern=spiralPatern

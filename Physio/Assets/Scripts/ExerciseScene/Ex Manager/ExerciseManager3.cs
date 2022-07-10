@@ -11,10 +11,10 @@ public class ExerciseManager3 : MonoBehaviour {
     public GameObject cursor;
     public bool hasSecondaryCursor;
 
-    [Header("Time")]
+    /*[Header("Time")]
     public Text avgTime; // these are not used
     public Text lastrepTime; // these are not used
-    int lastrep = 0;
+    int lastrep = 0;*/
 
     [Header("Exercise")]
     public ExercisePreferencesSetup preferencesScript;

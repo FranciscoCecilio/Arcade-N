@@ -47,12 +47,23 @@ public class ChapterManager : MonoBehaviour
     public GameObject currentPage;
     public bool isChapterOdd;
 
-    bool skipFlag_showChapter = false;
+    void Awake()
+    {
+        GameObject soundManagerObj = GameObject.FindGameObjectWithTag("SoundManager");
+        if(soundManagerObj == null){
+            Debug.LogError("ERROR: could not find a SoundManager in this scene!");
+        }
+        else{
+            soundManager = soundManagerObj.GetComponent<SoundManager>();
+        }
+    }
+    
     void Start()
     {
         // when there are no more chapters to unlock we just show overview "the end"
         if(SequenceManager.showOverview){
             SequenceManager.showOverview = false;
+            skipButton.gameObject.SetActive(false);
             ShowPage(1);
         }
         else{
@@ -61,6 +72,8 @@ public class ChapterManager : MonoBehaviour
     }
 
     public void ShowNarrative(){
+        // lower the SoundManager volume!
+        soundManager.ReduceMusicVolume();
 
         currentChapter = SequenceManager.GetCurrentChapter();
 
@@ -132,7 +145,9 @@ public class ChapterManager : MonoBehaviour
             clipLength = ShowImageAndText(currentImage);
             yield return new WaitForSeconds(clipLength);
         }
+
         // we showed all the unlocked images - Bye Narrative screen: Return to Exercise!!
+        soundManager.ReturnMusicToOrginalVolume();
         if(SequenceManager.GetCurrentChapter() < 2) SequenceManager.SetCurrentChapter(2);
         if(SequenceManager.sequence != null) SequenceManager.nextExercise();
     }
@@ -148,6 +163,7 @@ public class ChapterManager : MonoBehaviour
             }
         }
         // we showed all the unlocked images - Bye Narrative screen: Return to Exercise!!
+        soundManager.ReturnMusicToOrginalVolume();
         if(SequenceManager.sequence != null) SequenceManager.nextExercise();
     }
 
@@ -218,11 +234,13 @@ public class ChapterManager : MonoBehaviour
     }
 
     public void BackToMainMenuButton(){
+        soundManager.ReturnMusicToOrginalVolume();
         SceneManager.LoadScene("MainMenu");
     }
     
     public void SkipShowingNarrative(){
         // it's like we showed all the unlocked images - Bye Narrative screen: Return to Exercise!!
+        soundManager.ReturnMusicToOrginalVolume();
         if(SequenceManager.GetCurrentChapter() < 2) SequenceManager.SetCurrentChapter(2);
         if(SequenceManager.sequence != null) SequenceManager.nextExercise();
     }

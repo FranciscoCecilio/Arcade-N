@@ -47,11 +47,18 @@ MonoBehaviour:
   sounds:
   - name: swipesy cakewalk
     clip: {fileID: 8300000, guid: 9a041dbe054c93b439c13cbf4353dbdd, type: 3}
-    volume: 0.04
+    volume: 0.05
     pitch: 1
     loop: 1
     source: {fileID: 0}
     web_url_source: https://www.youtube.com/watch?v=o9_Gu3TI4IY
+  - name: Sunny Sunday
+    clip: {fileID: 8300000, guid: b3d845a4a9ba81f41abe8f209ccf5fc8, type: 3}
+    volume: 0.05
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+    web_url_source: 
   - name: button_click1
     clip: {fileID: 8300000, guid: 9e64eab1da8e20f4ba49d7c0badf2570, type: 3}
     volume: 0.3
@@ -87,13 +94,6 @@ MonoBehaviour:
     loop: 0
     source: {fileID: 0}
     web_url_source: 
-  - name: Sunny Sunday
-    clip: {fileID: 8300000, guid: b3d845a4a9ba81f41abe8f209ccf5fc8, type: 3}
-    volume: 0.008
-    pitch: 1
-    loop: 1
-    source: {fileID: 0}
-    web_url_source: 
   - name: end_of_session
     clip: {fileID: 8300000, guid: c2fe4b389ecafc747a40d4c2e07e4a65, type: 3}
     volume: 0.2
@@ -108,7 +108,7 @@ MonoBehaviour:
     loop: 1
     source: {fileID: 0}
     web_url_source: 
-  - name: Page_flip
+  - name: PageFlip
     clip: {fileID: 8300000, guid: 2f4f2a55944cbea409c20e77389f0fa8, type: 3}
     volume: 1
     pitch: 1

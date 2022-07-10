@@ -17,6 +17,7 @@ public class MainMenuScript : MonoBehaviour {
     public TMP_Text afterDeleteText;
 
     [Header("Narrative on the right")]
+    public GameObject objToAnimate;
     public Image chapterImg;
     public TMP_Text chapterText;
     public TMP_Text proverbioText;
@@ -121,6 +122,8 @@ public class MainMenuScript : MonoBehaviour {
             Debug.Log("ERROR: " + titlePath + " not found.");
             proverbioText.text = "A alegria é um tesouro que vale muito mais que ouro";
         } 
+        LeanTween.scale(objToAnimate, new Vector3(0.95f,0.95f,0.95f) , 3f).setLoopType(LeanTweenType.pingPong).setRepeat(-1);
+        
     }
 
     // called by the button

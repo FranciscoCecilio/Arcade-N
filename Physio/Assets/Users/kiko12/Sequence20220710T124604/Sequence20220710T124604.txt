@@ -1,0 +1,7 @@
+timestamp=20220710T124604
+totalDuration=00:02:15 horas
+name=0
+series=1
+restDuration=60
+exe=0=Grelha=Exercise0Scene=right=1=60=60
+performance=1
